@@ -1,5 +1,4 @@
-# ![Capstone_Logo_1](https://github.com/psm981021/Anomaly-Forecast/assets/49465397/65791efc-39b7-4463-9b9b-4703c49e8b60){ width=200px height=200px } Anomaly Forecast
-
+# ![Capstone_Logo_1](https://github.com/psm981021/Anomaly-Forecast/assets/49465397/65791efc-39b7-4463-9b9b-4703c49e8b60){ width=20px height=20px }
 ### 💡 [Background]
 #### 24-1학기 캡스톤 프로젝트
 
