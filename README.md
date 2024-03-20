@@ -1,4 +1,5 @@
-# Anomaly-Forecast
+# [Anomaly-Forecast] <img src = "https://github.com/psm981021/restaurant-type-recsys/blob/main/jpg/kmeans.png" width = "10%" >
+
 ### 💡 [Background]
 #### 24-1학기 캡스톤 프로젝트
 
