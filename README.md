@@ -1,5 +1,6 @@
-# [Anomaly-Forecast] <img src = "https://github.com/psm981021/Anomaly-Forecast/blob/main/images/Capstone_Logo_1.jpg" width = "15%" >
+# [Anomaly-Forecast] 
 
+### Team: Fourcaster <img src = "https://github.com/psm981021/Anomaly-Forecast/blob/main/images/Capstone_Logo_1.jpg" width = "15%" >
 ### 💡 [Background]
 #### 24-1학기 캡스톤 프로젝트
 
