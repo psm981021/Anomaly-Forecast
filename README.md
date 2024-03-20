@@ -1,5 +1,4 @@
-# Anomaly-detection
-Anomaly detection project
+# Anomaly-Forecast
 
 ### 💡 [Background]
 #### 24-1학기 캡스톤 프로젝트
