@@ -5,6 +5,7 @@ from sklearn.ensemble import RandomForestRegressor
 from matplotlib import pyplot
 from sklearn.metrics import *
 from sklearn.model_selection import train_test_split
+import matplotlib.pyplot as plt
 
 
 def dataset(filepath):
@@ -30,22 +31,37 @@ def dataset(filepath):
 
     return dataframe
 
-def random_forest(dataframe, n_estimators, random_state,x_variables, y_variables, split):
+def random_forest(dataframe, n_estimators, random_state,x_variables, y_variables, split_date):
     model = RandomForestRegressor(n_estimators=n_estimators, random_state=random_state)
 
-    x,y = dataframe[x_variables],dataframe[y_variables]
-    X_train, X_test, y_train, y_test = train_test_split(x, y, test_size=split, random_state=random_state)
+    train_data = dataframe[dataframe['date'] < split_date]
+    test_data = dataframe[dataframe['date'] >= split_date]
+
+    x_train, y_train = train_data[x_variables], train_data[y_variables]
+    x_test, y_test = test_data[x_variables], test_data[y_variables]
 
     model = RandomForestRegressor(n_estimators=100, random_state=42)
-    model.fit(X_train, y_train)
+    model.fit(x_train, y_train)
 
-    y_pred = model.predict(X_test)
+    y_pred = model.predict(x_test)
+
+    dates_test = test_data['date']
+    plot_prediction(y_test, y_pred,dataframe, dates_test)
+
 
     return [mean_squared_error(y_test, y_pred),mean_absolute_error(y_test, y_pred),root_mean_squared_error(y_test, y_pred)]
 
 
     
-
+def plot_prediction(y_test, y_pred,dataframe, dates):
+    plt.figure(figsize=(10, 6))
+    plt.plot(dates, y_test, label='Actual')
+    plt.plot(dates, y_pred, label='Predicted')
+    plt.xlabel('Date')
+    plt.ylabel('Precipitation')
+    plt.title('Random Forest Actual vs Predicted Precipitation')
+    plt.legend()
+    plt.show()
 
 
 
@@ -54,7 +70,8 @@ def random_forest(dataframe, n_estimators, random_state,x_variables, y_variables
 if __name__ == "__main__":
     path = '/Users/sb/Desktop/anomaly_forecast/data/test_data.csv'
     dataframe = dataset(path)
-    mse,mae,rmse = random_forest(dataframe, 100, 42,['Wind','Wind_Direction','Temperature'],'Precipitation',0.2)
+    date ='2023-05-01'
+    mse,mae,rmse = random_forest(dataframe, 100, 42,['Wind','Wind_Direction','Temperature'],'Precipitation',date)
     
     print("mse:", mse)
     print("mae:", mae)
