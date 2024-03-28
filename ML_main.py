@@ -12,7 +12,7 @@ from model import random_forest_regession
 
 """---data preprocessing---"""
 
-data=pd.read_csv("광진구_aws_data.csv")
+data=pd.read_csv("/Users/sb/Desktop/anomaly_forecast/data/test_data.csv")
 data=data.set_index('일시')
 data=dataset.fourier(data,'풍향(deg)',360.0)
 data=dataset.lag_maker(data,3,'강수량(mm)')

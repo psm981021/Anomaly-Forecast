@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 from sklearn.ensemble import RandomForestRegressor
 from sklearn.linear_model import LinearRegression
-from sklearn.metrics import mean_squared_error
+from sklearn.metrics import *
 import math
 from sklearn.model_selection import GridSearchCV
 
@@ -74,8 +74,10 @@ def linear_regression(train_x, train_y, test_x, test_y, cv, params={}):
     lr.fit(train_x, train_y)
     train_predict = lr.predict(train_x)
     test_predict = lr.predict(test_x)
-    print("train_predict RMSE:{}".format(math.sqrt(mean_squared_error(train_predict, train_y))))
+    
     print("test_predict RMSE:{}".format(math.sqrt(mean_squared_error(test_predict, test_y))))
+    print("test predict MSE:{}".format(mean_squared_error(test_predict, test_y)))
+    print("test predict MAE:{}".format(mean_absolute_error(test_predict, test_y)))
     
     # coef 계산
     coef_values = lr.coef_

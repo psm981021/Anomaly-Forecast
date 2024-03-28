@@ -40,8 +40,8 @@ rf_params = {
 }
 
 # random forest regression실행
-random_forest_regression(params=rf_params, train_x=train_x, train_y=train_y, test_x=test_x, test_y=test_y, cv=2)
-print("Random Forest done")
+# random_forest_regression(params=rf_params, train_x=train_x, train_y=train_y, test_x=test_x, test_y=test_y, cv=2)
+# print("Random Forest done")
 
 # linear regression 실행
 linear_regression(train_x=train_x, train_y=train_y, test_x=test_x, test_y=test_y, cv=2)

@@ -70,7 +70,7 @@ def plot_prediction(y_test, y_pred,dataframe, dates):
 if __name__ == "__main__":
     path = '/Users/sb/Desktop/anomaly_forecast/data/test_data.csv'
     dataframe = dataset(path)
-    date ='2023-05-01'
+    date ='2023-01-01'
     mse,mae,rmse = random_forest(dataframe, 100, 42,['Wind','Wind_Direction','Temperature'],'Precipitation',date)
     
     print("mse:", mse)
