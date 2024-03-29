@@ -3,7 +3,7 @@
 머신러닝 계열 모델들을 여기에 다 모으면 좋을 것 같음. 
 
 """
-import dataset
+import datapreprocessing
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
@@ -14,8 +14,8 @@ from model import random_forest_regession
 
 data=pd.read_csv("/Users/sb/Desktop/anomaly_forecast/data/test_data.csv")
 data=data.set_index('일시')
-data=dataset.fourier(data,'풍향(deg)',360.0)
-data=dataset.lag_maker(data,3,'강수량(mm)')
+data=datapreprocessing.fourier(data,'풍향(deg)',360.0)
+data=datapreprocessing.lag_maker(data,3,'강수량(mm)')
 data=data.fillna(0)
 print("data preprocessing done")
 # lag 만들면서 생긴 결측치는 일단 0으로 처리함. 
