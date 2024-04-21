@@ -65,7 +65,7 @@
 <p align="center"> <img src = "https://github.com/psm981021/Anomaly-Forecast/blob/main/images/Experiment_1.png" width = "60%" ></p>
 
 + Autoregressive한 성향이 지배적임을 알 수 있다.
-    + 그래프를 확대해보았을 떄, 현재의 강수량을 이전 값과 유사하게 예측해버리는 성향이 지배적임을 확인할 수 있었다.
+    + 그래프를 확대해보았을 때, 현재의 강수량을 이전 값과 유사하게 예측해버리는 성향이 지배적임을 확인할 수 있었다.
     + Lag 변수를 제거하고, DL 모델을 사용하여 강수량 예측을 위한 실험을 추가적으로 진행해본다.
 
     + 비가 오지 않는 날이 많아 평균 강수량 값이 0에 근접한다.
