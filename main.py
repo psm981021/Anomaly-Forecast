@@ -2,7 +2,7 @@ from torch.utils.data import DataLoader
 from tqdm import trange
 from datasets import Radar
 import argparse
-
+from utils import *
 
 
 
@@ -20,5 +20,22 @@ def main():
     parser.add_argument("--batch", type=int, help="batch size")
     parser.add_argument("--device",type=str, default="cuda:1")
     parser.add_argument("--seed",type=int, default="42")
+    
+    
 
+
+
+    
+
+    #configs
+    args = parser.parse_args()
+    set_seed(args.seed)
+    check_path(args.output_dir)
+    os.environ["CUDA_VISIBLE_DEVICES"] = args.gpu_id
+    args.cuda_condition = torch.cuda.is_available() and not args.no_cuda
+    print("Using Cuda:", torch.cuda.is_available())
+
+    
+
+    # main
 
