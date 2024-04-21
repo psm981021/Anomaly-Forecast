@@ -30,7 +30,7 @@
     + 기상 API 허브에서 2021 ~ 2023년 10분 간격으로 측정한 레이더 이미지 데이터셋
 
 #### 지점 선정 및 이상치 선정
-<p align="center"> <img src = "https://github.com/psm981021/Anomaly-Forecast/blob/main/images/Data_Map.png width = "40%" ></p>
+<p align="center"> <img src = "https://github.com/psm981021/Anomaly-Forecast/blob/main/images/Data_Map.png" width = "40%" ></p>
 
 ##### 🇰🇷 지점 선정 기준 
 
@@ -47,7 +47,7 @@
 
 #### FrameWork 1
 
-<p align="center"> <img src = "https://github.com/psm981021/Anomaly-Forecast/blob/main/images/Framework_1.png width = "40%" ></p>
+<p align="center"> <img src = "https://github.com/psm981021/Anomaly-Forecast/blob/main/images/Framework_1.png" width = "40%" ></p>
 
 + (Pre-train)
     + 전체적인 분포에 대한 학습, 원본 + 증강(데이터)
@@ -62,7 +62,7 @@
 
 ##### 실험 1 결과
 
-<p align="center"> <img src = "https://github.com/psm981021/Anomaly-Forecast/blob/main/images/Experiment_1.png width = "40%" ></p>
+<p align="center"> <img src = "https://github.com/psm981021/Anomaly-Forecast/blob/main/images/Experiment_1.png" width = "40%" ></p>
 
 + Autoregressive한 성향이 지배적임을 알 수 있다.
     + 그래프를 확대해보았을 떄, 현재의 강수량을 이전 값과 유사하게 예측해버리는 성향이 지배적임을 확인할 수 있었다.
@@ -78,7 +78,7 @@
 
 ##### 실험 2 결과
 
-<p align="center"> <img src = "https://github.com/psm981021/Anomaly-Forecast/blob/main/images/Experiment_2.png width = "40%" ></p>
+<p align="center"> <img src = "https://github.com/psm981021/Anomaly-Forecast/blob/main/images/Experiment_2.png" width = "40%" ></p>
 
 + 성능 지표는 개선되었으나, 여전히 강수량 예측 결과가 평균값 근처에 머무르고 있으므로 유의미하지 않다고 판단하였다.
 + 예측 단계에서 모델이 시계열 데이터 내 변수들의 값을 변수들의 특성에 맞게 고려하지 못 하는 것으로 판단하였다.
@@ -97,7 +97,7 @@
 
 #### FrameWork 2
 
-<p align="center"> <img src = "https://github.com/psm981021/Anomaly-Forecast/blob/main/images/Framework_2.png width = "40%" ></p>
+<p align="center"> <img src = "https://github.com/psm981021/Anomaly-Forecast/blob/main/images/Framework_2.png" width = "40%" ></p>
 
 + Autoregressive와 시계열 데이터의 한계를 극복하기 위한 새로운 전략 수립
 
