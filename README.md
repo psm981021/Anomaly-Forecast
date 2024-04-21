@@ -47,7 +47,7 @@
 
 #### FrameWork 1
 
-<p align="center"> <img src = "https://github.com/psm981021/Anomaly-Forecast/blob/main/images/Framework_1.png" width = "60%" ></p>
+<p align="center"> <img src = "https://github.com/psm981021/Anomaly-Forecast/blob/main/images/Framework_1.png" width = "80%" ></p>
 
 + (Pre-train)
     + 전체적인 분포에 대한 학습, 원본 + 증강(데이터)
@@ -78,7 +78,7 @@
 
 ##### 실험 2 결과
 
-<p align="center"> <img src = "https://github.com/psm981021/Anomaly-Forecast/blob/main/images/Experiment_2.png" width = "60%" ></p>
+<p align="center"> <img src = "https://github.com/psm981021/Anomaly-Forecast/blob/main/images/Experiment_2.png" width = "80%" ></p>
 
 + 성능 지표는 개선되었으나, 여전히 강수량 예측 결과가 평균값 근처에 머무르고 있으므로 유의미하지 않다고 판단하였다.
 + 예측 단계에서 모델이 시계열 데이터 내 변수들의 값을 변수들의 특성에 맞게 고려하지 못 하는 것으로 판단하였다.
