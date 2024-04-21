@@ -1,10 +1,10 @@
 
 
 #data
-/*zip
+data/*.zip
 /data/radar_sample_images/
+/data/radar_test/
 
 # clone models
 /test.ipynb
-/data
 /test3_jiwon.ipynb
