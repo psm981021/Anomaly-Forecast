@@ -42,6 +42,8 @@ def make_image_csv(path,file_name=None):
         crop_image = image[120:420,170:470]
         img_size = crop_image.shape[1]
         num_pixels = img_size * img_size
+        
+        import IPython; IPython.embed(colors='Linux');exit(1);
 
         # rain pixels accumulate
         rain_pixels = np.sum(crop_image > 0)
@@ -54,10 +56,10 @@ def make_image_csv(path,file_name=None):
     df["Set"] = "Train"
 
     images_per_day =6 * 24
-    for i in range(0,len(df), images_per_day * 4):
-        train_end_index = i + (images_per_day * 2)  # Train for 2 days
-        valid_end_index = train_end_index + images_per_day  # Validation for 1 day
-        test_end_index = valid_end_index + images_per_day  # Test for 1 day
+    for i in range(0,len(df), images_per_day * 8):
+        train_end_index = i + (images_per_day * 4)  # Train for 2 days
+        valid_end_index = train_end_index + images_per_day*2  # Validation for 1 day
+        test_end_index = valid_end_index + images_per_day*2  # Test for 1 day
 
         df.loc[i:train_end_index - 1, "Set"] = "Train"  # Exclude train_end_index
         df.loc[train_end_index:valid_end_index - 1, "Set"] = "Valid"  # Exclude valid_end_index
