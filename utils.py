@@ -61,7 +61,7 @@ def make_image_csv(path,file_name=None):
         valid_end_index = train_end_index + images_per_day*2  # Validation for 1 day
         test_end_index = valid_end_index + images_per_day*2  # Test for 1 day
 
-        df.loc[i:train_end_index - 1, "Set"] = "Train"  # Exclude train_end_index
+        df.loc[i:train_end_index - 1, "Set"] = "Train"  # Exclude train_end_ index
         df.loc[train_end_index:valid_end_index - 1, "Set"] = "Valid"  # Exclude valid_end_index
         df.loc[valid_end_index:test_end_index - 1, "Set"] = "Test"  # Exclude test_end_index
         
