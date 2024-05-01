@@ -9,3 +9,8 @@ data/*.csv
 # clone models
 /test.ipynb
 /test3_jiwon.ipynb
+
+# jw
+/test.jpg
+/Resized image test.jpg
+sample_test

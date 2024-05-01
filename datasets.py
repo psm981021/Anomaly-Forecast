@@ -5,15 +5,17 @@ import numpy as np
 import torch
 import torchvision.transforms as transforms
 from torch.utils.data import Dataset
+import pandas as pd
+
 
 class Radar(Dataset):
-    def __init__(self, train =False):
+    def __init__(self, train = False):
         super(Radar, self).__init__()
-        self.path = '/home/seongbeom/paper/anomaly/data/radar_test'
+        self.path = 'data/radar_test'
         self.transform = None
-        self.num_imgs = len(glob.glob(self.path+'/*.jpg'))
-        self.img_list = glob.glob(self.path + '/*.jpg')
-        self.img_list = train
+        self.num_imgs = len(glob.glob(self.path+'/*.png'))
+        self.img_list = glob.glob(self.path + '/*.png')
+        self.is_train = train
         self.idx = np.array([i for i in range(self.__len__())], dtype=int)
         self.Image_Transform()
     
@@ -40,10 +42,24 @@ class Radar(Dataset):
         return self.num_imgs
 
     def __getitem__(self, idx):
+        data=pd.read_csv("loader_test.csv")
         idx = idx
         img = Image.open(self.img_list[idx])
         img = self.transform(img)
-
+        label=data['Rain_Intensity'][idx]
         #label mapping
-        return img #label, age
+        # if self.is_train:
 
+        
+        return img, label
+
+
+
+dataset=Radar(train=True)
+train_loader = torch.utils.data.DataLoader(dataset,batch_size=4)
+import IPython; IPython.embed(colors='Linux'); exit(1)
+for i, (data) in enumerate(train_loader):
+    print(data)
+    
+print("end")
+print(dataset)

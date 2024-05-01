@@ -21,6 +21,11 @@ def main():
     parser.add_argument("--device",type=str, default="cuda:1")
     parser.add_argument("--seed",type=int, default="42")
     
+    # test dataset
+    train_dataset=Radar(train=True)
+    valid_dataset=Radar(train=False)
+    test_dataset=Radar(train=False)
+
     
 
 
