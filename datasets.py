@@ -47,3 +47,5 @@ class Radar(Dataset):
         #label mapping
         return img #label, age
 
+if __name__ == "__main__":
+    Radar()
