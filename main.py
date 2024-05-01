@@ -22,9 +22,9 @@ def main():
     parser.add_argument("--seed",type=int, default="42")
     
     # test dataset
-    train_dataset=Radar(train=True)
-    valid_dataset=Radar(train=False)
-    test_dataset=Radar(train=False)
+    train_dataset=Radar(flag="Train")
+    valid_dataset=Radar(flag="Valid")
+    test_dataset=Radar(flag="Test")
 
     
 

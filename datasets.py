@@ -9,19 +9,19 @@ import pandas as pd
 
 
 class Radar(Dataset):
-    def __init__(self, train = False):
+    def __init__(self, flag=None):
         super(Radar, self).__init__()
         self.path = 'data/radar_test'
         self.transform = None
         self.num_imgs = len(glob.glob(self.path+'/*.png'))
         self.img_list = glob.glob(self.path + '/*.png')
-        self.is_train = train
+        self.flag=flag
         self.idx = np.array([i for i in range(self.__len__())], dtype=int)
         self.Image_Transform()
     
     def Image_Transform(self):
         # 이미지 변환용
-        if self.is_train:
+        if self.flag =="Train":
             # Train 
             self.transform = transforms.Compose([
                 transforms.ToTensor(),
@@ -42,15 +42,21 @@ class Radar(Dataset):
         return self.num_imgs
 
     def __getitem__(self, idx):
+        assert self.flag in {"Train", "Valid", "Test"}
         data=pd.read_csv("loader_test.csv")
         idx = idx
         img = Image.open(self.img_list[idx])
         img = self.transform(img)
         label=data['Rain_Intensity'][idx]
         #label mapping
-        # if self.is_train:
+        if self.flag == "Train":
+            pass
+        elif self.flag == "Valid":
+            pass
+        else:
+            pass
 
-        
+
         return img, label
 
 
