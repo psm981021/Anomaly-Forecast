@@ -69,3 +69,5 @@ for i, (data) in enumerate(train_loader):
     
 print("end")
 print(dataset)
+if __name__ == "__main__":
+    Radar()

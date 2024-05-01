@@ -6,6 +6,8 @@ import zipfile
 from tqdm import tqdm
 import cv2 
 import pandas as pd
+from PIL import Image
+from torchvision import transforms 
 
 def set_seed(seed):
     random.seed(seed)
@@ -24,6 +26,13 @@ def check_path(path):
         os.makedirs(path)
         print(f"{path} created")
 
+def z_to_r(z):
+    """
+    Convert radar reflectivity (Z in dBZ) to rainfall rate (R in mm/hr) using the equation Z = 200 * R^1.6.
+    """
+    return np.power(z / 200, 1 / 1.6)
+
+
 def make_image_csv(path,file_name=None):
 
     image_files = sorted(os.listdir(path))
@@ -37,19 +46,24 @@ def make_image_csv(path,file_name=None):
     print(f"Start tqdm with length of: {len(rain_image)}")
     for image in rain_image:
         image_path = os.path.join(path, image)
-        image = cv2.imread(image_path)
+        image = Image.open(image_path).convert("RGB")
+        image_np = np.array(image)
 
-        crop_image = image[120:420,170:470]
-        img_size = crop_image.shape[1]
-        num_pixels = img_size * img_size
+        cropped_image_np = image_np[120:420, 170:470, :]
+        # Convert numpy array to PyTorch tensor
+        crop_image = transforms.ToTensor()(cropped_image_np)
         
-        import IPython; IPython.embed(colors='Linux');exit(1);
+        # Apply normalization
+        normalize = transforms.Normalize(mean=[0.485, 0.456, 0.406],
+                                         std=[0.229, 0.224, 0.225])
+        crop_image = normalize(crop_image)
 
-        # rain pixels accumulate
-        rain_pixels = np.sum(crop_image > 0)
-        total_pixels = np.prod(crop_image.shape[:2])
-        rain_amount = rain_pixels / total_pixels
-        rain_amounts.append(round(rain_amount,2))
+        #z to r transformation
+        z_values = np.mean(crop_image.numpy(), axis=(0, 1, 2))
+        intensity = z_to_r(z_values)
+        
+        rain_amounts.append(round(intensity, 2))
+
             
     # image path
     df =pd.DataFrame({"Image_Path":image_files, "Rain_Intensity": rain_amounts})
@@ -57,9 +71,9 @@ def make_image_csv(path,file_name=None):
 
     images_per_day =6 * 24
     for i in range(0,len(df), images_per_day * 8):
-        train_end_index = i + (images_per_day * 4)  # Train for 2 days
-        valid_end_index = train_end_index + images_per_day*2  # Validation for 1 day
-        test_end_index = valid_end_index + images_per_day*2  # Test for 1 day
+        train_end_index = i + (images_per_day * 4)  # Train for 4 days
+        valid_end_index = train_end_index + images_per_day*2  # Validation for 2 day
+        test_end_index = valid_end_index + images_per_day*2  # Test for 2 day
 
         df.loc[i:train_end_index - 1, "Set"] = "Train"  # Exclude train_end_ index
         df.loc[train_end_index:valid_end_index - 1, "Set"] = "Valid"  # Exclude valid_end_index
