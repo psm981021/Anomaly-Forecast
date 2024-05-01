@@ -63,7 +63,7 @@ def make_image_csv(path,file_name=None):
 
         df.loc[i:train_end_index - 1, "Set"] = "Train"  # Exclude train_end_ index
         df.loc[train_end_index:valid_end_index - 1, "Set"] = "Valid"  # Exclude valid_end_index
-        df.loc[valid_end_index:test_end_index - 1, "Set"] = "Test"  # Exclude test_end_index
+        df.loc[valid_end_index:test_end_index - 1, "Set"] = "Test"  # Exclude test_en d_index
         
     if file_name:
         df.to_csv(file_name, index=False)
