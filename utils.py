@@ -82,4 +82,4 @@ def make_image_csv(path,file_name=None):
 
 
 if __name__ == "__main__":
-    make_image_csv('/Users/sb/Desktop/anomaly_forecast/data/radar_sample_images','data/image_loader.csv')
+    make_image_csv('data/radar_test','data/image_loader.csv')
