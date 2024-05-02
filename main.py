@@ -23,10 +23,21 @@ def main():
     parser.add_argument("--seed",type=int, default="42")
     args = parser.parse_args()
 
+<<<<<<< HEAD
     # Create instances of Radar class for train, valid, and test datasets
     train_dataset = Radar(flag="Train", csv_path=args.image_csv_dir)
     # valid_dataset = Radar(flag="Valid", csv_path=args.image_csv_dir)
     # test_dataset = Radar(flag="Test", csv_path=args.image_csv_dir)
+=======
+    # test dataset
+    train_dataset=Radar(flag="Train",csv_path= args.image_csv_dir)
+    valid_dataset=Radar(flag="Valid", csv_path= args.image_csv_dir)
+    test_dataset=Radar(flag="Test", csv_path= args.image_csv_dir)
+
+    train_loader = DataLoader(train_dataset, batch_size = 1)
+    valid_loader = DataLoader(valid_dataset, batch_size = 1)
+    test_loader = DataLoader(test_dataset, batch_size = 1)
+>>>>>>> jw
 
     
     import IPython; IPython.embed(colors='Linux');exit(1);
