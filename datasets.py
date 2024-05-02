@@ -23,11 +23,7 @@ class Radar(Dataset):
     def Image_Transform(self, flag):
         # 이미지 변환용
         if flag =="Train":
-<<<<<<< HEAD
             # Train 
-=======
-            # Train
->>>>>>> jw
             self.transform = transforms.Compose([
                 transforms.ToTensor(),
                 transforms.CenterCrop((250,250))
@@ -67,7 +63,6 @@ class Radar(Dataset):
                 brightness -= 0.4
             img = TF.adjust_brightness(img, brightness)
 
-<<<<<<< HEAD
     def image_set(self, flag=None ): 
         data =data=pd.read_csv(self.image_csv_dir)
         
@@ -83,33 +78,6 @@ class Radar(Dataset):
             for i in tqdm(train_index):
                 img = Image.open(os.path.join(self.path, data['Image_Path'][i]))
                 
-=======
-
-    def __getitem__(self, idx):
-        assert self.flag in {"Train", "Valid", "Test"}
-
-        data=pd.read_csv(self.image_csv_dir)
-        idx = idx
-        # img = Image.open(self.img_list[idx])
-        # img = self.transform(img)
-        # label=data['Rain_Intensity'][idx]
-        #label mapping
-        if self.flag == "Train":
-            # img = self.transform(img, self.flag)
-            
-            #augmentation if needed
-            # if self.augmentations:
-            #     img = self.apply_augmentation(img)
-
-            self.Image_Transform(flag=self.flag)
-            train_index=np.array(data[data['Set']=="Train"].index, dtype=int)
-            # train_img_list=list(data['Image_Path'][train_index])
-            train_img=[]
-            train_label=[]
-            train_img_tmp=[]
-            for i in tqdm(train_index):
-                img = Image.open(self.path + '/' + data['Image_Path'][i])
->>>>>>> jw
                 img = self.transform(img)
                 train_img_tmp.append(img)
 
