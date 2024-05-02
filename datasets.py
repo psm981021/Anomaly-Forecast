@@ -6,7 +6,7 @@ import torch
 import torchvision.transforms as transforms
 from torch.utils.data import Dataset
 import pandas as pd
-
+from tqdm import tqdm
 
 class Radar(Dataset):
     def __init__(self, flag=None):
@@ -51,9 +51,18 @@ class Radar(Dataset):
         #label mapping
         if self.flag == "Train":
             train_index=np.array(data[data['Set']=="Train"].index, dtype=int)
-            train_img = Image.open(self.img_list[train_index])
-            train_img = self.transform(train_img)
-            train_label=data['Rain_Intensity'][train_index]
+            train_img=[]
+            train_label=[]
+            train_img_tmp=[]
+            for i in tqdm(train_index):
+                img = Image.open(self.img_list[i])
+                img = self.transform(img)
+                train_img_tmp.append(img)
+                if (i+1)%6==0:
+                    train_img.append(train_img_tmp)
+                    train_label.append(data['Rain_Intensity'][i])
+                    train_img_tmp=[]
+
             # train_img=img[train_index]
             # train_label=label[train_index]
 
@@ -72,7 +81,7 @@ class Radar(Dataset):
 
 
 dataset=Radar(flag="Train")
-train_loader = torch.utils.data.DataLoader(dataset,batch_size=8)
+train_loader = torch.utils.data.DataLoader(dataset,batch_size=1)
 import IPython; IPython.embed(colors='Linux'); exit(1)
 for i, (data) in enumerate(train_loader):
     print(data)
