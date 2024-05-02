@@ -45,24 +45,34 @@ class Radar(Dataset):
         assert self.flag in {"Train", "Valid", "Test"}
         data=pd.read_csv("loader_test.csv")
         idx = idx
-        img = Image.open(self.img_list[idx])
-        img = self.transform(img)
-        label=data['Rain_Intensity'][idx]
+        # img = Image.open(self.img_list[idx])
+        # img = self.transform(img)
+        # label=data['Rain_Intensity'][idx]
         #label mapping
         if self.flag == "Train":
-            pass
+            train_index=np.array(data[data['Set']=="Train"].index, dtype=int)
+            train_img = Image.open(self.img_list[train_index])
+            train_img = self.transform(train_img)
+            train_label=data['Rain_Intensity'][train_index]
+            # train_img=img[train_index]
+            # train_label=label[train_index]
+
+            return train_img, train_label
+
         elif self.flag == "Valid":
+            valid=data[data['Set']=="Valid"]
             pass
         else:
+            test=data[data['Set']=='Test']
             pass
 
 
-        return img, label
+        # return img, label
 
 
 
-dataset=Radar(train=True)
-train_loader = torch.utils.data.DataLoader(dataset,batch_size=4)
+dataset=Radar(flag="Train")
+train_loader = torch.utils.data.DataLoader(dataset,batch_size=8)
 import IPython; IPython.embed(colors='Linux'); exit(1)
 for i, (data) in enumerate(train_loader):
     print(data)

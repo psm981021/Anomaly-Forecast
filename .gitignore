@@ -14,6 +14,8 @@ data/*.csv
 /test.jpg
 /Resized image test.jpg
 sample_test
+/datatest.ipynb
+/loader_test.csv
 
 
 # sb
