@@ -9,6 +9,7 @@ from torch.utils.data import Dataset
 import pandas as pd
 import random
 
+from tqdm import tqdm
 
 class Radar(Dataset):
     def __init__(self, csv_path, flag= None, augmentations= None, ):
@@ -72,11 +73,9 @@ class Radar(Dataset):
         data=pd.read_csv(self.image_csv_dir)
 
         idx = idx
-
         img = Image.open(self.img_list[idx])
         img = self.transform(img)
         label=data['Rain_Intensity'][idx]
-
         #label mapping
         if self.flag == "Train":
             img = self.transform(img, self.flag)
@@ -85,14 +84,33 @@ class Radar(Dataset):
             if self.augmentations:
                 img = self.apply_augmentation(img)
 
+            train_index=np.array(data[data['Set']=="Train"].index, dtype=int)
+            train_img=[]
+            train_label=[]
+            train_img_tmp=[]
+            for i in tqdm(train_index):
+                img = Image.open(self.img_list[i])
+                img = self.transform(img)
+                train_img_tmp.append(img)
+                if (i+1)%6==0:
+                    train_img.append(train_img_tmp)
+                    train_label.append(data['Rain_Intensity'][i])
+                    train_img_tmp=[]
+
+            # train_img=img[train_index]
+            # train_label=label[train_index]
+
+            return train_img, train_label
+
         elif self.flag == "Valid":
-            img = self.transform(img, self.flag)
+            valid=data[data['Set']=="Valid"]
+            pass
         else:
-            img = self.transform(img, self.flag)
+            test=data[data['Set']=='Test']
+            pass
 
-            
 
-        return img, label
+        # return img, label
 
 
 if __name__ == "__main__":
