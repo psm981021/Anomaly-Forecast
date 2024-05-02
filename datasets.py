@@ -25,16 +25,17 @@ class Radar(Dataset):
             # Train 
             self.transform = transforms.Compose([
                 transforms.ToTensor(),
-                transforms.Resize((60, 60)),
-                transforms.Normalize(0, 1),
-                transforms.RandomCrop(60),
-                transforms.RandomHorizontalFlip(),
-                transforms.RandomRotation(5),
+                transforms.CenterCrop((250,250))
+            ])
+        elif self.flag == "Valid":
+            self.transform = transforms.Compose([
+                transforms.ToTensor(),
+                transforms.CenterCrop((250,250))
             ])
         else:
             self.transform = transforms.Compose([
                 transforms.ToTensor(),
-                transforms.Resize((60, 60)),
+                transforms.CenterCrop((250,250))
             ])
         pass
 

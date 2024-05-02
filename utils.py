@@ -49,17 +49,15 @@ def make_image_csv(path,file_name=None):
         image = Image.open(image_path).convert("RGB")
         image_np = np.array(image)
 
-        cropped_image_np = image_np[120:420, 170:470, :]
-        # Convert numpy array to PyTorch tensor
-        crop_image = transforms.ToTensor()(cropped_image_np)
-        
-        # Apply normalization
-        normalize = transforms.Normalize(mean=[0.485, 0.456, 0.406],
-                                         std=[0.229, 0.224, 0.225])
-        crop_image = normalize(crop_image)
+        transform_ = transforms.Compose([
+            transforms.ToTensor(),
+            transforms.CenterCrop((250,250))
+        ])
+        transform_input = transform_(image_np)
+        transformed_image = transforms.ToPILImage()(transform_input)
 
         #z to r transformation
-        z_values = np.mean(crop_image.numpy(), axis=(0, 1, 2))
+        z_values = np.mean(transformed_image.numpy(), axis=(0, 1, 2))
         intensity = z_to_r(z_values)
         
         rain_amounts.append(round(intensity, 2))
