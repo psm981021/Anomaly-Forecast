@@ -8,7 +8,7 @@ import torchvision.transforms.functional as TF
 from torch.utils.data import Dataset
 import pandas as pd
 import random
-
+import os
 from tqdm import tqdm
 
 class Radar(Dataset):
@@ -16,22 +16,19 @@ class Radar(Dataset):
         super(Radar, self).__init__()
         self.path = 'data/radar_test'
         self.image_csv_dir = csv_path 
-        self.transform = None
-        self.num_imgs = len(glob.glob(self.path+'/*.png'))
-        self.img_list = glob.glob(self.path + '/*.png')
         self.flag=flag
         self.idx = np.array([i for i in range(self.__len__())], dtype=int)
         self.augmentations = augmentations
     
     def Image_Transform(self, flag):
         # 이미지 변환용
-        if self.flag =="Train":
+        if flag =="Train":
             # Train 
             self.transform = transforms.Compose([
                 transforms.ToTensor(),
                 transforms.CenterCrop((250,250))
             ])
-        elif self.flag == "Valid":
+        elif flag == "Valid":
             self.transform = transforms.Compose([
                 transforms.ToTensor(),
                 transforms.CenterCrop((250,250))
@@ -44,7 +41,7 @@ class Radar(Dataset):
         pass
 
     def __len__(self):
-        return self.num_imgs
+        return 1#self.num_imgs
     
     def apply_augmentation(self, img):
 
@@ -66,40 +63,41 @@ class Radar(Dataset):
                 brightness -= 0.4
             img = TF.adjust_brightness(img, brightness)
 
-
-    def __getitem__(self, idx):
-        assert self.flag in {"Train", "Valid", "Test"}
-
-        data=pd.read_csv(self.image_csv_dir)
-
-        idx = idx
-        img = Image.open(self.img_list[idx])
-        img = self.transform(img)
-        label=data['Rain_Intensity'][idx]
-        #label mapping
-        if self.flag == "Train":
-            img = self.transform(img, self.flag)
-            
-            #augmentation if needed
-            if self.augmentations:
-                img = self.apply_augmentation(img)
-
+    def image_set(self, flag=None ): 
+        data =data=pd.read_csv(self.image_csv_dir)
+        
+        if flag =="Train":
             train_index=np.array(data[data['Set']=="Train"].index, dtype=int)
-            train_img=[]
-            train_label=[]
-            train_img_tmp=[]
+            self.Image_Transform(flag)
+            
+
+            train_img = []
+            train_label = []
+            train_img_tmp =[]
+
             for i in tqdm(train_index):
-                img = Image.open(self.img_list[i])
+                img = Image.open(os.path.join(self.path, data['Image_Path'][i]))
+                
                 img = self.transform(img)
                 train_img_tmp.append(img)
+
                 if (i+1)%6==0:
                     train_img.append(train_img_tmp)
                     train_label.append(data['Rain_Intensity'][i])
                     train_img_tmp=[]
 
-            # train_img=img[train_index]
-            # train_label=label[train_index]
+        return train_img, train_label
 
+    def __getitem__(self, idx):
+        assert self.flag in {"Train", "Valid", "Test"}
+
+        data=pd.read_csv(self.image_csv_dir)
+        #label mapping
+        print(self.flag)
+        if self.flag == "Train":
+            
+            train_img, train_label = self.image_set("Train")
+            
             return train_img, train_label
 
         elif self.flag == "Valid":
