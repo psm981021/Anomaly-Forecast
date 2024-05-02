@@ -54,10 +54,9 @@ def make_image_csv(path,file_name=None):
             transforms.CenterCrop((250,250))
         ])
         transform_input = transform_(image_np)
-        transformed_image = transforms.ToPILImage()(transform_input)
-
+        
         #z to r transformation
-        z_values = np.mean(transformed_image.numpy(), axis=(0, 1, 2))
+        z_values = np.mean(transform_input.numpy(), axis=(0, 1, 2))
         intensity = z_to_r(z_values)
         
         rain_amounts.append(round(intensity, 2))
@@ -83,4 +82,4 @@ def make_image_csv(path,file_name=None):
 
 
 if __name__ == "__main__":
-    make_image_csv('/Users/sb/Desktop/anomaly_forecast/data/radar_sample_images','data/loader_test.csv')
+    make_image_csv('/Users/sb/Desktop/anomaly_forecast/data/radar_sample_images','data/image_loader.csv')

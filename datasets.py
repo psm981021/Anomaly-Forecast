@@ -4,22 +4,25 @@ import PIL.Image as Image
 import numpy as np
 import torch
 import torchvision.transforms as transforms
+import torchvision.transforms.functional as TF
 from torch.utils.data import Dataset
 import pandas as pd
+import random
 
 
 class Radar(Dataset):
-    def __init__(self, flag=None):
+    def __init__(self, csv_path, flag= None, augmentations= None, ):
         super(Radar, self).__init__()
         self.path = 'data/radar_test'
+        self.image_csv_dir = csv_path 
         self.transform = None
         self.num_imgs = len(glob.glob(self.path+'/*.png'))
         self.img_list = glob.glob(self.path + '/*.png')
         self.flag=flag
         self.idx = np.array([i for i in range(self.__len__())], dtype=int)
-        self.Image_Transform()
+        self.augmentations = augmentations
     
-    def Image_Transform(self):
+    def Image_Transform(self, flag):
         # 이미지 변환용
         if self.flag =="Train":
             # Train 
@@ -41,34 +44,56 @@ class Radar(Dataset):
 
     def __len__(self):
         return self.num_imgs
+    
+    def apply_augmentation(self, img):
+
+        # Horizontal flip
+        if random.random() >0.5:
+            img = TF.hflip(img)
+
+        # Random Rotation (clockwise and counterclockwise)
+        if random.random() > 0.5:
+            degrees = 10
+            if random.random() > 0.5:
+                degrees *= -1
+            img = TF.rotate(img, degrees)
+
+        # Brighten or darken image (only applied to input image)
+        if random.random() > 0.5:
+            brightness = 1.2
+            if random.random() > 0.5:
+                brightness -= 0.4
+            img = TF.adjust_brightness(img, brightness)
+
 
     def __getitem__(self, idx):
         assert self.flag in {"Train", "Valid", "Test"}
-        data=pd.read_csv("loader_test.csv")
+
+        data=pd.read_csv(self.image_csv_dir)
+
         idx = idx
+
         img = Image.open(self.img_list[idx])
         img = self.transform(img)
         label=data['Rain_Intensity'][idx]
+
         #label mapping
         if self.flag == "Train":
-            pass
-        elif self.flag == "Valid":
-            pass
-        else:
-            pass
+            img = self.transform(img, self.flag)
+            
+            #augmentation if needed
+            if self.augmentations:
+                img = self.apply_augmentation(img)
 
+        elif self.flag == "Valid":
+            img = self.transform(img, self.flag)
+        else:
+            img = self.transform(img, self.flag)
+
+            
 
         return img, label
 
 
-
-dataset=Radar(train=True)
-train_loader = torch.utils.data.DataLoader(dataset,batch_size=4)
-import IPython; IPython.embed(colors='Linux'); exit(1)
-for i, (data) in enumerate(train_loader):
-    print(data)
-    
-print("end")
-print(dataset)
 if __name__ == "__main__":
     Radar()

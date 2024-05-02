@@ -12,6 +12,7 @@ def main():
     parser = argparse.ArgumentParser()
 
     parser.add_argument("--data_dir", default="data/radar_test", type=str)
+    parser.add_argument("--image_csv_dir", default="data/image_loader", type=str, help="image path, rain intensity, label csv")
     parser.add_argument("--save_path",default="output/", type=str)
     parser.add_argument("--epochs", type=int, help="number of epochs" )
     parser.add_argument("--model_idx", default="test", type=str, help="model idenfier")
@@ -20,13 +21,18 @@ def main():
     parser.add_argument("--batch", type=int, help="batch size")
     parser.add_argument("--device",type=str, default="cuda:1")
     parser.add_argument("--seed",type=int, default="42")
-    
-    # test dataset
-    train_dataset=Radar(flag="Train")
-    valid_dataset=Radar(flag="Valid")
-    test_dataset=Radar(flag="Test")
+    args = parser.parse_args()
 
-    
+    # test dataset
+    train_dataset=Radar(flag="Train",csv_path= args.image_csv_dir)
+    valid_dataset=Radar(flag="Valid", csv_path= args.image_csv_dir)
+    test_dataset=Radar(flag="Test", csv_path= args.image_csv_dir)
+
+    train_loader = DataLoader(train_dataset, batch_size = 8)
+    valid_loader = DataLoader(valid_dataset, batch_size = 8)
+    test_loader = DataLoader(test_dataset, batch_size = 8)
+
+    import IPython; IPython.embed(colors='Linux');exit(1);
 
 
 
@@ -44,3 +50,5 @@ def main():
 
     # main
 
+if __name__ == "__main__":
+    main()
