@@ -92,7 +92,7 @@ class Radar(Dataset):
         batch_images = []
         labels = []
 
-        for i in range(self.sequence_length):
+        for i in range(self.sequence_length+1):
             img_path = os.path.join(self.args.data_dir,self.data.iloc[idx + i]['Image_Path'])
             image = Image.open(img_path).convert('RGB')
             
