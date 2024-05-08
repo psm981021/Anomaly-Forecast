@@ -28,26 +28,6 @@ class Radar(Dataset):
         
         self.idx = np.array([i for i in range(self.__len__())], dtype=int)
 
-    
-    def Image_Transform(self, flag):
-        # 이미지 변환용
-        if flag =="Train":
-            # Train 
-            self.transform = transforms.Compose([
-                transforms.ToTensor(),
-                transforms.CenterCrop((250,250))
-            ])
-        elif flag == "Valid":
-            self.transform = transforms.Compose([
-                transforms.ToTensor(),
-                transforms.CenterCrop((250,250))
-            ])
-        else:
-            self.transform = transforms.Compose([
-                transforms.ToTensor(),
-                transforms.CenterCrop((250,250))
-            ])
-        pass
 
     def __len__(self):
         try: 
@@ -126,8 +106,7 @@ class Radar(Dataset):
         batch_images = torch.stack(batch_images)
         labels = torch.tensor(labels, dtype=torch.float32)
 
-        return batch_images, labels
-
+        return (batch_images, labels)
 
 
 

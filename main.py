@@ -12,7 +12,7 @@ def main():
     parser = argparse.ArgumentParser()
 
     parser.add_argument("--data_dir", default="data/radar_test", type=str)
-    parser.add_argument("--image_csv_dir", default="/Users/sb/Desktop/anomaly_forecast/data/image_loader.csv", type=str, help="image path, rain intensity, label csv")
+    parser.add_argument("--image_csv_dir", default="data/image_loader.csv", type=str, help="image path, rain intensity, label csv")
     parser.add_argument("--save_path",default="output/", type=str)
     parser.add_argument("--epochs", type=int, help="number of epochs" )
     parser.add_argument("--model_idx", default="test", type=str, help="model idenfier")
