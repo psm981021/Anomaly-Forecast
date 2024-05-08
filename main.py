@@ -3,7 +3,7 @@ from tqdm import trange
 from datasets import Radar
 import argparse
 from utils import *
-
+from models import *
 
 
 
@@ -29,14 +29,17 @@ def main():
 
     # learning args
     parser.add_argument("--learning_rate", type=float, default=0.001, help="learning rate")
-
+    parser.add_argument("--adam_beta1", type=float, default=0.9, help="adam first beta value")
+    parser.add_argument("--adam_beta2", type=float, default=0.999, help="adam second beta value")
+    
+    
     args = parser.parse_args()
 
     #set seed
     set_seed(args.seed)
 
     #make path for save
-    
+    check_path(args.save_path)
 
 
 
@@ -53,20 +56,18 @@ def main():
     test_loader = DataLoader(test_dataset, batch_size=8)
 
 
-
+    os.environ["CUDA_VISIBLE_DEVICES"] = args.gpu_id
+    args.cuda_condition = torch.cuda.is_available() and not args.no_cuda
+    print("Using Cuda:", torch.cuda.is_available())
     
+    # save model args
+    args.str = f"{args.model_idx}-{args.batch}-{args.epochs}"
+    args.log_file = os.path.join(args.output_dir,args.str + ".txt" )
 
-    #configs
-    # args = parser.parse_args()
-    # set_seed(args.seed)
-    # check_path(args.output_dir)
-    # os.environ["CUDA_VISIBLE_DEVICES"] = args.gpu_id
-    # args.cuda_condition = torch.cuda.is_available() and not args.no_cuda
-    # print("Using Cuda:", torch.cuda.is_available())
+    #model
+    model = Fourcaster(args=args)
 
-    
 
-    # main
 
 if __name__ == "__main__":
     main()
