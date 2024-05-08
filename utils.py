@@ -80,6 +80,20 @@ def make_image_csv(path,file_name=None):
         df.to_csv(file_name, index=False)
     return df
 
+def set_seed(seed):
+    random.seed(seed)
+    os.environ["PYTHONHASHSEED"] = str(seed)
+    np.random.seed(seed)
+    torch.manual_seed(seed)
+    torch.cuda.manual_seed(seed)
+    torch.cuda.manual_seed_all(seed)
+    torch.backends.cudnn.deterministic = True
+
+def check_path(path):
+    if not os.path.exists(path):
+        os.makedirs(path)
+        print(f"{path} created")
+        
 
 if __name__ == "__main__":
     make_image_csv('data/radar_test','data/image_loader.csv')
