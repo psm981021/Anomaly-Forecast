@@ -12,13 +12,22 @@ import os
 from tqdm import tqdm
 
 class Radar(Dataset):
-    def __init__(self, csv_path, flag= None, augmentations= None, ):
+    def __init__(self, args,csv_path, sequence_length, flag= None, augmentations= None ):
         super(Radar, self).__init__()
         self.path = 'data/radar_test'
-        self.image_csv_dir = csv_path 
+        self.csv_path = csv_path
         self.flag=flag
-        self.idx = np.array([i for i in range(self.__len__())], dtype=int)
         self.augmentations = augmentations
+        self.args = args
+        self.sequence_length = sequence_length
+
+        self.transform = transforms.Compose([
+            transforms.ToTensor(),
+            transforms.CenterCrop((250, 250))
+        ])
+        
+        self.idx = np.array([i for i in range(self.__len__())], dtype=int)
+
     
     def Image_Transform(self, flag):
         # 이미지 변환용
@@ -41,7 +50,13 @@ class Radar(Dataset):
         pass
 
     def __len__(self):
-        return 1#self.num_imgs
+        try: 
+            self.data = pd.read_csv(self.csv_path)
+            self.data = self.data[self.data['Set'] == self.flag]
+            return len(self.data) // self.sequence_length
+        except:
+        # self.data contains all data including train/valid/test
+            print("dataset len debug");import IPython; IPython.embed(colors='Linux');exit(1);
     
     def apply_augmentation(self, img):
 
@@ -63,6 +78,9 @@ class Radar(Dataset):
                 brightness -= 0.4
             img = TF.adjust_brightness(img, brightness)
 
+
+
+    # original code from 5/8
     def image_set(self, flag=None ): 
         data =data=pd.read_csv(self.image_csv_dir)
         
@@ -89,23 +107,48 @@ class Radar(Dataset):
         return train_img, train_label
 
     def __getitem__(self, idx):
-        assert self.flag in {"Train", "Valid", "Test"}
 
-        data=pd.read_csv(self.image_csv_dir)
-        #label mapping
-        print(self.flag)
-        if self.flag == "Train":
-            
-            train_img, train_label = self.image_set("Train")
-            
-            return train_img, train_label
+        idx *= self.sequence_length  # Adjust index to get the sequence start
+        batch_images = []
+        labels = []
 
-        elif self.flag == "Valid":
-            valid=data[data['Set']=="Valid"]
-            pass
-        else:
-            test=data[data['Set']=='Test']
-            pass
+        for i in range(self.sequence_length):
+            img_path = os.path.join(self.args.data_dir,self.data.iloc[idx + i]['Image_Path'])
+            image = Image.open(img_path).convert('RGB')
+            
+            if self.transform:
+                image = self.transform(image)
+
+            # if flag == Train augmentation if needed
+            batch_images.append(image)
+            labels.append(self.data.iloc[idx+i]['Rain_Intensity'])
+
+        batch_images = torch.stack(batch_images)
+        labels = torch.tensor(labels, dtype=torch.float32)
+
+        return batch_images, labels
+
+
+
+
+        # original code in 5/8
+
+        # assert self.flag in {"Train", "Valid", "Test"}
+        # data=pd.read_csv(self.image_csv_dir)
+        # #label mapping
+        # print(self.flag)
+        # if self.flag == "Train":
+            
+        #     train_img, train_label = self.image_set("Train")
+            
+        #     return train_img, train_label
+
+        # elif self.flag == "Valid":
+        #     valid=data[data['Set']=="Valid"]
+        #     pass
+        # else:
+        #     test=data[data['Set']=='Test']
+        #     pass
 
 
         # return img, label
