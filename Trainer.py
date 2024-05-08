@@ -29,18 +29,10 @@ def fit(
     valid_dl,
     dev=None,
     save_every: Optional[int] = None,
-    tensorboard: bool = False,
     earlystopping=None,
     lr_scheduler=None,
 ):
-    writer = None
-    if tensorboard:
-        from torch.utils.tensorboard import SummaryWriter
-
-        writer = SummaryWriter(comment=f"{model.__class__.__name__}")
-
-    if dev is None:
-        dev = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+    dev = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
     start_time = time.time()
     best_mIoU = -1.0
@@ -92,7 +84,7 @@ def fit(
                     "train_loss": train_loss,
                     "mIOU": mean_iou,
                 },
-                ROOT_DIR / "checkpoints" / f"best_mIoU_model_{model.__class__.__name__}.pt",
+                "checkpoints" / f"best_mIoU_model_{model.__class__.__name__}.pt",
             )
             best_mIoU = mean_iou
             earlystopping_counter = 0
@@ -111,12 +103,12 @@ def fit(
             f"Early stopping counter: {earlystopping_counter}/{earlystopping}" if earlystopping is not None else "",
         )
 
-        if writer:
-            # add to tensorboard
-            writer.add_scalar("Loss/train", train_loss, epoch)
-            writer.add_scalar("Loss/val", val_loss, epoch)
-            writer.add_scalar("Metric/mIOU", mean_iou, epoch)
-            writer.add_scalar("Parameters/learning_rate", get_lr(opt), epoch)
+        # if writer:
+        #     # add to tensorboard
+        #     writer.add_scalar("Loss/train", train_loss, epoch)
+        #     writer.add_scalar("Loss/val", val_loss, epoch)
+        #     writer.add_scalar("Metric/mIOU", mean_iou, epoch)
+        #     writer.add_scalar("Parameters/learning_rate", get_lr(opt), epoch)
         if save_every is not None and epoch % save_every == 0:
             # save model
             torch.save(
@@ -130,7 +122,7 @@ def fit(
                     "train_loss": train_loss,
                     "mIOU": mean_iou,
                 },
-                ROOT_DIR / "checkpoints" / f"model_{model.__class__.__name__}_epoch_{epoch}.pt",
+                "checkpoints" / f"model_{model.__class__.__name__}_epoch_{epoch}.pt",
             )
         if lr_scheduler is not None:
             lr_scheduler.step(mean_iou)
@@ -144,35 +136,6 @@ if __name__ == "__main__":
     epochs = 200
     earlystopping = 30
     save_every = 1
-
-    # Load your dataset here
-    transformations = transforms.Compose([transforms.Resize(256), transforms.CenterCrop(224)])
-    voc_dataset_train = dataset_VOC.VOCSegmentation(
-        root=dataset_folder,
-        image_set="train",
-        transformations=transformations,
-        augmentations=True,
-    )
-    voc_dataset_val = dataset_VOC.VOCSegmentation(
-        root=dataset_folder,
-        image_set="val",
-        transformations=transformations,
-        augmentations=False,
-    )
-    train_dl = DataLoader(
-        dataset=voc_dataset_train,
-        batch_size=batch_size,
-        shuffle=True,
-        num_workers=0,
-        pin_memory=True,
-    )
-    valid_dl = DataLoader(
-        dataset=voc_dataset_val,
-        batch_size=batch_size,
-        shuffle=False,
-        num_workers=0,
-        pin_memory=True,
-    )
 
     # Load SmaAt-UNet
     model = SmaAt_UNet(n_channels=3, n_classes=21)
