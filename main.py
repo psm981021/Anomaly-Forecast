@@ -32,9 +32,9 @@ def main():
     
     # Create DataLoader instances for train, valid, and test datasets
     train_loader = DataLoader(train_dataset, batch_size=8)
-    import IPython; IPython.embed(colors='Linux');exit(1);
-    valid_loader = DataLoader(valid_dataset, batch_size=1)
-    test_loader = DataLoader(test_dataset, batch_size=1)
+    # import IPython; IPython.embed(colors='Linux');exit(1);
+    # valid_loader = DataLoader(valid_dataset, batch_size=1)
+    # test_loader = DataLoader(test_dataset, batch_size=1)
 
 
 
