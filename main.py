@@ -74,3 +74,7 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+# python main.py --data_dir="data\\radar_test" --image_csv_dir="data\\22.7_22.9 강수량 평균 0.1 이하 제거.csv"
+# python main.py --data_dir="data/radar_test" --image_csv_dir="data/22.7_22.9 강수량 평균 0.1 이하 제거.csv"
+
