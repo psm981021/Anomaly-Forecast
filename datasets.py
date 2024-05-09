@@ -26,7 +26,7 @@ class Radar(Dataset):
         ])
         
         self.idx = np.array([i for i in range(self.__len__())], dtype=int)
-        self.image, self.label, self.gap = self.get_input(csv_path,self.idx)
+        self.image, self.label, self.gap = self.get_input(csv_path, self.flag)
 
 
     def __len__(self):
@@ -59,42 +59,16 @@ class Radar(Dataset):
             img = TF.adjust_brightness(img, brightness)
 
 
-
-    # original code from 5/8
-    # def image_set(self, flag=None ): 
-    #     data =data=pd.read_csv(self.image_csv_dir)
-        
-    #     if flag =="Train":
-    #         train_index=np.array(data[data['Set']=="Train"].index, dtype=int)
-    #         self.Image_Transform(flag)
-            
-
-    #         train_img = []
-    #         train_label = []
-    #         train_img_tmp =[]
-
-    #         for i in tqdm(train_index):
-    #             img = Image.open(os.path.join(self.path, data['Image_Path'][i]))
-                
-    #             img = self.transform(img)
-    #             train_img_tmp.append(img)
-
-    #             if (i+1)%6==0:
-    #                 train_img.append(train_img_tmp)
-    #                 train_label.append(data['Rain_Intensity'][i])
-    #                 train_img_tmp.clear()
-
-    #     return train_img, train_label
-
     def __getitem__(self, idx):
         return self.image[idx], self.label[idx],self.gap[idx]
     
-    def get_input(self, csv_path, idx):
+    def get_input(self, csv_path, flag):
+        
         data=pd.read_csv(csv_path)
+        data=data[data['Set']==flag].reset_index(drop=True)
+        idx = np.array([i for i in range(len(data))], dtype=int)
 
         dataset_images = []
-
-        # Iterate through the dataset up to the provided index
         labels=data['Label'].values
         gaps=data['Label Gap'].values
         # import IPython; IPython.embed(colors='Linux'); exit(1)
@@ -119,6 +93,33 @@ class Radar(Dataset):
         return (dataset_images,
                 torch.Tensor(labels).type(torch.float),
                 torch.Tensor(gaps).type(torch.float))
+
+
+        # original code from 5/8
+        # def image_set(self, flag=None ): 
+        #     data =data=pd.read_csv(self.image_csv_dir)
+            
+        #     if flag =="Train":
+        #         train_index=np.array(data[data['Set']=="Train"].index, dtype=int)
+        #         self.Image_Transform(flag)
+                
+
+        #         train_img = []
+        #         train_label = []
+        #         train_img_tmp =[]
+
+        #         for i in tqdm(train_index):
+        #             img = Image.open(os.path.join(self.path, data['Image_Path'][i]))
+                    
+        #             img = self.transform(img)
+        #             train_img_tmp.append(img)
+
+        #             if (i+1)%6==0:
+        #                 train_img.append(train_img_tmp)
+        #                 train_label.append(data['Rain_Intensity'][i])
+        #                 train_img_tmp.clear()
+
+        #     return train_img, train_label
 
         # original code in 5/8
 

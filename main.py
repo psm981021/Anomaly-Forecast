@@ -46,7 +46,7 @@ def main():
     # Create instances of Radar class for train, valid, and test datasets
 
     train_dataset = Radar(args,csv_path=args.image_csv_dir,flag="Train")
-    # import IPython; IPython.embed(colors='Linux'); exit(1)
+    import IPython; IPython.embed(colors='Linux'); exit(1)
     valid_dataset = Radar(flag="Valid", csv_path=args.image_csv_dir)
     test_dataset = Radar(flag="Test", csv_path=args.image_csv_dir)
 
@@ -74,6 +74,6 @@ def main():
 if __name__ == "__main__":
     main()
 
-# python main.py --data_dir="data\\radar_test" --image_csv_dir="data\\22.7_22.9 강수량 평균 0.1 이하 제거.csv"
+# python main.py --data_dir="data\\radar_test" --image_csv_dir="data\\22.7_22.9 강수량 평균 0.1 이하 제거_set추가.csv"
 # python main.py --data_dir="data/radar_test" --image_csv_dir="data/22.7_22.9 강수량 평균 0.1 이하 제거.csv"
 
