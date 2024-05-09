@@ -7,7 +7,9 @@ from tqdm import tqdm
 import cv2 
 import pandas as pd
 from PIL import Image
-from torchvision import transforms 
+from torchvision import transforms
+from datetime import datetime, timedelta
+import glob
 
 def set_seed(seed):
     random.seed(seed)
@@ -93,7 +95,76 @@ def check_path(path):
     if not os.path.exists(path):
         os.makedirs(path)
         print(f"{path} created")
-        
+
+
+#All csvs containing average precipitation for each region must exist in data_path
+#truncate_start format example: '2022-07-01 00:00'
+#truncate_end format example: '2022-09-30 23:50'
+
+def make_model_input(data_path, truncate_start = None, truncate_end = None, threshold = None):
+    file_names = glob.glob(data_path + "*.csv") #Loads a list of all csv files in a folder
+    
+    data = pd.DataFrame() #Create an empty data frame
+
+    for file_name in file_names:
+        temp = pd.read_csv(str(file_name), encoding='utf-8') #Open the csv files one by one and create a temporary data frame
+        data = pd.concat([data, temp], axis = 1) #Add to entire data frame
+    
+    #Remove overlapping columns
+    cols = list(data.columns)
+    cols[0] = 'Timestamp'
+    data.columns = cols
+    data.drop('일시', axis=1, inplace=True) 
+    
+    # Assign average value to 'Label' column
+    tmp_data = data.drop('Timestamp', axis=1)
+    data['Label'] = tmp_data.mean(axis=1)
+    
+    # Create ‘Label Gap’ column
+    data['Label Gap'] = data['Label'].diff()
+    
+    # Drop local data columns.
+    region = data.columns[1:4]
+    data.drop(region, axis=1, inplace=True)
+    
+    # Create columns to add image paths for each timestamp
+    insert_cols = ['t-60', 't-50', 't-40', 't-30', 't-20', 't-10', 't']
+    for i in range(1, len(insert_cols) + 1):
+        data.insert(i, insert_cols[i - 1], np.nan)
+    
+    # Set start and end dates
+    start_date = datetime(2021, 1, 1, 0, 0)
+    end_date = datetime(2023, 12, 31, 23, 00)
+
+    # Create a date_list at 10 minute intervals
+    date_list = []
+    current_date = start_date
+    while current_date <= end_date:
+        date_list.append(current_date.strftime('%Y%m%d%H%M'))
+        current_date += timedelta(minutes=10)
+    
+    # Fill values in dataframe with image path
+    idx = 0
+    for i in range(1, len(data)):
+        for j in range(1, 8):
+            data.iloc[i, j] = date_list[idx] + '.png'
+            if j == 7:
+                pass
+            else:
+                idx += 1
+    
+    # Cut rows with data from a specific timestamp
+    if truncate_start:
+        data = data[truncate_start <= data['Timestamp']].reset_index(drop=True)
+    if truncate_end:
+        data = data[data['Timestamp'] <= truncate_end].reset_index(drop=True)
+    
+    # Leave only rows with precipitation above threshold
+    if threshold:
+        data = data[data['Label'] >= threshold].reset_index(drop=True)
+    
+    return data
+
 
 if __name__ == "__main__":
     make_image_csv('data/radar_test','data/image_loader.csv')
