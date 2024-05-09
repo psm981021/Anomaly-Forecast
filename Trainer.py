@@ -63,3 +63,5 @@ class Trainer:
 
     def load(self, file_name):
         self.model.load_state_dict(torch.load(file_name))
+
+
