@@ -1,5 +1,6 @@
 from torch.utils.data import DataLoader
 from tqdm import trange
+import torch.nn as nn
 from datasets import Radar
 import argparse
 from utils import *
@@ -18,16 +19,18 @@ def main():
     parser.add_argument("--gpu_id", type=str, default="0", help="gpu_id")
     parser.add_argument("--device",type=str, default="cuda:1")
     parser.add_argument("--seed",type=int, default="42")
-
+    parser.add_argument("--no_cuda", action="store_true")
+    parser.add_argument('--use_multi_gpu', action='store_true', help='use multiple gpus', default=False)
+    parser.add_argument('--multi_devices', type=str, default='0,1', help='device ids of multile gpus')
 
     # model args
     parser.add_argument("--model_idx", default="test", type=str, help="model identifier")
-    parser.add_argument("--batch", type=int,default=8, help="batch size")
+    parser.add_argument("--batch", type=int,default=4, help="batch size")
 
     # train args
-    parser.add_argument("--epochs", type=int, default =10, help="number of epochs" )
+    parser.add_argument("--epochs", type=int, default=10, help="number of epochs" )
     parser.add_argument("--log_freq", type=int, default =1, help="number of log frequency" )
-
+    parser.add_argument("--patience",type=int, default="10")
 
     # learning args
     parser.add_argument("--lr", type=float, default=0.001, help="learning rate")
@@ -57,39 +60,81 @@ def main():
     
     
     # Create DataLoader instances for train, valid, and test datasets
-    train_loader = DataLoader(train_dataset, batch_size=8)
-    valid_loader = DataLoader(valid_dataset, batch_size=8)
+    train_loader = DataLoader(train_dataset, batch_size=args.batch,drop_last=True)
+    valid_loader = DataLoader(valid_dataset, batch_size=args.batch,drop_last=True)
     test_loader = valid_loader
     # test_loader = DataLoader(test_dataset, batch_size=8)
 
-    os.environ["CUDA_VISIBLE_DEVICES"] = args.gpu_id
+    # os.environ["CUDA_VISIBLE_DEVICES"] = args.devicegpu_id
     args.cuda_condition = torch.cuda.is_available() and not args.no_cuda
     print("Using Cuda:", torch.cuda.is_available())
+    
+    if args.use_multi_gpu:
+        args.devices = args.multi_devices.replace(' ', '')
+        device_ids = args.devices.split(',')
+        args.device_ids = [int(id_) for id_ in device_ids]
     
     # save model args
     args.str = f"{args.model_idx}-{args.batch}-{args.epochs}"
     args.log_file = os.path.join(args.output_dir,args.str + ".txt" )
 
+    #checkpoint
+    checkpoint = args.str + ".pt"
+    args.checkpoint_path = os.path.join(args.output_dir, checkpoint)
+
+    if os.path.exists(args.checkpoint_path):
+        with open(args.log_file, "a") as f:
+            f.write("------------------------------ Continue Training ------------------------------ \n")
+    
+    
     #model
     # n_classes = channel
     model = Fourcaster(n_channels=3,n_classes=3,kernels_per_layer=1, args=args)
-    
+    if args.use_multi_gpu:
+        print(args.device_ids)
+        model = nn.DataParallel(model, device_ids=args.device_ids)
     #trainer
     trainer = FourTrainer(model, train_loader,valid_loader,test_loader, args)
 
     start_time = time.time()
-    print("Train Fourcaster")
 
+    if os.path.exists(args.checkpoint_path):
+        print("Load pth")
+        trainer.load(args.checkpoint_path)
+
+
+    early_stopping = EarlyStopping(args.log_file,args.checkpoint_path, args.patience, verbose=True)
+    print("Train Fourcaster")
     for epoch in range(args.epochs):
         trainer.train(epoch)
 
+        score,_ = trainer.valid(epoch)
+        early_stopping(score, trainer.model)
+        if early_stopping.early_stop:
+            print("Early stopping")
+            break
+
+        #early stopping add
+
+    trainer.model.load_state_dict(torch.load(args.checkpoint_path))
+
+    #test
 
 
+    # time check
+    end_time = time.time()
+    execution_time = end_time - start_time
 
+    hours = int(execution_time // 3600)
+    minutes = int((execution_time % 3600) // 60)
+    seconds = int(execution_time % 60)
+
+    with open(args.log_file, "a") as f:
+        f.write(f"To run Epoch:{args.epochs} , It took {hours} hours, {minutes} minutes, {seconds} seconds\n")
 
 if __name__ == "__main__":
     main()
 
 # python main.py --data_dir="data\\radar_test" --image_csv_dir="data\\22.7_22.9 강수량 평균 0.1 이하 제거_set추가.csv"
-# python main.py --data_dir="data/radar_test" --image_csv_dir="data/data_sample.csv" --gpu_id=1
+# python main.py --data_dir="data/radar_test" --image_csv_dir="data/data_sample.csv" --gpu_id=0 --batch=2 --use_multi_gpu
 

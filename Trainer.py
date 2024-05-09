@@ -14,7 +14,6 @@ class Trainer:
 
         if self.cuda_condition:
             self.model.cuda()
-            self.projection.cuda()
 
         # Setting the train and test data loader
         self.train_dataloader = train_dataloader
@@ -34,7 +33,7 @@ class Trainer:
         self.iteration(epoch, self.train_dataloader)
 
     def valid(self, epoch,):
-        return self.iteration(epoch, self.eval_dataloader, train=False)
+        return self.iteration(epoch, self.valid_dataloader, train=False)
 
     def test(self, epoch):
         return self.iteration(epoch, self.test_dataloader, train=False)
@@ -45,16 +44,16 @@ class Trainer:
     def get_score(self, epoch, pred):
 
         # pred has to values, cross-entropy loss and mae loss
-        ce, mae = pred
+        mae = pred
         post_fix = {
             "Epoch":epoch,
             "MAE":mae,
-            "CE-Loss": ce
         }
         print(post_fix)
         with open(self.args.log_file, "a") as f:
             f.write(str(post_fix) + "\n")
-        return [ce, mae], str(post_fix)
+        return  mae, str(post_fix)
+    
     
     def save(self, file_name):
         torch.save({
@@ -78,7 +77,7 @@ class FourTrainer(Trainer):
             # model eval
             self.model.eval()
             
-            batch_iter = tqdm(enumerate(dataloader))
+            batch_iter = tqdm(enumerate(dataloader), total= len(dataloader))
             ce_loss = 0.0
             mae_loss = 0.0
             for i, batch in batch_iter:
@@ -111,7 +110,7 @@ class FourTrainer(Trainer):
                 # Regression with labels (CNN-regression)
                 # Loss_mae
                 loss_mae = self.mae_criterion(total_mae, torch.sum(gap,dim=0))
-
+                
                 #Total Loss = Loss_ce + Loss_mae
                 
 
@@ -123,6 +122,9 @@ class FourTrainer(Trainer):
 
                 ce_loss += total_ce.item()
                 mae_loss += loss_mae.item()
+
+                del batch
+            torch.cuda.empty_cache() 
 
             post_fix = {
                 "epoch":epoch,
@@ -140,8 +142,33 @@ class FourTrainer(Trainer):
 
         else:
             #valid and test
+            print("Eval Fourcaster")
+            self.model.eval()
 
-            import IPython; IPython.embed(colors='Linux');exit(1);
+            batch_iter = tqdm(enumerate(dataloader), total= len(dataloader))
+            for i, batch in batch_iter:
+                image, label, gap = batch
+
+                image_batch = [t.to(self.device) for t in image]
+                label = label.to(self.device)
+                gap = gap.to(self.device)
+            
+                precipitation =[]
+                for i in range(len(image_batch)-1):
+                    generated_image, regression_logits = self.model(image_batch[i],self.args)
+                    regression_logits = regression_logits.reshape(self.args.batch, -1)
+                    precipitation.append(regression_logits)
+                
+                total_mae = 0
+                for i in range(len(precipitation)-1):
+                    # check validity
+                    total_mae += torch.sum(precipitation[i+1]-precipitation[i])
+                loss_mae = self.mae_criterion(total_mae, torch.sum(gap,dim=0))
+            
+                del batch
+            torch.cuda.empty_cache() 
+            return self.get_score(epoch,loss_mae)
+            
     
 
 
