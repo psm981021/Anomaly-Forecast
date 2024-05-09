@@ -52,3 +52,10 @@ class Fourcaster(nn.Module):
         x = self.up4(x, x1Att)
         logits = self.outc(x)
         return logits
+    
+
+
+if __name__ == "__main__":
+
+    image = torch.randn(8,7,3,250,250)
+    logits = Fourcaster(image)
