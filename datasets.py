@@ -14,7 +14,7 @@ from tqdm import tqdm
 class Radar(Dataset):
     def __init__(self, args, csv_path,flag= None, augmentations= None ):
         super(Radar, self).__init__()
-        self.path = 'data/radar_test'
+        self.path = 'data\\radar_test'
         self.csv_path = csv_path
         self.flag=flag
         self.augmentations = augmentations
@@ -26,6 +26,7 @@ class Radar(Dataset):
         ])
         
         self.idx = np.array([i for i in range(self.__len__())], dtype=int)
+        self.image, self.label, self.gap = self.get_input(csv_path,self.idx)
 
 
     def __len__(self):
@@ -86,36 +87,37 @@ class Radar(Dataset):
     #     return train_img, train_label
 
     def __getitem__(self, idx):
-        dataset=[]
-        
-        for i in range(idx): # 행 단위로 읽음.  
+        return self.image[idx], self.label[idx],self.gap[idx]
+    
+    def get_input(self, csv_path, idx):
+        data=pd.read_csv(csv_path)
+
+        dataset_images = []
+
+        # Iterate through the dataset up to the provided index
+        labels=data['Label'].values
+        gaps=data['Label Gap'].values
+        # import IPython; IPython.embed(colors='Linux'); exit(1)
+        for i in idx:
+            tmp = data.loc[i+1]
             batch_images = []
-            labels = []
-            gap=[]
-            tmp=self.data.loc[i]
-            for j in range(1,8):
-                img_path = os.path.join(self.args.data_dir,tmp[j])
+
+            # Collect images and associated data
+            for j in range(1, 8):
+                img_path = os.path.join(self.args.data_dir, tmp[j])
                 image = Image.open(img_path).convert('RGB')
-            
                 if self.transform:
                     image = self.transform(image)
-
-                # if flag == Train augmentation if needed
                 batch_images.append(image)
-            labels.append(tmp[j+1])
-            gap.append(tmp[j+2])
 
-            batch_images = torch.stack(batch_images)
-            labels = torch.tensor(labels, dtype=torch.float32)
-            gap=torch.tensor(gap, dtype=torch.float32)
+            # Convert batches to tensors and append to dataset lists
+            dataset_images.append(torch.stack(batch_images))
 
-            dataset.append(batch_images)
-            dataset.append(labels)
-            dataset.append(gap)
-
-        return dataset
-
-
+        # Combine all batches into a single dataset
+        # Each element of dataset now corresponds to batched images, labels, or gaps respectively
+        return (dataset_images.append(torch.stack(batch_images)),
+                torch.Tensor(labels).tpye(torch.long),
+                torch.Tensor(gaps).type(torch.long))
 
         # original code in 5/8
 

@@ -44,7 +44,7 @@ def main():
 
 
     # Create instances of Radar class for train, valid, and test datasets
-    print(os.path.join('data\\radar_test','202206302300.png'))
+
     train_dataset = Radar(args,csv_path=args.image_csv_dir,flag="Train")
     train_dataset.__getitem__(0)
     import IPython; IPython.embed(colors='Linux'); exit(1)

@@ -6,6 +6,7 @@ data/*.zip
 /data/radar_test/
 data/*.csv
 
+
 # clone models
 /test.ipynb
 /test3_jiwon.ipynb
@@ -16,7 +17,7 @@ data/*.csv
 sample_test
 /datatest.ipynb
 /loader_test.csv
-
+radar_test
 
 # sb
 /data/concat.ipynb
