@@ -49,29 +49,18 @@ def main():
 
     print("Train Dataset Load")
     train_dataset = Radar(args,csv_path=args.image_csv_dir,flag="Train")
-<<<<<<< HEAD
-    valid_dataset = Radar(args,csv_path=args.image_csv_dir,flag="Valid")
-    test_dataset = Radar(args,csv_path=args.image_csv_dir,flag="Test")
-=======
 
     print("Valid Dataset Load")
     valid_dataset = Radar(args,csv_path=args.image_csv_dir,flag="Valid")
     #test_dataset = Radar(flag="Test", csv_path=args.image_csv_dir)
->>>>>>> sb
 
     
     
     # Create DataLoader instances for train, valid, and test datasets
     train_loader = DataLoader(train_dataset, batch_size=8)
     valid_loader = DataLoader(valid_dataset, batch_size=8)
-<<<<<<< HEAD
-    # test_loader = DataLoader(test_dataset, batch_size=8)
-    
-    import IPython; IPython.embed(colors='Linux'); exit(1)
-=======
     test_loader = valid_loader
     # test_loader = DataLoader(test_dataset, batch_size=8)
->>>>>>> sb
 
     os.environ["CUDA_VISIBLE_DEVICES"] = args.gpu_id
     args.cuda_condition = torch.cuda.is_available() and not args.no_cuda
@@ -102,5 +91,5 @@ if __name__ == "__main__":
     main()
 
 # python main.py --data_dir="data\\radar_test" --image_csv_dir="data\\22.7_22.9 강수량 평균 0.1 이하 제거_set추가.csv"
-# python main.py --data_dir="data/radar_test" --image_csv_dir="data/sample.csv"
+# python main.py --data_dir="data/radar_test" --image_csv_dir="data/data_sample.csv" --gpu_id=1
 

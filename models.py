@@ -7,8 +7,8 @@ class Fourcaster(nn.Module):
             n_channels,
             n_classes,
             kernels_per_layer,
-            # args,
-            bilinear = True,
+            args,
+            bilinear = True
 
     ):
         super().__init__()
@@ -19,6 +19,7 @@ class Fourcaster(nn.Module):
         reduction_ratio = 16
         # self.args = args
         self.inner_size = 12
+        self.args =args
 
         self.inc = DoubleConvDS(self.n_channels, 64, kernels_per_layer=kernels_per_layer)
         self.cbam1 = CBAM(64, reduction_ratio=reduction_ratio)
@@ -73,11 +74,7 @@ class Fourcaster(nn.Module):
 
         regression_logits = self.regression_model(x)
 
-<<<<<<< HEAD
-        return x, classification_logits, regression_logits
-=======
         return generated_image, regression_logits 
->>>>>>> sb
     
 
 
