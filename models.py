@@ -7,7 +7,7 @@ class Fourcaster(nn.Module):
             n_channels,
             n_classes,
             kernels_per_layer,
-            args,
+            # args,
             bilinear = True,
 
     ):
@@ -17,7 +17,7 @@ class Fourcaster(nn.Module):
         kernels_per_layer = kernels_per_layer
         self.bilinear = bilinear
         reduction_ratio = 16
-        self.args = args
+        # self.args = args
         self.inner_size = 12
 
         self.inc = DoubleConvDS(self.n_channels, 64, kernels_per_layer=kernels_per_layer)
@@ -48,9 +48,13 @@ class Fourcaster(nn.Module):
         )
 
     def forward(self, x):
+        print("start")
         x1 = self.inc(x)
+        print("pass1")
         x1Att = self.cbam1(x1)
+        print("pass2")
         x2 = self.down1(x1)
+        print("pass3")
         x2Att = self.cbam2(x2)
         x3 = self.down2(x2)
         x3Att = self.cbam3(x3)
@@ -78,7 +82,7 @@ class Fourcaster(nn.Module):
 
 if __name__ == "__main__":
 
-    image = torch.randn(7,3,250,250)
+    image = torch.randn(8,3,250,250) # (batch, 3, 250, 250)
     model=Fourcaster(n_channels=3,n_classes=1,kernels_per_layer=64)
     logits = model(image)
     print(logits)

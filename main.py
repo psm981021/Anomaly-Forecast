@@ -46,17 +46,17 @@ def main():
     # Create instances of Radar class for train, valid, and test datasets
 
     train_dataset = Radar(args,csv_path=args.image_csv_dir,flag="Train")
-    import IPython; IPython.embed(colors='Linux'); exit(1)
-    valid_dataset = Radar(flag="Valid", csv_path=args.image_csv_dir)
-    test_dataset = Radar(flag="Test", csv_path=args.image_csv_dir)
+    valid_dataset = Radar(args,csv_path=args.image_csv_dir,flag="Valid")
+    test_dataset = Radar(args,csv_path=args.image_csv_dir,flag="Test")
 
     
     
     # Create DataLoader instances for train, valid, and test datasets
     train_loader = DataLoader(train_dataset, batch_size=8)
-    # valid_loader = DataLoader(valid_dataset, batch_size=8)
+    valid_loader = DataLoader(valid_dataset, batch_size=8)
     # test_loader = DataLoader(test_dataset, batch_size=8)
-
+    
+    import IPython; IPython.embed(colors='Linux'); exit(1)
 
     os.environ["CUDA_VISIBLE_DEVICES"] = args.gpu_id
     args.cuda_condition = torch.cuda.is_available() and not args.no_cuda
