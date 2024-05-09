@@ -67,38 +67,81 @@ class Trainer:
         self.model.load_state_dict(torch.load(file_name))
 
 class FourTrainer(Trainer):
-    def __init__(self,model,train_dataloader, valid_dataloader, test_dataloader, args):
+    def __init__(self,model,train_dataloader, valid_dataloader,test_dataloader, args):
         super(FourTrainer, self).__init__(
-            model,train_dataloader, valid_dataloader, test_dataloader)
+            model,train_dataloader, valid_dataloader, test_dataloader,args)
         
-    def iteration(self, epoch, train_dataloader, train=True):
+    def iteration(self, epoch, dataloader, train=True):
         
         if train:
             
             # model eval
             self.model.eval()
             
-            batch_iter = tqdm(enumerate(train_dataloader))
-            for i, image ,label, gap in batch_iter:
- 
-                image = image.to(self.device)
+            batch_iter = tqdm(enumerate(dataloader))
+            ce_loss = 0.0
+            mae_loss = 0.0
+            for i, batch in batch_iter:
+                image, label, gap = batch
+
+                image_batch = [t.to(self.device) for t in image]
                 label = label.to(self.device)
                 gap = gap.to(self.device)
 
-                # model output
-                generated_image,classification_logits, regression_logits = self.model(image,self.args)
+                total_ce = 0.0
+                precipitation =[]
+                for i in range(len(image_batch)-1):
+                    generated_image, regression_logits = self.model(image_batch[i],self.args)
+                    regression_logits = regression_logits.reshape(self.args.batch, -1)
+                    precipitation.append(regression_logits)
 
+                    loss_ce = self.ce_criterion(generated_image.flatten(1), image_batch[i+1].flatten(1))
+
+                    total_ce += loss_ce
+                
+               
+                # model output
+                total_mae = 0
+                for i in range(len(precipitation)-1):
+                    # check validity
+                    total_mae += torch.sum(precipitation[i+1]-precipitation[i])
 
                 # cross entropy loss (Real image vs Fake image)
-                # Loss_ce
-                loss_ce = self.ce_criterion(generated_image, image[-1])
                 
                 # Regression with labels (CNN-regression)
                 # Loss_mae
-                loss_mae = self.mae_criterion(regression_logits, label)
+                loss_mae = self.mae_criterion(total_mae, torch.sum(gap,dim=0))
 
                 #Total Loss = Loss_ce + Loss_mae
+                
 
-                #Total Loss backprop
+                joint_loss = 0.01 * total_ce + loss_mae
+
+                self.optim.zero_grad()
+                joint_loss.backward()
+                self.optim.step()
+
+                ce_loss += total_ce.item()
+                mae_loss += loss_mae.item()
+
+            post_fix = {
+                "epoch":epoch,
+                "ce_loss": "{:6}".format(ce_loss/len(batch_iter)),
+                "mae_loss":"{:6}".format(mae_loss/len(batch_iter))
+            }
+            if (epoch+1) % self.args.log_freq ==0:
+                print(str(post_fix))
+            
+            with open(self.args.log_file, "a") as f:
+                f.write(str(post_fix) + "\n")
+
+        # end of train
+
+
+        else:
+            #valid and test
+
+            import IPython; IPython.embed(colors='Linux');exit(1);
+    
 
 

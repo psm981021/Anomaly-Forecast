@@ -47,7 +47,7 @@ class Fourcaster(nn.Module):
             nn.AdaptiveAvgPool2d((1, 1)),  # Global average pooling
         )
 
-    def forward(self, x):
+    def forward(self, x, args):
         x1 = self.inc(x)
         x1Att = self.cbam1(x1)
         x2 = self.down1(x1)
@@ -58,6 +58,7 @@ class Fourcaster(nn.Module):
         x4Att = self.cbam4(x4)
         x5 = self.down4(x4)
         x5Att = self.cbam5(x5)
+
         x = self.up1(x5Att, x4Att)
         x = self.up2(x, x3Att)
         x = self.up3(x, x2Att)
@@ -66,13 +67,13 @@ class Fourcaster(nn.Module):
         x = self.up4(x, x1Att)
 
         # classification logit인 것 같음
-        classification_logits = self.outc(x)
+        generated_image = self.outc(x)
 
         # regression logit
 
         regression_logits = self.regression_model(x)
 
-        return x, classification_logits, regression_logits 
+        return generated_image, regression_logits 
     
 
 
