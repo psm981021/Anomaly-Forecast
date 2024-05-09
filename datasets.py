@@ -98,8 +98,8 @@ class Radar(Dataset):
         labels=data['Label'].values
         gaps=data['Label Gap'].values
         # import IPython; IPython.embed(colors='Linux'); exit(1)
-        for i in idx:
-            tmp = data.loc[i+1]
+        for i in tqdm(idx):
+            tmp = data.loc[i]
             batch_images = []
 
             # Collect images and associated data
@@ -115,9 +115,10 @@ class Radar(Dataset):
 
         # Combine all batches into a single dataset
         # Each element of dataset now corresponds to batched images, labels, or gaps respectively
-        return (dataset_images.append(torch.stack(batch_images)),
-                torch.Tensor(labels).tpye(torch.long),
-                torch.Tensor(gaps).type(torch.long))
+        # import IPython; IPython.embed(colors='Linux');exit(1);
+        return (dataset_images,
+                torch.Tensor(labels).type(torch.float),
+                torch.Tensor(gaps).type(torch.float))
 
         # original code in 5/8
 
