@@ -15,7 +15,7 @@ class Fourcaster(nn.Module):
         self.n_classes = n_classes
         kernels_per_layer = kernels_per_layer
         self.bilinear = bilinear
-        reduction_ratio = reduction_ratio
+        reduction_ratio = 16
 
         self.inc = DoubleConvDS(self.n_channels, 64, kernels_per_layer=kernels_per_layer)
         self.cbam1 = CBAM(64, reduction_ratio=reduction_ratio)
@@ -57,5 +57,7 @@ class Fourcaster(nn.Module):
 
 if __name__ == "__main__":
 
-    image = torch.randn(8,7,3,250,250)
-    logits = Fourcaster(image)
+    image = torch.randn(7,3,250,250)
+    model=Fourcaster(n_channels=3,n_classes=1,kernels_per_layer=64)
+    logits = model(image)
+    print(logits)

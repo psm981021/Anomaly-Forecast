@@ -109,6 +109,9 @@ class OutConv(nn.Module):
     def forward(self, x):
         return self.conv(x)
     
+class Flatten(nn.Module):
+    def forward(self, x):
+        return x.view(x.size(0), -1)
 
 class ChannelAttention(nn.Module):
     def __init__(self, input_channels, reduction_ratio=16):
