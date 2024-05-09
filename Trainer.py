@@ -1,5 +1,6 @@
 import torch
 from torch.optim import Adam
+from tqdm import tqdm
 
 class Trainer:
     def __init__(self, model, train_dataloader, valid_dataloader, test_dataloader, args):
@@ -26,7 +27,8 @@ class Trainer:
 
         print("Total Parameters:", sum([p.nelement() for p in self.model.parameters()]))
 
-        self.criterion = torch.nn.CrossEntropyLoss().to(self.args.device)
+        self.ce_criterion = torch.nn.CrossEntropyLoss().to(self.args.device)
+        self.mae_criterion = torch.nn.L1Loss()
 
     def train(self, epoch):
         self.iteration(epoch, self.train_dataloader)
@@ -63,5 +65,40 @@ class Trainer:
 
     def load(self, file_name):
         self.model.load_state_dict(torch.load(file_name))
+
+class FourTrainer(Trainer):
+    def __init__(self,model,train_dataloader, valid_dataloader, test_dataloader, args):
+        super(FourTrainer, self).__init__(
+            model,train_dataloader, valid_dataloader, test_dataloader)
+        
+    def iteration(self, epoch, train_dataloader, train=True):
+        
+        if train:
+            
+            # model eval
+            self.model.eval()
+            
+            batch_iter = tqdm(enumerate(train_dataloader))
+            for i, image ,label, gap in batch_iter:
+ 
+                image = image.to(self.device)
+                label = label.to(self.device)
+                gap = gap.to(self.device)
+
+                # model output
+                generated_image,classification_logits, regression_logits = self.model(image,self.args)
+
+
+                # cross entropy loss (Real image vs Fake image)
+                # Loss_ce
+                loss_ce = self.ce_criterion(generated_image, image[-1])
+                
+                # Regression with labels (CNN-regression)
+                # Loss_mae
+                loss_mae = self.mae_criterion(regression_logits, label)
+
+                #Total Loss = Loss_ce + Loss_mae
+
+                #Total Loss backprop
 
 

@@ -7,6 +7,7 @@ class Fourcaster(nn.Module):
             n_channels,
             n_classes,
             kernels_per_layer,
+            args,
             bilinear = True,
 
     ):
@@ -16,6 +17,8 @@ class Fourcaster(nn.Module):
         kernels_per_layer = kernels_per_layer
         self.bilinear = bilinear
         reduction_ratio = 16
+        self.args = args
+        self.inner_size = 12
 
         self.inc = DoubleConvDS(self.n_channels, 64, kernels_per_layer=kernels_per_layer)
         self.cbam1 = CBAM(64, reduction_ratio=reduction_ratio)
@@ -32,8 +35,17 @@ class Fourcaster(nn.Module):
         self.up2 = UpDS(512, 256 // factor, self.bilinear, kernels_per_layer=kernels_per_layer)
         self.up3 = UpDS(256, 128 // factor, self.bilinear, kernels_per_layer=kernels_per_layer)
         self.up4 = UpDS(128, 64, self.bilinear, kernels_per_layer=kernels_per_layer)
-
         self.outc = OutConv(64, self.n_classes)
+
+        self.regression_model = nn.Sequential(
+            nn.Conv2d(64, 32, kernel_size=3, padding=1),
+            nn.ReLU(inplace=True),
+            nn.Conv2d(32, 16, kernel_size=3, padding=1),
+            nn.ReLU(inplace=True),
+            nn.Conv2d(16, 1, kernel_size=3, padding=1),
+            nn.ReLU(inplace=True),
+            nn.AdaptiveAvgPool2d((1, 1)),  # Global average pooling
+        )
 
     def forward(self, x):
         x1 = self.inc(x)
@@ -49,9 +61,18 @@ class Fourcaster(nn.Module):
         x = self.up1(x5Att, x4Att)
         x = self.up2(x, x3Att)
         x = self.up3(x, x2Att)
+
+        # shape 확인 - reconstruction image?
         x = self.up4(x, x1Att)
-        logits = self.outc(x)
-        return logits
+
+        # classification logit인 것 같음
+        classification_logits = self.outc(x)
+
+        # regression logit
+
+        regression_logits = self.regression_model(x)
+
+        return x, classification_logits, regression_logits 
     
 
 
