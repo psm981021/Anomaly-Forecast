@@ -7,7 +7,7 @@ from utils import *
 from models import *
 from Trainer import *
 import time
-
+import wandb
 
 def main():
     parser = argparse.ArgumentParser()
@@ -22,13 +22,14 @@ def main():
     parser.add_argument("--no_cuda", action="store_true")
     parser.add_argument('--use_multi_gpu', action='store_true', help='use multiple gpus', default=False)
     parser.add_argument('--multi_devices', type=str, default='0,1', help='device ids of multile gpus')
+    parser.add_argument("--wandb", action="store_true")
 
     # model args
     parser.add_argument("--model_idx", default="test", type=str, help="model identifier")
     parser.add_argument("--batch", type=int,default=4, help="batch size")
 
     # train args
-    parser.add_argument("--epochs", type=int, default=10, help="number of epochs" )
+    parser.add_argument("--epochs", type=int, default=30, help="number of epochs" )
     parser.add_argument("--log_freq", type=int, default =1, help="number of log frequency" )
     parser.add_argument("--patience",type=int, default="10")
 
@@ -90,9 +91,13 @@ def main():
     #model
     # n_classes = channel
     model = Fourcaster(n_channels=3,n_classes=3,kernels_per_layer=1, args=args)
+    model.to(args.device)
+
     if args.use_multi_gpu:
         print(args.device_ids)
         model = nn.DataParallel(model, device_ids=args.device_ids)
+    
+
     #trainer
     trainer = FourTrainer(model, train_loader,valid_loader,test_loader, args)
 
@@ -102,20 +107,26 @@ def main():
         print("Load pth")
         trainer.load(args.checkpoint_path)
 
+    if args.wandb == True:
+        wandb.init(project="anomaly",
+                name=f"{args.model_idx}_{args.batch_size}_{args.epochs}",
+                config=args)
+        args = wandb.config
 
     early_stopping = EarlyStopping(args.log_file,args.checkpoint_path, args.patience, verbose=True)
-    print("Train Fourcaster")
+
     for epoch in range(args.epochs):
+    
         trainer.train(epoch)
 
         score,_ = trainer.valid(epoch)
+        if args.wandb == True:
+            wandb.log({"MAE Vailid Loss": score})
         early_stopping(score, trainer.model)
         if early_stopping.early_stop:
             print("Early stopping")
             break
-
-        #early stopping add
-
+        
     trainer.model.load_state_dict(torch.load(args.checkpoint_path))
 
     #test
@@ -136,5 +147,5 @@ if __name__ == "__main__":
     main()
 
 # python main.py --data_dir="data\\radar_test" --image_csv_dir="data\\22.7_22.9 강수량 평균 0.1 이하 제거_set추가.csv"
-# python main.py --data_dir="data/radar_test" --image_csv_dir="data/data_sample.csv" --gpu_id=0 --batch=2 --use_multi_gpu
+# python main.py --data_dir="data/radar_test" --image_csv_dir="data/data_sample.csv" --gpu_id=0 --batch=2 --use_multi_gpu --model_idx="test-projection"
 
