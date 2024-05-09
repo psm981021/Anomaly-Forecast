@@ -46,9 +46,9 @@ def main():
     # Create instances of Radar class for train, valid, and test datasets
 
     train_dataset = Radar(args,csv_path=args.image_csv_dir,flag="Train")
-    import IPython; IPython.embed(colors='Linux'); exit(1)
-    # valid_dataset = Radar(flag="Valid", csv_path=args.image_csv_dir)
-    # test_dataset = Radar(flag="Test", csv_path=args.image_csv_dir)
+    # import IPython; IPython.embed(colors='Linux'); exit(1)
+    valid_dataset = Radar(flag="Valid", csv_path=args.image_csv_dir)
+    test_dataset = Radar(flag="Test", csv_path=args.image_csv_dir)
 
     
     
