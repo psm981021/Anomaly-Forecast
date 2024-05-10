@@ -81,3 +81,4 @@ EarlyStopping counter: 9 out of 10
 {'Epoch': 29, 'MAE': tensor(1.8053, device='cuda:0')}
 EarlyStopping counter: 10 out of 10
 To run Epoch:29 , It took 2 hours, 23 minutes, 18 seconds
+------------------------------ Continue Training ------------------------------ 

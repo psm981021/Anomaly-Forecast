@@ -149,3 +149,4 @@ if __name__ == "__main__":
 # python main.py --data_dir="data\\radar_test" --image_csv_dir="data\\22.7_22.9 강수량 평균 0.1 이하 제거_set추가.csv"
 # python main.py --data_dir="data/radar_test" --image_csv_dir="data/data_sample.csv" --gpu_id=0 --batch=2 --use_multi_gpu --model_idx="test-projection"
 
+# python main.py --data_dir="data/radar_test" --image_csv_dir="data/22.7_22.9 강수량 평균 0.1 이하 제거_set추가.csv" --gpu_id=1 --batch=2 --use_multi_gpu --model_idx="test-projection"
