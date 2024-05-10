@@ -29,7 +29,7 @@ def main():
     parser.add_argument("--batch", type=int,default=4, help="batch size")
 
     # train args
-    parser.add_argument("--epochs", type=int, default=30, help="number of epochs" )
+    parser.add_argument("--epochs", type=int, default=50, help="number of epochs" )
     parser.add_argument("--log_freq", type=int, default =1, help="number of log frequency" )
     parser.add_argument("--patience",type=int, default="10")
 
