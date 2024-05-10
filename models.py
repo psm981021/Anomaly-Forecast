@@ -47,6 +47,11 @@ class Fourcaster(nn.Module):
             nn.ReLU(inplace=True),
             nn.AdaptiveAvgPool2d((1, 1)),  # Global average pooling
         )
+        self.projection = nn.Sequential(
+            nn.Conv2d(64, 3, kernel_size=3, stride=2, padding=1),  # 64 input channels
+            nn.ReLU(),
+            nn.AdaptiveAvgPool2d((50, 50))
+        )
 
     def forward(self, x, args):
         x1 = self.inc(x)
@@ -67,8 +72,7 @@ class Fourcaster(nn.Module):
         # shape 확인 - reconstruction image?
         x = self.up4(x, x1Att)
 
-        # classification logit인 것 같음
-        generated_image = self.outc(x)
+        generated_image = self.projection(x)
 
         # regression logit
 

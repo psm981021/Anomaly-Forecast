@@ -32,6 +32,7 @@ class Radar(Dataset):
     def __len__(self):
         try: 
             self.data = pd.read_csv(self.csv_path)
+            self.data=self.data[self.data['Set']==self.flag].reset_index(drop=True)
             # self.data = self.data[self.data['Set'] == self.flag]
             return len(self.data)
         except:
