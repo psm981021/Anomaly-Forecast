@@ -80,4 +80,4 @@ EarlyStopping counter: 9 out of 10
 {'epoch': 29, 'ce_loss': '9478.037822522616', 'mae_loss': '0.14125746375832118'}
 {'Epoch': 29, 'MAE': tensor(1.8053, device='cuda:0')}
 EarlyStopping counter: 10 out of 10
-To run Epoch:209 , It took 2 hours, 23 minutes, 18 seconds
+To run Epoch:29 , It took 2 hours, 23 minutes, 18 seconds
