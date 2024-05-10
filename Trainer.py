@@ -79,6 +79,7 @@ class FourTrainer(Trainer):
             self.model.eval()
             
             batch_iter = tqdm(enumerate(dataloader))
+            # import IPython; IPython.embed(colors='Linux');exit(1);
             ce_loss = 0.0
             mae_loss = 0.0
             for i, batch in batch_iter:

@@ -81,7 +81,7 @@ def main():
     print("Train Fourcaster")
 
     for epoch in range(args.epochs):
-        trainer.train(epoch)
+        trainer.iteration(epoch, train_loader)
 
 
 
