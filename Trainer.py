@@ -85,8 +85,7 @@ class FourTrainer(Trainer):
             self.model.train()
             
             batch_iter = tqdm(enumerate(dataloader), total= len(dataloader))
-            ce_loss = 0.0
-            mae_loss = 0.0
+            ce_loss,mae_loss = 0.0, 0.0
             for i, batch in batch_iter:
                 image, label, gap = batch
 
@@ -101,29 +100,19 @@ class FourTrainer(Trainer):
                     generated_image, regression_logits = self.model(image_batch[i],self.args)
                     regression_logits = regression_logits.reshape(self.args.batch, -1)
                     precipitation.append(regression_logits)
-                    
                     projection_image = self.projection(image_batch[i+1])
                     
                     loss_ce = self.ce_criterion(generated_image.flatten(1), projection_image.flatten(1))
-
                     total_ce += loss_ce
-                
-               
-                # model output
+        
                 total_mae = 0
                 for i in range(len(precipitation)-1):
                     # check validity
                     total_mae += torch.sum(precipitation[i+1]-precipitation[i])
-
-                # cross entropy loss (Real image vs Fake image)
                 
-                # Regression with labels (CNN-regression)
                 # Loss_mae
                 loss_mae = self.mae_criterion(total_mae, torch.sum(gap,dim=0))
-                
-                #Total Loss = Loss_ce + Loss_mae
-                
-
+                # joint Loss
                 joint_loss = 0.01 * total_ce + loss_mae
 
                 self.optim.zero_grad()
@@ -133,8 +122,7 @@ class FourTrainer(Trainer):
                 ce_loss += total_ce.item()
                 mae_loss += loss_mae.item()
 
-                del batch
-                del loss_ce, loss_mae, joint_loss  # After backward pass
+                del batch, loss_ce, loss_mae, joint_loss  # After backward pass
                 torch.cuda.empty_cache()
 
             if self.args.wandb == True:
@@ -183,7 +171,7 @@ class FourTrainer(Trainer):
                 
                     del batch
                 torch.cuda.empty_cache() 
-            return self.get_score(epoch,loss_mae)
+            return self.get_score(epoch,loss_mae/len(batch_iter))
             
     
 

@@ -81,7 +81,6 @@ class Fourcaster(nn.Module):
         return generated_image, regression_logits 
     
 
-
 if __name__ == "__main__":
 
     image = torch.randn(8,3,250,250) # (batch, 3, 250, 250)
