@@ -17,7 +17,7 @@ def main():
     parser.add_argument("--image_csv_dir", default="data\\22.7_22.9 강수량 평균 0.1 이하 제거.csv", type=str, help="image path, rain intensity, label csv")
     parser.add_argument("--output_dir", default="output/", type=str)
     parser.add_argument("--gpu_id", type=str, default="0", help="gpu_id")
-    parser.add_argument("--device",type=str, default="cuda:1")
+    parser.add_argument("--device",type=str, default="cuda:0")
     parser.add_argument("--seed",type=int, default="42")
     parser.add_argument("--no_cuda", action="store_true")
     parser.add_argument('--use_multi_gpu', action='store_true', help='use multiple gpus', default=False)
@@ -70,11 +70,15 @@ def main():
     args.cuda_condition = torch.cuda.is_available() and not args.no_cuda
     print("Using Cuda:", torch.cuda.is_available())
     
+   
     if args.use_multi_gpu:
-        args.devices = args.multi_devices.replace(' ', '')
-        device_ids = args.devices.split(',')
-        args.device_ids = [int(id_) for id_ in device_ids]
-    
+        if args.cuda_condition:
+            args.devices = args.multi_devices.replace(' ', '') 
+            device_ids = args.devices.split(',')
+            args.device_ids = [int(id_) for id_ in device_ids]
+            torch.cuda.set_device(args.device_ids[0])
+        else:
+            args.device = torch.device("cpu")
     # save model args
     args.str = f"{args.model_idx}-{args.batch}-{args.epochs}"
     args.log_file = os.path.join(args.output_dir,args.str + ".txt" )
@@ -90,13 +94,14 @@ def main():
     
     #model
     # n_classes = channel
+    
     model = Fourcaster(n_channels=3,n_classes=3,kernels_per_layer=1, args=args)
     model.to(args.device)
 
     if args.use_multi_gpu:
         print(args.device_ids)
         model = nn.DataParallel(model, device_ids=args.device_ids)
-    
+        
 
     #trainer
     trainer = FourTrainer(model, train_loader,valid_loader,test_loader, args)
@@ -149,4 +154,4 @@ if __name__ == "__main__":
 # python main.py --data_dir="data\\radar_test" --image_csv_dir="data\\22.7_22.9 강수량 평균 0.1 이하 제거_set추가.csv"
 # python main.py --data_dir="data/radar_test" --image_csv_dir="data/data_sample.csv" --gpu_id=0 --batch=2 --use_multi_gpu --model_idx="test-projection"
 
-# python main.py --data_dir="data/radar_test" --image_csv_dir="data/22.7_22.9 강수량 평균 0.1 이하 제거_set추가.csv" --gpu_id=1 --batch=2 --use_multi_gpu --model_idx="test-projection"
+# python main.py --data_dir="data/radar_test" --image_csv_dir="data/22.7_22.9 강수량 평균 0.1 이하 제거_set추가.csv" --gpu_id=1 --batch=2 --use_multi_gpu --multi_devices=1,2,3 --device="cuda:1" --model_idx="test-projection"

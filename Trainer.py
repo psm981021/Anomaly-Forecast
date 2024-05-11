@@ -80,8 +80,7 @@ class FourTrainer(Trainer):
     def iteration(self, epoch, dataloader, train=True):
         
         if train:
-            print("Train Fourcaster")
-            
+            print("Train Fourcaster")            
             self.model.train()
             
             batch_iter = tqdm(enumerate(dataloader), total= len(dataloader))
@@ -89,12 +88,12 @@ class FourTrainer(Trainer):
             for i, batch in batch_iter:
                 image, label, gap = batch
 
-                image_batch = [t.to(self.device) for t in image]
-                label = label.to(self.device)
-                gap = gap.to(self.device)
+                image_batch = [t.to(self.args.device) for t in image]
+                label = label.to(self.args.device)
+                gap = gap.to(self.args.device)
 
                 total_ce = 0.0
-                precipitation =[]
+                precipitation =[]                
                 for i in range(len(image_batch)-1):
                     
                     generated_image, regression_logits = self.model(image_batch[i],self.args)
@@ -153,9 +152,9 @@ class FourTrainer(Trainer):
                 for i, batch in batch_iter:
                     image, label, gap = batch
 
-                    image_batch = [t.to(self.device) for t in image]
-                    label = label.to(self.device)
-                    gap = gap.to(self.device)
+                    image_batch = [t.to(self.args.device) for t in image]
+                    label = label.to(self.args.device)
+                    gap = gap.to(self.args.device)
                 
                     precipitation =[]
                     for i in range(len(image_batch)-1):
