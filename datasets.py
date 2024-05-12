@@ -19,10 +19,24 @@ class Radar(Dataset):
         self.flag=flag
         self.augmentations = augmentations
         self.args = args
-
+        
+        # 이미지 자를 좌표 - 서울 : 100x100
+        self.left = 260  
+        self.top = 150   
+        self.right = 360
+        self.bottom = 250
+        
+        # 이미지 자를 좌표 - 강원도 150x150
+        # self.left = 300
+        # self.top = 110  
+        # self.right = 450
+        # self.bottom = 260
+        
+        
         self.transform = transforms.Compose([
             transforms.ToTensor(),
-            transforms.CenterCrop((250, 250))
+            #transforms.CenterCrop((250, 250)) # centercrop 말고 
+            transforms.Lambda(lambda x: x.crop((self.left, self.top, self.right, self.bottom)))  # 이미지 crop 작업 추가
         ])
         
         self.idx = np.array([i for i in range(self.__len__())], dtype=int)
