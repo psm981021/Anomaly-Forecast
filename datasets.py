@@ -34,9 +34,9 @@ class Radar(Dataset):
         
         
         self.transform = transforms.Compose([
-            transforms.ToTensor(),
             #transforms.CenterCrop((250, 250)) # centercrop 말고 
-            transforms.Lambda(lambda x: x.crop((self.left, self.top, self.right, self.bottom)))  # 이미지 crop 작업 추가
+            transforms.Lambda(lambda x: x.crop((self.left, self.top, self.right, self.bottom))),  # 이미지 crop 작업 추가
+            transforms.ToTensor()
         ])
         
         self.idx = np.array([i for i in range(self.__len__())], dtype=int)
