@@ -159,7 +159,43 @@ class EarlyStopping:
 
 
 
+def unify_data_by_timestamp(data_path, save_path):
+    # Set start and end dates
+    start_date = datetime(2021, 1, 1, 0, 0)
+    end_date = datetime(2023, 12, 31, 23, 00)
 
+    # Create a list of dates at 60-minute intervals
+    date_list = []
+    current_date = start_date
+    while current_date <= end_date:
+        date_list.append(current_date.strftime('%Y-%m-%d %H:%M'))
+        current_date += timedelta(minutes=60)
+    
+    file_names = glob.glob(data_path + "*.csv") #Loads a list of all csv files in a folder
+    
+    data = pd.DataFrame() #Create an empty data frame
+
+    for file_name in file_names:
+        temp = pd.read_csv(str(file_name), encoding='cp949') #Open the csv files one by one and create a temporary data frame
+        data = pd.concat([data, temp], axis = 0) #Add to entire data frame
+        
+    data = data[['일시', '강수량(mm)']].reset_index(drop=True)
+    
+    # Fill in blank dates
+    full_dates_df = pd.DataFrame(date_list, columns=['일시'])
+
+    # Merge full_dates_df and df based on 'date', and set data without '강수량(mm)' to NaN
+    result_df = pd.merge(full_dates_df, data, on='일시', how='left')
+    
+    # Fill NaN values
+    result_df['강수량(mm)'].fillna(0, inplace=True)
+    
+    result_df.to_csv(save_path + '연도 통합.csv', index=False, encoding='utf-8-sig')
+
+#Annotation for make_model_input function
+#Set 'data_path' variable to 'save_path' of unify_data_by_timestamp function
+#truncate_start format example: '2022-07-01 00:00'
+#truncate_end format example: '2022-09-30 23:50'
 
 #All csvs containing average precipitation for each region must exist in data_path
 #truncate_start format example: '2022-07-01 00:00'
@@ -177,19 +213,13 @@ def make_model_input(data_path, truncate_start = None, truncate_end = None, thre
     #Remove overlapping columns
     cols = list(data.columns)
     cols[0] = 'Timestamp'
+    cols[1] = 'Label'
     data.columns = cols
-    data.drop('일시', axis=1, inplace=True) 
-    
-    # Assign average value to 'Label' column
-    tmp_data = data.drop('Timestamp', axis=1)
-    data['Label'] = tmp_data.mean(axis=1)
+    if '일시' in data.columns:
+        data.drop('일시', axis=1, inplace=True)
     
     # Create ‘Label Gap’ column
     data['Label Gap'] = data['Label'].diff()
-    
-    # Drop local data columns.
-    region = data.columns[1:4]
-    data.drop(region, axis=1, inplace=True)
     
     # Create columns to add image paths for each timestamp
     insert_cols = ['t-60', 't-50', 't-40', 't-30', 't-20', 't-10', 't']
@@ -217,15 +247,56 @@ def make_model_input(data_path, truncate_start = None, truncate_end = None, thre
             else:
                 idx += 1
     
+    #make test data
+    data['Set'] = np.nan
+    
+    # Extract rows corresponding to the top 10% of rainy days from the 'Label' column
+    rained = data[data['Label'] >= threshold]
+    top_10_percent = rained['Label'].quantile(0.9)
+    top_10_list = list(data[data['Label'] >= top_10_percent].index)
+    
+    # Set top 10% as test data: prediction for outliers
+    data.loc[top_10_list, 'Set'] = 'Test'
+    
+    for i in range(len(data)):
+        # Set 2 hours before and 1 hour after the index of the outlier as test data.
+        if i >= 2:
+            if data.loc[i]['Set'] == 'Test':
+                for j in range(i - 2, i + 2):
+                    if j != i:
+                        data.loc[j, 'Set'] = 'Test2'
+    
+    for i in range(len(data)):
+        if data.loc[i]['Set'] == 'Test2':
+            data.loc[i, 'Set'] = 'Test'
+    
     # Cut rows with data from a specific timestamp
     if truncate_start:
         data = data[truncate_start <= data['Timestamp']].reset_index(drop=True)
     if truncate_end:
         data = data[data['Timestamp'] <= truncate_end].reset_index(drop=True)
     
-    # Leave only rows with precipitation above threshold
+    # Leave only rows with precipitation above threshold and 'Set' = 'Test
     if threshold:
-        data = data[data['Label'] >= threshold].reset_index(drop=True)
+        data = data[(data['Label'] >= threshold) | (~data['Set'].isna())].reset_index(drop=True)
+        
+    #data split 
+    train_cnt = 0
+    valid_cnt = 0
+
+    for i in range(len(data)):
+        if pd.isna(data.loc[i]['Set']):
+            if train_cnt < 5:
+                data.loc[i, 'Set'] = 'Train'
+                train_cnt += 1
+        
+            if train_cnt >= 5 and valid_cnt < 2:
+                data.loc[i, 'Set'] = 'Valid'
+                valid_cnt += 1
+            
+            if train_cnt >= 5 and valid_cnt >= 2:
+                valid_cnt = 0
+                train_cnt = 0
     
     return data
 
