@@ -20,11 +20,11 @@ class Radar(Dataset):
         self.augmentations = augmentations
         self.args = args
         
-        # 이미지 자를 좌표 - 서울 : 100x100
-        self.left = 260  
-        self.top = 150   
-        self.right = 360
-        self.bottom = 250
+        # 이미지 자를 좌표 - 서울 : 150x150
+        self.left = 240  
+        self.top = 120   
+        self.right = 390
+        self.bottom = 270
         
         # 이미지 자를 좌표 - 강원도 150x150
         # self.left = 300
