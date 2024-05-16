@@ -25,3 +25,4 @@ config: {'data_dir': 'data/data_seoul_only', 'image_csv_dir': 'data/서우
 2024-05-16 22:01:04,704 INFO    MainThread:891786 [wandb_run.py:_redirect():2294] Wrapping output streams.
 2024-05-16 22:01:04,704 INFO    MainThread:891786 [wandb_run.py:_redirect():2319] Redirects installed.
 2024-05-16 22:01:04,705 INFO    MainThread:891786 [wandb_init.py:init():838] run started, returning control to user process
+2024-05-16 22:08:36,510 WARNING MsgRouterThr:891786 [router.py:message_loop():77] message_loop has been closed

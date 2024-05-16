@@ -70,24 +70,28 @@ def main():
     test_loader = DataLoader(test_dataset, batch_size=args.batch,drop_last=True)
 
     # os.environ["CUDA_VISIBLE_DEVICES"] = args.devicegpu_id
-    args.cuda_condition = torch.cuda.is_available() and not args.no_cuda
+    args.device = "cuda" if torch.cuda.is_available() and not args.no_cuda else "cpu"
     print("Using Cuda:", torch.cuda.is_available())
-    
-    if args.use_multi_gpu:
-        if args.cuda_condition:
-            args.devices = args.multi_devices.replace(' ', '')
-            device_ids = args.devices.split(',')
-            args.device_ids = [int(id_) for id_ in device_ids]
-            torch.cuda.set_device(args.device_ids[0])
-        else:
-            args.device  = torch.device("cpu")
-    
 
-    if torch.cuda.is_available():
-        pass
+    # if args.use_multi_gpu:
+    #     if args.cuda_condition:
+    #         args.devices = args.multi_devices.replace(' ', '')
+    #         device_ids = args.devices.split(',')
+    #         args.device_ids = [int(id_) for id_ in device_ids]
+    #         torch.cuda.set_device(args.device_ids[0])
+    #         args.gpu = args.device_ids[0]
+    #     else:
+    #         args.device  = torch.device("cpu")
+
+    if args.use_multi_gpu and torch.cuda.is_available():
+        device_ids = list(map(int, args.multi_devices.split(',')))
+        args.device_ids = device_ids  # Store device IDs for potential use in DataParallel
+        args.device = f"cuda:{device_ids[0]}"  # Set default device to the first GPU
+        torch.cuda.set_device(args.device)  # Explicitly set the default device
+        print(f"Using multiple GPUs: {device_ids}")
     else:
-        args.device= "cpu"
-
+        print(f"Using single device: {args.device}")
+        
     # save model args
     args.str = f"{args.model_idx}-{args.batch}-{args.epochs}"
     args.log_file = os.path.join(args.output_dir,args.str + ".txt" )

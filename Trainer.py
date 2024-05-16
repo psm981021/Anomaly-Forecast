@@ -84,7 +84,8 @@ class FourTrainer(Trainer):
             self.model.train()
             
             batch_iter = tqdm(enumerate(dataloader), total= len(dataloader))
-            ce_loss,mae_loss = 0.0, 0.0
+            ce_loss, mae_loss = torch.tensor(0.0, device=self.device), torch.tensor(0.0, device=self.device)
+            
             for i, batch in batch_iter:
                 image, label, gap, datetime = batch
 
@@ -93,7 +94,7 @@ class FourTrainer(Trainer):
                 gap = gap.to(self.args.device)
                 
                 total_ce = 0.0
-                precipitation =[]                
+                precipitation = []       
                 for i in range(len(image_batch)-1):
                     
                     generated_image, regression_logits = self.model(image_batch[i],self.args)
@@ -105,6 +106,7 @@ class FourTrainer(Trainer):
                     total_ce += loss_ce
         
                 total_mae = 0
+                
                 for i in range(len(precipitation)-1):
                     # check validity
                     total_mae += torch.sum(precipitation[i+1]-precipitation[i])
