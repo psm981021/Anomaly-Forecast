@@ -60,15 +60,14 @@ def main():
 
     print("Valid Dataset Load")
     valid_dataset = Radar(args,csv_path=args.image_csv_dir,flag="Valid")
-    #test_dataset = Radar(flag="Test", csv_path=args.image_csv_dir)
+    test_dataset = Radar(args,csv_path=args.image_csv_dir,flag="Test")
 
     
     
     # Create DataLoader instances for train, valid, and test datasets
     train_loader = DataLoader(train_dataset, batch_size=args.batch,drop_last=True)
     valid_loader = DataLoader(valid_dataset, batch_size=args.batch,drop_last=True)
-    test_loader = valid_loader
-    # test_loader = DataLoader(test_dataset, batch_size=8)
+    test_loader = DataLoader(test_dataset, batch_size=args.batch,drop_last=True)
 
     # os.environ["CUDA_VISIBLE_DEVICES"] = args.devicegpu_id
     args.cuda_condition = torch.cuda.is_available() and not args.no_cuda
@@ -78,7 +77,11 @@ def main():
         args.devices = args.multi_devices.replace(' ', '')
         device_ids = args.devices.split(',')
         args.device_ids = [int(id_) for id_ in device_ids]
-    
+
+    if torch.cuda.is_available():
+        pass
+    else:
+        args.device= "cpu"
     # save model args
     args.str = f"{args.model_idx}-{args.batch}-{args.epochs}"
     args.log_file = os.path.join(args.output_dir,args.str + ".txt" )
