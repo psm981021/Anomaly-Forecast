@@ -4,6 +4,7 @@
 data/*.zip
 /data/radar_sample_images/
 /data/radar_test/
+/data/radar_full/
 data/*.csv
 
 
