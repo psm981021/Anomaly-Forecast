@@ -1,5 +1,3 @@
-
-
 python main.py \
     --data_dir "data/radar_test" \
     --image_csv_dir "data/data_sample.csv" \
@@ -7,4 +5,4 @@ python main.py \
     --model_idx "test-projection" \
     --test_list []
 
-#--use_multi_gpu \
+#--use_multi_gpu \ma
