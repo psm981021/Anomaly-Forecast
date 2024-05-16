@@ -18,6 +18,7 @@ sample_test
 /datatest.ipynb
 /loader_test.csv
 radar_test
+sianet.py
 
 # sb
 /data/concat.ipynb
