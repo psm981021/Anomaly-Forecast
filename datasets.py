@@ -32,7 +32,6 @@ class Radar(Dataset):
         # self.right = 450
         # self.bottom = 260
         
-        
         self.transform = transforms.Compose([
             #transforms.CenterCrop((250, 250)) # centercrop 말고 
             transforms.Lambda(lambda x: x.crop((self.left, self.top, self.right, self.bottom))),  # 이미지 crop
@@ -40,7 +39,7 @@ class Radar(Dataset):
         ])
         
         self.idx = np.array([i for i in range(self.__len__())], dtype=int)
-        self.image, self.label, self.gap = self.get_input(csv_path, self.flag)
+        self.image, self.label, self.gap, self.date = self.get_input(csv_path, self.flag)
 
 
     def __len__(self):
@@ -86,6 +85,8 @@ class Radar(Dataset):
         dataset_images = []
         labels=data['Label'].values
         gaps=data['Label Gap'].values
+        dataset_date = data['일시'].values
+
         # import IPython; IPython.embed(colors='Linux'); exit(1)
         for i in tqdm(idx):
             tmp = data.loc[i]
@@ -104,59 +105,12 @@ class Radar(Dataset):
 
         # Combine all batches into a single dataset
         # Each element of dataset now corresponds to batched images, labels, or gaps respectively
-        # import IPython; IPython.embed(colors='Linux');exit(1);
+
         return (dataset_images,
                 torch.Tensor(labels).type(torch.float),
-                torch.Tensor(gaps).type(torch.float))
-
-
-        # original code from 5/8
-        # def image_set(self, flag=None ): 
-        #     data =data=pd.read_csv(self.image_csv_dir)
-            
-        #     if flag =="Train":
-        #         train_index=np.array(data[data['Set']=="Train"].index, dtype=int)
-        #         self.Image_Transform(flag)
-                
-
-        #         train_img = []
-        #         train_label = []
-        #         train_img_tmp =[]
-
-        #         for i in tqdm(train_index):
-        #             img = Image.open(os.path.join(self.path, data['Image_Path'][i]))
-                    
-        #             img = self.transform(img)
-        #             train_img_tmp.append(img)
-
-        #             if (i+1)%6==0:
-        #                 train_img.append(train_img_tmp)
-        #                 train_label.append(data['Rain_Intensity'][i])
-        #                 train_img_tmp.clear()
-
-        #     return train_img, train_label
-
-        # original code in 5/8
-
-        # assert self.flag in {"Train", "Valid", "Test"}
-        # data=pd.read_csv(self.image_csv_dir)
-        # #label mapping
-        # print(self.flag)
-        # if self.flag == "Train":
-            
-        #     train_img, train_label = self.image_set("Train")
-            
-        #     return train_img, train_label
-
-        # elif self.flag == "Valid":
-        #     valid=data[data['Set']=="Valid"]
-        #     pass
-        # else:
-        #     test=data[data['Set']=='Test']
-        #     pass
-
-
-        # return img, label
+                torch.Tensor(gaps).type(torch.float),
+                dataset_date
+                )
 
 
 if __name__ == "__main__":

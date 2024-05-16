@@ -40,10 +40,10 @@ class Trainer:
         self.iteration(epoch, self.train_dataloader)
 
     def valid(self, epoch,):
-        return self.iteration(epoch, self.valid_dataloader, train=False)
+        return self.iteration(epoch, self.valid_dataloader, train=False, test=False)
 
     def test(self, epoch):
-        return self.iteration(epoch, self.test_dataloader, train=False)
+        return self.iteration(epoch, self.test_dataloader, train=False, test=True)
 
     def iteration(self, epoch, dataloader, train=True):
         raise NotImplementedError
@@ -77,7 +77,7 @@ class FourTrainer(Trainer):
         super(FourTrainer, self).__init__(
             model,train_dataloader, valid_dataloader, test_dataloader,args)
         
-    def iteration(self, epoch, dataloader, train=True):
+    def iteration(self, epoch, dataloader, train=True, test=False):
         
         if train:
             print("Train Fourcaster")            
@@ -86,7 +86,7 @@ class FourTrainer(Trainer):
             batch_iter = tqdm(enumerate(dataloader), total= len(dataloader))
             ce_loss,mae_loss = 0.0, 0.0
             for i, batch in batch_iter:
-                image, label, gap = batch
+                image, label, gap, datetime = batch
 
                 image_batch = [t.to(self.args.device) for t in image]
                 label = label.to(self.args.device)
@@ -146,11 +146,12 @@ class FourTrainer(Trainer):
             #valid and test
             print("Eval Fourcaster")
             self.model.eval()
-            with torch.no_grad():
 
+            with torch.no_grad():
+                
                 batch_iter = tqdm(enumerate(dataloader), total= len(dataloader))
                 for i, batch in batch_iter:
-                    image, label, gap = batch
+                    image, label, gap, datetime = batch
 
                     image_batch = [t.to(self.args.device) for t in image]
                     label = label.to(self.args.device)
@@ -162,12 +163,14 @@ class FourTrainer(Trainer):
                         regression_logits = regression_logits.reshape(self.args.batch, -1)
                         precipitation.append(regression_logits)
                     
-                    total_mae = 0
+                    total_precipitation = 0
                     for i in range(len(precipitation)-1):
                         # check validity
-                        total_mae += torch.sum(precipitation[i+1]-precipitation[i])
-                    loss_mae = self.mae_criterion(total_mae, torch.sum(gap,dim=0))
-                
+                        total_precipitation += torch.sum(precipitation[i+1]-precipitation[i])
+                    loss_mae = self.mae_criterion(total_precipitation, torch.sum(gap,dim=0))
+                    if test:
+                        self.args.test_list.append([datetime, total_precipitation, gap])
+                        
                     del batch
                 torch.cuda.empty_cache() 
             return self.get_score(epoch,loss_mae/len(batch_iter))
