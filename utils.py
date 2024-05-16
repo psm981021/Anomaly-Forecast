@@ -122,22 +122,25 @@ class EarlyStopping:
         self.delta = delta
 
     def compare(self, score):
-        if score > self.best_score + self.delta:
+        if score < self.best_score + self.delta:
             return False
         return True
 
     def __call__(self, score, model):
-        # score HIT@10 NDCG@10
+        # score
 
         if self.best_score is None:
             self.best_score = score
             self.score_min = 0
             self.save_checkpoint(score, model)
+
         elif self.compare(score):
             self.counter += 1
+
             with open(self.log_file, "a") as f:
                 f.write(f"EarlyStopping counter: {self.counter} out of {self.patience}\n")
             print(f"EarlyStopping counter: {self.counter} out of {self.patience}")
+
             if self.counter >= self.patience:
                 self.early_stop = True
         else:

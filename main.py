@@ -23,7 +23,11 @@ def main():
     parser.add_argument('--use_multi_gpu', action='store_true', help='use multiple gpus', default=False)
     parser.add_argument('--multi_devices', type=str, default='0,1', help='device ids of multile gpus')
     parser.add_argument("--wandb", action="store_true")
-
+    parser.add_argument( '--test_list',
+        nargs='+',  # This tells argparse to accept one or more arguments for this option
+        required=True,  # Make this argument required
+        help='A list of values',
+    )
     # model args
     parser.add_argument("--model_idx", default="test", type=str, help="model identifier")
     parser.add_argument("--batch", type=int,default=4, help="batch size")
@@ -82,6 +86,7 @@ def main():
     # save model args
     args.str = f"{args.model_idx}-{args.batch}-{args.epochs}"
     args.log_file = os.path.join(args.output_dir,args.str + ".txt" )
+    args.dataframe_path = os.path.join(args.output_dir,args.str + ".csv")
 
     #checkpoint
     checkpoint = args.str + ".pt"
@@ -132,10 +137,16 @@ def main():
             print("Early stopping")
             break
         
-    trainer.model.load_state_dict(torch.load(args.checkpoint_path))
 
     #test
+    print("-----------------Test-----------------")
+    # load the best model
+    trainer.model.load_state_dict(torch.load(args.checkpoint_path))
+    score = trainer.test(args.epochs)
 
+    # save csv file
+    dataframe = pd.DataFrame(args.test_list, columns =['datetime', 'predicted precipitation', 'ground_truth'])
+    dataframe.to_csv(args.dataframe_path,index=False)
 
     # time check
     end_time = time.time()
