@@ -74,7 +74,7 @@ class Radar(Dataset):
 
 
     def __getitem__(self, idx):
-        return self.image[idx], self.label[idx],self.gap[idx]
+        return self.image[idx], self.label[idx],self.gap[idx], self.date[idx]
     
     def get_input(self, csv_path, flag):
         
@@ -85,7 +85,7 @@ class Radar(Dataset):
         dataset_images = []
         labels=data['Label'].values
         gaps=data['Label Gap'].values
-        dataset_date = data['일시'].values
+        dataset_date = data['Timestamp'].values
 
         # import IPython; IPython.embed(colors='Linux'); exit(1)
         for i in tqdm(idx):
