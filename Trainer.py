@@ -110,7 +110,9 @@ class FourTrainer(Trainer):
                     total_mae += torch.sum(precipitation[i+1]-precipitation[i])
                 
                 # Loss_mae
-                loss_mae = self.mae_criterion(total_mae, torch.sum(gap,dim=0))
+                loss_mae=(max(0,total_mae-torch.sum(gap,dim=0)))**2 + 0.5*(max(0,torch.sum(gap,dim=0)-total_mae))**2
+                # loss_mae = self.mae_criterion(total_mae, torch.sum(gap,dim=0))
+                            
                 # joint Loss
                 joint_loss = 0.01 * total_ce + loss_mae
 

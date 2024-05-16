@@ -28,6 +28,8 @@ def extract_image_file(csv_path,raw_data_path, extract_path):
 
 if __name__ == "__main__":
 
+    path_to_zipfile = 'data/레이더 전체 데이터.zip'
+    directory_to_unzip = 'data/radar_full'
     path_to_zipfile = '/Users/sb/Desktop/anomaly_forecast/data/data_gangwon_only.zip'
     directory_to_unzip = ''
 
