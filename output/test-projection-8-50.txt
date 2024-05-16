@@ -49,3 +49,4 @@ EarlyStopping counter: 9 out of 10
 EarlyStopping counter: 10 out of 10
 To run Epoch:50 , It took 3 hours, 31 minutes, 41 seconds
 
+------------------------------ Continue Training ------------------------------ 
