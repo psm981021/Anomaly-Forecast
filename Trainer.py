@@ -91,7 +91,7 @@ class FourTrainer(Trainer):
                 image_batch = [t.to(self.args.device) for t in image]
                 label = label.to(self.args.device)
                 gap = gap.to(self.args.device)
-
+                import IPython; IPython.embed(colors='Linux');exit(1);
                 total_ce = 0.0
                 precipitation =[]                
                 for i in range(len(image_batch)-1):

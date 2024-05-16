@@ -82,6 +82,7 @@ def main():
         pass
     else:
         args.device= "cpu"
+
     # save model args
     args.str = f"{args.model_idx}-{args.batch}-{args.epochs}"
     args.log_file = os.path.join(args.output_dir,args.str + ".txt" )
