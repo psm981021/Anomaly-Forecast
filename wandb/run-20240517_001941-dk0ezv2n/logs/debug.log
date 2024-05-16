@@ -1,0 +1,27 @@
+2024-05-17 00:19:41,918 INFO    MainThread:1110747 [wandb_setup.py:_flush():76] Current SDK version is 0.17.0
+2024-05-17 00:19:41,919 INFO    MainThread:1110747 [wandb_setup.py:_flush():76] Configure stats pid to 1110747
+2024-05-17 00:19:41,919 INFO    MainThread:1110747 [wandb_setup.py:_flush():76] Loading settings from /home/seongbeom/.config/wandb/settings
+2024-05-17 00:19:41,919 INFO    MainThread:1110747 [wandb_setup.py:_flush():76] Loading settings from /home/seongbeom/paper/anomaly/wandb/settings
+2024-05-17 00:19:41,919 INFO    MainThread:1110747 [wandb_setup.py:_flush():76] Loading settings from environment variables: {}
+2024-05-17 00:19:41,919 INFO    MainThread:1110747 [wandb_setup.py:_flush():76] Applying setup settings: {'_disable_service': False}
+2024-05-17 00:19:41,919 INFO    MainThread:1110747 [wandb_setup.py:_flush():76] Inferring run settings from compute environment: {'program_relpath': 'main.py', 'program_abspath': '/home/seongbeom/paper/anomaly/main.py', 'program': '/home/seongbeom/paper/anomaly/main.py'}
+2024-05-17 00:19:41,919 INFO    MainThread:1110747 [wandb_setup.py:_flush():76] Applying login settings: {}
+2024-05-17 00:19:41,919 INFO    MainThread:1110747 [wandb_init.py:_log_setup():520] Logging user logs to /home/seongbeom/paper/anomaly/wandb/run-20240517_001941-dk0ezv2n/logs/debug.log
+2024-05-17 00:19:41,919 INFO    MainThread:1110747 [wandb_init.py:_log_setup():521] Logging internal logs to /home/seongbeom/paper/anomaly/wandb/run-20240517_001941-dk0ezv2n/logs/debug-internal.log
+2024-05-17 00:19:41,919 INFO    MainThread:1110747 [wandb_init.py:init():560] calling init triggers
+2024-05-17 00:19:41,919 INFO    MainThread:1110747 [wandb_init.py:init():567] wandb.init called with sweep_config: {}
+config: {'data_dir': 'data/data_seoul_only', 'image_csv_dir': 'data/서울_2021_2023_강수량 0.1 미만 제거_상위 10% test.csv', 'output_dir': 'output/', 'gpu_id': '1', 'device': 'cuda:1', 'seed': 9486, 'no_cuda': False, 'use_multi_gpu': False, 'multi_devices': '0,1', 'wandb': True, 'test_list': ['[]'], 'model_idx': 'seoul-V1', 'batch': 8, 'epochs': 1000, 'log_freq': 1, 'patience': 100, 'lr': 0.001, 'adam_beta1': 0.9, 'adam_beta2': 0.999, 'weight_decay': 0.0, 'str': 'seoul-V1-8-1000', 'log_file': 'output/seoul-V1-8-1000.txt', 'dataframe_path': 'output/seoul-V1-8-1000.csv', 'checkpoint_path': 'output/seoul-V1-8-1000.pt'}
+2024-05-17 00:19:41,919 INFO    MainThread:1110747 [wandb_init.py:init():610] starting backend
+2024-05-17 00:19:41,919 INFO    MainThread:1110747 [wandb_init.py:init():614] setting up manager
+2024-05-17 00:19:41,921 INFO    MainThread:1110747 [backend.py:_multiprocessing_setup():105] multiprocessing start_methods=fork,spawn,forkserver, using: spawn
+2024-05-17 00:19:41,923 INFO    MainThread:1110747 [wandb_init.py:init():622] backend started and connected
+2024-05-17 00:19:41,928 INFO    MainThread:1110747 [wandb_init.py:init():711] updated telemetry
+2024-05-17 00:19:42,105 INFO    MainThread:1110747 [wandb_init.py:init():744] communicating run to backend with 90.0 second timeout
+2024-05-17 00:19:42,726 INFO    MainThread:1110747 [wandb_run.py:_on_init():2396] communicating current version
+2024-05-17 00:19:42,901 INFO    MainThread:1110747 [wandb_run.py:_on_init():2405] got version response 
+2024-05-17 00:19:42,901 INFO    MainThread:1110747 [wandb_init.py:init():795] starting run threads in backend
+2024-05-17 00:19:43,072 INFO    MainThread:1110747 [wandb_run.py:_console_start():2374] atexit reg
+2024-05-17 00:19:43,073 INFO    MainThread:1110747 [wandb_run.py:_redirect():2229] redirect: wrap_raw
+2024-05-17 00:19:43,073 INFO    MainThread:1110747 [wandb_run.py:_redirect():2294] Wrapping output streams.
+2024-05-17 00:19:43,073 INFO    MainThread:1110747 [wandb_run.py:_redirect():2319] Redirects installed.
+2024-05-17 00:19:43,074 INFO    MainThread:1110747 [wandb_init.py:init():838] run started, returning control to user process

@@ -7,13 +7,15 @@
 
 
 python main.py \
-    --data_dir "data/data_seoul_only" \
-    --image_csv_dir "data/seoul_sample.csv" \
-    --batch 4 \
-    --epochs 5 \
+    --data_dir "data/data_gangwon_only" \
+    --image_csv_dir "data/강원_2021_2023_강수량 0.1 미만 제거_상위 10% test.csv" \
+    --batch 8 \
+    --epochs 1000 \
+    --patience 100 \
+    --model_idx "gangwon-V1" \
     --test_list=[]\
-    --model_idx "seoul-test" \
-    --use_multi_gpu
-    # --wandb
-
+    --gpu_id 0 \
+    --seed 9486 \
+    --do_eval
+    
 #scripts/Version1.sh

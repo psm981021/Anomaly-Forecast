@@ -1,0 +1,104 @@
+wandb_version: 1
+
+data_dir:
+  desc: null
+  value: data/data_seoul_only
+image_csv_dir:
+  desc: null
+  value: data/서울_2021_2023_강수량 0.1 미만 제거_상위 10% test.csv
+output_dir:
+  desc: null
+  value: output/
+gpu_id:
+  desc: null
+  value: '1'
+device:
+  desc: null
+  value: cuda:1
+seed:
+  desc: null
+  value: 9486
+no_cuda:
+  desc: null
+  value: false
+use_multi_gpu:
+  desc: null
+  value: false
+multi_devices:
+  desc: null
+  value: 0,1
+wandb:
+  desc: null
+  value: true
+test_list:
+  desc: null
+  value:
+  - '[]'
+model_idx:
+  desc: null
+  value: seoul-V1
+batch:
+  desc: null
+  value: 8
+epochs:
+  desc: null
+  value: 1000
+log_freq:
+  desc: null
+  value: 1
+patience:
+  desc: null
+  value: 100
+lr:
+  desc: null
+  value: 0.001
+adam_beta1:
+  desc: null
+  value: 0.9
+adam_beta2:
+  desc: null
+  value: 0.999
+weight_decay:
+  desc: null
+  value: 0.0
+str:
+  desc: null
+  value: seoul-V1-8-1000
+log_file:
+  desc: null
+  value: output/seoul-V1-8-1000.txt
+dataframe_path:
+  desc: null
+  value: output/seoul-V1-8-1000.csv
+checkpoint_path:
+  desc: null
+  value: output/seoul-V1-8-1000.pt
+_wandb:
+  desc: null
+  value:
+    python_version: 3.9.19
+    cli_version: 0.17.0
+    framework: torch
+    is_jupyter_run: false
+    is_kaggle_kernel: false
+    start_time: 1715872781
+    t:
+      1:
+      - 1
+      - 41
+      - 51
+      - 55
+      2:
+      - 1
+      - 41
+      - 51
+      - 55
+      3:
+      - 13
+      - 16
+      - 23
+      4: 3.9.19
+      5: 0.17.0
+      8:
+      - 5
+      13: linux-x86_64

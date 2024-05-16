@@ -3,13 +3,16 @@ from torch.optim import Adam
 from tqdm import tqdm
 import wandb
 import torch.nn as nn
+from PIL import Image
+import matplotlib.pyplot as plt
 
 class Trainer:
     def __init__(self, model, train_dataloader, valid_dataloader, test_dataloader, args):
 
         self.args = args
         self.cuda_condition = torch.cuda.is_available() and not self.args.no_cuda
-        self.device = torch.device("cuda" if self.cuda_condition else "cpu")
+        self.device = torch.device("cuda:" + args.gpu_id if torch.cuda.is_available() and not args.no_cuda else "cpu")
+        torch.cuda.set_device(self.device)
 
         self.model = model
         self.projection = nn.Sequential(
@@ -98,13 +101,14 @@ class FourTrainer(Trainer):
                 for i in range(len(image_batch)-1):
                     
                     generated_image, regression_logits = self.model(image_batch[i],self.args)
+                    
                     regression_logits = regression_logits.reshape(self.args.batch, -1)
                     precipitation.append(regression_logits)
                     projection_image = self.projection(image_batch[i+1])
                     
                     loss_ce = self.ce_criterion(generated_image.flatten(1), projection_image.flatten(1))
                     total_ce += loss_ce
-        
+    
                 total_mae = 0
                 
                 for i in range(len(precipitation)-1):
@@ -112,8 +116,8 @@ class FourTrainer(Trainer):
                     total_mae += torch.sum(precipitation[i+1]-precipitation[i])
                 
                 # Loss_mae
-                loss_mae=(max(0,total_mae-torch.sum(gap,dim=0)))**2 + 0.5*(max(0,torch.sum(gap,dim=0)-total_mae))**2
-                # loss_mae = self.mae_criterion(total_mae, torch.sum(gap,dim=0))
+                # loss_mae=(max(0,total_mae-torch.sum(gap,dim=0)))**2 + 0.5*(max(0,torch.sum(gap,dim=0)-total_mae))**2
+                loss_mae = self.mae_criterion(total_mae, torch.sum(gap,dim=0))
                             
                 # joint Loss
                 joint_loss = 0.01 * total_ce + loss_mae
@@ -125,8 +129,8 @@ class FourTrainer(Trainer):
                 ce_loss += total_ce.item()
                 mae_loss += loss_mae.item()
 
-                del batch, loss_ce, loss_mae, joint_loss  # After backward pass
-                torch.cuda.empty_cache()
+                # del batch, loss_ce, loss_mae, joint_loss  # After backward pass
+                # torch.cuda.empty_cache()
 
             if self.args.wandb == True:
                 wandb.log({'Generation Loss (CE)': ce_loss / len(batch_iter)})
@@ -173,10 +177,10 @@ class FourTrainer(Trainer):
                         total_precipitation += torch.sum(precipitation[i+1]-precipitation[i])
                     loss_mae = self.mae_criterion(total_precipitation, torch.sum(gap,dim=0))
                     if test:
-                        self.args.test_list.append([datetime, total_precipitation, gap])
+                        self.args.test_list.append([datetime, total_precipitation, label])
                         
-                    del batch
-                torch.cuda.empty_cache() 
+                #     del batch
+                # torch.cuda.empty_cache() 
             return self.get_score(epoch,loss_mae/len(batch_iter))
             
     
