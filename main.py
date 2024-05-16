@@ -17,7 +17,7 @@ def main():
     parser.add_argument("--image_csv_dir", default="data\\22.7_22.9 강수량 평균 0.1 이하 제거.csv", type=str, help="image path, rain intensity, label csv")
     parser.add_argument("--output_dir", default="output/", type=str)
     parser.add_argument("--gpu_id", type=str, default="0", help="gpu_id")
-    parser.add_argument("--device",type=str, default="cuda:1")
+    parser.add_argument("--device",type=str, default="cuda:0")
     parser.add_argument("--seed",type=int, default="42")
     parser.add_argument("--no_cuda", action="store_true")
     parser.add_argument('--use_multi_gpu', action='store_true', help='use multiple gpus', default=False)
@@ -74,9 +74,14 @@ def main():
     print("Using Cuda:", torch.cuda.is_available())
     
     if args.use_multi_gpu:
-        args.devices = args.multi_devices.replace(' ', '')
-        device_ids = args.devices.split(',')
-        args.device_ids = [int(id_) for id_ in device_ids]
+        if args.cuda_condition:
+            args.devices = args.multi_devices.replace(' ', '')
+            device_ids = args.devices.split(',')
+            args.device_ids = [int(id_) for id_ in device_ids]
+            torch.cuda.set_device(args.device_ids[0])
+        else:
+            args.device  = torch.device("cpu")
+    
 
     if torch.cuda.is_available():
         pass
@@ -117,8 +122,8 @@ def main():
         trainer.load(args.checkpoint_path)
 
     if args.wandb == True:
-        wandb.init(project="anomaly",
-                name=f"{args.model_idx}_{args.batch_size}_{args.epochs}",
+        wandb.init(project="anomaly_forecast",
+                name=f"{args.model_idx}_{args.batch}_{args.epochs}",
                 config=args)
         args = wandb.config
 
@@ -144,7 +149,19 @@ def main():
     score = trainer.test(args.epochs)
 
     # save csv file
-    dataframe = pd.DataFrame(args.test_list, columns =['datetime', 'predicted precipitation', 'ground_truth'])
+    try:
+        args.test_list.pop(0)
+        formatted_data = [{
+        'datetime': record[0][0],
+        'predicted precipitation': record[1].item(),
+        'ground_truth': record[2].cpu().numpy()[0]
+        } for record in args.test_list]
+        dataframe = pd.DataFrame(formatted_data)
+
+        #dataframe = pd.DataFrame(args.test_list, columns =['datetime', 'predicted precipitation', 'ground_truth'])
+    except:
+        import IPython; IPython.embed(colors='Linux');exit(1);
+    
     dataframe.to_csv(args.dataframe_path,index=False)
 
     # time check
