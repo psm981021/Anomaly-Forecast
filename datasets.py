@@ -85,7 +85,7 @@ class Radar(Dataset):
         dataset_images = []
         labels=data['Label'].values
         gaps=data['Label Gap'].values
-        dataset_date = data['일시'].values
+        dataset_date = data['Timestamp'].values
 
         # import IPython; IPython.embed(colors='Linux'); exit(1)
         for i in tqdm(idx):
