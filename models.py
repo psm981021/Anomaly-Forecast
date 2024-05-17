@@ -40,13 +40,13 @@ class Fourcaster(nn.Module):
 
         self.regression_model = nn.Sequential(
             nn.Conv2d(64, 32, kernel_size=3, padding=1),
-            nn.ReLU(inplace=True),
+            nn.ReLU(),
             nn.Conv2d(32, 16, kernel_size=3, padding=1),
-            nn.ReLU(inplace=True),
+            nn.ReLU(),
             nn.Conv2d(16, 1, kernel_size=3, padding=1),
-            nn.ReLU(inplace=True),
-            nn.AdaptiveAvgPool2d((1, 1)),  # Global average pooling
+            # nn.AdaptiveAvgPool2d((1, 1)),  # Global average pooling
         )
+
         self.projection = nn.Sequential(
             nn.Conv2d(64, 3, kernel_size=3, stride=2, padding=1),  # 64 input channels
             nn.ReLU(),

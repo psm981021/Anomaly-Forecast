@@ -23,6 +23,7 @@ def main():
     parser.add_argument('--use_multi_gpu', action='store_true', help='use multiple gpus', default=False)
     parser.add_argument('--multi_devices', type=str, default='0,1', help='device ids of multile gpus')
     parser.add_argument("--wandb", action="store_true")
+    parser.add_argument("--do_eval", action="store_true")
     parser.add_argument( '--test_list',
         nargs='+',  # This tells argparse to accept one or more arguments for this option
         required=True,  # Make this argument required
@@ -70,7 +71,6 @@ def main():
     test_loader = DataLoader(test_dataset, batch_size=args.batch,drop_last=True)
 
     # os.environ["CUDA_VISIBLE_DEVICES"] = args.devicegpu_id
-    args.device = "cuda" if torch.cuda.is_available() and not args.no_cuda else "cpu"
     print("Using Cuda:", torch.cuda.is_available())
 
     # if args.use_multi_gpu:
@@ -121,39 +121,20 @@ def main():
 
     start_time = time.time()
 
-    if os.path.exists(args.checkpoint_path):
-        print("Load pth")
-        trainer.load(args.checkpoint_path)
+    # if os.path.exists(args.checkpoint_path):
+    #     print("Load pth")
+    #     trainer.load(args.checkpoint_path)
 
     if args.wandb == True:
         wandb.init(project="anomaly_forecast",
                 name=f"{args.model_idx}_{args.batch}_{args.epochs}",
                 config=args)
         args = wandb.config
-
-    early_stopping = EarlyStopping(args.log_file,args.checkpoint_path, args.patience, verbose=True)
-
-    for epoch in range(args.epochs):
-    
-        trainer.train(epoch)
-
-        score,_ = trainer.valid(epoch)
-        if args.wandb == True:
-            wandb.log({"MAE Vailid Loss": score})
-        early_stopping(score, trainer.model)
-        if early_stopping.early_stop:
-            print("Early stopping")
-            break
-        
-
-    #test
-    print("-----------------Test-----------------")
-    # load the best model
-    trainer.model.load_state_dict(torch.load(args.checkpoint_path))
-    score = trainer.test(args.epochs)
-
-    # save csv file
-    try:
+    if args.do_eval:
+        trainer.load(args.checkpoint_path)
+        print(f"Load model from {args.checkpoint_path} for test!")
+        score = trainer.test(args.epochs)
+        import IPython; IPython.embed(colors='Linux');exit(1);
         args.test_list.pop(0)
         formatted_data = [{
         'datetime': record[0][0],
@@ -161,23 +142,56 @@ def main():
         'ground_truth': record[2].cpu().numpy()[0]
         } for record in args.test_list]
         dataframe = pd.DataFrame(formatted_data)
+        
+        dataframe.to_csv(args.dataframe_path,index=False)
+    else:
+        early_stopping = EarlyStopping(args.log_file,args.checkpoint_path, args.patience, verbose=True)
 
-        #dataframe = pd.DataFrame(args.test_list, columns =['datetime', 'predicted precipitation', 'ground_truth'])
-    except:
-        import IPython; IPython.embed(colors='Linux');exit(1);
-    
-    dataframe.to_csv(args.dataframe_path,index=False)
+        for epoch in range(args.epochs):
+        
+            trainer.train(epoch)
 
-    # time check
-    end_time = time.time()
-    execution_time = end_time - start_time
+            score,_ = trainer.valid(epoch)
+            if args.wandb == True:
+                wandb.log({"MAE Vailid Loss": score})
+            early_stopping(score, trainer.model)
+            if early_stopping.early_stop:
+                print("Early stopping")
+                break
+            
 
-    hours = int(execution_time // 3600)
-    minutes = int((execution_time % 3600) // 60)
-    seconds = int(execution_time % 60)
+        #test
+        print("-----------------Test-----------------")
+        # load the best model
+        trainer.model.load_state_dict(torch.load(args.checkpoint_path))
+        score = trainer.test(args.epochs)
 
-    with open(args.log_file, "a") as f:
-        f.write(f"To run Epoch:{args.epochs} , It took {hours} hours, {minutes} minutes, {seconds} seconds\n")
+        # save csv file
+        try:
+            args.test_list.pop(0)
+            formatted_data = [{
+            'datetime': record[0][0],
+            'predicted precipitation': record[1].item(),
+            'ground_truth': record[2].cpu().numpy()[0]
+            } for record in args.test_list]
+            dataframe = pd.DataFrame(formatted_data)
+
+            #dataframe = pd.DataFrame(args.test_list, columns =['datetime', 'predicted precipitation', 'ground_truth'])
+        except:
+            import IPython; IPython.embed(colors='Linux');exit(1);
+        
+        dataframe.to_csv(args.dataframe_path,index=False)
+
+        # time check
+        end_time = time.time()
+        execution_time = end_time - start_time
+
+        hours = int(execution_time // 3600)
+        minutes = int((execution_time % 3600) // 60)
+        seconds = int(execution_time % 60)
+
+        with open(args.log_file, "a") as f:
+            f.write(f"To run Epoch:{args.epochs} , It took {hours} hours, {minutes} minutes, {seconds} seconds\n")
 
 if __name__ == "__main__":
     main()
