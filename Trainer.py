@@ -169,6 +169,7 @@ class FourTrainer(Trainer):
                     for i in range(len(image_batch)-1):
                         generated_image, regression_logits = self.model(image_batch[i],self.args)
                         regression_logits = regression_logits.reshape(self.args.batch, -1)
+                        import IPython; IPython.embed(colors='Linux');exit(1);
                         precipitation.append(regression_logits)
                     
                     total_precipitation = 0

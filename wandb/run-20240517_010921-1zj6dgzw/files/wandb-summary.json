@@ -1,1 +1,1 @@
-{"Generation Loss (CE)": 63409.11328125, "_timestamp": 1715877533.7940843, "_runtime": 1772.2428653240204, "_step": 134, "MAE Train Loss": 1.2619768381118774, "MAE Vailid Loss": 0.057746123522520065}
+{"Generation Loss (CE)": 63381.01953125, "_timestamp": 1715880384.3591485, "_runtime": 4622.807929515839, "_step": 368, "MAE Train Loss": 1.0681051015853882, "MAE Vailid Loss": 0.031669147312641144, "_wandb": {"runtime": 4627}}

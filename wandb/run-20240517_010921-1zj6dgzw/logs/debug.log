@@ -25,3 +25,4 @@ config: {'data_dir': 'data/data_gangwon_only', 'image_csv_dir': 'data/강�
 2024-05-17 01:09:22,660 INFO    MainThread:1184713 [wandb_run.py:_redirect():2294] Wrapping output streams.
 2024-05-17 01:09:22,660 INFO    MainThread:1184713 [wandb_run.py:_redirect():2319] Redirects installed.
 2024-05-17 01:09:22,661 INFO    MainThread:1184713 [wandb_init.py:init():838] run started, returning control to user process
+2024-05-17 02:26:38,256 WARNING MsgRouterThr:1184713 [router.py:message_loop():77] message_loop has been closed
