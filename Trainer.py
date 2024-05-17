@@ -167,13 +167,14 @@ class FourTrainer(Trainer):
                 
                     precipitation =[]
                     for i in range(len(image_batch)-1):
+                        import IPython; IPython.embed(colors='Linux');exit(1);
                         generated_image, regression_logits = self.model(image_batch[i],self.args)
                         regression_logits = regression_logits.reshape(self.args.batch, -1)
-                        import IPython; IPython.embed(colors='Linux');exit(1);
+                        
                         precipitation.append(regression_logits)
                     
                     total_precipitation = 0
-                    import IPython; IPython.embed(colors='Linux');exit(1);
+                    
                     for i in range(len(precipitation)-1):
                         # check validity
                         total_precipitation += torch.sum(precipitation[i+1]-precipitation[i])
