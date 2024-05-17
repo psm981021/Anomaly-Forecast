@@ -157,7 +157,7 @@ def main():
         args.test_list.pop(0)
         formatted_data = [{
         'datetime': record[0][0],
-        'predicted precipitation': record[1].item(),
+        'predicted precipitation': record[1].item()[0],
         'ground_truth': record[2].cpu().numpy()[0]
         } for record in args.test_list]
         dataframe = pd.DataFrame(formatted_data)
