@@ -173,6 +173,7 @@ class FourTrainer(Trainer):
                         precipitation.append(regression_logits)
                     
                     total_precipitation = 0
+                    import IPython; IPython.embed(colors='Linux');exit(1);
                     for i in range(len(precipitation)-1):
                         # check validity
                         total_precipitation += torch.sum(precipitation[i+1]-precipitation[i])
