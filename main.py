@@ -134,15 +134,20 @@ def main():
         trainer.load(args.checkpoint_path)
         print(f"Load model from {args.checkpoint_path} for test!")
         score = trainer.test(args.epochs)
-        import IPython; IPython.embed(colors='Linux');exit(1);
-        args.test_list.pop(0)
-        formatted_data = [{
-        'datetime': record[0][0],
-        'predicted precipitation': record[1].item()[0],
-        'ground_truth': record[2].cpu().numpy()[0]
-        } for record in args.test_list]
-        dataframe = pd.DataFrame(formatted_data)
         
+        args.test_list.pop(0)
+        formatted_data = []
+        for record in args.test_list:
+            for i in range(len(record[0])):  # Assuming record[0] contains a list of timestamps
+                datetime = record[0][i]
+                predicted_precipitation = f"{record[1][i].item():.6f}" if record[1].dim() != 0 else f"{record[1].item():.6f}"
+                ground_truth = record[2][i].item() if record[2].dim() != 0 else record[2].item()
+                formatted_data.append({
+                    'datetime': datetime,
+                    'predicted precipitation': predicted_precipitation,
+                    'ground_truth': ground_truth
+        })
+        dataframe = pd.DataFrame(formatted_data)
         dataframe.to_csv(args.dataframe_path,index=False)
     else:
         early_stopping = EarlyStopping(args.log_file,args.checkpoint_path, args.patience, verbose=True)
@@ -168,20 +173,26 @@ def main():
 
         # save csv file
         try:
-            args.test_list.pop(0)
-            formatted_data = [{
-            'datetime': record[0][0],
-            'predicted precipitation': record[1].item(),
-            'ground_truth': record[2].cpu().numpy()[0]
-            } for record in args.test_list]
+            formatted_data = []
+
+            for record in args.test_list:
+                for i in range(len(record[0])):  # Assuming record[0] contains a list of timestamps
+                    datetime = record[0][i]
+                    predicted_precipitation = record[1][i].item() if record[1].dim() != 0 else record[1].item()
+                    ground_truth = record[2][i].item() if record[2].dim() != 0 else record[2].item()
+                    formatted_data.append({
+                        'datetime': datetime,
+                        'predicted precipitation': predicted_precipitation,
+                        'ground_truth': ground_truth
+                    })
             dataframe = pd.DataFrame(formatted_data)
+            dataframe.to_csv(args.dataframe_path,index=False)
 
             #dataframe = pd.DataFrame(args.test_list, columns =['datetime', 'predicted precipitation', 'ground_truth'])
         except:
-            import IPython; IPython.embed(colors='Linux');exit(1);
+            print("Error Handling csv");
         
-        dataframe.to_csv(args.dataframe_path,index=False)
-
+    
         # time check
         end_time = time.time()
         execution_time = end_time - start_time

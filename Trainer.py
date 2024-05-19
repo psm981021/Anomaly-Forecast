@@ -75,6 +75,16 @@ class Trainer:
     def load(self, file_name):
         self.model.load_state_dict(torch.load(file_name))
 
+    @staticmethod
+    def plot_images(image, flag=None):
+        
+        image = image.cpu().detach().permute(1,2,0).numpy()
+        plt.imshow(image)
+        if flag == 'R':
+            plt.savefig('Real Image')
+        else:
+            plt.savefig('Generated Image')
+
 class FourTrainer(Trainer):
     def __init__(self,model,train_dataloader, valid_dataloader,test_dataloader, args):
         super(FourTrainer, self).__init__(
@@ -92,35 +102,38 @@ class FourTrainer(Trainer):
             for i, batch in batch_iter:
                 image, label, gap, datetime = batch
 
-                image_batch = [t.to(self.args.device) for t in image]
-                label = label.to(self.args.device)
-                gap = gap.to(self.args.device)
+                image_batch = [t.to(self.args.device) for t in image] # 7
+                label = label.to(self.args.device) #answer, B
+                gap = gap.to(self.args.device) #diff between t-1 t, B
                 
                 total_ce = 0.0
                 precipitation = []       
                 for i in range(len(image_batch)-1):
                     
+                    # image_batch[i] [B x 3 x R x R]
                     generated_image, regression_logits = self.model(image_batch[i],self.args)
                     
+                    # generated_image [B 3 R R ], Regression_logits [B x 1 x 150 x 150]
                     regression_logits = regression_logits.reshape(self.args.batch, -1)
-                    precipitation.append(regression_logits)
-                    projection_image = self.projection(image_batch[i+1])
+                    precipitation.append(torch.sum(regression_logits, dim=1)) # [B x 1]
                     
-                    loss_ce = self.ce_criterion(generated_image.flatten(1), projection_image.flatten(1))
+                    #projection_image = self.projection(image_batch[i+1])
+                    
+                    loss_ce = self.ce_criterion(generated_image.flatten(1), generated_image.flatten(1))
                     total_ce += loss_ce
     
-                total_mae = 0
+                stack_precipitation = torch.stack(precipitation) # [6 x B]
+
                 
-                for i in range(len(precipitation)-1):
-                    # check validity
-                    total_mae += torch.sum(precipitation[i+1]-precipitation[i])
+                predicted_gaps =  stack_precipitation[1:] - stack_precipitation[:-1] # [5 x B]
+                total_mae_loss = torch.sum(predicted_gaps, dim=0) # [B]
                 
                 # Loss_mae
                 # loss_mae=(max(0,total_mae-torch.sum(gap,dim=0)))**2 + 0.5*(max(0,torch.sum(gap,dim=0)-total_mae))**2
-                loss_mae = self.mae_criterion(total_mae, torch.sum(gap,dim=0))
+                loss_mae = self.mae_criterion(total_mae_loss, gap)
                             
                 # joint Loss
-                joint_loss = 0.01 * total_ce + loss_mae
+                joint_loss = 0.0001 * total_ce + loss_mae
 
                 self.optim.zero_grad()
                 joint_loss.backward()
@@ -166,20 +179,34 @@ class FourTrainer(Trainer):
                     gap = gap.to(self.args.device)
                 
                     precipitation =[]
+                    total_ce =0.0
                     for i in range(len(image_batch)-1):
-                        generated_image, regression_logits = self.model(image_batch[i],self.args)
-                        regression_logits = regression_logits.reshape(self.args.batch, -1)
-                        import IPython; IPython.embed(colors='Linux');exit(1);
-                        precipitation.append(regression_logits)
                     
-                    total_precipitation = 0
-                    import IPython; IPython.embed(colors='Linux');exit(1);
-                    for i in range(len(precipitation)-1):
-                        # check validity
-                        total_precipitation += torch.sum(precipitation[i+1]-precipitation[i])
-                    loss_mae = self.mae_criterion(total_precipitation, torch.sum(gap,dim=0))
+                        # image_batch[i] [B x 3 x R x R]
+                        generated_image, regression_logits = self.model(image_batch[i],self.args)
+                        
+                        # generated_image [B 3 R R ], Regression_logits [B x 1 x 150 x 150]
+                        regression_logits = regression_logits.reshape(self.args.batch, -1)
+                        precipitation.append(torch.sum(regression_logits, dim=1)) # [B x 1]
+                        
+                        #projection_image = self.projection(image_batch[i+1])
+                        
+                        loss_ce = self.ce_criterion(generated_image.flatten(1), generated_image.flatten(1))
+                        total_ce += loss_ce
+        
+                    
+                    stack_precipitation = torch.stack(precipitation) # [6 x B]
+                    predicted_gaps =  stack_precipitation[1:] - stack_precipitation[:-1] # [5 x B]
+                    total_mae_loss = torch.sum(predicted_gaps, dim=0) # [B]
+                    
+                    last_elements = stack_precipitation[-1,:] 
+
+                    # Loss_mae
+                    # loss_mae=(max(0,total_mae-torch.sum(gap,dim=0)))**2 + 0.5*(max(0,torch.sum(gap,dim=0)-total_mae))**2
+                    loss_mae = self.mae_criterion(total_mae_loss, gap)
+
                     if test:
-                        self.args.test_list.append([datetime, total_precipitation, label])
+                        self.args.test_list.append([datetime, last_elements, label])
                         
                 #     del batch
                 # torch.cuda.empty_cache() 

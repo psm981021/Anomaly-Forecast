@@ -649,3 +649,13 @@ EarlyStopping counter: 99 out of 100
 EarlyStopping counter: 100 out of 100
 {'Epoch': 1000, 'MAE': tensor(0.2177, device='cuda:0')}
 To run Epoch:1000 , It took 2 hours, 13 minutes, 50 seconds
+------------------------------ Continue Training ------------------------------ 
+------------------------------ Continue Training ------------------------------ 
+{'Epoch': 1000, 'MAE': tensor(0.0708, device='cuda:0')}
+------------------------------ Continue Training ------------------------------ 
+------------------------------ Continue Training ------------------------------ 
+{'Epoch': 1000, 'MAE': tensor(0.0708, device='cuda:0')}
+------------------------------ Continue Training ------------------------------ 
+{'Epoch': 1000, 'MAE': tensor(0.0708, device='cuda:0')}
+------------------------------ Continue Training ------------------------------ 
+{'Epoch': 1000, 'MAE': tensor(0.0708, device='cuda:0')}

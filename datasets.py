@@ -20,7 +20,8 @@ class Radar(Dataset):
         self.flag=flag
         self.augmentations = augmentations
         self.args = args
-        
+
+
         # 이미지 자를 좌표 - 서울 : 150x150
         self.left = 240  
         self.top = 120   
@@ -76,6 +77,7 @@ class Radar(Dataset):
 
     def __getitem__(self, idx):
         return self.image[idx], self.label[idx],self.gap[idx], self.date[idx]
+
     
     def get_input(self, csv_path, flag):
         
