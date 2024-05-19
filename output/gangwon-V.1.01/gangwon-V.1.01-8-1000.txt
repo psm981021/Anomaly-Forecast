@@ -1,0 +1,18 @@
+{'epoch': 0, 'CE Loss': '2798013.5', 'MAE Loss': '0.8602549433708191', 'Joint Loss': '346.1775817871094'}
+{'Epoch': 0, 'MAE': tensor(40397.3789, device='cuda:0')}
+{'epoch': 1, 'CE Loss': '2782763.5', 'MAE Loss': '0.8596934676170349', 'Joint Loss': '345.7784118652344'}
+{'Epoch': 1, 'MAE': tensor(40282.9844, device='cuda:0')}
+{'epoch': 2, 'CE Loss': '2779353.5', 'MAE Loss': '0.8596636652946472', 'Joint Loss': '345.6357727050781'}
+{'Epoch': 2, 'MAE': tensor(40251.4180, device='cuda:0')}
+{'epoch': 3, 'CE Loss': '2777566.0', 'MAE Loss': '0.8596591353416443', 'Joint Loss': '345.5925598144531'}
+{'Epoch': 3, 'MAE': tensor(40242.7969, device='cuda:0')}
+{'epoch': 4, 'CE Loss': '2776185.25', 'MAE Loss': '0.8596591949462891', 'Joint Loss': '345.5537109375'}
+{'Epoch': 4, 'MAE': tensor(40251.9180, device='cuda:0')}
+EarlyStopping counter: 1 out of 50
+{'epoch': 5, 'CE Loss': '2775242.5', 'MAE Loss': '0.8596587777137756', 'Joint Loss': '345.5282897949219'}
+{'Epoch': 5, 'MAE': tensor(40222.9297, device='cuda:0')}
+{'epoch': 6, 'CE Loss': '2774410.5', 'MAE Loss': '0.8596585988998413', 'Joint Loss': '345.5124816894531'}
+{'Epoch': 6, 'MAE': tensor(40210.7578, device='cuda:0')}
+{'epoch': 7, 'CE Loss': '2773660.25', 'MAE Loss': '0.859658420085907', 'Joint Loss': '345.4984130859375'}
+{'Epoch': 7, 'MAE': tensor(40188.2305, device='cuda:0')}
+{'epoch': 8, 'CE Loss': '2772911.25', 'MAE Loss': '0.8596593141555786', 'Joint Loss': '345.4893798828125'}

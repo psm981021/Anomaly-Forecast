@@ -6,6 +6,7 @@ python main.py \
     --epochs 1000 \
     --patience 50 \
     --model_idx "gangwon-V.1.01" \
+    --output_dir "output/gangwon-V.1.01/" \
     --test_list=[]\
     --gpu_id 0 \
     --seed 0 \

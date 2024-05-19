@@ -119,7 +119,8 @@ class FourTrainer(Trainer):
                     
                     #projection_image = self.projection(image_batch[i+1])
                     
-                    loss_ce = self.ce_criterion(generated_image.flatten(1), generated_image.flatten(1))
+                    loss_ce = self.ce_criterion(generated_image.flatten(1), image_batch[i+1].flatten(1))
+                    
                     total_ce += loss_ce
     
                 stack_precipitation = torch.stack(precipitation) # [6 x B]
@@ -133,7 +134,8 @@ class FourTrainer(Trainer):
                 loss_mae = self.mae_criterion(total_mae_loss, gap)
                             
                 # joint Loss
-                joint_loss = 0.0001 * total_ce + loss_mae
+                
+                joint_loss = 0.01 * total_ce + loss_mae
 
                 self.optim.zero_grad()
                 joint_loss.backward()
@@ -148,11 +150,13 @@ class FourTrainer(Trainer):
             if self.args.wandb == True:
                 wandb.log({'Generation Loss (CE)': ce_loss / len(batch_iter)})
                 wandb.log({'MAE Train Loss': mae_loss / len(batch_iter)})
+                wandb.log({'Joint Loss': joint_loss / len(batch_iter)})
 
             post_fix = {
                 "epoch":epoch,
-                "ce_loss": "{:6}".format(ce_loss/len(batch_iter)),
-                "mae_loss":"{:6}".format(mae_loss/len(batch_iter))
+                "CE Loss": "{:6}".format(ce_loss/len(batch_iter)),
+                "MAE Loss":"{:6}".format(mae_loss/len(batch_iter)),
+                "Joint Loss":"{:6}".format(joint_loss/len(batch_iter))
             }
             if (epoch+1) % self.args.log_freq ==0:
                 print(str(post_fix))
@@ -191,7 +195,7 @@ class FourTrainer(Trainer):
                         
                         #projection_image = self.projection(image_batch[i+1])
                         
-                        loss_ce = self.ce_criterion(generated_image.flatten(1), generated_image.flatten(1))
+                        loss_ce =  self.ce_criterion(generated_image.flatten(1), image_batch[i+1].flatten(1))
                         total_ce += loss_ce
         
                     
@@ -210,7 +214,7 @@ class FourTrainer(Trainer):
                         
                 #     del batch
                 # torch.cuda.empty_cache() 
-            return self.get_score(epoch,loss_mae/len(batch_iter))
+            return self.get_score(epoch, total_ce/len(batch_iter))
             
     
 
