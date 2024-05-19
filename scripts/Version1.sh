@@ -1,6 +1,6 @@
 # python main.py \
 #     --data_dir "data/radar_test" \
-#     --image_csv_dir "data/.csv" \
+#     --image_csv_dir "data/data_sample.csv" \
 #     --batch 8 \
 #     --test_list []
 #     --model_idx "test-projection" \
@@ -12,10 +12,9 @@ python main.py \
     --batch 8 \
     --epochs 1000 \
     --patience 100 \
-    --model_idx "gangwon-V1" \
+    --model_idx "tests-V3" \
     --test_list=[]\
     --gpu_id 0 \
     --seed 9486 \
-    --do_eval
     
 #scripts/Version1.sh
