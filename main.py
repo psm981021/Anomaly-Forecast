@@ -187,10 +187,12 @@ def main():
                     })
             dataframe = pd.DataFrame(formatted_data)
             dataframe.to_csv(args.dataframe_path,index=False)
-
+            import IPython; IPython.embed(colors='Linux');exit(1);
             #dataframe = pd.DataFrame(args.test_list, columns =['datetime', 'predicted precipitation', 'ground_truth'])
         except:
             print("Error Handling csv");
+            import IPython; IPython.embed(colors='Linux');exit(1);
+            
         
     
         # time check

@@ -11,6 +11,6 @@ python main.py \
     --gpu_id 1 \
     --device "cuda:1" \
     --seed 0 \
-    --wandb
+    --do_eval
 
 # scripts/seoul.sh
