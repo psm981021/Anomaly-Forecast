@@ -113,7 +113,7 @@ class FourTrainer(Trainer):
                     # image_batch[i] [B x 3 x R x R]
                     generated_image, regression_logits = self.model(image_batch[i],self.args)
                     
-                    # generated_image [B 3 R R ], Regression_logits [B x 1 x 150 x 150]
+                    # generated_image [B 3 R R ], Regression_logits [B x 1 x 1 x 1]
                     regression_logits = regression_logits.reshape(self.args.batch, -1)
                     precipitation.append(torch.sum(regression_logits, dim=1)) # [B x 1]
                     

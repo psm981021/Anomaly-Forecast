@@ -134,7 +134,7 @@ def main():
         trainer.load(args.checkpoint_path)
         print(f"Load model from {args.checkpoint_path} for test!")
         score = trainer.test(args.epochs)
-        
+        import IPython; IPython.embed(colors='Linux');exit(1);
         args.test_list.pop(0)
         formatted_data = []
         for record in args.test_list:
@@ -174,7 +174,6 @@ def main():
         # save csv file
         try:
             formatted_data = []
-
             for record in args.test_list:
                 for i in range(len(record[0])):  # Assuming record[0] contains a list of timestamps
                     datetime = record[0][i]
