@@ -1,5 +1,7 @@
 from torch import nn
 from layers import *
+from PIL import Image
+import matplotlib.pyplot as plt
 
 class Fourcaster(nn.Module):
     def __init__(
@@ -44,7 +46,7 @@ class Fourcaster(nn.Module):
             nn.Conv2d(32, 16, kernel_size=3, padding=1),
             nn.ReLU(),
             nn.Conv2d(16, 1, kernel_size=3, padding=1),
-            # nn.AdaptiveAvgPool2d((1, 1)),  # Global average pooling
+            nn.AdaptiveAvgPool2d((1, 1)),  # Global average pooling
         )
 
         self.projection = nn.Sequential(
@@ -52,8 +54,20 @@ class Fourcaster(nn.Module):
             nn.ReLU(),
             nn.AdaptiveAvgPool2d((50, 50))
         )
+    @staticmethod
+    def plot_image(image, flag=None):
+        
+        image = image.cpu().detach().permute(1,2,0).numpy()
+        plt.imshow(image)
+        if flag == 'R':
+            plt.savefig('Real Image')
+        else:
+            plt.savefig('Generated Image')
+        #Fourcaster.plot_image(x[0])
 
     def forward(self, x, args):
+        
+
         x1 = self.inc(x)
         x1Att = self.cbam1(x1)
         x2 = self.down1(x1)
@@ -71,12 +85,13 @@ class Fourcaster(nn.Module):
 
         # shape 확인 - reconstruction image?
         x = self.up4(x, x1Att)
+        generated_image = self.outc(x)
 
-        generated_image = self.projection(x)
-
-        # regression logit
-
+        
         regression_logits = self.regression_model(x)
+        #generated_image = self.projection(x)
+
+        # regression logits
 
         return generated_image, regression_logits 
     
