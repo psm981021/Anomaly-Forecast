@@ -213,3 +213,4 @@ To run Epoch:1000 , It took 0 hours, 38 minutes, 14 seconds
 {'Epoch': 1000, 'MAE': tensor(60394.4180, device='cuda:1')}
 ------------------------------ Continue Training ------------------------------ 
 {'Epoch': 1000, 'MAE': tensor(60394.4180, device='cuda:1')}
+------------------------------ Continue Training ------------------------------ 

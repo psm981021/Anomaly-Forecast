@@ -188,7 +188,7 @@ class FourTrainer(Trainer):
                     
                         # image_batch[i] [B x 3 x R x R]
                         generated_image, regression_logits = self.model(image_batch[i],self.args)
-                        
+                        import IPython; IPython.embed(colors='Linux');exit(1);
                         # generated_image [B 3 R R ], Regression_logits [B x 1 x 150 x 150]
                         regression_logits = regression_logits.reshape(self.args.batch, -1)
                         precipitation.append(torch.sum(regression_logits, dim=1)) # [B x 1]
@@ -197,7 +197,7 @@ class FourTrainer(Trainer):
                         
                         loss_ce =  self.ce_criterion(generated_image.flatten(1), image_batch[i+1].flatten(1))
                         total_ce += loss_ce
-        
+
                     
                     stack_precipitation = torch.stack(precipitation) # [6 x B]
                     predicted_gaps =  stack_precipitation[1:] - stack_precipitation[:-1] # [5 x B]
