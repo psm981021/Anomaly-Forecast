@@ -1,0 +1,9 @@
+{'epoch': 0, 'ce_loss': '-224280560.0', 'mae_loss': '1.2595151662826538'}
+{'Epoch': 0, 'MAE': tensor(0.0054, device='cuda:1')}
+{'epoch': 1, 'ce_loss': '-3025376512.0', 'mae_loss': '1.2588337659835815'}
+{'Epoch': 1, 'MAE': tensor(0.0054, device='cuda:1')}
+{'epoch': 2, 'ce_loss': '-13601168384.0', 'mae_loss': '1.2588337659835815'}
+{'Epoch': 2, 'MAE': tensor(0.0054, device='cuda:1')}
+{'epoch': 3, 'ce_loss': '-41878028288.0', 'mae_loss': '1.2588391304016113'}
+{'Epoch': 3, 'MAE': tensor(0.0054, device='cuda:1')}
+EarlyStopping counter: 1 out of 50
