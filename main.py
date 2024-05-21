@@ -61,6 +61,8 @@ def main():
 
     print("Valid Dataset Load")
     valid_dataset = Radar(args,csv_path=args.image_csv_dir,flag="Valid")
+
+    print("Test Dataset Load")
     test_dataset = Radar(args,csv_path=args.image_csv_dir,flag="Test")
 
     
@@ -90,8 +92,15 @@ def main():
         torch.cuda.set_device(args.device)  # Explicitly set the default device
         print(f"Using multiple GPUs: {device_ids}")
     else:
+        if torch.cuda.is_available():
+            args.device = torch.device(f"cuda:{args.gpu_id}")
+        else:
+            args.device = torch.device("cpu")
         print(f"Using single device: {args.device}")
-        
+
+    
+   
+    
     # save model args
     args.str = f"{args.model_idx}-{args.batch}-{args.epochs}"
     args.log_file = os.path.join(args.output_dir,args.str + ".txt" )
@@ -131,14 +140,19 @@ def main():
                 config=args)
         args = wandb.config
     if args.do_eval:
-        trainer.load(args.checkpoint_path)
+        #trainer.load(args.checkpoint_path)
+
+        map_location = torch.device('cpu') if args.device == torch.device('cpu') else None
+        trainer.model.load_state_dict(torch.load(args.checkpoint_path, map_location=map_location))
         print(f"Load model from {args.checkpoint_path} for test!")
+
+
         score = trainer.test(args.epochs)
-        import IPython; IPython.embed(colors='Linux');exit(1);
+        
         args.test_list.pop(0)
         formatted_data = []
         for record in args.test_list:
-            for i in range(len(record[0])):  # Assuming record[0] contains a list of timestamps
+            for i in range(args.batch):  # Assuming record[0] contains a list of timestamps
                 datetime = record[0][i]
                 predicted_precipitation = f"{record[1][i].item():.6f}" if record[1].dim() != 0 else f"{record[1].item():.6f}"
                 ground_truth = record[2][i].item() if record[2].dim() != 0 else record[2].item()
@@ -149,6 +163,7 @@ def main():
         })
         dataframe = pd.DataFrame(formatted_data)
         dataframe.to_csv(args.dataframe_path,index=False)
+        import IPython; IPython.embed(colors='Linux');exit(1);
     else:
         early_stopping = EarlyStopping(args.log_file,args.checkpoint_path, args.patience, verbose=True)
 

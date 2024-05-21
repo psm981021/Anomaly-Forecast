@@ -80,7 +80,6 @@ class Radar(Dataset):
 
     
     def get_input(self, csv_path, flag):
-        
         data=pd.read_csv(csv_path)
         data=data[data['Set']==flag].reset_index(drop=True)
         idx = np.array([i for i in range(len(data))], dtype=int)

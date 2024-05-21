@@ -11,8 +11,8 @@ class Trainer:
 
         self.args = args
         self.cuda_condition = torch.cuda.is_available() and not self.args.no_cuda
-        self.device = torch.device("cuda:" + args.gpu_id if torch.cuda.is_available() and not args.no_cuda else "cpu")
-        torch.cuda.set_device(self.device)
+        # self.device = torch.device("cuda:" + args.gpu_id if torch.cuda.is_available() and not args.no_cuda else "cpu")
+        #torch.cuda.set_device(self.args.device)
 
         self.model = model
         self.projection = nn.Sequential(
@@ -188,7 +188,6 @@ class FourTrainer(Trainer):
                     
                         # image_batch[i] [B x 3 x R x R]
                         generated_image, regression_logits = self.model(image_batch[i],self.args)
-                        import IPython; IPython.embed(colors='Linux');exit(1);
                         # generated_image [B 3 R R ], Regression_logits [B x 1 x 150 x 150]
                         regression_logits = regression_logits.reshape(self.args.batch, -1)
                         precipitation.append(torch.sum(regression_logits, dim=1)) # [B x 1]
