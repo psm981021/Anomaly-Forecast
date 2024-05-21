@@ -4,13 +4,13 @@ python main.py \
     --batch 8 \
     --epochs 1000 \
     --patience 1000 \
-    --model_idx "Pretrain-gangwon-V.1.01" \
-    --output_dir "output/Pretrain-gangwon-V.1.01/" \
+    --model_idx "Pretrain-gangwon-V.2.01" \
+    --output_dir "output/Pretrain-gangwon-V.2.01/" \
     --test_list=[] \
-    --gpu_id 1 \
+    --gpu_id 0 \
     --seed 0 \
     --pre_train \
-    --ce_type 'ce_image' \
+    --ce_type 'mse_image' \
     --wandb
 
 

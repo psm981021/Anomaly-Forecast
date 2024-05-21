@@ -122,6 +122,8 @@ class FourTrainer(Trainer):
                     
                     if self.args.ce_type == 'ce_image':
                         loss_ce =  self.ce_criterion(generated_image.flatten(1), image_batch[i+1].flatten(1))
+                    elif self.args.ce_type == 'mse_image':
+                        loss_ce = self.mae_criterion(generated_image.flatten(1), image_batch[i+1].flatten(1))
                     else:
                         loss_ce =  self.ce_criterion(generated_image.flatten(1), class_label)
                     
@@ -205,6 +207,8 @@ class FourTrainer(Trainer):
                         #projection_image = self.projection(image_batch[i+1])
                         if self.args.ce_type == 'ce_image':
                             loss_ce =  self.ce_criterion(generated_image.flatten(1), image_batch[i+1].flatten(1))
+                        elif self.args.ce_type == 'mse_image':
+                            loss_ce = self.mae_criterion(generated_image.flatten(1), image_batch[i+1].flatten(1))
                         else:
                             loss_ce =  self.ce_criterion(generated_image.flatten(1), class_label)
 

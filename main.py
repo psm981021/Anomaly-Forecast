@@ -148,7 +148,7 @@ def main():
         trainer.load(args.checkpoint_path)
         print(f"Load model from {args.checkpoint_path} for test!")
         score = trainer.test(args.epochs)
-        import IPython; IPython.embed(colors='Linux');exit(1);
+        
         args.test_list.pop(0)
         formatted_data = []
         for record in args.test_list:
@@ -200,7 +200,7 @@ def main():
                     })
             dataframe = pd.DataFrame(formatted_data)
             dataframe.to_csv(args.dataframe_path,index=False)
-            import IPython; IPython.embed(colors='Linux');exit(1);
+            
             #dataframe = pd.DataFrame(args.test_list, columns =['datetime', 'predicted precipitation', 'ground_truth'])
         except:
             print("Error Handling csv");
