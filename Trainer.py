@@ -12,7 +12,7 @@ class Trainer:
         self.args = args
         self.cuda_condition = torch.cuda.is_available() and not self.args.no_cuda
         # self.device = torch.device("cuda:" + args.gpu_id if torch.cuda.is_available() and not args.no_cuda else "cpu")
-        #torch.cuda.set_device(self.args.device)
+        # torch.cuda.set_device(self.args.device)
 
         self.model = model
         self.projection = nn.Sequential(
@@ -183,15 +183,15 @@ class FourTrainer(Trainer):
             self.model.eval()
 
             with torch.no_grad():
-                total_ce = torch.tensor(0.0, device=self.device)
+                total_ce = torch.tensor(0.0, device=self.args.device)
                 batch_iter = tqdm(enumerate(dataloader), total= len(dataloader))
                 for i, batch in batch_iter:
-                    image, label, gap, datetime, class_label = batch
-
+                    image, label, gap, datetime = batch
+                    # image, label, gap, datetime, class_label = batch
                     image_batch = [t.to(self.args.device) for t in image]
                     label = label.to(self.args.device)
                     gap = gap.to(self.args.device)
-                    class_label = class_label.to(self.args.device)
+                    # class_label = class_label.to(self.args.device)
                 
                     precipitation =[]
                     set_ce =0.0

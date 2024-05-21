@@ -174,7 +174,7 @@ def main():
         })
         dataframe = pd.DataFrame(formatted_data)
         dataframe.to_csv(args.dataframe_path,index=False)
-        import IPython; IPython.embed(colors='Linux');exit(1);
+        # import IPython; IPython.embed(colors='Linux');exit(1);
     else:
         early_stopping = EarlyStopping(args.log_file,args.checkpoint_path, args.patience, verbose=True)
 
