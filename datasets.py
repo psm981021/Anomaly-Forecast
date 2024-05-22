@@ -98,7 +98,10 @@ class Radar(Dataset):
             # Collect images and associated data
             for j in range(1, 8):
                 img_path = os.path.join(self.args.data_dir, tmp[j])
-                image = Image.open(img_path).convert('RGB')
+                if self.args.grey_scale:
+                    image = Image.open(img_path).convert('L')
+                else:
+                    image = Image.open(img_path).convert('RGB')
                 if self.transform:
                     image = self.transform(image)
 

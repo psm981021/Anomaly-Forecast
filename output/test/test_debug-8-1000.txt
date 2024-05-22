@@ -1,0 +1,445 @@
+---------------------- Configure Info: ----------------------
+data_dir                       : data/radar_test
+image_csv_dir                  : data/data_sample.csv
+output_dir                     : output/test
+gpu_id                         : 1
+device                         : cpu
+seed                           : 0
+no_cuda                        : False
+use_multi_gpu                  : False
+multi_devices                  : 0,1
+wandb                          : False
+pre_train                      : False
+do_eval                        : False
+test_list                      : ['[]']
+grey_scale                     : True
+model_idx                      : test_debug
+batch                          : 8
+sianet                         : False
+epochs                         : 1000
+log_freq                       : 1
+patience                       : 50
+ce_type                        : ce_image
+lr                             : 0.001
+adam_beta1                     : 0.9
+adam_beta2                     : 0.999
+weight_decay                   : 0.0
+str                            : test_debug-8-1000
+log_file                       : output/test/test_debug-8-1000.txt
+dataframe_path                 : output/test/test_debug-8-1000.csv
+checkpoint_path                : output/test/test_debug-8-1000.pt
+---------------------- Configure Info: ----------------------
+{'epoch': 0, 'CE Loss': 'nan', 'MAE Loss': 'nan'}
+{'Epoch': 0, 'Cross Entropy': 'nan'}
+{'epoch': 1, 'CE Loss': 'nan', 'MAE Loss': 'nan'}
+{'Epoch': 1, 'Cross Entropy': 'nan'}
+EarlyStopping counter: 1 out of 50
+{'epoch': 2, 'CE Loss': 'nan', 'MAE Loss': 'nan'}
+{'Epoch': 2, 'Cross Entropy': 'nan'}
+EarlyStopping counter: 2 out of 50
+{'epoch': 3, 'CE Loss': 'nan', 'MAE Loss': 'nan'}
+{'Epoch': 3, 'Cross Entropy': 'nan'}
+EarlyStopping counter: 3 out of 50
+{'epoch': 4, 'CE Loss': 'nan', 'MAE Loss': 'nan'}
+{'Epoch': 4, 'Cross Entropy': 'nan'}
+EarlyStopping counter: 4 out of 50
+{'epoch': 5, 'CE Loss': 'nan', 'MAE Loss': 'nan'}
+{'Epoch': 5, 'Cross Entropy': 'nan'}
+EarlyStopping counter: 5 out of 50
+{'epoch': 6, 'CE Loss': 'nan', 'MAE Loss': 'nan'}
+{'Epoch': 6, 'Cross Entropy': 'nan'}
+EarlyStopping counter: 6 out of 50
+{'epoch': 7, 'CE Loss': 'nan', 'MAE Loss': 'nan'}
+{'Epoch': 7, 'Cross Entropy': 'nan'}
+EarlyStopping counter: 7 out of 50
+{'epoch': 8, 'CE Loss': 'nan', 'MAE Loss': 'nan'}
+{'Epoch': 8, 'Cross Entropy': 'nan'}
+EarlyStopping counter: 8 out of 50
+{'epoch': 9, 'CE Loss': 'nan', 'MAE Loss': 'nan'}
+{'Epoch': 9, 'Cross Entropy': 'nan'}
+EarlyStopping counter: 9 out of 50
+{'epoch': 10, 'CE Loss': 'nan', 'MAE Loss': 'nan'}
+{'Epoch': 10, 'Cross Entropy': 'nan'}
+EarlyStopping counter: 10 out of 50
+{'epoch': 11, 'CE Loss': 'nan', 'MAE Loss': 'nan'}
+{'Epoch': 11, 'Cross Entropy': 'nan'}
+EarlyStopping counter: 11 out of 50
+{'epoch': 12, 'CE Loss': 'nan', 'MAE Loss': 'nan'}
+{'Epoch': 12, 'Cross Entropy': 'nan'}
+EarlyStopping counter: 12 out of 50
+{'epoch': 13, 'CE Loss': 'nan', 'MAE Loss': 'nan'}
+{'Epoch': 13, 'Cross Entropy': 'nan'}
+EarlyStopping counter: 13 out of 50
+{'epoch': 14, 'CE Loss': 'nan', 'MAE Loss': 'nan'}
+{'Epoch': 14, 'Cross Entropy': 'nan'}
+EarlyStopping counter: 14 out of 50
+{'epoch': 15, 'CE Loss': 'nan', 'MAE Loss': 'nan'}
+{'Epoch': 15, 'Cross Entropy': 'nan'}
+EarlyStopping counter: 15 out of 50
+{'epoch': 16, 'CE Loss': 'nan', 'MAE Loss': 'nan'}
+{'Epoch': 16, 'Cross Entropy': 'nan'}
+EarlyStopping counter: 16 out of 50
+{'epoch': 17, 'CE Loss': 'nan', 'MAE Loss': 'nan'}
+{'Epoch': 17, 'Cross Entropy': 'nan'}
+EarlyStopping counter: 17 out of 50
+{'epoch': 18, 'CE Loss': 'nan', 'MAE Loss': 'nan'}
+{'Epoch': 18, 'Cross Entropy': 'nan'}
+EarlyStopping counter: 18 out of 50
+{'epoch': 19, 'CE Loss': 'nan', 'MAE Loss': 'nan'}
+{'Epoch': 19, 'Cross Entropy': 'nan'}
+EarlyStopping counter: 19 out of 50
+{'epoch': 20, 'CE Loss': 'nan', 'MAE Loss': 'nan'}
+{'Epoch': 20, 'Cross Entropy': 'nan'}
+EarlyStopping counter: 20 out of 50
+{'epoch': 21, 'CE Loss': 'nan', 'MAE Loss': 'nan'}
+{'Epoch': 21, 'Cross Entropy': 'nan'}
+EarlyStopping counter: 21 out of 50
+{'epoch': 22, 'CE Loss': 'nan', 'MAE Loss': 'nan'}
+{'Epoch': 22, 'Cross Entropy': 'nan'}
+EarlyStopping counter: 22 out of 50
+{'epoch': 23, 'CE Loss': 'nan', 'MAE Loss': 'nan'}
+{'Epoch': 23, 'Cross Entropy': 'nan'}
+EarlyStopping counter: 23 out of 50
+{'epoch': 24, 'CE Loss': 'nan', 'MAE Loss': 'nan'}
+{'Epoch': 24, 'Cross Entropy': 'nan'}
+EarlyStopping counter: 24 out of 50
+{'epoch': 25, 'CE Loss': 'nan', 'MAE Loss': 'nan'}
+{'Epoch': 25, 'Cross Entropy': 'nan'}
+EarlyStopping counter: 25 out of 50
+{'epoch': 26, 'CE Loss': 'nan', 'MAE Loss': 'nan'}
+{'Epoch': 26, 'Cross Entropy': 'nan'}
+EarlyStopping counter: 26 out of 50
+{'epoch': 27, 'CE Loss': 'nan', 'MAE Loss': 'nan'}
+{'Epoch': 27, 'Cross Entropy': 'nan'}
+EarlyStopping counter: 27 out of 50
+{'epoch': 28, 'CE Loss': 'nan', 'MAE Loss': 'nan'}
+{'Epoch': 28, 'Cross Entropy': 'nan'}
+EarlyStopping counter: 28 out of 50
+{'epoch': 29, 'CE Loss': 'nan', 'MAE Loss': 'nan'}
+{'Epoch': 29, 'Cross Entropy': 'nan'}
+EarlyStopping counter: 29 out of 50
+{'epoch': 30, 'CE Loss': 'nan', 'MAE Loss': 'nan'}
+{'Epoch': 30, 'Cross Entropy': 'nan'}
+EarlyStopping counter: 30 out of 50
+{'epoch': 31, 'CE Loss': 'nan', 'MAE Loss': 'nan'}
+{'Epoch': 31, 'Cross Entropy': 'nan'}
+EarlyStopping counter: 31 out of 50
+{'epoch': 32, 'CE Loss': 'nan', 'MAE Loss': 'nan'}
+{'Epoch': 32, 'Cross Entropy': 'nan'}
+EarlyStopping counter: 32 out of 50
+{'epoch': 33, 'CE Loss': 'nan', 'MAE Loss': 'nan'}
+{'Epoch': 33, 'Cross Entropy': 'nan'}
+EarlyStopping counter: 33 out of 50
+{'epoch': 34, 'CE Loss': 'nan', 'MAE Loss': 'nan'}
+{'Epoch': 34, 'Cross Entropy': 'nan'}
+EarlyStopping counter: 34 out of 50
+{'epoch': 35, 'CE Loss': 'nan', 'MAE Loss': 'nan'}
+{'Epoch': 35, 'Cross Entropy': 'nan'}
+EarlyStopping counter: 35 out of 50
+{'epoch': 36, 'CE Loss': 'nan', 'MAE Loss': 'nan'}
+{'Epoch': 36, 'Cross Entropy': 'nan'}
+EarlyStopping counter: 36 out of 50
+{'epoch': 37, 'CE Loss': 'nan', 'MAE Loss': 'nan'}
+{'Epoch': 37, 'Cross Entropy': 'nan'}
+EarlyStopping counter: 37 out of 50
+{'epoch': 38, 'CE Loss': 'nan', 'MAE Loss': 'nan'}
+{'Epoch': 38, 'Cross Entropy': 'nan'}
+EarlyStopping counter: 38 out of 50
+{'epoch': 39, 'CE Loss': 'nan', 'MAE Loss': 'nan'}
+{'Epoch': 39, 'Cross Entropy': 'nan'}
+EarlyStopping counter: 39 out of 50
+{'epoch': 40, 'CE Loss': 'nan', 'MAE Loss': 'nan'}
+{'Epoch': 40, 'Cross Entropy': 'nan'}
+EarlyStopping counter: 40 out of 50
+{'epoch': 41, 'CE Loss': 'nan', 'MAE Loss': 'nan'}
+{'Epoch': 41, 'Cross Entropy': 'nan'}
+EarlyStopping counter: 41 out of 50
+{'epoch': 42, 'CE Loss': 'nan', 'MAE Loss': 'nan'}
+{'Epoch': 42, 'Cross Entropy': 'nan'}
+EarlyStopping counter: 42 out of 50
+{'epoch': 43, 'CE Loss': 'nan', 'MAE Loss': 'nan'}
+{'Epoch': 43, 'Cross Entropy': 'nan'}
+EarlyStopping counter: 43 out of 50
+{'epoch': 44, 'CE Loss': 'nan', 'MAE Loss': 'nan'}
+{'Epoch': 44, 'Cross Entropy': 'nan'}
+EarlyStopping counter: 44 out of 50
+{'epoch': 45, 'CE Loss': 'nan', 'MAE Loss': 'nan'}
+{'Epoch': 45, 'Cross Entropy': 'nan'}
+EarlyStopping counter: 45 out of 50
+{'epoch': 46, 'CE Loss': 'nan', 'MAE Loss': 'nan'}
+{'Epoch': 46, 'Cross Entropy': 'nan'}
+EarlyStopping counter: 46 out of 50
+{'epoch': 47, 'CE Loss': 'nan', 'MAE Loss': 'nan'}
+{'Epoch': 47, 'Cross Entropy': 'nan'}
+EarlyStopping counter: 47 out of 50
+{'epoch': 48, 'CE Loss': 'nan', 'MAE Loss': 'nan'}
+{'Epoch': 48, 'Cross Entropy': 'nan'}
+EarlyStopping counter: 48 out of 50
+{'epoch': 49, 'CE Loss': 'nan', 'MAE Loss': 'nan'}
+{'Epoch': 49, 'Cross Entropy': 'nan'}
+EarlyStopping counter: 49 out of 50
+{'epoch': 50, 'CE Loss': 'nan', 'MAE Loss': 'nan'}
+{'Epoch': 50, 'Cross Entropy': 'nan'}
+EarlyStopping counter: 50 out of 50
+{'Epoch': 1000, 'Cross Entropy': 'nan'}
+---------------------- Configure Info: ----------------------
+data_dir                       : data/radar_test
+image_csv_dir                  : data/data_sample_train.csv
+output_dir                     : output/test
+gpu_id                         : 1
+device                         : cpu
+seed                           : 0
+no_cuda                        : False
+use_multi_gpu                  : False
+multi_devices                  : 0,1
+wandb                          : False
+pre_train                      : False
+do_eval                        : False
+test_list                      : ['[]']
+grey_scale                     : True
+model_idx                      : test_debug
+batch                          : 8
+sianet                         : False
+epochs                         : 1000
+log_freq                       : 1
+patience                       : 50
+ce_type                        : ce_image
+lr                             : 0.001
+adam_beta1                     : 0.9
+adam_beta2                     : 0.999
+weight_decay                   : 0.0
+str                            : test_debug-8-1000
+log_file                       : output/test/test_debug-8-1000.txt
+dataframe_path                 : output/test/test_debug-8-1000.csv
+checkpoint_path                : output/test/test_debug-8-1000.pt
+---------------------- Configure Info: ----------------------
+------------------------------ Continue Training ------------------------------ 
+---------------------- Configure Info: ----------------------
+data_dir                       : data/radar_test
+image_csv_dir                  : data/data_sample_train.csv
+output_dir                     : output/test
+gpu_id                         : 1
+device                         : cpu
+seed                           : 0
+no_cuda                        : False
+use_multi_gpu                  : False
+multi_devices                  : 0,1
+wandb                          : False
+pre_train                      : False
+do_eval                        : False
+test_list                      : ['[]']
+grey_scale                     : True
+model_idx                      : test_debug
+batch                          : 8
+sianet                         : False
+epochs                         : 1000
+log_freq                       : 1
+patience                       : 50
+ce_type                        : ce_image
+lr                             : 0.001
+adam_beta1                     : 0.9
+adam_beta2                     : 0.999
+weight_decay                   : 0.0
+str                            : test_debug-8-1000
+log_file                       : output/test/test_debug-8-1000.txt
+dataframe_path                 : output/test/test_debug-8-1000.csv
+checkpoint_path                : output/test/test_debug-8-1000.pt
+---------------------- Configure Info: ----------------------
+------------------------------ Continue Training ------------------------------ 
+---------------------- Configure Info: ----------------------
+data_dir                       : data/radar_test
+image_csv_dir                  : data/data_sample_train.csv
+output_dir                     : output/test
+gpu_id                         : 1
+device                         : cpu
+seed                           : 0
+no_cuda                        : False
+use_multi_gpu                  : False
+multi_devices                  : 0,1
+wandb                          : False
+pre_train                      : False
+do_eval                        : False
+test_list                      : ['[]']
+grey_scale                     : True
+model_idx                      : test_debug
+batch                          : 8
+sianet                         : False
+epochs                         : 1000
+log_freq                       : 1
+patience                       : 50
+ce_type                        : ce_image
+lr                             : 0.001
+adam_beta1                     : 0.9
+adam_beta2                     : 0.999
+weight_decay                   : 0.0
+str                            : test_debug-8-1000
+log_file                       : output/test/test_debug-8-1000.txt
+dataframe_path                 : output/test/test_debug-8-1000.csv
+checkpoint_path                : output/test/test_debug-8-1000.pt
+---------------------- Configure Info: ----------------------
+------------------------------ Continue Training ------------------------------ 
+---------------------- Configure Info: ----------------------
+data_dir                       : data/radar_test
+image_csv_dir                  : data/data_sample_train.csv
+output_dir                     : output/test
+gpu_id                         : 1
+device                         : cpu
+seed                           : 0
+no_cuda                        : False
+use_multi_gpu                  : False
+multi_devices                  : 0,1
+wandb                          : False
+pre_train                      : False
+do_eval                        : False
+test_list                      : ['[]']
+grey_scale                     : True
+model_idx                      : test_debug
+batch                          : 8
+sianet                         : False
+epochs                         : 1000
+log_freq                       : 1
+patience                       : 50
+ce_type                        : ce_image
+lr                             : 0.001
+adam_beta1                     : 0.9
+adam_beta2                     : 0.999
+weight_decay                   : 0.0
+str                            : test_debug-8-1000
+log_file                       : output/test/test_debug-8-1000.txt
+dataframe_path                 : output/test/test_debug-8-1000.csv
+checkpoint_path                : output/test/test_debug-8-1000.pt
+---------------------- Configure Info: ----------------------
+------------------------------ Continue Training ------------------------------ 
+---------------------- Configure Info: ----------------------
+data_dir                       : data/radar_test
+image_csv_dir                  : data/data_sample_train.csv
+output_dir                     : output/test
+gpu_id                         : 1
+device                         : cpu
+seed                           : 0
+no_cuda                        : False
+use_multi_gpu                  : False
+multi_devices                  : 0,1
+wandb                          : False
+pre_train                      : False
+do_eval                        : False
+test_list                      : ['[]']
+grey_scale                     : True
+model_idx                      : test_debug
+batch                          : 8
+sianet                         : False
+epochs                         : 1000
+log_freq                       : 1
+patience                       : 50
+ce_type                        : ce_image
+loss                           : ed_image
+lr                             : 0.001
+adam_beta1                     : 0.9
+adam_beta2                     : 0.999
+weight_decay                   : 0.0
+str                            : test_debug-8-1000
+log_file                       : output/test/test_debug-8-1000.txt
+dataframe_path                 : output/test/test_debug-8-1000.csv
+checkpoint_path                : output/test/test_debug-8-1000.pt
+---------------------- Configure Info: ----------------------
+------------------------------ Continue Training ------------------------------ 
+---------------------- Configure Info: ----------------------
+data_dir                       : data/radar_test
+image_csv_dir                  : data/data_sample_train.csv
+output_dir                     : output/test
+gpu_id                         : 1
+device                         : cpu
+seed                           : 0
+no_cuda                        : False
+use_multi_gpu                  : False
+multi_devices                  : 0,1
+wandb                          : False
+pre_train                      : False
+do_eval                        : False
+test_list                      : ['[]']
+grey_scale                     : True
+model_idx                      : test_debug
+batch                          : 8
+sianet                         : False
+epochs                         : 1000
+log_freq                       : 1
+patience                       : 50
+ce_type                        : ed_image
+loss                           : ce_image
+lr                             : 0.001
+adam_beta1                     : 0.9
+adam_beta2                     : 0.999
+weight_decay                   : 0.0
+str                            : test_debug-8-1000
+log_file                       : output/test/test_debug-8-1000.txt
+dataframe_path                 : output/test/test_debug-8-1000.csv
+checkpoint_path                : output/test/test_debug-8-1000.pt
+---------------------- Configure Info: ----------------------
+------------------------------ Continue Training ------------------------------ 
+---------------------- Configure Info: ----------------------
+data_dir                       : data/radar_test
+image_csv_dir                  : data/data_sample_train.csv
+output_dir                     : output/test
+gpu_id                         : 1
+device                         : cpu
+seed                           : 0
+no_cuda                        : False
+use_multi_gpu                  : False
+multi_devices                  : 0,1
+wandb                          : False
+pre_train                      : False
+do_eval                        : False
+test_list                      : ['[]']
+grey_scale                     : True
+model_idx                      : test_debug
+batch                          : 8
+sianet                         : False
+epochs                         : 1000
+log_freq                       : 1
+patience                       : 50
+ce_type                        : ed_image
+loss                           : ce_image
+lr                             : 0.001
+adam_beta1                     : 0.9
+adam_beta2                     : 0.999
+weight_decay                   : 0.0
+str                            : test_debug-8-1000
+log_file                       : output/test/test_debug-8-1000.txt
+dataframe_path                 : output/test/test_debug-8-1000.csv
+checkpoint_path                : output/test/test_debug-8-1000.pt
+---------------------- Configure Info: ----------------------
+------------------------------ Continue Training ------------------------------ 
+---------------------- Configure Info: ----------------------
+data_dir                       : data/radar_test
+image_csv_dir                  : data/data_sample_train.csv
+output_dir                     : output/test
+gpu_id                         : 1
+device                         : cpu
+seed                           : 0
+no_cuda                        : False
+use_multi_gpu                  : False
+multi_devices                  : 0,1
+wandb                          : False
+pre_train                      : False
+do_eval                        : False
+test_list                      : ['[]']
+grey_scale                     : True
+model_idx                      : test_debug
+batch                          : 8
+sianet                         : False
+epochs                         : 1000
+log_freq                       : 1
+patience                       : 50
+ce_type                        : ed_image
+loss                           : ce_image
+lr                             : 0.001
+adam_beta1                     : 0.9
+adam_beta2                     : 0.999
+weight_decay                   : 0.0
+str                            : test_debug-8-1000
+log_file                       : output/test/test_debug-8-1000.txt
+dataframe_path                 : output/test/test_debug-8-1000.csv
+checkpoint_path                : output/test/test_debug-8-1000.pt
+---------------------- Configure Info: ----------------------
+------------------------------ Continue Training ------------------------------ 
+{'epoch': 0, 'CE Loss': '28.305733', 'MAE Loss': '0.216455'}
