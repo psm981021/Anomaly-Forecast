@@ -6,6 +6,7 @@ import argparse
 from utils import *
 from models import *
 from Trainer import *
+from sianet import *
 import time
 import wandb
 def show_args_info(args,log_file):
@@ -40,7 +41,7 @@ def main():
     # model args
     parser.add_argument("--model_idx", default="test", type=str, help="model identifier")
     parser.add_argument("--batch", type=int,default=4, help="batch size")
-
+    parser.add_argument("--sianet",action="store_true")
     # train args
     parser.add_argument("--epochs", type=int, default=50, help="number of epochs" )
     parser.add_argument("--log_freq", type=int, default =1, help="number of log frequency" )
@@ -128,7 +129,11 @@ def main():
     
     #model
     # n_classes = channel
-    model = Fourcaster(n_channels=3,n_classes=3,kernels_per_layer=1, args=args)
+    if args.sianet:
+        model=sianet()
+    else:
+        model = Fourcaster(n_channels=3,n_classes=3,kernels_per_layer=1, args=args)
+    
     model.to(args.device)
 
     if args.use_multi_gpu:
@@ -137,7 +142,10 @@ def main():
     
 
     #trainer
-    trainer = FourTrainer(model, train_loader,valid_loader,test_loader, args)
+    if args.sianet:
+        trainer = SianetTrainer(model, train_loader, valid_loader, test_loader, args)
+    else:
+        trainer = FourTrainer(model, train_loader,valid_loader,test_loader, args)
 
     start_time = time.time()
 
@@ -201,7 +209,7 @@ def main():
         try:
             formatted_data = []
             for record in args.test_list:
-                for i in range(len(record[0])):  # Assuming record[0] contains a list of timestamps
+                for i in range(args.batch):  # Assuming record[0] contains a list of timestamps
                     datetime = record[0][i]
                     predicted_precipitation = record[1][i].item() if record[1].dim() != 0 else record[1].item()
                     ground_truth = record[2][i].item() if record[2].dim() != 0 else record[2].item()

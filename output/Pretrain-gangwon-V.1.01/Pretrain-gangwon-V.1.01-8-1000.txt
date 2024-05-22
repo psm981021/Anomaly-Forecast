@@ -3018,7 +3018,7 @@ EarlyStopping counter: 979 out of 1000
 {'Epoch': 1000, 'Cross Entropy': '404154.750000'}
 ---------------------- Configure Info: ----------------------
 data_dir                       : data\radar_full
-image_csv_dir                  : c:\\Users\\PC\\OneDrive\\¹ÙÅÁ È­¸é\\2024-1\\Ä¸½ºÅæ\\anomaly\\data\\°­¿ø_2021_2023_°­¼ö·® 0.1 ¹Ì¸¸ Á¦°Å_»óÀ§ 10% test.csv
+image_csv_dir                  : c:\\Users\\PC\\OneDrive\\ï¿½ï¿½ï¿½ï¿½ È­ï¿½ï¿½\\2024-1\\Ä¸ï¿½ï¿½ï¿½ï¿½\\anomaly\\data\\ï¿½ï¿½ï¿½ï¿½_2021_2023_ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 0.1 ï¿½Ì¸ï¿½ ï¿½ï¿½ï¿½ï¿½_ï¿½ï¿½ï¿½ï¿½ 10% test.csv
 output_dir                     : output\\Pretrain-gangwon-V.1.01
 gpu_id                         : 0
 device                         : cpu
@@ -3048,7 +3048,7 @@ checkpoint_path                : output\\Pretrain-gangwon-V.1.01\Pretrain-gangwo
 ------------------------------ Continue Training ------------------------------ 
 ---------------------- Configure Info: ----------------------
 data_dir                       : data\radar_full
-image_csv_dir                  : c:\\Users\\PC\\OneDrive\\¹ÙÅÁ È­¸é\\2024-1\\Ä¸½ºÅæ\\anomaly\\data\\°­¿ø_2021_2023_°­¼ö·® 0.1 ¹Ì¸¸ Á¦°Å_»óÀ§ 10% test.csv
+image_csv_dir                  : c:\\Users\\PC\\OneDrive\\ï¿½ï¿½ï¿½ï¿½ È­ï¿½ï¿½\\2024-1\\Ä¸ï¿½ï¿½ï¿½ï¿½\\anomaly\\data\\ï¿½ï¿½ï¿½ï¿½_2021_2023_ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 0.1 ï¿½Ì¸ï¿½ ï¿½ï¿½ï¿½ï¿½_ï¿½ï¿½ï¿½ï¿½ 10% test.csv
 output_dir                     : output\\Pretrain-gangwon-V.1.01
 gpu_id                         : 0
 device                         : cpu
@@ -3078,7 +3078,7 @@ checkpoint_path                : output\\Pretrain-gangwon-V.1.01\Pretrain-gangwo
 ------------------------------ Continue Training ------------------------------ 
 ---------------------- Configure Info: ----------------------
 data_dir                       : data\radar_full
-image_csv_dir                  : c:\\Users\\PC\\OneDrive\\¹ÙÅÁ È­¸é\\2024-1\\Ä¸½ºÅæ\\anomaly\\data\\°­¿ø_2021_2023_°­¼ö·® 0.1 ¹Ì¸¸ Á¦°Å_»óÀ§ 10% test.csv
+image_csv_dir                  : c:\\Users\\PC\\OneDrive\\ï¿½ï¿½ï¿½ï¿½ È­ï¿½ï¿½\\2024-1\\Ä¸ï¿½ï¿½ï¿½ï¿½\\anomaly\\data\\ï¿½ï¿½ï¿½ï¿½_2021_2023_ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 0.1 ï¿½Ì¸ï¿½ ï¿½ï¿½ï¿½ï¿½_ï¿½ï¿½ï¿½ï¿½ 10% test.csv
 output_dir                     : output\\Pretrain-gangwon-V.1.01
 gpu_id                         : 0
 device                         : cpu
@@ -3108,7 +3108,7 @@ checkpoint_path                : output\\Pretrain-gangwon-V.1.01\Pretrain-gangwo
 ------------------------------ Continue Training ------------------------------ 
 ---------------------- Configure Info: ----------------------
 data_dir                       : data\radar_full
-image_csv_dir                  : c:\\Users\\PC\\OneDrive\\¹ÙÅÁ È­¸é\\2024-1\\Ä¸½ºÅæ\\anomaly\\data\\°­¿ø_2021_2023_°­¼ö·® 0.1 ¹Ì¸¸ Á¦°Å_»óÀ§ 10% test.csv
+image_csv_dir                  : c:\\Users\\PC\\OneDrive\\ï¿½ï¿½ï¿½ï¿½ È­ï¿½ï¿½\\2024-1\\Ä¸ï¿½ï¿½ï¿½ï¿½\\anomaly\\data\\ï¿½ï¿½ï¿½ï¿½_2021_2023_ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 0.1 ï¿½Ì¸ï¿½ ï¿½ï¿½ï¿½ï¿½_ï¿½ï¿½ï¿½ï¿½ 10% test.csv
 output_dir                     : output\\Pretrain-gangwon-V.1.01
 gpu_id                         : 0
 device                         : cpu
