@@ -42,7 +42,7 @@ class Radar(Dataset):
         
         self.idx = np.array([i for i in range(self.__len__())], dtype=int)
         self.image, self.label, self.gap, self.date = self.get_input(csv_path, self.flag)
-
+        # self.image, self.label, self.gap, self.date, self.class_label = self.get_input(csv_path, self.flag)
 
     def __len__(self):
         try: 
@@ -76,11 +76,10 @@ class Radar(Dataset):
 
 
     def __getitem__(self, idx):
-        return self.image[idx], self.label[idx],self.gap[idx], self.date[idx]
+        return self.image[idx], self.label[idx],self.gap[idx], self.date[idx] #, self.class_label[idx]
 
     
     def get_input(self, csv_path, flag):
-        
         data=pd.read_csv(csv_path)
         data=data[data['Set']==flag].reset_index(drop=True)
         idx = np.array([i for i in range(len(data))], dtype=int)
@@ -89,6 +88,7 @@ class Radar(Dataset):
         labels=data['Label'].values
         gaps=data['Label Gap'].values
         dataset_date = data['Timestamp'].values
+#       class_label = data['Class_Label'].values
 
         # import IPython; IPython.embed(colors='Linux'); exit(1)
         for i in tqdm(idx):
@@ -121,7 +121,8 @@ class Radar(Dataset):
         return (dataset_images,
                 torch.Tensor(labels).type(torch.float),
                 torch.Tensor(gaps).type(torch.float),
-                dataset_date
+                dataset_date,
+                #torch.Tensor(class_label).type(torch.long)
                 )
 
 

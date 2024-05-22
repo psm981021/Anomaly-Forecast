@@ -6,8 +6,16 @@ import argparse
 from utils import *
 from models import *
 from Trainer import *
+from sianet import *
 import time
 import wandb
+def show_args_info(args,log_file):
+    with open(log_file, 'a') as f:
+        f.write("---------------------- Configure Info: ----------------------\n")
+        for arg in vars(args):
+            # Each attribute and its value are printed on a new line with adjusted alignment
+            f.write(f"{arg:<30} : {getattr(args, arg)}\n")
+        f.write("---------------------- Configure Info: ----------------------\n")
 
 def main():
     parser = argparse.ArgumentParser()
@@ -23,6 +31,7 @@ def main():
     parser.add_argument('--use_multi_gpu', action='store_true', help='use multiple gpus', default=False)
     parser.add_argument('--multi_devices', type=str, default='0,1', help='device ids of multile gpus')
     parser.add_argument("--wandb", action="store_true")
+    parser.add_argument("--pre_train", action="store_true")
     parser.add_argument("--do_eval", action="store_true")
     parser.add_argument( '--test_list',
         nargs='+',  # This tells argparse to accept one or more arguments for this option
@@ -32,11 +41,12 @@ def main():
     # model args
     parser.add_argument("--model_idx", default="test", type=str, help="model identifier")
     parser.add_argument("--batch", type=int,default=4, help="batch size")
-
+    parser.add_argument("--sianet",action="store_true")
     # train args
     parser.add_argument("--epochs", type=int, default=50, help="number of epochs" )
     parser.add_argument("--log_freq", type=int, default =1, help="number of log frequency" )
     parser.add_argument("--patience",type=int, default="10")
+    parser.add_argument('--ce_type', type=str, default='ce_image', help='ce_image, ce_label')
 
     # learning args
     parser.add_argument("--lr", type=float, default=0.001, help="learning rate")
@@ -61,6 +71,8 @@ def main():
 
     print("Valid Dataset Load")
     valid_dataset = Radar(args,csv_path=args.image_csv_dir,flag="Valid")
+
+    print("Test Dataset Load")
     test_dataset = Radar(args,csv_path=args.image_csv_dir,flag="Test")
 
     
@@ -90,16 +102,25 @@ def main():
         torch.cuda.set_device(args.device)  # Explicitly set the default device
         print(f"Using multiple GPUs: {device_ids}")
     else:
+        if torch.cuda.is_available():
+            args.device = torch.device(f"cuda:{args.gpu_id}")
+        else:
+            args.device = torch.device("cpu")
         print(f"Using single device: {args.device}")
         
+    args.device = torch.device("cuda:" + args.gpu_id if torch.cuda.is_available() and not args.no_cuda else "cpu")
+    
     # save model args
     args.str = f"{args.model_idx}-{args.batch}-{args.epochs}"
     args.log_file = os.path.join(args.output_dir,args.str + ".txt" )
+
     args.dataframe_path = os.path.join(args.output_dir,args.str + ".csv")
 
     #checkpoint
     checkpoint = args.str + ".pt"
     args.checkpoint_path = os.path.join(args.output_dir, checkpoint)
+
+    show_args_info(args,args.log_file)
 
     if os.path.exists(args.checkpoint_path):
         with open(args.log_file, "a") as f:
@@ -108,7 +129,11 @@ def main():
     
     #model
     # n_classes = channel
-    model = Fourcaster(n_channels=3,n_classes=3,kernels_per_layer=1, args=args)
+    if args.sianet:
+        model=sianet()
+    else:
+        model = Fourcaster(n_channels=3,n_classes=3,kernels_per_layer=1, args=args)
+    
     model.to(args.device)
 
     if args.use_multi_gpu:
@@ -117,7 +142,10 @@ def main():
     
 
     #trainer
-    trainer = FourTrainer(model, train_loader,valid_loader,test_loader, args)
+    if args.sianet:
+        trainer = SianetTrainer(model, train_loader, valid_loader, test_loader, args)
+    else:
+        trainer = FourTrainer(model, train_loader,valid_loader,test_loader, args)
 
     start_time = time.time()
 
@@ -131,14 +159,19 @@ def main():
                 config=args)
         args = wandb.config
     if args.do_eval:
-        trainer.load(args.checkpoint_path)
+        #trainer.load(args.checkpoint_path)
+
+        map_location = torch.device('cpu') if args.device == torch.device('cpu') else None
+        trainer.model.load_state_dict(torch.load(args.checkpoint_path, map_location=map_location))
         print(f"Load model from {args.checkpoint_path} for test!")
+
+
         score = trainer.test(args.epochs)
         
         args.test_list.pop(0)
         formatted_data = []
         for record in args.test_list:
-            for i in range(len(record[0])):  # Assuming record[0] contains a list of timestamps
+            for i in range(args.batch):  # Assuming record[0] contains a list of timestamps
                 datetime = record[0][i]
                 predicted_precipitation = f"{record[1][i].item():.6f}" if record[1].dim() != 0 else f"{record[1].item():.6f}"
                 ground_truth = record[2][i].item() if record[2].dim() != 0 else record[2].item()
@@ -149,6 +182,7 @@ def main():
         })
         dataframe = pd.DataFrame(formatted_data)
         dataframe.to_csv(args.dataframe_path,index=False)
+        # import IPython; IPython.embed(colors='Linux');exit(1);
     else:
         early_stopping = EarlyStopping(args.log_file,args.checkpoint_path, args.patience, verbose=True)
 
@@ -158,7 +192,7 @@ def main():
 
             score,_ = trainer.valid(epoch)
             if args.wandb == True:
-                wandb.log({"MAE Vailid Loss": score})
+                wandb.log({"CE Loss": score},step=epoch)
             early_stopping(score, trainer.model)
             if early_stopping.early_stop:
                 print("Early stopping")
@@ -174,9 +208,8 @@ def main():
         # save csv file
         try:
             formatted_data = []
-
             for record in args.test_list:
-                for i in range(len(record[0])):  # Assuming record[0] contains a list of timestamps
+                for i in range(args.batch):  # Assuming record[0] contains a list of timestamps
                     datetime = record[0][i]
                     predicted_precipitation = record[1][i].item() if record[1].dim() != 0 else record[1].item()
                     ground_truth = record[2][i].item() if record[2].dim() != 0 else record[2].item()
@@ -187,10 +220,12 @@ def main():
                     })
             dataframe = pd.DataFrame(formatted_data)
             dataframe.to_csv(args.dataframe_path,index=False)
-
+            
             #dataframe = pd.DataFrame(args.test_list, columns =['datetime', 'predicted precipitation', 'ground_truth'])
         except:
             print("Error Handling csv");
+            import IPython; IPython.embed(colors='Linux');exit(1);
+            
         
     
         # time check

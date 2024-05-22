@@ -1,0 +1,661 @@
+{'epoch': 0, 'ce_loss': '28251.826171875', 'mae_loss': '31.56511878967285'}
+{'Epoch': 0, 'MAE': tensor(0.0564, device='cuda:0')}
+{'epoch': 1, 'ce_loss': '28080.40625', 'mae_loss': '2.958686351776123'}
+{'Epoch': 1, 'MAE': tensor(0.0924, device='cuda:0')}
+EarlyStopping counter: 1 out of 100
+{'epoch': 2, 'ce_loss': '28052.111328125', 'mae_loss': '2.515411853790283'}
+{'Epoch': 2, 'MAE': tensor(0.0351, device='cuda:0')}
+{'epoch': 3, 'ce_loss': '28027.869140625', 'mae_loss': '2.7299695014953613'}
+{'Epoch': 3, 'MAE': tensor(0.0558, device='cuda:0')}
+EarlyStopping counter: 1 out of 100
+{'epoch': 4, 'ce_loss': '28018.552734375', 'mae_loss': '2.838207721710205'}
+{'Epoch': 4, 'MAE': tensor(0.0342, device='cuda:0')}
+{'epoch': 5, 'ce_loss': '28008.732421875', 'mae_loss': '2.2770657539367676'}
+{'Epoch': 5, 'MAE': tensor(0.0457, device='cuda:0')}
+EarlyStopping counter: 1 out of 100
+{'epoch': 6, 'ce_loss': '27996.41015625', 'mae_loss': '2.243154287338257'}
+{'Epoch': 6, 'MAE': tensor(0.2350, device='cuda:0')}
+EarlyStopping counter: 2 out of 100
+{'epoch': 7, 'ce_loss': '27989.939453125', 'mae_loss': '2.1440699100494385'}
+{'Epoch': 7, 'MAE': tensor(0.0191, device='cuda:0')}
+{'epoch': 8, 'ce_loss': '27984.626953125', 'mae_loss': '2.060253143310547'}
+{'Epoch': 8, 'MAE': tensor(0.1144, device='cuda:0')}
+EarlyStopping counter: 1 out of 100
+{'epoch': 9, 'ce_loss': '27976.779296875', 'mae_loss': '1.8262805938720703'}
+{'Epoch': 9, 'MAE': tensor(0.0270, device='cuda:0')}
+EarlyStopping counter: 2 out of 100
+{'epoch': 10, 'ce_loss': '27972.3828125', 'mae_loss': '1.7763432264328003'}
+{'Epoch': 10, 'MAE': tensor(0.0472, device='cuda:0')}
+EarlyStopping counter: 3 out of 100
+{'epoch': 11, 'ce_loss': '27973.07421875', 'mae_loss': '1.8599257469177246'}
+{'Epoch': 11, 'MAE': tensor(0.0247, device='cuda:0')}
+EarlyStopping counter: 4 out of 100
+{'epoch': 12, 'ce_loss': '27968.05078125', 'mae_loss': '1.6833609342575073'}
+{'Epoch': 12, 'MAE': tensor(0.0344, device='cuda:0')}
+EarlyStopping counter: 5 out of 100
+{'epoch': 13, 'ce_loss': '27962.6484375', 'mae_loss': '1.7811847925186157'}
+{'Epoch': 13, 'MAE': tensor(0.0166, device='cuda:0')}
+{'epoch': 14, 'ce_loss': '27957.7578125', 'mae_loss': '1.2092982530593872'}
+{'Epoch': 14, 'MAE': tensor(0.1144, device='cuda:0')}
+EarlyStopping counter: 1 out of 100
+{'epoch': 15, 'ce_loss': '27954.419921875', 'mae_loss': '1.727869987487793'}
+{'Epoch': 15, 'MAE': tensor(0.0070, device='cuda:0')}
+{'epoch': 16, 'ce_loss': '27949.931640625', 'mae_loss': '1.330177664756775'}
+{'Epoch': 16, 'MAE': tensor(0.0018, device='cuda:0')}
+{'epoch': 17, 'ce_loss': '27948.244140625', 'mae_loss': '1.3726948499679565'}
+{'Epoch': 17, 'MAE': tensor(0.0565, device='cuda:0')}
+EarlyStopping counter: 1 out of 100
+{'epoch': 18, 'ce_loss': '27953.861328125', 'mae_loss': '1.832625150680542'}
+{'Epoch': 18, 'MAE': tensor(0.0081, device='cuda:0')}
+EarlyStopping counter: 2 out of 100
+{'epoch': 19, 'ce_loss': '27950.765625', 'mae_loss': '1.4452033042907715'}
+{'Epoch': 19, 'MAE': tensor(0.0232, device='cuda:0')}
+EarlyStopping counter: 3 out of 100
+{'epoch': 20, 'ce_loss': '27946.12890625', 'mae_loss': '1.3883203268051147'}
+{'Epoch': 20, 'MAE': tensor(0.0128, device='cuda:0')}
+EarlyStopping counter: 4 out of 100
+{'epoch': 21, 'ce_loss': '27942.841796875', 'mae_loss': '1.322737455368042'}
+{'Epoch': 21, 'MAE': tensor(0.0131, device='cuda:0')}
+EarlyStopping counter: 5 out of 100
+{'epoch': 22, 'ce_loss': '27939.837890625', 'mae_loss': '1.2151362895965576'}
+{'Epoch': 22, 'MAE': tensor(0.0006, device='cuda:0')}
+{'epoch': 23, 'ce_loss': '27937.240234375', 'mae_loss': '1.1295483112335205'}
+{'Epoch': 23, 'MAE': tensor(0.0229, device='cuda:0')}
+EarlyStopping counter: 1 out of 100
+{'epoch': 24, 'ce_loss': '27936.439453125', 'mae_loss': '1.1389343738555908'}
+{'Epoch': 24, 'MAE': tensor(0.0200, device='cuda:0')}
+EarlyStopping counter: 2 out of 100
+{'epoch': 25, 'ce_loss': '27934.880859375', 'mae_loss': '1.09456467628479'}
+{'Epoch': 25, 'MAE': tensor(0.0036, device='cuda:0')}
+EarlyStopping counter: 3 out of 100
+{'epoch': 26, 'ce_loss': '27931.919921875', 'mae_loss': '1.06440007686615'}
+{'Epoch': 26, 'MAE': tensor(0.0039, device='cuda:0')}
+EarlyStopping counter: 4 out of 100
+{'epoch': 27, 'ce_loss': '27930.50390625', 'mae_loss': '0.9804490804672241'}
+{'Epoch': 27, 'MAE': tensor(0.0421, device='cuda:0')}
+EarlyStopping counter: 5 out of 100
+{'epoch': 28, 'ce_loss': '27929.779296875', 'mae_loss': '1.183753490447998'}
+{'Epoch': 28, 'MAE': tensor(0.0237, device='cuda:0')}
+EarlyStopping counter: 6 out of 100
+{'epoch': 29, 'ce_loss': '27928.287109375', 'mae_loss': '1.0401792526245117'}
+{'Epoch': 29, 'MAE': tensor(0.0206, device='cuda:0')}
+EarlyStopping counter: 7 out of 100
+{'epoch': 30, 'ce_loss': '27926.74609375', 'mae_loss': '1.3259302377700806'}
+{'Epoch': 30, 'MAE': tensor(0.0025, device='cuda:0')}
+EarlyStopping counter: 8 out of 100
+{'epoch': 31, 'ce_loss': '27925.255859375', 'mae_loss': '1.0822173357009888'}
+{'Epoch': 31, 'MAE': tensor(0.0228, device='cuda:0')}
+EarlyStopping counter: 9 out of 100
+{'epoch': 32, 'ce_loss': '27925.267578125', 'mae_loss': '1.1620515584945679'}
+{'Epoch': 32, 'MAE': tensor(0.0113, device='cuda:0')}
+EarlyStopping counter: 10 out of 100
+{'epoch': 33, 'ce_loss': '27923.662109375', 'mae_loss': '1.2051928043365479'}
+{'Epoch': 33, 'MAE': tensor(0.0189, device='cuda:0')}
+EarlyStopping counter: 11 out of 100
+{'epoch': 34, 'ce_loss': '27923.6015625', 'mae_loss': '1.235608458518982'}
+{'Epoch': 34, 'MAE': tensor(0.0123, device='cuda:0')}
+EarlyStopping counter: 12 out of 100
+{'epoch': 35, 'ce_loss': '27923.80078125', 'mae_loss': '1.3303756713867188'}
+{'Epoch': 35, 'MAE': tensor(0.0066, device='cuda:0')}
+EarlyStopping counter: 13 out of 100
+{'epoch': 36, 'ce_loss': '27923.169921875', 'mae_loss': '1.2779356241226196'}
+{'Epoch': 36, 'MAE': tensor(0.0176, device='cuda:0')}
+EarlyStopping counter: 14 out of 100
+{'epoch': 37, 'ce_loss': '27922.21484375', 'mae_loss': '1.2710460424423218'}
+{'Epoch': 37, 'MAE': tensor(0.0355, device='cuda:0')}
+EarlyStopping counter: 15 out of 100
+{'epoch': 38, 'ce_loss': '27919.486328125', 'mae_loss': '1.0741301774978638'}
+{'Epoch': 38, 'MAE': tensor(0.0247, device='cuda:0')}
+EarlyStopping counter: 16 out of 100
+{'epoch': 39, 'ce_loss': '27918.79296875', 'mae_loss': '1.294535517692566'}
+{'Epoch': 39, 'MAE': tensor(0.0292, device='cuda:0')}
+EarlyStopping counter: 17 out of 100
+{'epoch': 40, 'ce_loss': '27916.81640625', 'mae_loss': '1.0725728273391724'}
+{'Epoch': 40, 'MAE': tensor(0.0142, device='cuda:0')}
+EarlyStopping counter: 18 out of 100
+{'epoch': 41, 'ce_loss': '27917.759765625', 'mae_loss': '1.3569684028625488'}
+{'Epoch': 41, 'MAE': tensor(0.0082, device='cuda:0')}
+EarlyStopping counter: 19 out of 100
+{'epoch': 42, 'ce_loss': '27915.904296875', 'mae_loss': '1.064571499824524'}
+{'Epoch': 42, 'MAE': tensor(0.0066, device='cuda:0')}
+EarlyStopping counter: 20 out of 100
+{'epoch': 43, 'ce_loss': '27914.515625', 'mae_loss': '1.3506304025650024'}
+{'Epoch': 43, 'MAE': tensor(0.0602, device='cuda:0')}
+EarlyStopping counter: 21 out of 100
+{'epoch': 44, 'ce_loss': '27914.08984375', 'mae_loss': '1.121762752532959'}
+{'Epoch': 44, 'MAE': tensor(0.0044, device='cuda:0')}
+EarlyStopping counter: 22 out of 100
+{'epoch': 45, 'ce_loss': '27913.822265625', 'mae_loss': '1.2817755937576294'}
+{'Epoch': 45, 'MAE': tensor(0.0206, device='cuda:0')}
+EarlyStopping counter: 23 out of 100
+{'epoch': 46, 'ce_loss': '27922.78125', 'mae_loss': '1.4244986772537231'}
+{'Epoch': 46, 'MAE': tensor(0.0104, device='cuda:0')}
+EarlyStopping counter: 24 out of 100
+{'epoch': 47, 'ce_loss': '27917.296875', 'mae_loss': '1.3420612812042236'}
+{'Epoch': 47, 'MAE': tensor(0.0143, device='cuda:0')}
+EarlyStopping counter: 25 out of 100
+{'epoch': 48, 'ce_loss': '27912.671875', 'mae_loss': '1.4673140048980713'}
+{'Epoch': 48, 'MAE': tensor(0.0364, device='cuda:0')}
+EarlyStopping counter: 26 out of 100
+{'epoch': 49, 'ce_loss': '27913.228515625', 'mae_loss': '1.2888412475585938'}
+{'Epoch': 49, 'MAE': tensor(0.0107, device='cuda:0')}
+EarlyStopping counter: 27 out of 100
+{'epoch': 50, 'ce_loss': '27912.15234375', 'mae_loss': '1.328506588935852'}
+{'Epoch': 50, 'MAE': tensor(0.0363, device='cuda:0')}
+EarlyStopping counter: 28 out of 100
+{'epoch': 51, 'ce_loss': '27911.8125', 'mae_loss': '1.288686990737915'}
+{'Epoch': 51, 'MAE': tensor(0.0179, device='cuda:0')}
+EarlyStopping counter: 29 out of 100
+{'epoch': 52, 'ce_loss': '27910.0234375', 'mae_loss': '1.2417798042297363'}
+{'Epoch': 52, 'MAE': tensor(0.0144, device='cuda:0')}
+EarlyStopping counter: 30 out of 100
+{'epoch': 53, 'ce_loss': '27911.08984375', 'mae_loss': '1.482517957687378'}
+{'Epoch': 53, 'MAE': tensor(0.0049, device='cuda:0')}
+EarlyStopping counter: 31 out of 100
+{'epoch': 54, 'ce_loss': '27911.322265625', 'mae_loss': '1.2570682764053345'}
+{'Epoch': 54, 'MAE': tensor(0.0025, device='cuda:0')}
+EarlyStopping counter: 32 out of 100
+{'epoch': 55, 'ce_loss': '27911.2734375', 'mae_loss': '1.2031348943710327'}
+{'Epoch': 55, 'MAE': tensor(0.0095, device='cuda:0')}
+EarlyStopping counter: 33 out of 100
+{'epoch': 56, 'ce_loss': '27909.599609375', 'mae_loss': '1.5858900547027588'}
+{'Epoch': 56, 'MAE': tensor(0.0632, device='cuda:0')}
+EarlyStopping counter: 34 out of 100
+{'epoch': 57, 'ce_loss': '27910.0625', 'mae_loss': '1.41756010055542'}
+{'Epoch': 57, 'MAE': tensor(0.0004, device='cuda:0')}
+{'epoch': 58, 'ce_loss': '27913.35546875', 'mae_loss': '1.6084671020507812'}
+{'Epoch': 58, 'MAE': tensor(0.0046, device='cuda:0')}
+EarlyStopping counter: 1 out of 100
+{'epoch': 59, 'ce_loss': '27911.005859375', 'mae_loss': '1.6954761743545532'}
+{'Epoch': 59, 'MAE': tensor(0.0043, device='cuda:0')}
+EarlyStopping counter: 2 out of 100
+{'epoch': 60, 'ce_loss': '27910.763671875', 'mae_loss': '1.4472687244415283'}
+{'Epoch': 60, 'MAE': tensor(0.0274, device='cuda:0')}
+EarlyStopping counter: 3 out of 100
+{'epoch': 61, 'ce_loss': '27909.828125', 'mae_loss': '1.441968560218811'}
+{'Epoch': 61, 'MAE': tensor(0.0244, device='cuda:0')}
+EarlyStopping counter: 4 out of 100
+{'epoch': 62, 'ce_loss': '27906.955078125', 'mae_loss': '1.2538384199142456'}
+{'Epoch': 62, 'MAE': tensor(0.0061, device='cuda:0')}
+EarlyStopping counter: 5 out of 100
+{'epoch': 63, 'ce_loss': '27906.880859375', 'mae_loss': '1.546406865119934'}
+{'Epoch': 63, 'MAE': tensor(0.0292, device='cuda:0')}
+EarlyStopping counter: 6 out of 100
+{'epoch': 64, 'ce_loss': '27905.857421875', 'mae_loss': '1.1481523513793945'}
+{'Epoch': 64, 'MAE': tensor(0.0050, device='cuda:0')}
+EarlyStopping counter: 7 out of 100
+{'epoch': 65, 'ce_loss': '27907.04296875', 'mae_loss': '1.4806591272354126'}
+{'Epoch': 65, 'MAE': tensor(0.0224, device='cuda:0')}
+EarlyStopping counter: 8 out of 100
+{'epoch': 66, 'ce_loss': '27907.990234375', 'mae_loss': '1.3169128894805908'}
+{'Epoch': 66, 'MAE': tensor(0.0009, device='cuda:0')}
+EarlyStopping counter: 9 out of 100
+{'epoch': 67, 'ce_loss': '27908.30859375', 'mae_loss': '1.5913809537887573'}
+{'Epoch': 67, 'MAE': tensor(0.0089, device='cuda:0')}
+EarlyStopping counter: 10 out of 100
+{'epoch': 68, 'ce_loss': '27906.853515625', 'mae_loss': '1.3996484279632568'}
+{'Epoch': 68, 'MAE': tensor(0.0468, device='cuda:0')}
+EarlyStopping counter: 11 out of 100
+{'epoch': 69, 'ce_loss': '27907.6171875', 'mae_loss': '1.5167313814163208'}
+{'Epoch': 69, 'MAE': tensor(0.0357, device='cuda:0')}
+EarlyStopping counter: 12 out of 100
+{'epoch': 70, 'ce_loss': '27909.380859375', 'mae_loss': '1.6280691623687744'}
+{'Epoch': 70, 'MAE': tensor(0.0093, device='cuda:0')}
+EarlyStopping counter: 13 out of 100
+{'epoch': 71, 'ce_loss': '27908.64453125', 'mae_loss': '1.3326085805892944'}
+{'Epoch': 71, 'MAE': tensor(0.0132, device='cuda:0')}
+EarlyStopping counter: 14 out of 100
+{'epoch': 72, 'ce_loss': '27906.1328125', 'mae_loss': '1.4672178030014038'}
+{'Epoch': 72, 'MAE': tensor(0.0379, device='cuda:0')}
+EarlyStopping counter: 15 out of 100
+{'epoch': 73, 'ce_loss': '27906.796875', 'mae_loss': '1.181760311126709'}
+{'Epoch': 73, 'MAE': tensor(0.0045, device='cuda:0')}
+EarlyStopping counter: 16 out of 100
+{'epoch': 74, 'ce_loss': '27905.1484375', 'mae_loss': '1.3952044248580933'}
+{'Epoch': 74, 'MAE': tensor(4.3796e-05, device='cuda:0')}
+{'epoch': 75, 'ce_loss': '27903.59765625', 'mae_loss': '1.338166356086731'}
+{'Epoch': 75, 'MAE': tensor(0.0125, device='cuda:0')}
+EarlyStopping counter: 1 out of 100
+{'epoch': 76, 'ce_loss': '27904.52734375', 'mae_loss': '1.2778748273849487'}
+{'Epoch': 76, 'MAE': tensor(0.0201, device='cuda:0')}
+EarlyStopping counter: 2 out of 100
+{'epoch': 77, 'ce_loss': '27903.7890625', 'mae_loss': '1.3757336139678955'}
+{'Epoch': 77, 'MAE': tensor(0.0166, device='cuda:0')}
+EarlyStopping counter: 3 out of 100
+{'epoch': 78, 'ce_loss': '27904.66796875', 'mae_loss': '1.1187931299209595'}
+{'Epoch': 78, 'MAE': tensor(0.0108, device='cuda:0')}
+EarlyStopping counter: 4 out of 100
+{'epoch': 79, 'ce_loss': '27906.294921875', 'mae_loss': '1.3473145961761475'}
+{'Epoch': 79, 'MAE': tensor(0.0831, device='cuda:0')}
+EarlyStopping counter: 5 out of 100
+{'epoch': 80, 'ce_loss': '27905.052734375', 'mae_loss': '1.5506960153579712'}
+{'Epoch': 80, 'MAE': tensor(0.0216, device='cuda:0')}
+EarlyStopping counter: 6 out of 100
+{'epoch': 81, 'ce_loss': '27903.97265625', 'mae_loss': '1.4152379035949707'}
+{'Epoch': 81, 'MAE': tensor(0.0047, device='cuda:0')}
+EarlyStopping counter: 7 out of 100
+{'epoch': 82, 'ce_loss': '27904.544921875', 'mae_loss': '1.5293538570404053'}
+{'Epoch': 82, 'MAE': tensor(0.0021, device='cuda:0')}
+EarlyStopping counter: 8 out of 100
+{'epoch': 83, 'ce_loss': '27904.11328125', 'mae_loss': '1.1882842779159546'}
+{'Epoch': 83, 'MAE': tensor(0.0261, device='cuda:0')}
+EarlyStopping counter: 9 out of 100
+{'epoch': 84, 'ce_loss': '27905.00390625', 'mae_loss': '1.5663142204284668'}
+{'Epoch': 84, 'MAE': tensor(0.0181, device='cuda:0')}
+EarlyStopping counter: 10 out of 100
+{'epoch': 85, 'ce_loss': '27903.40625', 'mae_loss': '1.1415215730667114'}
+{'Epoch': 85, 'MAE': tensor(0.0062, device='cuda:0')}
+EarlyStopping counter: 11 out of 100
+{'epoch': 86, 'ce_loss': '27909.134765625', 'mae_loss': '1.542749285697937'}
+{'Epoch': 86, 'MAE': tensor(0.0085, device='cuda:0')}
+EarlyStopping counter: 12 out of 100
+{'epoch': 87, 'ce_loss': '27913.861328125', 'mae_loss': '1.5858131647109985'}
+{'Epoch': 87, 'MAE': tensor(0.0139, device='cuda:0')}
+EarlyStopping counter: 13 out of 100
+{'epoch': 88, 'ce_loss': '27905.337890625', 'mae_loss': '1.3766165971755981'}
+{'Epoch': 88, 'MAE': tensor(0.0076, device='cuda:0')}
+EarlyStopping counter: 14 out of 100
+{'epoch': 89, 'ce_loss': '27904.1875', 'mae_loss': '1.2207728624343872'}
+{'Epoch': 89, 'MAE': tensor(0.0124, device='cuda:0')}
+EarlyStopping counter: 15 out of 100
+{'epoch': 90, 'ce_loss': '27903.251953125', 'mae_loss': '1.130409598350525'}
+{'Epoch': 90, 'MAE': tensor(0.0120, device='cuda:0')}
+EarlyStopping counter: 16 out of 100
+{'epoch': 91, 'ce_loss': '27901.5859375', 'mae_loss': '1.1271718740463257'}
+{'Epoch': 91, 'MAE': tensor(0.0134, device='cuda:0')}
+EarlyStopping counter: 17 out of 100
+{'epoch': 92, 'ce_loss': '27901.515625', 'mae_loss': '1.0875145196914673'}
+{'Epoch': 92, 'MAE': tensor(0.0282, device='cuda:0')}
+EarlyStopping counter: 18 out of 100
+{'epoch': 93, 'ce_loss': '27902.357421875', 'mae_loss': '1.3003525733947754'}
+{'Epoch': 93, 'MAE': tensor(0.0077, device='cuda:0')}
+EarlyStopping counter: 19 out of 100
+{'epoch': 94, 'ce_loss': '27900.8671875', 'mae_loss': '1.3089090585708618'}
+{'Epoch': 94, 'MAE': tensor(0.0188, device='cuda:0')}
+EarlyStopping counter: 20 out of 100
+{'epoch': 95, 'ce_loss': '27901.619140625', 'mae_loss': '1.063616156578064'}
+{'Epoch': 95, 'MAE': tensor(0.0106, device='cuda:0')}
+EarlyStopping counter: 21 out of 100
+{'epoch': 96, 'ce_loss': '27901.6171875', 'mae_loss': '1.148555040359497'}
+{'Epoch': 96, 'MAE': tensor(0.0323, device='cuda:0')}
+EarlyStopping counter: 22 out of 100
+{'epoch': 97, 'ce_loss': '27900.4765625', 'mae_loss': '1.2927031517028809'}
+{'Epoch': 97, 'MAE': tensor(0.0233, device='cuda:0')}
+EarlyStopping counter: 23 out of 100
+{'epoch': 98, 'ce_loss': '27900.46484375', 'mae_loss': '0.9641593098640442'}
+{'Epoch': 98, 'MAE': tensor(0.0382, device='cuda:0')}
+EarlyStopping counter: 24 out of 100
+{'epoch': 99, 'ce_loss': '27901.2734375', 'mae_loss': '1.195859432220459'}
+{'Epoch': 99, 'MAE': tensor(0.0057, device='cuda:0')}
+EarlyStopping counter: 25 out of 100
+{'epoch': 100, 'ce_loss': '27904.287109375', 'mae_loss': '1.148354172706604'}
+{'Epoch': 100, 'MAE': tensor(0.0051, device='cuda:0')}
+EarlyStopping counter: 26 out of 100
+{'epoch': 101, 'ce_loss': '27902.130859375', 'mae_loss': '1.1105046272277832'}
+{'Epoch': 101, 'MAE': tensor(0.0039, device='cuda:0')}
+EarlyStopping counter: 27 out of 100
+{'epoch': 102, 'ce_loss': '27900.705078125', 'mae_loss': '1.1995697021484375'}
+{'Epoch': 102, 'MAE': tensor(0.0237, device='cuda:0')}
+EarlyStopping counter: 28 out of 100
+{'epoch': 103, 'ce_loss': '27899.529296875', 'mae_loss': '0.9189323782920837'}
+{'Epoch': 103, 'MAE': tensor(0.0067, device='cuda:0')}
+EarlyStopping counter: 29 out of 100
+{'epoch': 104, 'ce_loss': '27900.107421875', 'mae_loss': '1.204453468322754'}
+{'Epoch': 104, 'MAE': tensor(0.0164, device='cuda:0')}
+EarlyStopping counter: 30 out of 100
+{'epoch': 105, 'ce_loss': '27899.080078125', 'mae_loss': '0.9732515811920166'}
+{'Epoch': 105, 'MAE': tensor(0.0101, device='cuda:0')}
+EarlyStopping counter: 31 out of 100
+{'epoch': 106, 'ce_loss': '27901.783203125', 'mae_loss': '1.0527456998825073'}
+{'Epoch': 106, 'MAE': tensor(0.0329, device='cuda:0')}
+EarlyStopping counter: 32 out of 100
+{'epoch': 107, 'ce_loss': '27900.0', 'mae_loss': '0.9313332438468933'}
+{'Epoch': 107, 'MAE': tensor(0.0204, device='cuda:0')}
+EarlyStopping counter: 33 out of 100
+{'epoch': 108, 'ce_loss': '27899.638671875', 'mae_loss': '1.0888442993164062'}
+{'Epoch': 108, 'MAE': tensor(0.0207, device='cuda:0')}
+EarlyStopping counter: 34 out of 100
+{'epoch': 109, 'ce_loss': '27897.896484375', 'mae_loss': '0.8877829313278198'}
+{'Epoch': 109, 'MAE': tensor(0.0370, device='cuda:0')}
+EarlyStopping counter: 35 out of 100
+{'epoch': 110, 'ce_loss': '27899.408203125', 'mae_loss': '1.0286308526992798'}
+{'Epoch': 110, 'MAE': tensor(0.0134, device='cuda:0')}
+EarlyStopping counter: 36 out of 100
+{'epoch': 111, 'ce_loss': '27726.009765625', 'mae_loss': '1.1638538837432861'}
+{'Epoch': 111, 'MAE': tensor(0.0264, device='cuda:0')}
+EarlyStopping counter: 37 out of 100
+{'epoch': 112, 'ce_loss': '27385.5625', 'mae_loss': '1.1935713291168213'}
+{'Epoch': 112, 'MAE': tensor(0.0283, device='cuda:0')}
+EarlyStopping counter: 38 out of 100
+{'epoch': 113, 'ce_loss': '27362.966796875', 'mae_loss': '1.1106841564178467'}
+{'Epoch': 113, 'MAE': tensor(0.0126, device='cuda:0')}
+EarlyStopping counter: 39 out of 100
+{'epoch': 114, 'ce_loss': '27354.9921875', 'mae_loss': '1.0012036561965942'}
+{'Epoch': 114, 'MAE': tensor(0.0097, device='cuda:0')}
+EarlyStopping counter: 40 out of 100
+{'epoch': 115, 'ce_loss': '27351.810546875', 'mae_loss': '0.9455584287643433'}
+{'Epoch': 115, 'MAE': tensor(0.0163, device='cuda:0')}
+EarlyStopping counter: 41 out of 100
+{'epoch': 116, 'ce_loss': '27349.154296875', 'mae_loss': '1.058764100074768'}
+{'Epoch': 116, 'MAE': tensor(0.0103, device='cuda:0')}
+EarlyStopping counter: 42 out of 100
+{'epoch': 117, 'ce_loss': '27344.861328125', 'mae_loss': '0.8471140265464783'}
+{'Epoch': 117, 'MAE': tensor(0.0260, device='cuda:0')}
+EarlyStopping counter: 43 out of 100
+{'epoch': 118, 'ce_loss': '27341.79296875', 'mae_loss': '0.9550356268882751'}
+{'Epoch': 118, 'MAE': tensor(0.0194, device='cuda:0')}
+EarlyStopping counter: 44 out of 100
+{'epoch': 119, 'ce_loss': '27340.28515625', 'mae_loss': '1.071516990661621'}
+{'Epoch': 119, 'MAE': tensor(4.0687e-05, device='cuda:0')}
+{'epoch': 120, 'ce_loss': '27339.283203125', 'mae_loss': '0.9661264419555664'}
+{'Epoch': 120, 'MAE': tensor(0.0041, device='cuda:0')}
+EarlyStopping counter: 1 out of 100
+{'epoch': 121, 'ce_loss': '27336.49609375', 'mae_loss': '0.9158194065093994'}
+{'Epoch': 121, 'MAE': tensor(0.0173, device='cuda:0')}
+EarlyStopping counter: 2 out of 100
+{'epoch': 122, 'ce_loss': '27336.033203125', 'mae_loss': '0.8792917728424072'}
+{'Epoch': 122, 'MAE': tensor(0.0042, device='cuda:0')}
+EarlyStopping counter: 3 out of 100
+{'epoch': 123, 'ce_loss': '27337.271484375', 'mae_loss': '0.9768151640892029'}
+{'Epoch': 123, 'MAE': tensor(0.0074, device='cuda:0')}
+EarlyStopping counter: 4 out of 100
+{'epoch': 124, 'ce_loss': '27338.244140625', 'mae_loss': '1.0123169422149658'}
+{'Epoch': 124, 'MAE': tensor(0.0251, device='cuda:0')}
+EarlyStopping counter: 5 out of 100
+{'epoch': 125, 'ce_loss': '27335.7421875', 'mae_loss': '0.8759804368019104'}
+{'Epoch': 125, 'MAE': tensor(0.0139, device='cuda:0')}
+EarlyStopping counter: 6 out of 100
+{'epoch': 126, 'ce_loss': '27335.3515625', 'mae_loss': '1.0654889345169067'}
+{'Epoch': 126, 'MAE': tensor(0.0079, device='cuda:0')}
+EarlyStopping counter: 7 out of 100
+{'epoch': 127, 'ce_loss': '27332.171875', 'mae_loss': '0.9533690214157104'}
+{'Epoch': 127, 'MAE': tensor(0.0450, device='cuda:0')}
+EarlyStopping counter: 8 out of 100
+{'epoch': 128, 'ce_loss': '27329.9609375', 'mae_loss': '0.9945706129074097'}
+{'Epoch': 128, 'MAE': tensor(0.0030, device='cuda:0')}
+EarlyStopping counter: 9 out of 100
+{'epoch': 129, 'ce_loss': '27330.333984375', 'mae_loss': '0.9888293147087097'}
+{'Epoch': 129, 'MAE': tensor(0.0027, device='cuda:0')}
+EarlyStopping counter: 10 out of 100
+{'epoch': 130, 'ce_loss': '27328.740234375', 'mae_loss': '0.9762598872184753'}
+{'Epoch': 130, 'MAE': tensor(0.0271, device='cuda:0')}
+EarlyStopping counter: 11 out of 100
+{'epoch': 131, 'ce_loss': '27330.044921875', 'mae_loss': '1.0005654096603394'}
+{'Epoch': 131, 'MAE': tensor(0.0211, device='cuda:0')}
+EarlyStopping counter: 12 out of 100
+{'epoch': 132, 'ce_loss': '27329.05078125', 'mae_loss': '0.9522286653518677'}
+{'Epoch': 132, 'MAE': tensor(0.0179, device='cuda:0')}
+EarlyStopping counter: 13 out of 100
+{'epoch': 133, 'ce_loss': '27326.333984375', 'mae_loss': '0.8768152594566345'}
+{'Epoch': 133, 'MAE': tensor(0.0160, device='cuda:0')}
+EarlyStopping counter: 14 out of 100
+{'epoch': 134, 'ce_loss': '27326.048828125', 'mae_loss': '0.8539615869522095'}
+{'Epoch': 134, 'MAE': tensor(0.0357, device='cuda:0')}
+EarlyStopping counter: 15 out of 100
+{'epoch': 135, 'ce_loss': '27326.505859375', 'mae_loss': '0.945936918258667'}
+{'Epoch': 135, 'MAE': tensor(0.0004, device='cuda:0')}
+EarlyStopping counter: 16 out of 100
+{'epoch': 136, 'ce_loss': '27323.865234375', 'mae_loss': '0.8372453451156616'}
+{'Epoch': 136, 'MAE': tensor(0.0067, device='cuda:0')}
+EarlyStopping counter: 17 out of 100
+{'epoch': 137, 'ce_loss': '27325.216796875', 'mae_loss': '0.8758571743965149'}
+{'Epoch': 137, 'MAE': tensor(0.0191, device='cuda:0')}
+EarlyStopping counter: 18 out of 100
+{'epoch': 138, 'ce_loss': '27326.017578125', 'mae_loss': '0.8011406660079956'}
+{'Epoch': 138, 'MAE': tensor(0.0116, device='cuda:0')}
+EarlyStopping counter: 19 out of 100
+{'epoch': 139, 'ce_loss': '27322.642578125', 'mae_loss': '1.0026659965515137'}
+{'Epoch': 139, 'MAE': tensor(0.0070, device='cuda:0')}
+EarlyStopping counter: 20 out of 100
+{'epoch': 140, 'ce_loss': '27322.7734375', 'mae_loss': '0.8551276326179504'}
+{'Epoch': 140, 'MAE': tensor(0.0067, device='cuda:0')}
+EarlyStopping counter: 21 out of 100
+{'epoch': 141, 'ce_loss': '27323.654296875', 'mae_loss': '0.9089574217796326'}
+{'Epoch': 141, 'MAE': tensor(0.0197, device='cuda:0')}
+EarlyStopping counter: 22 out of 100
+{'epoch': 142, 'ce_loss': '27322.84375', 'mae_loss': '0.9644932746887207'}
+{'Epoch': 142, 'MAE': tensor(0.0270, device='cuda:0')}
+EarlyStopping counter: 23 out of 100
+{'epoch': 143, 'ce_loss': '27322.029296875', 'mae_loss': '0.7624534368515015'}
+{'Epoch': 143, 'MAE': tensor(0.0184, device='cuda:0')}
+EarlyStopping counter: 24 out of 100
+{'epoch': 144, 'ce_loss': '27321.291015625', 'mae_loss': '0.917390763759613'}
+{'Epoch': 144, 'MAE': tensor(0.0088, device='cuda:0')}
+EarlyStopping counter: 25 out of 100
+{'epoch': 145, 'ce_loss': '27321.087890625', 'mae_loss': '0.982395350933075'}
+{'Epoch': 145, 'MAE': tensor(0.0180, device='cuda:0')}
+EarlyStopping counter: 26 out of 100
+{'epoch': 146, 'ce_loss': '27319.9453125', 'mae_loss': '0.8226895928382874'}
+{'Epoch': 146, 'MAE': tensor(0.0276, device='cuda:0')}
+EarlyStopping counter: 27 out of 100
+{'epoch': 147, 'ce_loss': '27321.705078125', 'mae_loss': '0.8195728659629822'}
+{'Epoch': 147, 'MAE': tensor(0.0088, device='cuda:0')}
+EarlyStopping counter: 28 out of 100
+{'epoch': 148, 'ce_loss': '27322.966796875', 'mae_loss': '1.0655059814453125'}
+{'Epoch': 148, 'MAE': tensor(0.0250, device='cuda:0')}
+EarlyStopping counter: 29 out of 100
+{'epoch': 149, 'ce_loss': '27319.529296875', 'mae_loss': '0.886756181716919'}
+{'Epoch': 149, 'MAE': tensor(0.0022, device='cuda:0')}
+EarlyStopping counter: 30 out of 100
+{'epoch': 150, 'ce_loss': '27319.806640625', 'mae_loss': '0.8983224630355835'}
+{'Epoch': 150, 'MAE': tensor(0.0011, device='cuda:0')}
+EarlyStopping counter: 31 out of 100
+{'epoch': 151, 'ce_loss': '27319.560546875', 'mae_loss': '0.7859048247337341'}
+{'Epoch': 151, 'MAE': tensor(0.0099, device='cuda:0')}
+EarlyStopping counter: 32 out of 100
+{'epoch': 152, 'ce_loss': '27318.826171875', 'mae_loss': '0.8463321328163147'}
+{'Epoch': 152, 'MAE': tensor(0.0119, device='cuda:0')}
+EarlyStopping counter: 33 out of 100
+{'epoch': 153, 'ce_loss': '27318.427734375', 'mae_loss': '0.7088539600372314'}
+{'Epoch': 153, 'MAE': tensor(0.0154, device='cuda:0')}
+EarlyStopping counter: 34 out of 100
+{'epoch': 154, 'ce_loss': '27317.888671875', 'mae_loss': '0.8613685965538025'}
+{'Epoch': 154, 'MAE': tensor(0.0314, device='cuda:0')}
+EarlyStopping counter: 35 out of 100
+{'epoch': 155, 'ce_loss': '27317.11328125', 'mae_loss': '0.8029311895370483'}
+{'Epoch': 155, 'MAE': tensor(0.0015, device='cuda:0')}
+EarlyStopping counter: 36 out of 100
+{'epoch': 156, 'ce_loss': '27317.169921875', 'mae_loss': '0.8813410401344299'}
+{'Epoch': 156, 'MAE': tensor(0.0100, device='cuda:0')}
+EarlyStopping counter: 37 out of 100
+{'epoch': 157, 'ce_loss': '27316.24609375', 'mae_loss': '0.7271432876586914'}
+{'Epoch': 157, 'MAE': tensor(0.0148, device='cuda:0')}
+EarlyStopping counter: 38 out of 100
+{'epoch': 158, 'ce_loss': '27317.240234375', 'mae_loss': '0.764441192150116'}
+{'Epoch': 158, 'MAE': tensor(0.0148, device='cuda:0')}
+EarlyStopping counter: 39 out of 100
+{'epoch': 159, 'ce_loss': '27316.55859375', 'mae_loss': '0.8704962730407715'}
+{'Epoch': 159, 'MAE': tensor(0.0483, device='cuda:0')}
+EarlyStopping counter: 40 out of 100
+{'epoch': 160, 'ce_loss': '27316.625', 'mae_loss': '0.8913413882255554'}
+{'Epoch': 160, 'MAE': tensor(0.0131, device='cuda:0')}
+EarlyStopping counter: 41 out of 100
+{'epoch': 161, 'ce_loss': '27315.185546875', 'mae_loss': '0.7852296233177185'}
+{'Epoch': 161, 'MAE': tensor(0.0046, device='cuda:0')}
+EarlyStopping counter: 42 out of 100
+{'epoch': 162, 'ce_loss': '27315.86328125', 'mae_loss': '0.7860655188560486'}
+{'Epoch': 162, 'MAE': tensor(0.0113, device='cuda:0')}
+EarlyStopping counter: 43 out of 100
+{'epoch': 163, 'ce_loss': '27315.73046875', 'mae_loss': '0.7970865964889526'}
+{'Epoch': 163, 'MAE': tensor(0.0211, device='cuda:0')}
+EarlyStopping counter: 44 out of 100
+{'epoch': 164, 'ce_loss': '27316.505859375', 'mae_loss': '0.7099171280860901'}
+{'Epoch': 164, 'MAE': tensor(0.0024, device='cuda:0')}
+EarlyStopping counter: 45 out of 100
+{'epoch': 165, 'ce_loss': '27313.240234375', 'mae_loss': '0.7620657086372375'}
+{'Epoch': 165, 'MAE': tensor(0.0043, device='cuda:0')}
+EarlyStopping counter: 46 out of 100
+{'epoch': 166, 'ce_loss': '27314.552734375', 'mae_loss': '0.7780592441558838'}
+{'Epoch': 166, 'MAE': tensor(0.0054, device='cuda:0')}
+EarlyStopping counter: 47 out of 100
+{'epoch': 167, 'ce_loss': '27313.078125', 'mae_loss': '0.8805394172668457'}
+{'Epoch': 167, 'MAE': tensor(0.0067, device='cuda:0')}
+EarlyStopping counter: 48 out of 100
+{'epoch': 168, 'ce_loss': '27312.052734375', 'mae_loss': '0.6991636753082275'}
+{'Epoch': 168, 'MAE': tensor(0.0012, device='cuda:0')}
+EarlyStopping counter: 49 out of 100
+{'epoch': 169, 'ce_loss': '27312.259765625', 'mae_loss': '0.7379342913627625'}
+{'Epoch': 169, 'MAE': tensor(0.0037, device='cuda:0')}
+EarlyStopping counter: 50 out of 100
+{'epoch': 170, 'ce_loss': '27313.04296875', 'mae_loss': '0.7210003733634949'}
+{'Epoch': 170, 'MAE': tensor(0.0131, device='cuda:0')}
+EarlyStopping counter: 51 out of 100
+{'epoch': 171, 'ce_loss': '27312.51953125', 'mae_loss': '0.699223518371582'}
+{'Epoch': 171, 'MAE': tensor(0.0047, device='cuda:0')}
+EarlyStopping counter: 52 out of 100
+{'epoch': 172, 'ce_loss': '27318.94921875', 'mae_loss': '0.9345513582229614'}
+{'Epoch': 172, 'MAE': tensor(0.0016, device='cuda:0')}
+EarlyStopping counter: 53 out of 100
+{'epoch': 173, 'ce_loss': '27317.68359375', 'mae_loss': '0.7951087951660156'}
+{'Epoch': 173, 'MAE': tensor(0.0148, device='cuda:0')}
+EarlyStopping counter: 54 out of 100
+{'epoch': 174, 'ce_loss': '27314.75', 'mae_loss': '0.7147648930549622'}
+{'Epoch': 174, 'MAE': tensor(0.0146, device='cuda:0')}
+EarlyStopping counter: 55 out of 100
+{'epoch': 175, 'ce_loss': '27313.625', 'mae_loss': '0.7333963513374329'}
+{'Epoch': 175, 'MAE': tensor(0.0051, device='cuda:0')}
+EarlyStopping counter: 56 out of 100
+{'epoch': 176, 'ce_loss': '27312.93359375', 'mae_loss': '0.9785833358764648'}
+{'Epoch': 176, 'MAE': tensor(0.0032, device='cuda:0')}
+EarlyStopping counter: 57 out of 100
+{'epoch': 177, 'ce_loss': '27312.22265625', 'mae_loss': '0.7007293701171875'}
+{'Epoch': 177, 'MAE': tensor(0.0020, device='cuda:0')}
+EarlyStopping counter: 58 out of 100
+{'epoch': 178, 'ce_loss': '27312.044921875', 'mae_loss': '0.7383444905281067'}
+{'Epoch': 178, 'MAE': tensor(0.0026, device='cuda:0')}
+EarlyStopping counter: 59 out of 100
+{'epoch': 179, 'ce_loss': '27312.24609375', 'mae_loss': '0.7471539378166199'}
+{'Epoch': 179, 'MAE': tensor(0.0070, device='cuda:0')}
+EarlyStopping counter: 60 out of 100
+{'epoch': 180, 'ce_loss': '27310.7265625', 'mae_loss': '0.7724207639694214'}
+{'Epoch': 180, 'MAE': tensor(0.0053, device='cuda:0')}
+EarlyStopping counter: 61 out of 100
+{'epoch': 181, 'ce_loss': '27313.212890625', 'mae_loss': '0.7685546875'}
+{'Epoch': 181, 'MAE': tensor(0.0063, device='cuda:0')}
+EarlyStopping counter: 62 out of 100
+{'epoch': 182, 'ce_loss': '27310.939453125', 'mae_loss': '0.8404787182807922'}
+{'Epoch': 182, 'MAE': tensor(0.0128, device='cuda:0')}
+EarlyStopping counter: 63 out of 100
+{'epoch': 183, 'ce_loss': '27310.8515625', 'mae_loss': '0.7127165794372559'}
+{'Epoch': 183, 'MAE': tensor(0.0132, device='cuda:0')}
+EarlyStopping counter: 64 out of 100
+{'epoch': 184, 'ce_loss': '27310.16796875', 'mae_loss': '0.6911125183105469'}
+{'Epoch': 184, 'MAE': tensor(0.0155, device='cuda:0')}
+EarlyStopping counter: 65 out of 100
+{'epoch': 185, 'ce_loss': '27310.796875', 'mae_loss': '0.8132800459861755'}
+{'Epoch': 185, 'MAE': tensor(9.6674e-05, device='cuda:0')}
+EarlyStopping counter: 66 out of 100
+{'epoch': 186, 'ce_loss': '27309.35546875', 'mae_loss': '0.7256483435630798'}
+{'Epoch': 186, 'MAE': tensor(0.0310, device='cuda:0')}
+EarlyStopping counter: 67 out of 100
+{'epoch': 187, 'ce_loss': '27310.53125', 'mae_loss': '0.7608161568641663'}
+{'Epoch': 187, 'MAE': tensor(0.0168, device='cuda:0')}
+EarlyStopping counter: 68 out of 100
+{'epoch': 188, 'ce_loss': '27309.375', 'mae_loss': '0.7929086089134216'}
+{'Epoch': 188, 'MAE': tensor(0.0099, device='cuda:0')}
+EarlyStopping counter: 69 out of 100
+{'epoch': 189, 'ce_loss': '27309.662109375', 'mae_loss': '0.7016792297363281'}
+{'Epoch': 189, 'MAE': tensor(0.0113, device='cuda:0')}
+EarlyStopping counter: 70 out of 100
+{'epoch': 190, 'ce_loss': '27308.12109375', 'mae_loss': '0.720720112323761'}
+{'Epoch': 190, 'MAE': tensor(0.0033, device='cuda:0')}
+EarlyStopping counter: 71 out of 100
+{'epoch': 191, 'ce_loss': '27307.46484375', 'mae_loss': '0.6931580901145935'}
+{'Epoch': 191, 'MAE': tensor(0.0149, device='cuda:0')}
+EarlyStopping counter: 72 out of 100
+{'epoch': 192, 'ce_loss': '27307.54296875', 'mae_loss': '0.6673731803894043'}
+{'Epoch': 192, 'MAE': tensor(0.0063, device='cuda:0')}
+EarlyStopping counter: 73 out of 100
+{'epoch': 193, 'ce_loss': '27308.66796875', 'mae_loss': '0.7221372127532959'}
+{'Epoch': 193, 'MAE': tensor(0.0131, device='cuda:0')}
+EarlyStopping counter: 74 out of 100
+{'epoch': 194, 'ce_loss': '27307.171875', 'mae_loss': '0.7092741131782532'}
+{'Epoch': 194, 'MAE': tensor(0.0024, device='cuda:0')}
+EarlyStopping counter: 75 out of 100
+{'epoch': 195, 'ce_loss': '27307.787109375', 'mae_loss': '0.8927246332168579'}
+{'Epoch': 195, 'MAE': tensor(0.0073, device='cuda:0')}
+EarlyStopping counter: 76 out of 100
+{'epoch': 196, 'ce_loss': '27308.654296875', 'mae_loss': '0.6554718017578125'}
+{'Epoch': 196, 'MAE': tensor(0.0058, device='cuda:0')}
+EarlyStopping counter: 77 out of 100
+{'epoch': 197, 'ce_loss': '27307.4765625', 'mae_loss': '0.7130720019340515'}
+{'Epoch': 197, 'MAE': tensor(0.0057, device='cuda:0')}
+EarlyStopping counter: 78 out of 100
+{'epoch': 198, 'ce_loss': '27308.1015625', 'mae_loss': '0.6516055464744568'}
+{'Epoch': 198, 'MAE': tensor(0.0344, device='cuda:0')}
+EarlyStopping counter: 79 out of 100
+{'epoch': 199, 'ce_loss': '27308.8515625', 'mae_loss': '0.8133801221847534'}
+{'Epoch': 199, 'MAE': tensor(0.0081, device='cuda:0')}
+EarlyStopping counter: 80 out of 100
+{'epoch': 200, 'ce_loss': '27306.849609375', 'mae_loss': '0.6962273120880127'}
+{'Epoch': 200, 'MAE': tensor(0.0166, device='cuda:0')}
+EarlyStopping counter: 81 out of 100
+{'epoch': 201, 'ce_loss': '27307.587890625', 'mae_loss': '0.6986077427864075'}
+{'Epoch': 201, 'MAE': tensor(0.0040, device='cuda:0')}
+EarlyStopping counter: 82 out of 100
+{'epoch': 202, 'ce_loss': '27307.87890625', 'mae_loss': '0.6999464631080627'}
+{'Epoch': 202, 'MAE': tensor(0.0060, device='cuda:0')}
+EarlyStopping counter: 83 out of 100
+{'epoch': 203, 'ce_loss': '27306.3984375', 'mae_loss': '0.6500386595726013'}
+{'Epoch': 203, 'MAE': tensor(0.0125, device='cuda:0')}
+EarlyStopping counter: 84 out of 100
+{'epoch': 204, 'ce_loss': '27306.7265625', 'mae_loss': '0.739737331867218'}
+{'Epoch': 204, 'MAE': tensor(0.0188, device='cuda:0')}
+EarlyStopping counter: 85 out of 100
+{'epoch': 205, 'ce_loss': '27306.74609375', 'mae_loss': '0.7479856610298157'}
+{'Epoch': 205, 'MAE': tensor(0.0016, device='cuda:0')}
+EarlyStopping counter: 86 out of 100
+{'epoch': 206, 'ce_loss': '27305.4375', 'mae_loss': '0.6755393743515015'}
+{'Epoch': 206, 'MAE': tensor(0.0068, device='cuda:0')}
+EarlyStopping counter: 87 out of 100
+{'epoch': 207, 'ce_loss': '27305.72265625', 'mae_loss': '0.7497014999389648'}
+{'Epoch': 207, 'MAE': tensor(0.0123, device='cuda:0')}
+EarlyStopping counter: 88 out of 100
+{'epoch': 208, 'ce_loss': '27305.482421875', 'mae_loss': '0.7123146653175354'}
+{'Epoch': 208, 'MAE': tensor(0.0071, device='cuda:0')}
+EarlyStopping counter: 89 out of 100
+{'epoch': 209, 'ce_loss': '27303.685546875', 'mae_loss': '0.6531106233596802'}
+{'Epoch': 209, 'MAE': tensor(0.0059, device='cuda:0')}
+EarlyStopping counter: 90 out of 100
+{'epoch': 210, 'ce_loss': '27304.7421875', 'mae_loss': '0.6562992930412292'}
+{'Epoch': 210, 'MAE': tensor(0.0006, device='cuda:0')}
+EarlyStopping counter: 91 out of 100
+{'epoch': 211, 'ce_loss': '27304.7421875', 'mae_loss': '0.6706653237342834'}
+{'Epoch': 211, 'MAE': tensor(0.0002, device='cuda:0')}
+EarlyStopping counter: 92 out of 100
+{'epoch': 212, 'ce_loss': '27303.83984375', 'mae_loss': '0.6754040718078613'}
+{'Epoch': 212, 'MAE': tensor(0.0076, device='cuda:0')}
+EarlyStopping counter: 93 out of 100
+{'epoch': 213, 'ce_loss': '27303.28515625', 'mae_loss': '0.5654017329216003'}
+{'Epoch': 213, 'MAE': tensor(0.0120, device='cuda:0')}
+EarlyStopping counter: 94 out of 100
+{'epoch': 214, 'ce_loss': '27304.28125', 'mae_loss': '0.6651885509490967'}
+{'Epoch': 214, 'MAE': tensor(0.0027, device='cuda:0')}
+EarlyStopping counter: 95 out of 100
+{'epoch': 215, 'ce_loss': '27304.10546875', 'mae_loss': '0.6546444892883301'}
+{'Epoch': 215, 'MAE': tensor(0.0036, device='cuda:0')}
+EarlyStopping counter: 96 out of 100
+{'epoch': 216, 'ce_loss': '27304.171875', 'mae_loss': '0.6406664848327637'}
+{'Epoch': 216, 'MAE': tensor(0.0079, device='cuda:0')}
+EarlyStopping counter: 97 out of 100
+{'epoch': 217, 'ce_loss': '27304.12890625', 'mae_loss': '0.5844560861587524'}
+{'Epoch': 217, 'MAE': tensor(0.0148, device='cuda:0')}
+EarlyStopping counter: 98 out of 100
+{'epoch': 218, 'ce_loss': '27303.865234375', 'mae_loss': '0.6946073174476624'}
+{'Epoch': 218, 'MAE': tensor(0.0009, device='cuda:0')}
+EarlyStopping counter: 99 out of 100
+{'epoch': 219, 'ce_loss': '27303.619140625', 'mae_loss': '0.5574839115142822'}
+{'Epoch': 219, 'MAE': tensor(0.0253, device='cuda:0')}
+EarlyStopping counter: 100 out of 100
+{'Epoch': 1000, 'MAE': tensor(0.2177, device='cuda:0')}
+To run Epoch:1000 , It took 2 hours, 13 minutes, 50 seconds
+------------------------------ Continue Training ------------------------------ 
+------------------------------ Continue Training ------------------------------ 
+{'Epoch': 1000, 'MAE': tensor(0.0708, device='cuda:0')}
+------------------------------ Continue Training ------------------------------ 
+------------------------------ Continue Training ------------------------------ 
+{'Epoch': 1000, 'MAE': tensor(0.0708, device='cuda:0')}
+------------------------------ Continue Training ------------------------------ 
+{'Epoch': 1000, 'MAE': tensor(0.0708, device='cuda:0')}
+------------------------------ Continue Training ------------------------------ 
+{'Epoch': 1000, 'MAE': tensor(0.0708, device='cuda:0')}

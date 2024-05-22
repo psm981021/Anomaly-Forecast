@@ -19,9 +19,9 @@ class Fourcaster(nn.Module):
         kernels_per_layer = kernels_per_layer
         self.bilinear = bilinear
         reduction_ratio = 16
-        # self.args = args
+        self.args = args
         self.inner_size = 12
-        self.args =args
+
 
         self.inc = DoubleConvDS(self.n_channels, 64, kernels_per_layer=kernels_per_layer)
         self.cbam1 = CBAM(64, reduction_ratio=reduction_ratio)
@@ -100,6 +100,6 @@ if __name__ == "__main__":
 
     image = torch.randn(8,3,250,250) # (batch, 3, 250, 250)
     model=Fourcaster(n_channels=3,n_classes=1,kernels_per_layer=1) # n_classes는 n_channels와 같은 역할을 함. 
-    x,classification_logits, regression_logits = model(image)
+    classification_logits, regression_logits = model(image)
     print(classification_logits.size())
     print(regression_logits.size())

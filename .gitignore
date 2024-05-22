@@ -6,6 +6,7 @@ data/*.zip
 /data/radar_test/
 /data/radar_full/
 data/*.csv
+data/*.ipynb
 /data/data_radar
 
 
@@ -20,11 +21,10 @@ sample_test
 /datatest.ipynb
 /loader_test.csv
 radar_test
-sianet.py
+
 
 # sb
-/data/concat.ipynb
+/data/preprocess.ipynb
 /data/data_seoul_only/
 /data/data_gangwon_only/
 /wandb/
-

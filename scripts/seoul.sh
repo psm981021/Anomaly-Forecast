@@ -6,10 +6,11 @@ python main.py \
     --patience 50 \
     --batch 8 \
     --model_idx "seoul-V.1.01" \
+    --output_dir "output/seoul-V.1.01/" \
     --test_list=[]\
     --gpu_id 1 \
     --device "cuda:1" \
     --seed 0 \
-    --wandb
+    --do_eval
 
 # scripts/seoul.sh
