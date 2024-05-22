@@ -39,6 +39,7 @@ class Fourcaster(nn.Module):
         self.up3 = UpDS(256, 128 // factor, self.bilinear, kernels_per_layer=kernels_per_layer)
         self.up4 = UpDS(128, 64, self.bilinear, kernels_per_layer=kernels_per_layer)
         self.outc = OutConv(64, self.n_classes)
+        self.apply(self.init_weights)
 
         self.regression_model = nn.Sequential(
             nn.Conv2d(64, 32, kernel_size=3, padding=1),
@@ -65,6 +66,18 @@ class Fourcaster(nn.Module):
             plt.savefig('Generated Image')
         #Fourcaster.plot_image(x[0])
 
+    def init_weights(self, module):
+        """ Initialize the weights more appropriately based on layer type. """
+        if isinstance(module, (nn.Conv3d, nn.Conv2d, nn.ConvTranspose3d, nn.ConvTranspose2d)):
+            nn.init.xavier_normal_(module.weight)
+            if getattr(module, 'bias') is not None:
+                nn.init.constant_(module.bias, 0)
+
+        elif isinstance(module, nn.Linear):
+            module.weight.data.normal_(mean=0.0, std=self.args.initializer_range)
+
+
+
     def forward(self, x, args):
         
 
@@ -86,6 +99,7 @@ class Fourcaster(nn.Module):
         # shape 확인 - reconstruction image?
         x = self.up4(x, x1Att)
         generated_image = self.outc(x)
+        generated_image = generated_image.permute(0,2,3,1)
 
         
         regression_logits = self.regression_model(x)

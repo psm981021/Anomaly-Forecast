@@ -38,15 +38,21 @@ def main():
         required=True,  # Make this argument required
         help='A list of values',
     )
+    parser.add_argument("--grey_scale", action="store_true")
+
+
     # model args
     parser.add_argument("--model_idx", default="test", type=str, help="model identifier")
     parser.add_argument("--batch", type=int,default=4, help="batch size")
     parser.add_argument("--sianet",action="store_true")
+
     # train args
     parser.add_argument("--epochs", type=int, default=50, help="number of epochs" )
     parser.add_argument("--log_freq", type=int, default =1, help="number of log frequency" )
     parser.add_argument("--patience",type=int, default="10")
     parser.add_argument('--ce_type', type=str, default='ce_image', help='ce_image, ce_label')
+    parser.add_argument('--loss', type=str, default='ce_image', help='ed: Earth distance movement,\
+                        ')
 
     # learning args
     parser.add_argument("--lr", type=float, default=0.001, help="learning rate")
@@ -132,7 +138,7 @@ def main():
     if args.sianet:
         model=sianet()
     else:
-        model = Fourcaster(n_channels=3,n_classes=3,kernels_per_layer=1, args=args)
+        model = Fourcaster(n_channels=1,n_classes=100,kernels_per_layer=1, args=args)
     
     model.to(args.device)
 
