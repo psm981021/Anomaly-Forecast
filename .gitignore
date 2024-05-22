@@ -7,6 +7,7 @@ data/*.zip
 /data/radar_full/
 data/*.csv
 data/*.ipynb
+/data/data_radar
 
 
 # clone models
@@ -28,3 +29,4 @@ test.py
 /data/data_seoul_only/
 /data/data_gangwon_only/
 /wandb/
+/test.py

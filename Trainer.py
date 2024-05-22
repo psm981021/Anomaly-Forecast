@@ -11,6 +11,7 @@ class Trainer:
 
         self.args = args
         self.cuda_condition = torch.cuda.is_available() and not self.args.no_cuda
+        self.device = args.device
         # self.device = torch.device("cuda:" + args.gpu_id if torch.cuda.is_available() and not args.no_cuda else "cpu")
         # torch.cuda.set_device(self.args.device)
 
@@ -101,12 +102,15 @@ class FourTrainer(Trainer):
             total_ce, total_mae = torch.tensor(0.0, device=self.device), torch.tensor(0.0, device=self.device)
             
             for i, batch in batch_iter:
-                image, label, gap, datetime, class_label = batch
+                #image, label, gap, datetime, class_label = batch
+
+                image, label, gap, datetime = batch
+
 
                 image_batch = [t.to(self.args.device) for t in image] # 7
                 label = label.to(self.args.device) #answer, B
                 gap = gap.to(self.args.device) #diff between t-1 t, B
-                class_label = class_label.to(self.args.device)
+                #class_label = class_label.to(self.args.device)
                 
                 set_ce = 0.0
                 precipitation = []       
@@ -125,6 +129,10 @@ class FourTrainer(Trainer):
                         loss_ce =  self.ce_criterion(generated_image.flatten(1), image_batch[i+1].flatten(1))
                     elif self.args.ce_type == 'mse_image':
                         loss_ce = self.mae_criterion(generated_image.flatten(1), image_batch[i+1].flatten(1))
+                    elif self.args.ce_type == 'ed_image':
+                        preds = torch.softmax(generated_image,dim=-1)
+                        err = (torch.arange(100).to(self.device).float() - image_batch[i+1].permute(0,2,3,1)).abs()
+                        loss_ce = torch.sum((preds * err),dim=-1).mean()
                     else:
                         loss_ce =  self.ce_criterion(generated_image.flatten(1), class_label)
                     
@@ -209,6 +217,10 @@ class FourTrainer(Trainer):
                             loss_ce =  self.ce_criterion(generated_image.flatten(1), image_batch[i+1].flatten(1))
                         elif self.args.ce_type == 'mse_image':
                             loss_ce = self.mae_criterion(generated_image.flatten(1), image_batch[i+1].flatten(1))
+                        elif self.args.ce_type == 'ed_image':
+                            preds = torch.softmax(generated_image,dim=-1)
+                            err = (torch.arange(100).to(self.device).float() - image_batch[i+1].permute(0,2,3,1)).abs()
+                            loss_ce = torch.sum((preds * err),dim=-1).mean()
                         else:
                             loss_ce =  self.ce_criterion(generated_image.flatten(1), class_label)
 
@@ -327,16 +339,13 @@ class SianetTrainer(Trainer):
                     target=image_batch[6]
 
                     image_batch_tensor=image_batch_tensor.permute(1,2,0,3,4) # [8,3,6,150,150]
-                
+
                     generated_image=self.model(image_batch_tensor)
                 
                     generated_image=generated_image.expand(-1,3,-1,-1,-1).squeeze(2)
 
+                    import IPython; IPython.embed(colors='Linux'); exit(1)
                     loss_l2 =  self.l2_criterion(generated_image, target)                
-
-                    self.optim.zero_grad()
-                    loss_l2.backward()
-                    self.optim.step()
 
                     total_l2 += loss_l2.item()
 

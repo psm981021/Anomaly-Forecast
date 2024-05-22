@@ -50,3 +50,40 @@ EarlyStopping counter: 10 out of 10
 To run Epoch:50 , It took 3 hours, 31 minutes, 41 seconds
 
 ------------------------------ Continue Training ------------------------------ 
+------------------------------ Continue Training ------------------------------ 
+{'epoch': 0, 'ce_loss': '-73813376.0', 'mae_loss': '0.2167191207408905'}
+{'Epoch': 0, 'MAE': tensor(0.0037, device='cuda:0')}
+{'epoch': 1, 'ce_loss': '-1008755136.0', 'mae_loss': '0.2163320779800415'}
+{'Epoch': 1, 'MAE': tensor(0.0037, device='cuda:0')}
+{'epoch': 2, 'ce_loss': '-3836307200.0', 'mae_loss': '0.2163100391626358'}
+{'Epoch': 2, 'MAE': tensor(0.0037, device='cuda:0')}
+{'epoch': 3, 'ce_loss': '-10438989824.0', 'mae_loss': '0.2163359820842743'}
+{'Epoch': 3, 'MAE': tensor(0.0037, device='cuda:0')}
+EarlyStopping counter: 1 out of 10
+{'epoch': 4, 'ce_loss': '-23630450688.0', 'mae_loss': '0.21631282567977905'}
+{'Epoch': 4, 'MAE': tensor(0.0037, device='cuda:0')}
+EarlyStopping counter: 2 out of 10
+{'epoch': 5, 'ce_loss': '-46539804672.0', 'mae_loss': '0.216297909617424'}
+{'Epoch': 5, 'MAE': tensor(0.0037, device='cuda:0')}
+EarlyStopping counter: 3 out of 10
+{'epoch': 6, 'ce_loss': '-83098615808.0', 'mae_loss': '0.21629932522773743'}
+{'Epoch': 6, 'MAE': tensor(0.0037, device='cuda:0')}
+EarlyStopping counter: 4 out of 10
+{'epoch': 7, 'ce_loss': '-138100277248.0', 'mae_loss': '0.21631047129631042'}
+{'Epoch': 7, 'MAE': tensor(0.0037, device='cuda:0')}
+EarlyStopping counter: 5 out of 10
+{'epoch': 8, 'ce_loss': '-216694603776.0', 'mae_loss': '0.21630100905895233'}
+{'Epoch': 8, 'MAE': tensor(0.0037, device='cuda:0')}
+EarlyStopping counter: 6 out of 10
+{'epoch': 9, 'ce_loss': '-323882156032.0', 'mae_loss': '0.2162982076406479'}
+{'Epoch': 9, 'MAE': tensor(0.0037, device='cuda:0')}
+EarlyStopping counter: 7 out of 10
+{'epoch': 10, 'ce_loss': '-465392795648.0', 'mae_loss': '0.21629668772220612'}
+{'Epoch': 10, 'MAE': tensor(0.0037, device='cuda:0')}
+EarlyStopping counter: 8 out of 10
+{'epoch': 11, 'ce_loss': '-647323779072.0', 'mae_loss': '0.21629369258880615'}
+{'Epoch': 11, 'MAE': tensor(0.0037, device='cuda:0')}
+EarlyStopping counter: 9 out of 10
+{'epoch': 12, 'ce_loss': '-876127715328.0', 'mae_loss': '0.21629832684993744'}
+{'Epoch': 12, 'MAE': tensor(0.0037, device='cuda:0')}
+EarlyStopping counter: 10 out of 10
