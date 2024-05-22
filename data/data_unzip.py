@@ -28,8 +28,8 @@ def extract_image_file(csv_path,raw_data_path, extract_path):
 
 if __name__ == "__main__":
 
-    path_to_zipfile = 'data_gangwon_only.zip'
-    directory_to_unzip = ''
+    path_to_zipfile = 'data\레이더_22.7_22.9.zip'
+    directory_to_unzip = 'data\data_radar'
 
     with zipfile.ZipFile(path_to_zipfile, 'r') as zip_ref:
         zip_ref.extractall(directory_to_unzip)

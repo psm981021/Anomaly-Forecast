@@ -6,6 +6,7 @@ data/*.zip
 /data/radar_test/
 /data/radar_full/
 data/*.csv
+/data/data_radar
 
 
 # clone models
