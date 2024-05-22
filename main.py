@@ -50,9 +50,7 @@ def main():
     parser.add_argument("--epochs", type=int, default=50, help="number of epochs" )
     parser.add_argument("--log_freq", type=int, default =1, help="number of log frequency" )
     parser.add_argument("--patience",type=int, default="10")
-    parser.add_argument('--ce_type', type=str, default='ce_image', help='ce_image, ce_label')
-    parser.add_argument('--loss', type=str, default='ce_image', help='ed: Earth distance movement,\
-                        ')
+    parser.add_argument('--loss_type', type=str, default='ce_image', help='ce_image, ce_label')
 
     # learning args
     parser.add_argument("--lr", type=float, default=0.001, help="learning rate")
@@ -190,6 +188,10 @@ def main():
         dataframe.to_csv(args.dataframe_path,index=False)
         # import IPython; IPython.embed(colors='Linux');exit(1);
     else:
+        current_time = time.time()
+        with open(args.log_file, "a") as f:
+            f.write(f"Current time: {current_time}\n")
+            
         early_stopping = EarlyStopping(args.log_file,args.checkpoint_path, args.patience, verbose=True)
 
         for epoch in range(args.epochs):
@@ -198,7 +200,7 @@ def main():
 
             score,_ = trainer.valid(epoch)
             if args.wandb == True:
-                wandb.log({"CE Loss": score},step=epoch)
+                wandb.log({"Generation Loss (Valid)": score},step=epoch)
             early_stopping(score, trainer.model)
             if early_stopping.early_stop:
                 print("Early stopping")
@@ -229,8 +231,10 @@ def main():
             
             #dataframe = pd.DataFrame(args.test_list, columns =['datetime', 'predicted precipitation', 'ground_truth'])
         except:
+            with open(args.log_file, "a") as f:
+                f.write("Error Handling csv")
             print("Error Handling csv");
-            import IPython; IPython.embed(colors='Linux');exit(1);
+            
             
         
     
@@ -244,7 +248,7 @@ def main():
 
         with open(args.log_file, "a") as f:
             f.write(f"To run Epoch:{args.epochs} , It took {hours} hours, {minutes} minutes, {seconds} seconds\n")
-
+            
 if __name__ == "__main__":
     main()
 

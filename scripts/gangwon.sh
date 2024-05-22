@@ -5,13 +5,13 @@ python main.py \
     --batch 8 \
     --epochs 1000 \
     --patience 50 \
-    --model_idx "gangwon-V.1.02" \
-    --output_dir "output/gangwon-V.1.02/" \
+    --model_idx "gangwon-V.2.01" \
+    --output_dir "output/gangwon-V.2.01/" \
     --test_list=[] \
     --gpu_id 1 \
     --seed 0 \
-    --ce_type 'ce_label' \
-    # --wandb
+    --loss_type "ed_image" \
+    --wandb
 
 
 # scripts/gangwon.sh
