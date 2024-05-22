@@ -327,16 +327,12 @@ class SianetTrainer(Trainer):
                     target=image_batch[6]
 
                     image_batch_tensor=image_batch_tensor.permute(1,2,0,3,4) # [8,3,6,150,150]
-                
+
                     generated_image=self.model(image_batch_tensor)
                 
                     generated_image=generated_image.expand(-1,3,-1,-1,-1).squeeze(2)
 
                     loss_l2 =  self.l2_criterion(generated_image, target)                
-
-                    self.optim.zero_grad()
-                    loss_l2.backward()
-                    self.optim.step()
 
                     total_l2 += loss_l2.item()
 

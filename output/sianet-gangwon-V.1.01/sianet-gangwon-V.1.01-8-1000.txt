@@ -1,10 +1,9 @@
-
 ---------------------- Configure Info: ----------------------
 data_dir                       : data\radar_full
-image_csv_dir                  : c:\\Users\\PC\\OneDrive\\바탕 화면\\2024-1\\캡스톤\\anomaly\\data\\강원_2021_2023_강수량 0.1 미만 제거_상위 10% test.csv
+image_csv_dir                  : data\\강원_2021_2023_강수량 0.1 미만 제거_상위 10% test.csv
 output_dir                     : output\\sianet-gangwon-V.1.01
 gpu_id                         : 0
-device                         : cpu
+device                         : cuda:0
 seed                           : 0
 no_cuda                        : False
 use_multi_gpu                  : False
@@ -29,12 +28,13 @@ log_file                       : output\\sianet-gangwon-V.1.01\sianet-gangwon-V.
 dataframe_path                 : output\\sianet-gangwon-V.1.01\sianet-gangwon-V.1.01-8-1000.csv
 checkpoint_path                : output\\sianet-gangwon-V.1.01\sianet-gangwon-V.1.01-8-1000.pt
 ---------------------- Configure Info: ----------------------
+{'epoch': 0, 'CE Loss': '0.223974', 'MAE Loss': '0.000000'}
 ---------------------- Configure Info: ----------------------
 data_dir                       : data\radar_full
-image_csv_dir                  : c:\\Users\\PC\\OneDrive\\바탕 화면\\2024-1\\캡스톤\\anomaly\\data\\강원_2021_2023_강수량 0.1 미만 제거_상위 10% test.csv
+image_csv_dir                  : data\\강원_2021_2023_강수량 0.1 미만 제거_상위 10% test.csv
 output_dir                     : output\\sianet-gangwon-V.1.01
 gpu_id                         : 0
-device                         : cpu
+device                         : cuda:0
 seed                           : 0
 no_cuda                        : False
 use_multi_gpu                  : False
@@ -59,3 +59,73 @@ log_file                       : output\\sianet-gangwon-V.1.01\sianet-gangwon-V.
 dataframe_path                 : output\\sianet-gangwon-V.1.01\sianet-gangwon-V.1.01-8-1000.csv
 checkpoint_path                : output\\sianet-gangwon-V.1.01\sianet-gangwon-V.1.01-8-1000.pt
 ---------------------- Configure Info: ----------------------
+{'epoch': 0, 'CE Loss': '0.223974', 'MAE Loss': '0.000000'}
+---------------------- Configure Info: ----------------------
+data_dir                       : data\radar_full
+image_csv_dir                  : data\\강원_2021_2023_강수량 0.1 미만 제거_상위 10% test.csv
+output_dir                     : output\\sianet-gangwon-V.1.01
+gpu_id                         : 0
+device                         : cuda:0
+seed                           : 0
+no_cuda                        : False
+use_multi_gpu                  : False
+multi_devices                  : 0,1
+wandb                          : False
+pre_train                      : False
+do_eval                        : False
+test_list                      : ['[]']
+model_idx                      : sianet-gangwon-V.1.01
+batch                          : 8
+sianet                         : True
+epochs                         : 1000
+log_freq                       : 1
+patience                       : 50
+ce_type                        : ce_image
+lr                             : 0.001
+adam_beta1                     : 0.9
+adam_beta2                     : 0.999
+weight_decay                   : 0.0
+str                            : sianet-gangwon-V.1.01-8-1000
+log_file                       : output\\sianet-gangwon-V.1.01\sianet-gangwon-V.1.01-8-1000.txt
+dataframe_path                 : output\\sianet-gangwon-V.1.01\sianet-gangwon-V.1.01-8-1000.csv
+checkpoint_path                : output\\sianet-gangwon-V.1.01\sianet-gangwon-V.1.01-8-1000.pt
+---------------------- Configure Info: ----------------------
+{'epoch': 0, 'CE Loss': '0.223974', 'MAE Loss': '0.000000'}
+---------------------- Configure Info: ----------------------
+data_dir                       : data\radar_full
+image_csv_dir                  : data\\강원_2021_2023_강수량 0.1 미만 제거_상위 10% test.csv
+output_dir                     : output\\sianet-gangwon-V.1.01
+gpu_id                         : 0
+device                         : cuda:0
+seed                           : 0
+no_cuda                        : False
+use_multi_gpu                  : False
+multi_devices                  : 0,1
+wandb                          : False
+pre_train                      : False
+do_eval                        : False
+test_list                      : ['[]']
+model_idx                      : sianet-gangwon-V.1.01
+batch                          : 8
+sianet                         : True
+epochs                         : 1000
+log_freq                       : 1
+patience                       : 50
+ce_type                        : ce_image
+lr                             : 0.001
+adam_beta1                     : 0.9
+adam_beta2                     : 0.999
+weight_decay                   : 0.0
+str                            : sianet-gangwon-V.1.01-8-1000
+log_file                       : output\\sianet-gangwon-V.1.01\sianet-gangwon-V.1.01-8-1000.txt
+dataframe_path                 : output\\sianet-gangwon-V.1.01\sianet-gangwon-V.1.01-8-1000.csv
+checkpoint_path                : output\\sianet-gangwon-V.1.01\sianet-gangwon-V.1.01-8-1000.pt
+---------------------- Configure Info: ----------------------
+{'epoch': 0, 'CE Loss': '0.223974', 'MAE Loss': '0.000000'}
+{'Epoch': 0, 'Cross Entropy': '0.114847'}
+{'epoch': 1, 'CE Loss': '0.142579', 'MAE Loss': '0.000000'}
+{'Epoch': 1, 'Cross Entropy': '0.101117'}
+{'epoch': 2, 'CE Loss': '0.122746', 'MAE Loss': '0.000000'}
+{'Epoch': 2, 'Cross Entropy': '0.093462'}
+{'epoch': 3, 'CE Loss': '0.110634', 'MAE Loss': '0.000000'}
+{'Epoch': 3, 'Cross Entropy': '0.091996'}
