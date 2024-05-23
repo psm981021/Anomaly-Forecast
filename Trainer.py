@@ -344,7 +344,7 @@ class SianetTrainer(Trainer):
                 
                     generated_image=generated_image.expand(-1,3,-1,-1,-1).squeeze(2)
 
-                    import IPython; IPython.embed(colors='Linux'); exit(1)
+                    # import IPython; IPython.embed(colors='Linux'); exit(1)
                     loss_l2 =  self.l2_criterion(generated_image, target)                
 
                     total_l2 += loss_l2.item()
