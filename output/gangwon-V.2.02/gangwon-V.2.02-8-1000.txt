@@ -30,112 +30,310 @@ log_file                       : output/gangwon-V.2.02/gangwon-V.2.02-8-1000.txt
 dataframe_path                 : output/gangwon-V.2.02/gangwon-V.2.02-8-1000.csv
 checkpoint_path                : output/gangwon-V.2.02/gangwon-V.2.02-8-1000.pt
 ---------------------- Configure Info: ----------------------
-Current time: 1716467910.2643085
-{'epoch': 0, 'Geneartion Loss(Train)': '18.807301', 'Correlation Image(Train)': '0.008530', 'MAE Loss': '1.083860'}
-{'Epoch': 0, 'Generation Loss (Eval)': '3.140149'}
-{'epoch': 1, 'Geneartion Loss(Train)': '0.903061', 'Correlation Image(Train)': '0.008479', 'MAE Loss': '0.825794'}
-{'Epoch': 1, 'Generation Loss (Eval)': '0.352481'}
-{'epoch': 2, 'Geneartion Loss(Train)': '0.334108', 'Correlation Image(Train)': '0.008425', 'MAE Loss': '0.824809'}
-{'Epoch': 2, 'Generation Loss (Eval)': '0.305883'}
-{'epoch': 3, 'Geneartion Loss(Train)': '0.307517', 'Correlation Image(Train)': '0.008163', 'MAE Loss': '0.807614'}
-{'Epoch': 3, 'Generation Loss (Eval)': '0.270384'}
-{'epoch': 4, 'Geneartion Loss(Train)': '0.267901', 'Correlation Image(Train)': '0.007858', 'MAE Loss': '0.798493'}
-{'Epoch': 4, 'Generation Loss (Eval)': '0.232169'}
-{'epoch': 5, 'Geneartion Loss(Train)': '0.249116', 'Correlation Image(Train)': '0.008009', 'MAE Loss': '0.799535'}
-{'Epoch': 5, 'Generation Loss (Eval)': '0.226583'}
-{'epoch': 6, 'Geneartion Loss(Train)': '0.241697', 'Correlation Image(Train)': '0.008076', 'MAE Loss': '0.792489'}
-{'Epoch': 6, 'Generation Loss (Eval)': '0.224604'}
-{'epoch': 7, 'Geneartion Loss(Train)': '0.237759', 'Correlation Image(Train)': '0.008032', 'MAE Loss': '0.795558'}
-{'Epoch': 7, 'Generation Loss (Eval)': '0.223800'}
-{'epoch': 8, 'Geneartion Loss(Train)': '0.237919', 'Correlation Image(Train)': '0.007932', 'MAE Loss': '0.795487'}
-{'Epoch': 8, 'Generation Loss (Eval)': '0.223215'}
-{'epoch': 9, 'Geneartion Loss(Train)': '0.232845', 'Correlation Image(Train)': '0.007991', 'MAE Loss': '0.796235'}
-{'Epoch': 9, 'Generation Loss (Eval)': '0.222571'}
-{'epoch': 10, 'Geneartion Loss(Train)': '0.231055', 'Correlation Image(Train)': '0.008025', 'MAE Loss': '0.791336'}
-{'Epoch': 10, 'Generation Loss (Eval)': '0.223674'}
+Current time: 1716469898.5289085
+{'epoch': 0, 'Geneartion Loss(Train)': '18.764616', 'Correlation Image(Train)': '0.008523', 'MAE Loss': '1.083593'}
+{'Epoch': 0, 'Generation Loss (Eval)': '3.041490'}
+{'epoch': 1, 'Geneartion Loss(Train)': '0.878261', 'Correlation Image(Train)': '0.008506', 'MAE Loss': '0.819560'}
+{'Epoch': 1, 'Generation Loss (Eval)': '0.320071'}
+{'epoch': 2, 'Geneartion Loss(Train)': '0.329828', 'Correlation Image(Train)': '0.008262', 'MAE Loss': '0.844031'}
+{'Epoch': 2, 'Generation Loss (Eval)': '0.286480'}
+{'epoch': 3, 'Geneartion Loss(Train)': '0.297583', 'Correlation Image(Train)': '0.008317', 'MAE Loss': '0.834290'}
+{'Epoch': 3, 'Generation Loss (Eval)': '0.282272'}
+{'epoch': 4, 'Geneartion Loss(Train)': '0.264993', 'Correlation Image(Train)': '0.008202', 'MAE Loss': '0.820490'}
+{'Epoch': 4, 'Generation Loss (Eval)': '0.231861'}
+{'epoch': 5, 'Geneartion Loss(Train)': '0.245028', 'Correlation Image(Train)': '0.008136', 'MAE Loss': '0.798650'}
+{'Epoch': 5, 'Generation Loss (Eval)': '0.225841'}
+{'epoch': 6, 'Geneartion Loss(Train)': '0.240002', 'Correlation Image(Train)': '0.008145', 'MAE Loss': '0.787923'}
+{'Epoch': 6, 'Generation Loss (Eval)': '0.223965'}
+{'epoch': 7, 'Geneartion Loss(Train)': '0.235285', 'Correlation Image(Train)': '0.008174', 'MAE Loss': '0.791971'}
+{'Epoch': 7, 'Generation Loss (Eval)': '0.223955'}
+{'epoch': 8, 'Geneartion Loss(Train)': '0.233446', 'Correlation Image(Train)': '0.008321', 'MAE Loss': '0.793609'}
+{'Epoch': 8, 'Generation Loss (Eval)': '0.247351'}
 EarlyStopping counter: 1 out of 50
-{'epoch': 11, 'Geneartion Loss(Train)': '0.232692', 'Correlation Image(Train)': '0.008145', 'MAE Loss': '0.794048'}
-{'Epoch': 11, 'Generation Loss (Eval)': '0.228342'}
-EarlyStopping counter: 2 out of 50
-{'epoch': 12, 'Geneartion Loss(Train)': '0.233546', 'Correlation Image(Train)': '0.008091', 'MAE Loss': '0.794506'}
-{'Epoch': 12, 'Generation Loss (Eval)': '0.221843'}
-{'epoch': 13, 'Geneartion Loss(Train)': '0.231222', 'Correlation Image(Train)': '0.007927', 'MAE Loss': '0.789440'}
-{'Epoch': 13, 'Generation Loss (Eval)': '0.221087'}
-{'epoch': 14, 'Geneartion Loss(Train)': '0.230825', 'Correlation Image(Train)': '0.007720', 'MAE Loss': '0.790044'}
-{'Epoch': 14, 'Generation Loss (Eval)': '0.223047'}
+{'epoch': 9, 'Geneartion Loss(Train)': '0.234243', 'Correlation Image(Train)': '0.008161', 'MAE Loss': '0.792906'}
+{'Epoch': 9, 'Generation Loss (Eval)': '0.221990'}
+{'epoch': 10, 'Geneartion Loss(Train)': '0.231058', 'Correlation Image(Train)': '0.008110', 'MAE Loss': '0.791780'}
+{'Epoch': 10, 'Generation Loss (Eval)': '0.223219'}
 EarlyStopping counter: 1 out of 50
-{'epoch': 15, 'Geneartion Loss(Train)': '0.229951', 'Correlation Image(Train)': '0.007723', 'MAE Loss': '0.789650'}
-{'Epoch': 15, 'Generation Loss (Eval)': '0.222741'}
+{'epoch': 11, 'Geneartion Loss(Train)': '0.230120', 'Correlation Image(Train)': '0.007975', 'MAE Loss': '0.790442'}
+{'Epoch': 11, 'Generation Loss (Eval)': '0.224487'}
 EarlyStopping counter: 2 out of 50
-{'epoch': 16, 'Geneartion Loss(Train)': '0.228316', 'Correlation Image(Train)': '0.007142', 'MAE Loss': '0.794093'}
-{'Epoch': 16, 'Generation Loss (Eval)': '0.222037'}
+{'epoch': 12, 'Geneartion Loss(Train)': '0.230680', 'Correlation Image(Train)': '0.007862', 'MAE Loss': '0.794727'}
+{'Epoch': 12, 'Generation Loss (Eval)': '0.222222'}
 EarlyStopping counter: 3 out of 50
-{'epoch': 17, 'Geneartion Loss(Train)': '0.234529', 'Correlation Image(Train)': '0.007592', 'MAE Loss': '0.805830'}
-{'Epoch': 17, 'Generation Loss (Eval)': '0.223689'}
+{'epoch': 13, 'Geneartion Loss(Train)': '0.228772', 'Correlation Image(Train)': '0.007932', 'MAE Loss': '0.788941'}
+{'Epoch': 13, 'Generation Loss (Eval)': '0.222685'}
 EarlyStopping counter: 4 out of 50
-{'epoch': 18, 'Geneartion Loss(Train)': '0.229007', 'Correlation Image(Train)': '0.007513', 'MAE Loss': '0.786786'}
-{'Epoch': 18, 'Generation Loss (Eval)': '0.223295'}
+{'epoch': 14, 'Geneartion Loss(Train)': '0.229427', 'Correlation Image(Train)': '0.007784', 'MAE Loss': '0.790760'}
+{'Epoch': 14, 'Generation Loss (Eval)': '0.224460'}
 EarlyStopping counter: 5 out of 50
-{'epoch': 19, 'Geneartion Loss(Train)': '0.227218', 'Correlation Image(Train)': '0.007556', 'MAE Loss': '0.788046'}
-{'Epoch': 19, 'Generation Loss (Eval)': '0.223684'}
+{'epoch': 15, 'Geneartion Loss(Train)': '0.228853', 'Correlation Image(Train)': '0.007716', 'MAE Loss': '0.788225'}
+{'Epoch': 15, 'Generation Loss (Eval)': '0.224384'}
 EarlyStopping counter: 6 out of 50
-{'epoch': 20, 'Geneartion Loss(Train)': '0.226237', 'Correlation Image(Train)': '0.007573', 'MAE Loss': '0.788028'}
-{'Epoch': 20, 'Generation Loss (Eval)': '0.225645'}
+{'epoch': 16, 'Geneartion Loss(Train)': '0.227228', 'Correlation Image(Train)': '0.007817', 'MAE Loss': '0.787924'}
+{'Epoch': 16, 'Generation Loss (Eval)': '0.223349'}
 EarlyStopping counter: 7 out of 50
-{'epoch': 21, 'Geneartion Loss(Train)': '0.225787', 'Correlation Image(Train)': '0.007593', 'MAE Loss': '0.786069'}
-{'Epoch': 21, 'Generation Loss (Eval)': '0.223852'}
+{'epoch': 17, 'Geneartion Loss(Train)': '0.227053', 'Correlation Image(Train)': '0.007771', 'MAE Loss': '0.790070'}
+{'Epoch': 17, 'Generation Loss (Eval)': '0.221731'}
+{'epoch': 18, 'Geneartion Loss(Train)': '0.226007', 'Correlation Image(Train)': '0.007795', 'MAE Loss': '0.789173'}
+{'Epoch': 18, 'Generation Loss (Eval)': '0.222405'}
+EarlyStopping counter: 1 out of 50
+{'epoch': 19, 'Geneartion Loss(Train)': '0.225078', 'Correlation Image(Train)': '0.007808', 'MAE Loss': '0.787340'}
+{'Epoch': 19, 'Generation Loss (Eval)': '0.222700'}
+EarlyStopping counter: 2 out of 50
+{'epoch': 20, 'Geneartion Loss(Train)': '0.224724', 'Correlation Image(Train)': '0.007768', 'MAE Loss': '0.788716'}
+{'Epoch': 20, 'Generation Loss (Eval)': '0.222298'}
+EarlyStopping counter: 3 out of 50
+{'epoch': 21, 'Geneartion Loss(Train)': '0.224152', 'Correlation Image(Train)': '0.007808', 'MAE Loss': '0.790208'}
+{'Epoch': 21, 'Generation Loss (Eval)': '0.222425'}
+EarlyStopping counter: 4 out of 50
+{'epoch': 22, 'Geneartion Loss(Train)': '0.223657', 'Correlation Image(Train)': '0.007827', 'MAE Loss': '0.787861'}
+{'Epoch': 22, 'Generation Loss (Eval)': '0.222184'}
+EarlyStopping counter: 5 out of 50
+{'epoch': 23, 'Geneartion Loss(Train)': '0.223336', 'Correlation Image(Train)': '0.007846', 'MAE Loss': '0.787798'}
+{'Epoch': 23, 'Generation Loss (Eval)': '0.222113'}
+EarlyStopping counter: 6 out of 50
+{'epoch': 24, 'Geneartion Loss(Train)': '0.223981', 'Correlation Image(Train)': '0.007887', 'MAE Loss': '0.788206'}
+{'Epoch': 24, 'Generation Loss (Eval)': '0.221586'}
+{'epoch': 25, 'Geneartion Loss(Train)': '0.224519', 'Correlation Image(Train)': '0.007904', 'MAE Loss': '0.788590'}
+{'Epoch': 25, 'Generation Loss (Eval)': '0.221510'}
+{'epoch': 26, 'Geneartion Loss(Train)': '0.224014', 'Correlation Image(Train)': '0.007908', 'MAE Loss': '0.786862'}
+{'Epoch': 26, 'Generation Loss (Eval)': '0.224115'}
+EarlyStopping counter: 1 out of 50
+{'epoch': 27, 'Geneartion Loss(Train)': '0.223573', 'Correlation Image(Train)': '0.007913', 'MAE Loss': '0.786944'}
+{'Epoch': 27, 'Generation Loss (Eval)': '0.222088'}
+EarlyStopping counter: 2 out of 50
+{'epoch': 28, 'Geneartion Loss(Train)': '0.224130', 'Correlation Image(Train)': '0.007936', 'MAE Loss': '0.788242'}
+{'Epoch': 28, 'Generation Loss (Eval)': '0.221290'}
+{'epoch': 29, 'Geneartion Loss(Train)': '0.223459', 'Correlation Image(Train)': '0.007875', 'MAE Loss': '0.787959'}
+{'Epoch': 29, 'Generation Loss (Eval)': '0.221110'}
+{'epoch': 30, 'Geneartion Loss(Train)': '0.222920', 'Correlation Image(Train)': '0.007909', 'MAE Loss': '0.785439'}
+{'Epoch': 30, 'Generation Loss (Eval)': '0.220885'}
+{'epoch': 31, 'Geneartion Loss(Train)': '0.226611', 'Correlation Image(Train)': '0.008150', 'MAE Loss': '0.787830'}
+{'Epoch': 31, 'Generation Loss (Eval)': '0.220672'}
+{'epoch': 32, 'Geneartion Loss(Train)': '0.224471', 'Correlation Image(Train)': '0.007907', 'MAE Loss': '0.788154'}
+{'Epoch': 32, 'Generation Loss (Eval)': '0.220929'}
+EarlyStopping counter: 1 out of 50
+{'epoch': 33, 'Geneartion Loss(Train)': '0.225175', 'Correlation Image(Train)': '0.007719', 'MAE Loss': '0.843739'}
+{'Epoch': 33, 'Generation Loss (Eval)': '0.221381'}
+EarlyStopping counter: 2 out of 50
+{'epoch': 34, 'Geneartion Loss(Train)': '0.226893', 'Correlation Image(Train)': '0.007756', 'MAE Loss': '0.813127'}
+{'Epoch': 34, 'Generation Loss (Eval)': '0.231731'}
+EarlyStopping counter: 3 out of 50
+{'epoch': 35, 'Geneartion Loss(Train)': '0.227906', 'Correlation Image(Train)': '0.008101', 'MAE Loss': '0.817361'}
+{'Epoch': 35, 'Generation Loss (Eval)': '0.221969'}
+EarlyStopping counter: 4 out of 50
+{'epoch': 36, 'Geneartion Loss(Train)': '0.225009', 'Correlation Image(Train)': '0.008121', 'MAE Loss': '0.790271'}
+{'Epoch': 36, 'Generation Loss (Eval)': '0.222418'}
+EarlyStopping counter: 5 out of 50
+{'epoch': 37, 'Geneartion Loss(Train)': '0.224116', 'Correlation Image(Train)': '0.008226', 'MAE Loss': '0.787321'}
+{'Epoch': 37, 'Generation Loss (Eval)': '0.221230'}
+EarlyStopping counter: 6 out of 50
+{'epoch': 38, 'Geneartion Loss(Train)': '0.223659', 'Correlation Image(Train)': '0.008237', 'MAE Loss': '0.786058'}
+{'Epoch': 38, 'Generation Loss (Eval)': '0.222513'}
+EarlyStopping counter: 7 out of 50
+{'epoch': 39, 'Geneartion Loss(Train)': '0.223317', 'Correlation Image(Train)': '0.008237', 'MAE Loss': '0.789515'}
+{'Epoch': 39, 'Generation Loss (Eval)': '0.223193'}
 EarlyStopping counter: 8 out of 50
-{'epoch': 22, 'Geneartion Loss(Train)': '0.225053', 'Correlation Image(Train)': '0.007623', 'MAE Loss': '0.790622'}
-{'Epoch': 22, 'Generation Loss (Eval)': '0.224360'}
+{'epoch': 40, 'Geneartion Loss(Train)': '0.223645', 'Correlation Image(Train)': '0.007984', 'MAE Loss': '0.789227'}
+{'Epoch': 40, 'Generation Loss (Eval)': '0.223000'}
 EarlyStopping counter: 9 out of 50
-{'epoch': 23, 'Geneartion Loss(Train)': '0.224596', 'Correlation Image(Train)': '0.007637', 'MAE Loss': '0.789828'}
-{'Epoch': 23, 'Generation Loss (Eval)': '0.224423'}
+{'epoch': 41, 'Geneartion Loss(Train)': '0.223001', 'Correlation Image(Train)': '0.008024', 'MAE Loss': '0.788393'}
+{'Epoch': 41, 'Generation Loss (Eval)': '0.223795'}
 EarlyStopping counter: 10 out of 50
-{'epoch': 24, 'Geneartion Loss(Train)': '0.224424', 'Correlation Image(Train)': '0.007602', 'MAE Loss': '0.788930'}
-{'Epoch': 24, 'Generation Loss (Eval)': '0.225989'}
+{'epoch': 42, 'Geneartion Loss(Train)': '0.222674', 'Correlation Image(Train)': '0.008030', 'MAE Loss': '0.787138'}
+{'Epoch': 42, 'Generation Loss (Eval)': '0.223675'}
 EarlyStopping counter: 11 out of 50
-{'epoch': 25, 'Geneartion Loss(Train)': '0.224428', 'Correlation Image(Train)': '0.007634', 'MAE Loss': '0.789921'}
-{'Epoch': 25, 'Generation Loss (Eval)': '0.224767'}
+{'epoch': 43, 'Geneartion Loss(Train)': '0.222450', 'Correlation Image(Train)': '0.008031', 'MAE Loss': '0.788562'}
+{'Epoch': 43, 'Generation Loss (Eval)': '0.223516'}
 EarlyStopping counter: 12 out of 50
-{'epoch': 26, 'Geneartion Loss(Train)': '0.224345', 'Correlation Image(Train)': '0.007500', 'MAE Loss': '0.789462'}
-{'Epoch': 26, 'Generation Loss (Eval)': '0.223679'}
+{'epoch': 44, 'Geneartion Loss(Train)': '0.222258', 'Correlation Image(Train)': '0.008030', 'MAE Loss': '0.786572'}
+{'Epoch': 44, 'Generation Loss (Eval)': '0.223310'}
 EarlyStopping counter: 13 out of 50
-{'epoch': 27, 'Geneartion Loss(Train)': '0.226409', 'Correlation Image(Train)': '0.007932', 'MAE Loss': '0.809581'}
-{'Epoch': 27, 'Generation Loss (Eval)': '0.224136'}
+{'epoch': 45, 'Geneartion Loss(Train)': '0.222307', 'Correlation Image(Train)': '0.008152', 'MAE Loss': '0.787637'}
+{'Epoch': 45, 'Generation Loss (Eval)': '0.222529'}
 EarlyStopping counter: 14 out of 50
-{'epoch': 28, 'Geneartion Loss(Train)': '0.226397', 'Correlation Image(Train)': '0.007955', 'MAE Loss': '0.790936'}
-{'Epoch': 28, 'Generation Loss (Eval)': '0.222503'}
+{'epoch': 46, 'Geneartion Loss(Train)': '0.222225', 'Correlation Image(Train)': '0.008181', 'MAE Loss': '0.786235'}
+{'Epoch': 46, 'Generation Loss (Eval)': '0.222685'}
 EarlyStopping counter: 15 out of 50
-{'epoch': 29, 'Geneartion Loss(Train)': '0.224673', 'Correlation Image(Train)': '0.008004', 'MAE Loss': '0.788275'}
-{'Epoch': 29, 'Generation Loss (Eval)': '0.222916'}
+{'epoch': 47, 'Geneartion Loss(Train)': '0.222005', 'Correlation Image(Train)': '0.008172', 'MAE Loss': '0.787247'}
+{'Epoch': 47, 'Generation Loss (Eval)': '0.223083'}
 EarlyStopping counter: 16 out of 50
-{'epoch': 30, 'Geneartion Loss(Train)': '0.224468', 'Correlation Image(Train)': '0.008142', 'MAE Loss': '0.790400'}
-{'Epoch': 30, 'Generation Loss (Eval)': '0.222810'}
+{'epoch': 48, 'Geneartion Loss(Train)': '0.221822', 'Correlation Image(Train)': '0.008188', 'MAE Loss': '0.786389'}
+{'Epoch': 48, 'Generation Loss (Eval)': '0.222843'}
 EarlyStopping counter: 17 out of 50
-{'epoch': 31, 'Geneartion Loss(Train)': '0.224452', 'Correlation Image(Train)': '0.008145', 'MAE Loss': '0.789035'}
-{'Epoch': 31, 'Generation Loss (Eval)': '0.221443'}
+{'epoch': 49, 'Geneartion Loss(Train)': '0.221803', 'Correlation Image(Train)': '0.008174', 'MAE Loss': '0.786770'}
+{'Epoch': 49, 'Generation Loss (Eval)': '0.221858'}
 EarlyStopping counter: 18 out of 50
-{'epoch': 32, 'Geneartion Loss(Train)': '0.224118', 'Correlation Image(Train)': '0.008113', 'MAE Loss': '0.787133'}
-{'Epoch': 32, 'Generation Loss (Eval)': '0.223265'}
+{'epoch': 50, 'Geneartion Loss(Train)': '0.221733', 'Correlation Image(Train)': '0.008166', 'MAE Loss': '0.787114'}
+{'Epoch': 50, 'Generation Loss (Eval)': '0.221921'}
 EarlyStopping counter: 19 out of 50
-{'epoch': 33, 'Geneartion Loss(Train)': '0.223613', 'Correlation Image(Train)': '0.008051', 'MAE Loss': '0.787437'}
-{'Epoch': 33, 'Generation Loss (Eval)': '0.224600'}
+{'epoch': 51, 'Geneartion Loss(Train)': '0.222132', 'Correlation Image(Train)': '0.008196', 'MAE Loss': '0.787413'}
+{'Epoch': 51, 'Generation Loss (Eval)': '0.220923'}
 EarlyStopping counter: 20 out of 50
-{'epoch': 34, 'Geneartion Loss(Train)': '0.223370', 'Correlation Image(Train)': '0.008056', 'MAE Loss': '0.787462'}
-{'Epoch': 34, 'Generation Loss (Eval)': '0.224125'}
+{'epoch': 52, 'Geneartion Loss(Train)': '0.221974', 'Correlation Image(Train)': '0.008172', 'MAE Loss': '0.787921'}
+{'Epoch': 52, 'Generation Loss (Eval)': '0.221771'}
 EarlyStopping counter: 21 out of 50
-{'epoch': 35, 'Geneartion Loss(Train)': '0.222926', 'Correlation Image(Train)': '0.008040', 'MAE Loss': '0.788770'}
-{'Epoch': 35, 'Generation Loss (Eval)': '0.223994'}
+{'epoch': 53, 'Geneartion Loss(Train)': '0.221572', 'Correlation Image(Train)': '0.008159', 'MAE Loss': '0.787026'}
+{'Epoch': 53, 'Generation Loss (Eval)': '0.221761'}
 EarlyStopping counter: 22 out of 50
-{'epoch': 36, 'Geneartion Loss(Train)': '0.222677', 'Correlation Image(Train)': '0.008031', 'MAE Loss': '0.787564'}
-{'Epoch': 36, 'Generation Loss (Eval)': '0.224223'}
+{'epoch': 54, 'Geneartion Loss(Train)': '0.221422', 'Correlation Image(Train)': '0.008134', 'MAE Loss': '0.786054'}
+{'Epoch': 54, 'Generation Loss (Eval)': '0.222168'}
 EarlyStopping counter: 23 out of 50
-{'epoch': 37, 'Geneartion Loss(Train)': '0.222473', 'Correlation Image(Train)': '0.008016', 'MAE Loss': '0.786651'}
-{'Epoch': 37, 'Generation Loss (Eval)': '0.224147'}
+{'epoch': 55, 'Geneartion Loss(Train)': '0.221475', 'Correlation Image(Train)': '0.008175', 'MAE Loss': '0.786460'}
+{'Epoch': 55, 'Generation Loss (Eval)': '0.222497'}
 EarlyStopping counter: 24 out of 50
-{'epoch': 38, 'Geneartion Loss(Train)': '0.222282', 'Correlation Image(Train)': '0.008001', 'MAE Loss': '0.788296'}
-{'Epoch': 38, 'Generation Loss (Eval)': '0.224026'}
+{'epoch': 56, 'Geneartion Loss(Train)': '0.221717', 'Correlation Image(Train)': '0.007925', 'MAE Loss': '0.786096'}
+{'Epoch': 56, 'Generation Loss (Eval)': '0.219739'}
+{'epoch': 57, 'Geneartion Loss(Train)': '0.223431', 'Correlation Image(Train)': '0.007993', 'MAE Loss': '0.817840'}
+{'Epoch': 57, 'Generation Loss (Eval)': '0.219967'}
+EarlyStopping counter: 1 out of 50
+{'epoch': 58, 'Geneartion Loss(Train)': '0.238415', 'Correlation Image(Train)': '0.007623', 'MAE Loss': '1.872522'}
+{'Epoch': 58, 'Generation Loss (Eval)': '0.221107'}
+EarlyStopping counter: 2 out of 50
+{'epoch': 59, 'Geneartion Loss(Train)': '0.227085', 'Correlation Image(Train)': '0.007709', 'MAE Loss': '0.787476'}
+{'Epoch': 59, 'Generation Loss (Eval)': '0.220506'}
+EarlyStopping counter: 3 out of 50
+{'epoch': 60, 'Geneartion Loss(Train)': '0.224708', 'Correlation Image(Train)': '0.007726', 'MAE Loss': '0.786559'}
+{'Epoch': 60, 'Generation Loss (Eval)': '0.221450'}
+EarlyStopping counter: 4 out of 50
+{'epoch': 61, 'Geneartion Loss(Train)': '0.223652', 'Correlation Image(Train)': '0.007746', 'MAE Loss': '0.785730'}
+{'Epoch': 61, 'Generation Loss (Eval)': '0.221716'}
+EarlyStopping counter: 5 out of 50
+{'epoch': 62, 'Geneartion Loss(Train)': '0.223054', 'Correlation Image(Train)': '0.007766', 'MAE Loss': '0.786240'}
+{'Epoch': 62, 'Generation Loss (Eval)': '0.221839'}
+EarlyStopping counter: 6 out of 50
+{'epoch': 63, 'Geneartion Loss(Train)': '0.222716', 'Correlation Image(Train)': '0.007784', 'MAE Loss': '0.785206'}
+{'Epoch': 63, 'Generation Loss (Eval)': '0.221639'}
+EarlyStopping counter: 7 out of 50
+{'epoch': 64, 'Geneartion Loss(Train)': '0.222475', 'Correlation Image(Train)': '0.007798', 'MAE Loss': '0.786659'}
+{'Epoch': 64, 'Generation Loss (Eval)': '0.221391'}
+EarlyStopping counter: 8 out of 50
+{'epoch': 65, 'Geneartion Loss(Train)': '0.222290', 'Correlation Image(Train)': '0.007817', 'MAE Loss': '0.785575'}
+{'Epoch': 65, 'Generation Loss (Eval)': '0.221293'}
+EarlyStopping counter: 9 out of 50
+{'epoch': 66, 'Geneartion Loss(Train)': '0.222131', 'Correlation Image(Train)': '0.007827', 'MAE Loss': '0.785432'}
+{'Epoch': 66, 'Generation Loss (Eval)': '0.221096'}
+EarlyStopping counter: 10 out of 50
+{'epoch': 67, 'Geneartion Loss(Train)': '0.222000', 'Correlation Image(Train)': '0.007842', 'MAE Loss': '0.785874'}
+{'Epoch': 67, 'Generation Loss (Eval)': '0.220730'}
+EarlyStopping counter: 11 out of 50
+{'epoch': 68, 'Geneartion Loss(Train)': '0.221884', 'Correlation Image(Train)': '0.007848', 'MAE Loss': '0.785422'}
+{'Epoch': 68, 'Generation Loss (Eval)': '0.220827'}
+EarlyStopping counter: 12 out of 50
+{'epoch': 69, 'Geneartion Loss(Train)': '0.221746', 'Correlation Image(Train)': '0.007854', 'MAE Loss': '0.784590'}
+{'Epoch': 69, 'Generation Loss (Eval)': '0.220503'}
+EarlyStopping counter: 13 out of 50
+{'epoch': 70, 'Geneartion Loss(Train)': '0.221636', 'Correlation Image(Train)': '0.007860', 'MAE Loss': '0.786173'}
+{'Epoch': 70, 'Generation Loss (Eval)': '0.220712'}
+EarlyStopping counter: 14 out of 50
+{'epoch': 71, 'Geneartion Loss(Train)': '0.221553', 'Correlation Image(Train)': '0.007869', 'MAE Loss': '0.785744'}
+{'Epoch': 71, 'Generation Loss (Eval)': '0.220718'}
+EarlyStopping counter: 15 out of 50
+{'epoch': 72, 'Geneartion Loss(Train)': '0.221446', 'Correlation Image(Train)': '0.007867', 'MAE Loss': '0.785131'}
+{'Epoch': 72, 'Generation Loss (Eval)': '0.220412'}
+EarlyStopping counter: 16 out of 50
+{'epoch': 73, 'Geneartion Loss(Train)': '0.221438', 'Correlation Image(Train)': '0.007849', 'MAE Loss': '0.786135'}
+{'Epoch': 73, 'Generation Loss (Eval)': '0.220812'}
+EarlyStopping counter: 17 out of 50
+{'epoch': 74, 'Geneartion Loss(Train)': '0.221392', 'Correlation Image(Train)': '0.007855', 'MAE Loss': '0.785810'}
+{'Epoch': 74, 'Generation Loss (Eval)': '0.220400'}
+EarlyStopping counter: 18 out of 50
+{'epoch': 75, 'Geneartion Loss(Train)': '0.221200', 'Correlation Image(Train)': '0.007871', 'MAE Loss': '0.786069'}
+{'Epoch': 75, 'Generation Loss (Eval)': '0.219881'}
+EarlyStopping counter: 19 out of 50
+{'epoch': 76, 'Geneartion Loss(Train)': '0.221064', 'Correlation Image(Train)': '0.007861', 'MAE Loss': '0.785513'}
+{'Epoch': 76, 'Generation Loss (Eval)': '0.220265'}
+EarlyStopping counter: 20 out of 50
+{'epoch': 77, 'Geneartion Loss(Train)': '0.220911', 'Correlation Image(Train)': '0.007867', 'MAE Loss': '0.785665'}
+{'Epoch': 77, 'Generation Loss (Eval)': '0.220112'}
+EarlyStopping counter: 21 out of 50
+{'epoch': 78, 'Geneartion Loss(Train)': '0.220804', 'Correlation Image(Train)': '0.007865', 'MAE Loss': '0.785771'}
+{'Epoch': 78, 'Generation Loss (Eval)': '0.220105'}
+EarlyStopping counter: 22 out of 50
+{'epoch': 79, 'Geneartion Loss(Train)': '0.220760', 'Correlation Image(Train)': '0.007865', 'MAE Loss': '0.785215'}
+{'Epoch': 79, 'Generation Loss (Eval)': '0.219842'}
+EarlyStopping counter: 23 out of 50
+{'epoch': 80, 'Geneartion Loss(Train)': '0.220649', 'Correlation Image(Train)': '0.007860', 'MAE Loss': '0.785504'}
+{'Epoch': 80, 'Generation Loss (Eval)': '0.220524'}
+EarlyStopping counter: 24 out of 50
+{'epoch': 81, 'Geneartion Loss(Train)': '0.220468', 'Correlation Image(Train)': '0.007850', 'MAE Loss': '0.785998'}
+{'Epoch': 81, 'Generation Loss (Eval)': '0.220705'}
 EarlyStopping counter: 25 out of 50
-{'epoch': 39, 'Geneartion Loss(Train)': '0.222120', 'Correlation Image(Train)': '0.007989', 'MAE Loss': '0.787746'}
-{'Epoch': 39, 'Generation Loss (Eval)': '0.224226'}
+{'epoch': 82, 'Geneartion Loss(Train)': '0.220345', 'Correlation Image(Train)': '0.007844', 'MAE Loss': '0.785649'}
+{'Epoch': 82, 'Generation Loss (Eval)': '0.219850'}
 EarlyStopping counter: 26 out of 50
+{'epoch': 83, 'Geneartion Loss(Train)': '0.220320', 'Correlation Image(Train)': '0.007844', 'MAE Loss': '0.784221'}
+{'Epoch': 83, 'Generation Loss (Eval)': '0.220369'}
+EarlyStopping counter: 27 out of 50
+{'epoch': 84, 'Geneartion Loss(Train)': '0.220042', 'Correlation Image(Train)': '0.007830', 'MAE Loss': '0.785471'}
+{'Epoch': 84, 'Generation Loss (Eval)': '0.220637'}
+EarlyStopping counter: 28 out of 50
+{'epoch': 85, 'Geneartion Loss(Train)': '0.219931', 'Correlation Image(Train)': '0.007834', 'MAE Loss': '0.785452'}
+{'Epoch': 85, 'Generation Loss (Eval)': '0.219897'}
+EarlyStopping counter: 29 out of 50
+{'epoch': 86, 'Geneartion Loss(Train)': '0.219775', 'Correlation Image(Train)': '0.007826', 'MAE Loss': '0.785534'}
+{'Epoch': 86, 'Generation Loss (Eval)': '0.219773'}
+EarlyStopping counter: 30 out of 50
+{'epoch': 87, 'Geneartion Loss(Train)': '0.219610', 'Correlation Image(Train)': '0.007808', 'MAE Loss': '0.784635'}
+{'Epoch': 87, 'Generation Loss (Eval)': '0.220942'}
+EarlyStopping counter: 31 out of 50
+{'epoch': 88, 'Geneartion Loss(Train)': '0.219410', 'Correlation Image(Train)': '0.007820', 'MAE Loss': '0.785254'}
+{'Epoch': 88, 'Generation Loss (Eval)': '0.220579'}
+EarlyStopping counter: 32 out of 50
+{'epoch': 89, 'Geneartion Loss(Train)': '0.219239', 'Correlation Image(Train)': '0.007830', 'MAE Loss': '0.785375'}
+{'Epoch': 89, 'Generation Loss (Eval)': '0.220187'}
+EarlyStopping counter: 33 out of 50
+{'epoch': 90, 'Geneartion Loss(Train)': '0.219243', 'Correlation Image(Train)': '0.007806', 'MAE Loss': '0.785481'}
+{'Epoch': 90, 'Generation Loss (Eval)': '0.221067'}
+EarlyStopping counter: 34 out of 50
+{'epoch': 91, 'Geneartion Loss(Train)': '0.219032', 'Correlation Image(Train)': '0.007821', 'MAE Loss': '0.784944'}
+{'Epoch': 91, 'Generation Loss (Eval)': '0.221872'}
+EarlyStopping counter: 35 out of 50
+{'epoch': 92, 'Geneartion Loss(Train)': '0.218733', 'Correlation Image(Train)': '0.007808', 'MAE Loss': '0.785226'}
+{'Epoch': 92, 'Generation Loss (Eval)': '0.221695'}
+EarlyStopping counter: 36 out of 50
+{'epoch': 93, 'Geneartion Loss(Train)': '0.218408', 'Correlation Image(Train)': '0.007791', 'MAE Loss': '0.785023'}
+{'Epoch': 93, 'Generation Loss (Eval)': '0.222085'}
+EarlyStopping counter: 37 out of 50
+{'epoch': 94, 'Geneartion Loss(Train)': '0.218245', 'Correlation Image(Train)': '0.007777', 'MAE Loss': '0.784981'}
+{'Epoch': 94, 'Generation Loss (Eval)': '0.222234'}
+EarlyStopping counter: 38 out of 50
+{'epoch': 95, 'Geneartion Loss(Train)': '0.218133', 'Correlation Image(Train)': '0.007798', 'MAE Loss': '0.785653'}
+{'Epoch': 95, 'Generation Loss (Eval)': '0.220320'}
+EarlyStopping counter: 39 out of 50
+{'epoch': 96, 'Geneartion Loss(Train)': '0.218260', 'Correlation Image(Train)': '0.007804', 'MAE Loss': '0.784864'}
+{'Epoch': 96, 'Generation Loss (Eval)': '0.221369'}
+EarlyStopping counter: 40 out of 50
+{'epoch': 97, 'Geneartion Loss(Train)': '0.217868', 'Correlation Image(Train)': '0.007789', 'MAE Loss': '0.785219'}
+{'Epoch': 97, 'Generation Loss (Eval)': '0.221423'}
+EarlyStopping counter: 41 out of 50
+{'epoch': 98, 'Geneartion Loss(Train)': '0.217515', 'Correlation Image(Train)': '0.007740', 'MAE Loss': '0.785289'}
+{'Epoch': 98, 'Generation Loss (Eval)': '0.221312'}
+EarlyStopping counter: 42 out of 50
+{'epoch': 99, 'Geneartion Loss(Train)': '0.217385', 'Correlation Image(Train)': '0.007743', 'MAE Loss': '0.784206'}
+{'Epoch': 99, 'Generation Loss (Eval)': '0.221540'}
+EarlyStopping counter: 43 out of 50
+{'epoch': 100, 'Geneartion Loss(Train)': '0.217100', 'Correlation Image(Train)': '0.007765', 'MAE Loss': '0.785379'}
+{'Epoch': 100, 'Generation Loss (Eval)': '0.220882'}
+EarlyStopping counter: 44 out of 50
+{'epoch': 101, 'Geneartion Loss(Train)': '0.216887', 'Correlation Image(Train)': '0.007751', 'MAE Loss': '0.784629'}
+{'Epoch': 101, 'Generation Loss (Eval)': '0.220382'}
+EarlyStopping counter: 45 out of 50
+{'epoch': 102, 'Geneartion Loss(Train)': '0.216771', 'Correlation Image(Train)': '0.007695', 'MAE Loss': '0.784567'}
+{'Epoch': 102, 'Generation Loss (Eval)': '0.223139'}
+EarlyStopping counter: 46 out of 50
+{'epoch': 103, 'Geneartion Loss(Train)': '0.216457', 'Correlation Image(Train)': '0.007720', 'MAE Loss': '0.785214'}
+{'Epoch': 103, 'Generation Loss (Eval)': '0.223557'}
+EarlyStopping counter: 47 out of 50
+{'epoch': 104, 'Geneartion Loss(Train)': '0.216339', 'Correlation Image(Train)': '0.007708', 'MAE Loss': '0.784868'}
+{'Epoch': 104, 'Generation Loss (Eval)': '0.223101'}
+EarlyStopping counter: 48 out of 50
+{'epoch': 105, 'Geneartion Loss(Train)': '0.216120', 'Correlation Image(Train)': '0.007679', 'MAE Loss': '0.785235'}
+{'Epoch': 105, 'Generation Loss (Eval)': '0.224074'}
+EarlyStopping counter: 49 out of 50
+{'epoch': 106, 'Geneartion Loss(Train)': '0.215889', 'Correlation Image(Train)': '0.007675', 'MAE Loss': '0.784366'}
+{'Epoch': 106, 'Generation Loss (Eval)': '0.223816'}
+EarlyStopping counter: 50 out of 50
+{'Epoch': 1000, 'Generation Loss (Eval)': '0.275004'}
+Error Handling csvTo run Epoch:1000 , It took 1 hours, 10 minutes, 38 seconds
