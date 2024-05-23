@@ -137,7 +137,7 @@ class FourTrainer(Trainer):
                 for i in range(len(image_batch)-1):
                     
                     # image_batch[i] [B x 3 x R x R]
-                    generated_image, regression_logits = self.model(image_batch[i],self.args)
+                    generated_image = self.model(image_batch[i],self.args)
                     
 
                     correlation_image += torch.abs(self.correlation_image(generated_image.mean(dim=-1), image_batch[i+1])) / self.args.batch
@@ -181,8 +181,8 @@ class FourTrainer(Trainer):
                 total_predict_gap = torch.sum(predicted_gaps, dim=0) # [B, 150, 150, 100] -> [1]
                 
                 total_predict_gap=total_predict_gap.permute(0,3,1,2)
-                reg = self.regression_model(total_predict_gap) # [B] 
-                # import IPython; IPython.embed(colors='Linux');exit(1);
+                reg = self.regression_model(total_predict_gap).view(self.args.batch) # [B] 
+                
                 # Loss_mae
                 if self.args.pre_train == False:
                     loss_mae = self.mae_criterion(reg, gap) # gap => [B]
@@ -202,11 +202,11 @@ class FourTrainer(Trainer):
                 self.reg_optim.step()
 
                 total_generation_loss += set_generation_loss.item()
-
+                import IPython; IPython.embed(colors='Linux');exit(1);
                 # del batch, generation_loss, loss_mae, joint_loss  # After backward pass
                 # torch.cuda.empty_cache()
             
-
+            
             if self.args.wandb == True:
                 wandb.log({'Generation Loss (Train)': total_generation_loss / len(batch_iter)}, step=epoch)
                 wandb.log({'Correlation Image (Train)': correlation_image / len(batch_iter)}, step=epoch)
@@ -286,7 +286,7 @@ class FourTrainer(Trainer):
                     set_generation_loss /= 6
                     correlation_image /= 6
 
-                    # import IPython; IPython.embed(colors='Linux'); exit(1)
+                    import IPython; IPython.embed(colors='Linux'); exit(1)
                     # self.plot_images(generated_image[0],self.args.model_idx,datetime[6])
                     
                     stack_precipitation = torch.stack(precipitation) # [6 , B, 150, 150, 100]
@@ -295,7 +295,7 @@ class FourTrainer(Trainer):
                     total_predict_gap = torch.sum(predicted_gaps, dim=0) # [B, 150, 150, 100] -> [1]
                     
                     total_predict_gap=total_predict_gap.permute(0,3,1,2)
-                    reg = self.regression_model(total_predict_gap) # [B] 
+                    reg = self.regression_model(total_predict_gap).view(self.args.batch) # [B] 
                     
                     last_elements = reg[-1,:] 
 
