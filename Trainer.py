@@ -40,8 +40,8 @@ class Trainer:
 
         # self.data_name = self.args.data_name
         betas = (self.args.adam_beta1, self.args.adam_beta2)
-        self.optim = Adam(self.model.parameters(), lr=self.args.lr, betas=betas, weight_decay=self.args.weight_decay)
-        self.reg_optim=Adam(self.regression_model.parameters(), lr=0.001, betas=betas, weight_decay=self.args.weight_decay)
+        self.optim = Adam(self.model.parameters(), lr=1e-5, betas=betas, weight_decay=self.args.weight_decay)
+        self.reg_optim=Adam(self.regression_model.parameters(), lr=1e-5, betas=betas, weight_decay=self.args.weight_decay)
 
         print("Total Parameters:", sum([p.nelement() for p in self.model.parameters()]))
 
@@ -166,7 +166,6 @@ class FourTrainer(Trainer):
                             event_weight = torch.clamp(image_batch[i] + 1, max=24).permute(0,2,3,1) # [B W H 1]
                             penalty = torch.pow(1 - torch.exp(-absolute_error), 0.5) #  [B W H C]
                             
-                            
                             result = absolute_error * event_weight * penalty
 
                             generation_loss = result.mean()
@@ -178,7 +177,7 @@ class FourTrainer(Trainer):
                     if torch.isnan(generation_loss).any():
                         print("Loss have NaN values")
                         import IPython; IPython.embed(colors='Linux'); exit(1)
-                        
+
                 # set이여서 6으로 나눔
                 set_generation_loss /= 6
                 correlation_image /= 6
