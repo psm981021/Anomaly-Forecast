@@ -296,7 +296,7 @@ class FourTrainer(Trainer):
                     
                     total_predict_gap=total_predict_gap.permute(0,3,1,2)
                     reg = self.regression_model(total_predict_gap).view(self.args.batch) # [B] 
-                    
+                        
                     last_elements = reg[-1,:] 
 
                     # Loss_mae
