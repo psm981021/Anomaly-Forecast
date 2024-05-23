@@ -78,14 +78,14 @@ class Trainer:
         self.model.load_state_dict(torch.load(file_name))
 
     @staticmethod
-    def plot_images(image, flag=None):
-        
+    def plot_images(self, image, datetime, flag=None):
+        name=self.args.model_idx
         image = image.cpu().detach().permute(1,2,0).numpy()
         plt.imshow(image)
         if flag == 'R':
-            plt.savefig('Real Image')
+            plt.savefig(f'{name}_{datetime}_Real Image')
         else:
-            plt.savefig('Generated Image')
+            plt.savefig(f'{name}_{datetime}_Generated Image')
 
 class FourTrainer(Trainer):
     def __init__(self,model,train_dataloader, valid_dataloader,test_dataloader, args):
