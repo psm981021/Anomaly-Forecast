@@ -77,7 +77,6 @@ class Fourcaster(nn.Module):
             module.weight.data.normal_(mean=3.0, std=self.args.initializer_range)
 
 
-
     def forward(self, x, args):
         
 
@@ -102,13 +101,34 @@ class Fourcaster(nn.Module):
         generated_image = generated_image.permute(0,2,3,1)
 
         
-        regression_logits = self.regression_model(x)
-        #generated_image = self.projection(x)
+        # regression_logits = self.regression_model(x)
+        # generated_image = self.projection(x)
 
         # regression logits
 
-        return generated_image, regression_logits 
+        return generated_image # , regression_logits 
     
+
+class RainfallPredictor(nn.Module):
+    def __init__(self):
+        super(RainfallPredictor, self).__init__()
+        self.conv1 = nn.Conv2d(100, 64, 3, padding=1)  # 100은 입력 채널 수
+        self.pool = nn.MaxPool2d(2, 2)
+        self.conv2 = nn.Conv2d(64, 128, 3, padding=1)
+        self.conv3 = nn.Conv2d(128, 256, 3, padding=1)
+        self.fc1 = nn.Linear(256 * 18 * 18, 512)  # 18은 풀링 후의 크기
+        self.fc2 = nn.Linear(512, 1)
+
+    def forward(self, x):
+        x = self.pool(torch.relu(self.conv1(x)))
+        x = self.pool(torch.relu(self.conv2(x)))
+        x = self.pool(torch.relu(self.conv3(x)))
+        x = x.reshape(-1, 256 * 18 * 18)
+        x = torch.relu(self.fc1(x))
+        x = self.fc2(x)
+        return x
+
+
 
 if __name__ == "__main__":
 
