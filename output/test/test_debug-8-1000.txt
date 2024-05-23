@@ -443,3 +443,207 @@ checkpoint_path                : output/test/test_debug-8-1000.pt
 ---------------------- Configure Info: ----------------------
 ------------------------------ Continue Training ------------------------------ 
 {'epoch': 0, 'CE Loss': '28.305733', 'MAE Loss': '0.216455'}
+---------------------- Configure Info: ----------------------
+data_dir                       : data/radar_test
+image_csv_dir                  : data/data_sample_train.csv
+output_dir                     : output/test
+gpu_id                         : 1
+device                         : cpu
+seed                           : 0
+no_cuda                        : False
+use_multi_gpu                  : False
+multi_devices                  : 0,1
+wandb                          : False
+pre_train                      : False
+do_eval                        : False
+test_list                      : ['[]']
+grey_scale                     : True
+model_idx                      : test_debug
+batch                          : 8
+sianet                         : False
+epochs                         : 1000
+log_freq                       : 1
+patience                       : 50
+loss_type                      : stamina
+lr                             : 0.001
+adam_beta1                     : 0.9
+adam_beta2                     : 0.999
+weight_decay                   : 0.0
+initializer_range              : 0.01
+str                            : test_debug-8-1000
+log_file                       : output/test/test_debug-8-1000.txt
+dataframe_path                 : output/test/test_debug-8-1000.csv
+checkpoint_path                : output/test/test_debug-8-1000.pt
+---------------------- Configure Info: ----------------------
+------------------------------ Continue Training ------------------------------ 
+Current time: 1716456118.240322
+---------------------- Configure Info: ----------------------
+data_dir                       : data/radar_test
+image_csv_dir                  : data/data_sample_train.csv
+output_dir                     : output/test
+gpu_id                         : 1
+device                         : cpu
+seed                           : 0
+no_cuda                        : False
+use_multi_gpu                  : False
+multi_devices                  : 0,1
+wandb                          : False
+pre_train                      : False
+do_eval                        : False
+test_list                      : ['[]']
+grey_scale                     : True
+model_idx                      : test_debug
+batch                          : 8
+sianet                         : False
+epochs                         : 1000
+log_freq                       : 1
+patience                       : 50
+loss_type                      : stamina
+lr                             : 0.001
+adam_beta1                     : 0.9
+adam_beta2                     : 0.999
+weight_decay                   : 0.0
+initializer_range              : 0.01
+str                            : test_debug-8-1000
+log_file                       : output/test/test_debug-8-1000.txt
+dataframe_path                 : output/test/test_debug-8-1000.csv
+checkpoint_path                : output/test/test_debug-8-1000.pt
+---------------------- Configure Info: ----------------------
+------------------------------ Continue Training ------------------------------ 
+Current time: 1716456206.4688692
+---------------------- Configure Info: ----------------------
+data_dir                       : data/radar_test
+image_csv_dir                  : data/data_sample_train.csv
+output_dir                     : output/test
+gpu_id                         : 1
+device                         : cpu
+seed                           : 0
+no_cuda                        : False
+use_multi_gpu                  : False
+multi_devices                  : 0,1
+wandb                          : False
+pre_train                      : False
+do_eval                        : False
+test_list                      : ['[]']
+grey_scale                     : True
+model_idx                      : test_debug
+batch                          : 8
+sianet                         : False
+epochs                         : 1000
+log_freq                       : 1
+patience                       : 50
+loss_type                      : stamina
+lr                             : 0.001
+adam_beta1                     : 0.9
+adam_beta2                     : 0.999
+weight_decay                   : 0.0
+initializer_range              : 0.01
+str                            : test_debug-8-1000
+log_file                       : output/test/test_debug-8-1000.txt
+dataframe_path                 : output/test/test_debug-8-1000.csv
+checkpoint_path                : output/test/test_debug-8-1000.pt
+---------------------- Configure Info: ----------------------
+------------------------------ Continue Training ------------------------------ 
+Current time: 1716456269.670058
+---------------------- Configure Info: ----------------------
+data_dir                       : data/radar_test
+image_csv_dir                  : data/data_sample_train.csv
+output_dir                     : output/test
+gpu_id                         : 1
+device                         : cpu
+seed                           : 0
+no_cuda                        : False
+use_multi_gpu                  : False
+multi_devices                  : 0,1
+wandb                          : False
+pre_train                      : False
+do_eval                        : False
+test_list                      : ['[]']
+grey_scale                     : True
+model_idx                      : test_debug
+batch                          : 8
+sianet                         : False
+epochs                         : 1000
+log_freq                       : 1
+patience                       : 50
+loss_type                      : stamina
+lr                             : 0.001
+adam_beta1                     : 0.9
+adam_beta2                     : 0.999
+weight_decay                   : 0.0
+initializer_range              : 0.01
+str                            : test_debug-8-1000
+log_file                       : output/test/test_debug-8-1000.txt
+dataframe_path                 : output/test/test_debug-8-1000.csv
+checkpoint_path                : output/test/test_debug-8-1000.pt
+---------------------- Configure Info: ----------------------
+------------------------------ Continue Training ------------------------------ 
+Current time: 1716458925.6321568
+---------------------- Configure Info: ----------------------
+data_dir                       : data/radar_test
+image_csv_dir                  : data/data_sample_train.csv
+output_dir                     : output/test
+gpu_id                         : 1
+device                         : cpu
+seed                           : 0
+no_cuda                        : False
+use_multi_gpu                  : False
+multi_devices                  : 0,1
+wandb                          : False
+pre_train                      : False
+do_eval                        : False
+test_list                      : ['[]']
+grey_scale                     : True
+model_idx                      : test_debug
+batch                          : 8
+sianet                         : False
+epochs                         : 1000
+log_freq                       : 1
+patience                       : 50
+loss_type                      : stamina
+lr                             : 0.001
+adam_beta1                     : 0.9
+adam_beta2                     : 0.999
+weight_decay                   : 0.0
+initializer_range              : 0.01
+str                            : test_debug-8-1000
+log_file                       : output/test/test_debug-8-1000.txt
+dataframe_path                 : output/test/test_debug-8-1000.csv
+checkpoint_path                : output/test/test_debug-8-1000.pt
+---------------------- Configure Info: ----------------------
+------------------------------ Continue Training ------------------------------ 
+Current time: 1716459176.890412
+---------------------- Configure Info: ----------------------
+data_dir                       : data/radar_test
+image_csv_dir                  : data/data_sample_train.csv
+output_dir                     : output/test
+gpu_id                         : 1
+device                         : cpu
+seed                           : 0
+no_cuda                        : False
+use_multi_gpu                  : False
+multi_devices                  : 0,1
+wandb                          : False
+pre_train                      : False
+do_eval                        : False
+test_list                      : ['[]']
+grey_scale                     : True
+model_idx                      : test_debug
+batch                          : 8
+sianet                         : False
+epochs                         : 1000
+log_freq                       : 1
+patience                       : 50
+loss_type                      : stamina
+lr                             : 0.001
+adam_beta1                     : 0.9
+adam_beta2                     : 0.999
+weight_decay                   : 0.0
+initializer_range              : 0.01
+str                            : test_debug-8-1000
+log_file                       : output/test/test_debug-8-1000.txt
+dataframe_path                 : output/test/test_debug-8-1000.csv
+checkpoint_path                : output/test/test_debug-8-1000.pt
+---------------------- Configure Info: ----------------------
+------------------------------ Continue Training ------------------------------ 
+Current time: 1716459733.5970309
