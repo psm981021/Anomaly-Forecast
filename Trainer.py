@@ -138,7 +138,9 @@ class FourTrainer(Trainer):
                     
                     # image_batch[i] [B x 3 x R x R]
                     generated_image = self.model(image_batch[i],self.args)
-                    
+                    if torch.isnan(generated_image).any():
+                        print("Outputs have NaN values")
+                        import IPython; IPython.embed(colors='Linux'); exit(1)
 
                     correlation_image += torch.abs(self.correlation_image(generated_image.mean(dim=-1), image_batch[i+1])) / self.args.batch
                     
@@ -173,7 +175,10 @@ class FourTrainer(Trainer):
                         generation_loss =  self.ce_criterion(generated_image.flatten(1), class_label)
                     
                     set_generation_loss += generation_loss
-                
+                    if torch.isnan(generation_loss).any():
+                        print("Loss have NaN values")
+                        import IPython; IPython.embed(colors='Linux'); exit(1)
+                        
                 # set이여서 6으로 나눔
                 set_generation_loss /= 6
                 correlation_image /= 6
