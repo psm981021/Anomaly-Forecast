@@ -9,7 +9,9 @@ python main.py \
     --output_dir "output/gangwon-V.2.01/" \
     --test_list=[] \
     --gpu_id 1 \
+    --device cuda:1 \
     --seed 0 \
+    --grey_scale \
     --loss_type "ed_image" \
     --wandb
 

@@ -13,7 +13,8 @@ class Trainer:
         self.cuda_condition = torch.cuda.is_available() and not self.args.no_cuda
         self.device = args.device
         # self.device = torch.device("cuda:" + args.gpu_id if torch.cuda.is_available() and not args.no_cuda else "cpu")
-        # torch.cuda.set_device(self.args.device)
+        if self.cuda_condition:
+            torch.cuda.set_device(self.args.device)
 
         self.model = model
         self.projection = nn.Sequential(
@@ -167,12 +168,12 @@ class FourTrainer(Trainer):
             
 
             if self.args.wandb == True:
-                wandb.log({'Generation Loss (CE)': total_generation_loss / len(batch_iter)}, step=epoch)
+                wandb.log({'Generation Loss (Train)': total_generation_loss / len(batch_iter)}, step=epoch)
                 wandb.log({'MAE Train Loss': total_mae / len(batch_iter)}, step=epoch)
 
             post_fix = {
                 "epoch":epoch,
-                "Geneartion Loss(Valid)": "{:.6f}".format(total_generation_loss/len(batch_iter)),
+                "Geneartion Loss(Train)": "{:.6f}".format(total_generation_loss/len(batch_iter)),
                 "MAE Loss":"{:.6f}".format(total_mae/len(batch_iter)),
             }
             if (epoch+1) % self.args.log_freq ==0:

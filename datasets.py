@@ -76,7 +76,7 @@ class Radar(Dataset):
 
 
     def __getitem__(self, idx):
-        return self.image[idx], self.label[idx],self.gap[idx], self.date[idx] #, self.class_label[idx]
+        return self.image[idx], self.label[idx],self.gap[idx], self.date[idx], self.class_label[idx]
 
     
     def get_input(self, csv_path, flag):

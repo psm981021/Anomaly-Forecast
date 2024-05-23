@@ -74,7 +74,7 @@ class Fourcaster(nn.Module):
                 nn.init.constant_(module.bias, 0)
 
         elif isinstance(module, nn.Linear):
-            module.weight.data.normal_(mean=0.0, std=self.args.initializer_range)
+            module.weight.data.normal_(mean=3.0, std=self.args.initializer_range)
 
 
 

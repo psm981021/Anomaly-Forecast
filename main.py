@@ -57,6 +57,7 @@ def main():
     parser.add_argument("--adam_beta1", type=float, default=0.9, help="adam first beta value")
     parser.add_argument("--adam_beta2", type=float, default=0.999, help="adam second beta value")
     parser.add_argument("--weight_decay", type=float, default=0.0, help="weight_decay of adam")
+    parser.add_argument("--initializer_range", type = float, default = 0.01)
     
     args = parser.parse_args()
 
@@ -86,18 +87,7 @@ def main():
     valid_loader = DataLoader(valid_dataset, batch_size=args.batch,drop_last=True)
     test_loader = DataLoader(test_dataset, batch_size=args.batch,drop_last=True)
 
-    # os.environ["CUDA_VISIBLE_DEVICES"] = args.devicegpu_id
     print("Using Cuda:", torch.cuda.is_available())
-
-    # if args.use_multi_gpu:
-    #     if args.cuda_condition:
-    #         args.devices = args.multi_devices.replace(' ', '')
-    #         device_ids = args.devices.split(',')
-    #         args.device_ids = [int(id_) for id_ in device_ids]
-    #         torch.cuda.set_device(args.device_ids[0])
-    #         args.gpu = args.device_ids[0]
-    #     else:
-    #         args.device  = torch.device("cpu")
 
     if args.use_multi_gpu and torch.cuda.is_available():
         device_ids = list(map(int, args.multi_devices.split(',')))
