@@ -41,7 +41,7 @@ class Trainer:
         # self.data_name = self.args.data_name
         betas = (self.args.adam_beta1, self.args.adam_beta2)
         self.optim = Adam(self.model.parameters(), lr=self.args.lr, betas=betas, weight_decay=self.args.weight_decay)
-        self.reg_optim=Adam(self.regression_model.parameters(), lr=0.01, betas=betas, weight_decay=self.args.weight_decay)
+        self.reg_optim=Adam(self.regression_model.parameters(), lr=0.001, betas=betas, weight_decay=self.args.weight_decay)
 
         print("Total Parameters:", sum([p.nelement() for p in self.model.parameters()]))
 
@@ -119,7 +119,7 @@ class FourTrainer(Trainer):
             self.regression_model.train()
             
             batch_iter = tqdm(enumerate(dataloader), total= len(dataloader))
-            total_generation_loss, total_mae = torch.tensor(0.0, device=self.device), torch.tensor(0.0, device=self.device)
+            total_generation_loss, total_mae, total_correlation = torch.tensor(0.0, device=self.device), torch.tensor(0.0, device=self.device) , torch.tensor(0.0, device=self.device)
             
             for i, batch in batch_iter:
                 # image, label, gap, datetime, class_label = batch
@@ -162,10 +162,13 @@ class FourTrainer(Trainer):
                             
                             absolute_error = torch.abs(generated_image - image_batch[i+1].permute(0,2,3,1)) # [B W H C]
                             event_weight = torch.clamp(image_batch[i] + 1, max=24).permute(0,2,3,1) # [B W H 1]
-                            penalty = torch.pow(1 - torch.exp(-absolute_error), 0.5).permute(0,2,3,1) #  [B W H C]
+                            penalty = torch.pow(1 - torch.exp(-absolute_error), 0.5) #  [B W H C]
+                            
+                            
                             result = absolute_error * event_weight * penalty
 
                             generation_loss = result.mean()
+                            
                     else:
                         generation_loss =  self.ce_criterion(generated_image.flatten(1), class_label)
                     
@@ -174,7 +177,8 @@ class FourTrainer(Trainer):
                 # set이여서 6으로 나눔
                 set_generation_loss /= 6
                 correlation_image /= 6
-
+                total_correlation += correlation_image
+                
                 stack_precipitation = torch.stack(precipitation) # [6 , B, 150, 150, 100]
                 
                 predicted_gaps =  stack_precipitation[1:] - stack_precipitation[:-1] # [5 ,B, 150, 150, 100]
@@ -197,7 +201,10 @@ class FourTrainer(Trainer):
 
                 self.optim.zero_grad()
                 self.reg_optim.zero_grad()
+                
                 joint_loss.backward()
+                
+                torch.nn.utils.clip_grad_norm_(self.model.parameters(), max_norm=1.0)
                 self.optim.step()
                 self.reg_optim.step()
 
@@ -273,7 +280,7 @@ class FourTrainer(Trainer):
                                 
                             absolute_error = torch.abs(generated_image - image_batch[i+1].permute(0,2,3,1)) # [B W H C]
                             event_weight = torch.clamp(image_batch[i] + 1, max=24).permute(0,2,3,1) # [B W H 1]
-                            penalty = torch.pow(1 - torch.exp(-absolute_error), 0.5).permute(0,2,3,1) #  [B W H C]
+                            penalty = torch.pow(1 - torch.exp(-absolute_error), 0.5) #  [B W H C]
 
                             result = absolute_error * event_weight * penalty
                             generation_loss = result.mean()
@@ -296,8 +303,8 @@ class FourTrainer(Trainer):
                     
                     total_predict_gap=total_predict_gap.permute(0,3,1,2)
                     reg = self.regression_model(total_predict_gap).view(self.args.batch) # [B] 
-                        
-                    last_elements = reg[-1,:] 
+                    
+                    last_elements = reg[-1] 
 
                     # Loss_mae
                     loss_mae = self.mae_criterion(reg, gap)
@@ -347,7 +354,6 @@ class SianetTrainer(Trainer):
                 
                 generated_image=generated_image.expand(-1,3,-1,-1,-1).squeeze(2)
 
-                # import IPython; IPython.embed(colors='Linux'); exit(1)
 
                 loss_l2 =  self.l2_criterion(generated_image, target)                
 
