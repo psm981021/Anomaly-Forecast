@@ -79,14 +79,15 @@ class Trainer:
         self.model.load_state_dict(torch.load(file_name))
 
     @staticmethod
-    def plot_images(self, image, datetime, flag=None):
-        name=self.args.model_idx
+    def plot_images(image, model_idx, datetime, flag=None):
         image = image.cpu().detach().permute(1,2,0).numpy()
         plt.imshow(image)
+        model_idx=model_idx.replace('.','-')
+        datetime = datetime.replace(':', '-').replace(' ', '_')
         if flag == 'R':
-            plt.savefig(f'{name}_{datetime}_Real Image')
+            plt.savefig(f'{model_idx}_{datetime}_Real Image')
         else:
-            plt.savefig(f'{name}_{datetime}_Generated Image')
+            plt.savefig(f'{model_idx}_{datetime}_Generated Image')
 
 class FourTrainer(Trainer):
     def __init__(self,model,train_dataloader, valid_dataloader,test_dataloader, args):
@@ -228,6 +229,8 @@ class FourTrainer(Trainer):
                     # set이여서 6으로 나눔
                     set_generation_loss /= 6
 
+                    # import IPython; IPython.embed(colors='Linux'); exit(1)
+                    # self.plot_images(generated_image[0],self.args.model_idx,datetime[6])
                     
                     stack_precipitation = torch.stack(precipitation) # [6 x B]
                     predicted_gaps =  stack_precipitation[1:] - stack_precipitation[:-1] # [5 x B]
@@ -304,7 +307,7 @@ class SianetTrainer(Trainer):
 
             post_fix = {
                 "epoch":epoch,
-                "CE Loss": "{:.6f}".format(total_l2/len(batch_iter)),
+                "Generation Loss (L2)": "{:.6f}".format(total_l2/len(batch_iter)),
                 "MAE Loss":"{:.6f}".format(total_mae/len(batch_iter)),
             }
             if (epoch+1) % self.args.log_freq ==0:
@@ -344,6 +347,8 @@ class SianetTrainer(Trainer):
                     generated_image=generated_image.expand(-1,3,-1,-1,-1).squeeze(2)
 
                     # import IPython; IPython.embed(colors='Linux'); exit(1)
+                    # self.plot_images(generated_image[0],self.args.model_idx,datetime[6])
+                    
                     loss_l2 =  self.l2_criterion(generated_image, target)                
 
                     total_l2 += loss_l2.item()
