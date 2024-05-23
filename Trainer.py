@@ -13,7 +13,8 @@ class Trainer:
         self.cuda_condition = torch.cuda.is_available() and not self.args.no_cuda
         self.device = args.device
         # self.device = torch.device("cuda:" + args.gpu_id if torch.cuda.is_available() and not args.no_cuda else "cpu")
-        # torch.cuda.set_device(self.args.device)
+        if self.cuda_condition:
+            torch.cuda.set_device(self.args.device)
 
         self.model = model
         self.projection = nn.Sequential(
@@ -59,7 +60,7 @@ class Trainer:
         ce = pred
         post_fix = {
             "Epoch":epoch,
-            "Cross Entropy":"{:.6f}".format(ce),
+            "Generation Loss (Eval)":"{:.6f}".format(ce),
         }
         print(post_fix)
         with open(self.args.log_file, "a") as f:
@@ -99,20 +100,18 @@ class FourTrainer(Trainer):
             self.model.train()
             
             batch_iter = tqdm(enumerate(dataloader), total= len(dataloader))
-            total_ce, total_mae = torch.tensor(0.0, device=self.device), torch.tensor(0.0, device=self.device)
+            total_generation_loss, total_mae = torch.tensor(0.0, device=self.device), torch.tensor(0.0, device=self.device)
             
             for i, batch in batch_iter:
-                #image, label, gap, datetime, class_label = batch
-
-                image, label, gap, datetime = batch
+                image, label, gap, datetime, class_label = batch
 
 
                 image_batch = [t.to(self.args.device) for t in image] # 7
                 label = label.to(self.args.device) #answer, B
                 gap = gap.to(self.args.device) #diff between t-1 t, B
-                #class_label = class_label.to(self.args.device)
+                class_label = class_label.to(self.args.device)
                 
-                set_ce = 0.0
+                set_generation_loss = 0.0
                 precipitation = []       
                 
                 for i in range(len(image_batch)-1):
@@ -125,21 +124,21 @@ class FourTrainer(Trainer):
                     precipitation.append(torch.sum(regression_logits, dim=1)) # [B x 1]
                     
                     
-                    if self.args.ce_type == 'ce_image':
-                        loss_ce =  self.ce_criterion(generated_image.flatten(1), image_batch[i+1].flatten(1))
-                    elif self.args.ce_type == 'mse_image':
-                        loss_ce = self.mae_criterion(generated_image.flatten(1), image_batch[i+1].flatten(1))
-                    elif self.args.ce_type == 'ed_image':
+                    if self.args.loss_type == 'ce_image':
+                        generation_loss =  self.ce_criterion(generated_image.flatten(1), image_batch[i+1].flatten(1))
+                    elif self.args.loss_type == 'mae_image':
+                        generation_loss = self.mae_criterion(generated_image.flatten(1), image_batch[i+1].flatten(1))
+                    elif self.args.loss_type == 'ed_image':
                         preds = torch.softmax(generated_image,dim=-1)
                         err = (torch.arange(100).to(self.device).float() - image_batch[i+1].permute(0,2,3,1)).abs()
-                        loss_ce = torch.sum((preds * err),dim=-1).mean()
+                        generation_loss = torch.sum((preds * err),dim=-1).mean()
                     else:
-                        loss_ce =  self.ce_criterion(generated_image.flatten(1), class_label)
+                        generation_loss =  self.ce_criterion(generated_image.flatten(1), class_label)
                     
-                    set_ce += loss_ce
+                    set_generation_loss += generation_loss
                 
                 # set이여서 6으로 나눔
-                set_ce /= 6
+                set_generation_loss /= 6
     
                 stack_precipitation = torch.stack(precipitation) # [6 x B]
                 predicted_gaps =  stack_precipitation[1:] - stack_precipitation[:-1] # [5 x B]
@@ -151,30 +150,30 @@ class FourTrainer(Trainer):
                             
                 # joint Loss
                 if self.args.pre_train:
-                    joint_loss = set_ce
+                    joint_loss = set_generation_loss
 
                 else:
-                    joint_loss = set_ce + loss_mae
+                    joint_loss = set_generation_loss + loss_mae
                     total_mae += loss_mae.item()
 
                 self.optim.zero_grad()
                 joint_loss.backward()
                 self.optim.step()
 
-                total_ce += set_ce.item()
+                total_generation_loss += set_generation_loss.item()
             # import IPython; IPython.embed(colors='Linux');exit(1);
 
-                # del batch, loss_ce, loss_mae, joint_loss  # After backward pass
+                # del batch, generation_loss, loss_mae, joint_loss  # After backward pass
                 # torch.cuda.empty_cache()
             
 
             if self.args.wandb == True:
-                wandb.log({'Generation Loss (CE)': total_ce / len(batch_iter)}, step=epoch)
+                wandb.log({'Generation Loss (Train)': total_generation_loss / len(batch_iter)}, step=epoch)
                 wandb.log({'MAE Train Loss': total_mae / len(batch_iter)}, step=epoch)
 
             post_fix = {
                 "epoch":epoch,
-                "CE Loss": "{:.6f}".format(total_ce/len(batch_iter)),
+                "Geneartion Loss(Train)": "{:.6f}".format(total_generation_loss/len(batch_iter)),
                 "MAE Loss":"{:.6f}".format(total_mae/len(batch_iter)),
             }
             if (epoch+1) % self.args.log_freq ==0:
@@ -192,18 +191,18 @@ class FourTrainer(Trainer):
             self.model.eval()
 
             with torch.no_grad():
-                total_ce = torch.tensor(0.0, device=self.args.device)
+                total_generation_loss = torch.tensor(0.0, device=self.args.device)
                 batch_iter = tqdm(enumerate(dataloader), total= len(dataloader))
                 for i, batch in batch_iter:
-                    image, label, gap, datetime = batch
-                    # image, label, gap, datetime, class_label = batch
+
+                    image, label, gap, datetime, class_label = batch
                     image_batch = [t.to(self.args.device) for t in image]
                     label = label.to(self.args.device)
                     gap = gap.to(self.args.device)
-                    # class_label = class_label.to(self.args.device)
+                    class_label = class_label.to(self.args.device)
                 
                     precipitation =[]
-                    set_ce =0.0
+                    set_generation_loss =0.0
                     for i in range(len(image_batch)-1):
                     
                         # image_batch[i] [B x 3 x R x R]
@@ -213,21 +212,21 @@ class FourTrainer(Trainer):
                         precipitation.append(torch.sum(regression_logits, dim=1)) # [B x 1]
                         
                         #projection_image = self.projection(image_batch[i+1])
-                        if self.args.ce_type == 'ce_image':
-                            loss_ce =  self.ce_criterion(generated_image.flatten(1), image_batch[i+1].flatten(1))
-                        elif self.args.ce_type == 'mse_image':
-                            loss_ce = self.mae_criterion(generated_image.flatten(1), image_batch[i+1].flatten(1))
-                        elif self.args.ce_type == 'ed_image':
+                        if self.args.loss_type == 'ce_image':
+                            generation_loss =  self.ce_criterion(generated_image.flatten(1), image_batch[i+1].flatten(1))
+                        elif self.args.loss_type == 'mse_image':
+                            generation_loss = self.mae_criterion(generated_image.flatten(1), image_batch[i+1].flatten(1))
+                        elif self.args.loss_type == 'ed_image':
                             preds = torch.softmax(generated_image,dim=-1)
                             err = (torch.arange(100).to(self.device).float() - image_batch[i+1].permute(0,2,3,1)).abs()
-                            loss_ce = torch.sum((preds * err),dim=-1).mean()
+                            generation_loss = torch.sum((preds * err),dim=-1).mean()
                         else:
-                            loss_ce =  self.ce_criterion(generated_image.flatten(1), class_label)
+                            generation_loss =  self.ce_criterion(generated_image.flatten(1), class_label)
 
-                        set_ce += loss_ce
+                        set_generation_loss += generation_loss
 
                     # set이여서 6으로 나눔
-                    set_ce /= 6
+                    set_generation_loss /= 6
 
                     
                     stack_precipitation = torch.stack(precipitation) # [6 x B]
@@ -239,14 +238,14 @@ class FourTrainer(Trainer):
                     # Loss_mae
                     loss_mae = self.mae_criterion(total_predict_gap, gap)
 
-                    total_ce += set_ce.item()
+                    total_generation_loss += set_generation_loss.item()
 
                     if test:
                         self.args.test_list.append([datetime, last_elements, label])
                         
                 #     del batch
                 # torch.cuda.empty_cache() 
-            return self.get_score(epoch, total_ce/len(batch_iter))
+            return self.get_score(epoch, total_generation_loss/len(batch_iter))
             
     
 class SianetTrainer(Trainer):
@@ -272,7 +271,7 @@ class SianetTrainer(Trainer):
                 gap = gap.to(self.args.device) #diff between t-1 t, B
                 # class_label = class_label.to(self.args.device)
                 
-                set_ce = 0.0
+                set_generation_loss = 0.0
                 precipitation = []   
 
                 image_batch_tensor=torch.stack(image_batch[:6]) # [6,8,3,150,150]
@@ -295,7 +294,7 @@ class SianetTrainer(Trainer):
                 total_l2 += loss_l2.item()
             
 
-                # del batch, loss_ce, loss_mae, joint_loss  # After backward pass
+                # del batch, generation_loss, loss_mae, joint_loss  # After backward pass
                 # torch.cuda.empty_cache()
             
 
@@ -344,7 +343,7 @@ class SianetTrainer(Trainer):
                 
                     generated_image=generated_image.expand(-1,3,-1,-1,-1).squeeze(2)
 
-                    import IPython; IPython.embed(colors='Linux'); exit(1)
+                    # import IPython; IPython.embed(colors='Linux'); exit(1)
                     loss_l2 =  self.l2_criterion(generated_image, target)                
 
                     total_l2 += loss_l2.item()

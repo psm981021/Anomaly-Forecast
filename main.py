@@ -50,15 +50,14 @@ def main():
     parser.add_argument("--epochs", type=int, default=50, help="number of epochs" )
     parser.add_argument("--log_freq", type=int, default =1, help="number of log frequency" )
     parser.add_argument("--patience",type=int, default="10")
-    parser.add_argument('--ce_type', type=str, default='ce_image', help='ce_image, ce_label')
-    parser.add_argument('--loss', type=str, default='ce_image', help='ed: Earth distance movement,\
-                        ')
+    parser.add_argument('--loss_type', type=str, default='ce_image', help='ce_image, ce_label')
 
     # learning args
     parser.add_argument("--lr", type=float, default=0.001, help="learning rate")
     parser.add_argument("--adam_beta1", type=float, default=0.9, help="adam first beta value")
     parser.add_argument("--adam_beta2", type=float, default=0.999, help="adam second beta value")
     parser.add_argument("--weight_decay", type=float, default=0.0, help="weight_decay of adam")
+    parser.add_argument("--initializer_range", type = float, default = 0.01)
     
     args = parser.parse_args()
 
@@ -88,18 +87,7 @@ def main():
     valid_loader = DataLoader(valid_dataset, batch_size=args.batch,drop_last=True)
     test_loader = DataLoader(test_dataset, batch_size=args.batch,drop_last=True)
 
-    # os.environ["CUDA_VISIBLE_DEVICES"] = args.devicegpu_id
     print("Using Cuda:", torch.cuda.is_available())
-
-    # if args.use_multi_gpu:
-    #     if args.cuda_condition:
-    #         args.devices = args.multi_devices.replace(' ', '')
-    #         device_ids = args.devices.split(',')
-    #         args.device_ids = [int(id_) for id_ in device_ids]
-    #         torch.cuda.set_device(args.device_ids[0])
-    #         args.gpu = args.device_ids[0]
-    #     else:
-    #         args.device  = torch.device("cpu")
 
     if args.use_multi_gpu and torch.cuda.is_available():
         device_ids = list(map(int, args.multi_devices.split(',')))
@@ -190,6 +178,10 @@ def main():
         dataframe.to_csv(args.dataframe_path,index=False)
         # import IPython; IPython.embed(colors='Linux');exit(1);
     else:
+        current_time = time.time()
+        with open(args.log_file, "a") as f:
+            f.write(f"Current time: {current_time}\n")
+            
         early_stopping = EarlyStopping(args.log_file,args.checkpoint_path, args.patience, verbose=True)
 
         for epoch in range(args.epochs):
@@ -198,7 +190,7 @@ def main():
 
             score,_ = trainer.valid(epoch)
             if args.wandb == True:
-                wandb.log({"CE Loss": score},step=epoch)
+                wandb.log({"Generation Loss (Valid)": score},step=epoch)
             early_stopping(score, trainer.model)
             if early_stopping.early_stop:
                 print("Early stopping")
@@ -229,8 +221,10 @@ def main():
             
             #dataframe = pd.DataFrame(args.test_list, columns =['datetime', 'predicted precipitation', 'ground_truth'])
         except:
+            with open(args.log_file, "a") as f:
+                f.write("Error Handling csv")
             print("Error Handling csv");
-            import IPython; IPython.embed(colors='Linux');exit(1);
+            
             
         
     
@@ -244,7 +238,7 @@ def main():
 
         with open(args.log_file, "a") as f:
             f.write(f"To run Epoch:{args.epochs} , It took {hours} hours, {minutes} minutes, {seconds} seconds\n")
-
+            
 if __name__ == "__main__":
     main()
 
