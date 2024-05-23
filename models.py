@@ -97,6 +97,8 @@ class Fourcaster(nn.Module):
 
         # shape 확인 - reconstruction image?
         x = self.up4(x, x1Att)
+        
+
         generated_image = self.outc(x)
         generated_image = generated_image.permute(0,2,3,1)
 
