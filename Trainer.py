@@ -5,6 +5,7 @@ import wandb
 import torch.nn as nn
 from PIL import Image
 import matplotlib.pyplot as plt
+
 from models import RainfallPredictor
 
 class Trainer:
@@ -45,8 +46,8 @@ class Trainer:
         print("Total Parameters:", sum([p.nelement() for p in self.model.parameters()]))
 
         self.ce_criterion = torch.nn.CrossEntropyLoss().to(self.args.device)
-        self.mae_criterion = torch.nn.L1Loss()
-        self.l2_criterion = torch.nn.MSELoss()
+        self.mae_criterion = torch.nn.L1Loss().to(self.args.device)
+        self.l2_criterion = torch.nn.MSELoss().to(self.args.device)
         
     def train(self, epoch):
         self.iteration(epoch, self.train_dataloader)
@@ -59,6 +60,16 @@ class Trainer:
 
     def iteration(self, epoch, dataloader, train=True):
         raise NotImplementedError
+
+    def correlation_image(self, T,P):
+        # correlation between observation and generated image
+        epsilon = 1e-9
+        covariance = torch.sum(P * T)
+        P_squared_sum = torch.sum(P ** 2)
+        T_squared_sum = torch.sum(T ** 2)
+
+        correlation = covariance / torch.sqrt(P_squared_sum * T_squared_sum + epsilon)
+        return correlation
     
     def get_score(self, epoch, pred):
 
@@ -117,15 +128,19 @@ class FourTrainer(Trainer):
                 image_batch = [t.to(self.args.device) for t in image] # 7
                 label = label.to(self.args.device) #answer, B
                 gap = gap.to(self.args.device) #diff between t-1 t, B
-                # class_label = class_label.to(self.args.device)
+                # #class_label = class_label.to(self.args.device)
                 
                 set_generation_loss = 0.0
+                correlation_image = 0.0
                 precipitation = []       
                 
                 for i in range(len(image_batch)-1):
                     
                     # image_batch[i] [B x 3 x R x R]
-                    generated_image = self.model(image_batch[i],self.args)
+                    generated_image, regression_logits = self.model(image_batch[i],self.args)
+                    
+
+                    correlation_image += torch.abs(self.correlation_image(generated_image.mean(dim=-1), image_batch[i+1])) / self.args.batch
                     
                     # generated_image [B 3 R R ], Regression_logits [B x 1 x 1 x 1]
                     # regression_logits = regression_logits.reshape(self.args.batch, -1)
@@ -134,12 +149,23 @@ class FourTrainer(Trainer):
                     
                     if self.args.loss_type == 'ce_image':
                         generation_loss =  self.ce_criterion(generated_image.flatten(1), image_batch[i+1].flatten(1))
+
                     elif self.args.loss_type == 'mae_image':
                         generation_loss = self.mae_criterion(generated_image.flatten(1), image_batch[i+1].flatten(1))
+
                     elif self.args.loss_type == 'ed_image':
                         preds = torch.softmax(generated_image,dim=-1)
                         err = (torch.arange(100).to(self.device).float() - image_batch[i+1].permute(0,2,3,1)).abs()
                         generation_loss = torch.sum((preds * err),dim=-1).mean()
+
+                    elif self.args.loss_type == 'stamina':
+                            
+                            absolute_error = torch.abs(generated_image - image_batch[i+1].permute(0,2,3,1)) # [B W H C]
+                            event_weight = torch.clamp(image_batch[i] + 1, max=24).permute(0,2,3,1) # [B W H 1]
+                            penalty = torch.pow(1 - torch.exp(-absolute_error), 0.5).permute(0,2,3,1) #  [B W H C]
+                            result = absolute_error * event_weight * penalty
+
+                            generation_loss = result.mean()
                     else:
                         generation_loss =  self.ce_criterion(generated_image.flatten(1), class_label)
                     
@@ -147,12 +173,12 @@ class FourTrainer(Trainer):
                 
                 # set이여서 6으로 나눔
                 set_generation_loss /= 6
+                correlation_image /= 6
 
                 stack_precipitation = torch.stack(precipitation) # [6 , B, 150, 150, 100]
                 
                 predicted_gaps =  stack_precipitation[1:] - stack_precipitation[:-1] # [5 ,B, 150, 150, 100]
                 total_predict_gap = torch.sum(predicted_gaps, dim=0) # [B, 150, 150, 100] -> [1]
-                
                 
                 total_predict_gap=total_predict_gap.permute(0,3,1,2)
                 reg = self.regression_model(total_predict_gap) # [B] 
@@ -176,7 +202,6 @@ class FourTrainer(Trainer):
                 self.reg_optim.step()
 
                 total_generation_loss += set_generation_loss.item()
-                # import IPython; IPython.embed(colors='Linux');exit(1);
 
                 # del batch, generation_loss, loss_mae, joint_loss  # After backward pass
                 # torch.cuda.empty_cache()
@@ -184,11 +209,13 @@ class FourTrainer(Trainer):
 
             if self.args.wandb == True:
                 wandb.log({'Generation Loss (Train)': total_generation_loss / len(batch_iter)}, step=epoch)
+                wandb.log({'Correlation Image (Train)': correlation_image / len(batch_iter)}, step=epoch)
                 wandb.log({'MAE Train Loss': total_mae / len(batch_iter)}, step=epoch)
 
             post_fix = {
                 "epoch":epoch,
                 "Geneartion Loss(Train)": "{:.6f}".format(total_generation_loss/len(batch_iter)),
+                "Correlation Image(Train)": "{:.6f}".format(correlation_image/len(batch_iter)),
                 "MAE Loss":"{:.6f}".format(total_mae/len(batch_iter)),
             }
             if (epoch+1) % self.args.log_freq ==0:
@@ -211,7 +238,7 @@ class FourTrainer(Trainer):
                 batch_iter = tqdm(enumerate(dataloader), total= len(dataloader))
                 for i, batch in batch_iter:
 
-                    # image, label, gap, datetime, class_label = batch
+                    # image, label, gap, datetime= batch
                     image, label, gap, datetime = batch
                     image_batch = [t.to(self.args.device) for t in image]
                     label = label.to(self.args.device)
@@ -220,11 +247,15 @@ class FourTrainer(Trainer):
                 
                     precipitation =[]
                     set_generation_loss =0.0
+                    correlation_image =0.0
+
                     for i in range(len(image_batch)-1):
                     
                         # image_batch[i] [B x 3 x R x R]
                         generated_image = self.model(image_batch[i],self.args)
                         # generated_image [B 3 R R ], Regression_logits [B x 1 x 150 x 150]
+
+                        correlation_image += torch.abs(self.correlation_image(generated_image.mean(dim=-1), image_batch[i+1])) / self.args.batch
                         # regression_logits = regression_logits.reshape(self.args.batch, -1)
                         precipitation.append(generated_image) 
                         
@@ -237,6 +268,15 @@ class FourTrainer(Trainer):
                             preds = torch.softmax(generated_image,dim=-1)
                             err = (torch.arange(100).to(self.device).float() - image_batch[i+1].permute(0,2,3,1)).abs()
                             generation_loss = torch.sum((preds * err),dim=-1).mean()
+                        
+                        elif self.args.loss_type == 'stamina':
+                                
+                            absolute_error = torch.abs(generated_image - image_batch[i+1].permute(0,2,3,1)) # [B W H C]
+                            event_weight = torch.clamp(image_batch[i] + 1, max=24).permute(0,2,3,1) # [B W H 1]
+                            penalty = torch.pow(1 - torch.exp(-absolute_error), 0.5).permute(0,2,3,1) #  [B W H C]
+
+                            result = absolute_error * event_weight * penalty
+                            generation_loss = result.mean()
                         else:
                             generation_loss =  self.ce_criterion(generated_image.flatten(1), class_label)
 
@@ -244,6 +284,7 @@ class FourTrainer(Trainer):
 
                     # set이여서 6으로 나눔
                     set_generation_loss /= 6
+                    correlation_image /= 6
 
                     # import IPython; IPython.embed(colors='Linux'); exit(1)
                     # self.plot_images(generated_image[0],self.args.model_idx,datetime[6])

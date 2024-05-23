@@ -16,8 +16,9 @@ python main.py \
     --output_dir "output/test" \
     --test_list=[]\
     --gpu_id 1 \
+    --grey_scale \
     --device "cuda:1" \
-    --ce_type "ed_image" \
+    --loss_type "stamina" \
     --grey_scale \
     --seed 0
     
