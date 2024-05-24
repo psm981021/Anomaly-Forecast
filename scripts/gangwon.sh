@@ -1,35 +1,21 @@
 
-# python main.py \
-#     --data_dir "data/data_gangwon_only" \
-#     --image_csv_dir "data/gangwon.csv" \
-#     --batch 8 \
-#     --epochs 1000 \
-#     --patience 50 \
-#     --model_idx "gangwon-V.3.01" \
-#     --output_dir "output/gangwon-V.3.01/" \
-#     --test_list=[] \
-#     --gpu_id 1 \
-#     --device cuda:1 \
-#     --seed 0 \
-#     --grey_scale \
-#     --loss_type "stamina" \
-#     --wandb
-
 python main.py \
     --data_dir "data/data_gangwon_only" \
     --image_csv_dir "data/gangwon.csv" \
     --batch 8 \
     --epochs 1000 \
     --patience 50 \
-    --model_idx "gangwon-V.2.02" \
-    --output_dir "output/gangwon-V.2.02/" \
+    --model_idx "gangwon-V.3.01" \
+    --output_dir "output/gangwon-V.3.01/" \
     --test_list=[] \
     --gpu_id 1 \
     --device cuda:1 \
     --seed 0 \
     --grey_scale \
-    --loss_type "ed_image" \
+    --lr 0.0001 \
+    --loss_type "stamina" \
     --wandb
+
 
 # scripts/gangwon.sh
 

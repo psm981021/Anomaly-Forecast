@@ -1,35 +1,24 @@
 
-# python main.py \
-#     --data_dir "data/data_seoul_only" \
-#     --image_csv_dir "data/seoul.csv" \
-#     --batch 8 \
-#     --epochs 1000 \
-#     --patience 50 \
-#     --model_idx "seoul-V.3.01" \
-#     --output_dir "output/seoul-V.3.01/" \
-#     --test_list=[] \
-#     --gpu_id 0 \
-#     --device cuda:0 \
-#     --seed 0 \
-#     --grey_scale \
-#     --loss_type "stamina" \
-#     --wandb
-
 python main.py \
     --data_dir "data/data_seoul_only" \
     --image_csv_dir "data/seoul.csv" \
     --batch 8 \
     --epochs 1000 \
     --patience 50 \
-    --model_idx "seoul-V.2.02" \
-    --output_dir "output/seoul-V.2.02/" \
+    --model_idx "seoul-V.3.01" \
+    --output_dir "output/seoul-V.3.01/" \
     --test_list=[] \
     --gpu_id 0 \
     --device cuda:0 \
     --seed 0 \
     --grey_scale \
-    --loss_type "ed_image" \
+    --lr 0.0001 \
+    --loss_type "stamina" \
     --wandb
+
+
+
+
 # scripts/seoul.sh
 
 # minjoo computer

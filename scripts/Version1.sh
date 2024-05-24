@@ -29,14 +29,14 @@ python main.py \
     --batch 8 \
     --epochs 1000 \
     --patience 50 \
-    --model_idx "test_1" \
-    --output_dir "output/test_1/" \
+    --model_idx "test" \
+    --output_dir "output/test/" \
     --test_list=[] \
     --gpu_id 1 \
     --device cuda:1 \
     --seed 0 \
     --grey_scale \
-    --loss_type "ed_image" \
+    --loss_type "stamina" \
 
 
 #scripts/Version1.sh

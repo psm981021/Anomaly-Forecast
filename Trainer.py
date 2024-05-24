@@ -62,14 +62,19 @@ class Trainer:
         raise NotImplementedError
 
     def correlation_image(self, T,P):
-        # correlation between observation and generated image
         epsilon = 1e-9
-        covariance = torch.sum(P * T)
-        P_squared_sum = torch.sum(P ** 2)
-        T_squared_sum = torch.sum(T ** 2)
-
-        correlation = covariance / torch.sqrt(P_squared_sum * T_squared_sum + epsilon)
-        return correlation
+        
+        T_mean = T.mean(dim=(1, 2), keepdim=True)
+        P_mean = P.mean(dim=(1, 2), keepdim=True)
+        T_centered = T - T_mean
+        P_centered = P - P_mean
+        
+        covariance = (T_centered * P_centered).sum(dim=(1, 2))
+        T_var = (T_centered ** 2).sum(dim=(1, 2))
+        P_var = (P_centered ** 2).sum(dim=(1, 2))
+        
+        correlation = covariance / (torch.sqrt(T_var * P_var) + epsilon)
+        return correlation.mean() 
     
     def get_score(self, epoch, pred):
 
@@ -140,11 +145,8 @@ class FourTrainer(Trainer):
                     
                     # image_batch[i] [B x 3 x R x R]
                     generated_image = self.model(image_batch[i],self.args)
-                    if torch.isnan(generated_image).any():
-                        print("Outputs have NaN values")
-                        import IPython; IPython.embed(colors='Linux'); exit(1)
 
-                    correlation_image += torch.abs(self.correlation_image(generated_image.mean(dim=-1), image_batch[i+1])) / self.args.batch
+                    correlation_image += torch.abs(self.correlation_image(generated_image.mean(dim=-1), image_batch[i+1].mean(dim=1))) / self.args.batch
                     
                     # generated_image [B 3 R R ], Regression_logits [B x 1 x 1 x 1]
                     # regression_logits = regression_logits.reshape(self.args.batch, -1)
@@ -163,22 +165,19 @@ class FourTrainer(Trainer):
                         generation_loss = torch.sum((preds * err),dim=-1).mean()
 
                     elif self.args.loss_type == 'stamina':
-                            
+                            epsilon = 1e-6
                             absolute_error = torch.abs(generated_image - image_batch[i+1].permute(0,2,3,1)) # [B W H C]
-                            event_weight = torch.clamp(image_batch[i] + 1, max=24).permute(0,2,3,1) # [B W H 1]
-                            penalty = torch.pow(1 - torch.exp(-absolute_error), 0.5) #  [B W H C]
+                            event_weight = torch.clamp(image_batch[i] + 1, max=6).permute(0,2,3,1) # [B W H 1]
+                            penalty = torch.pow(1 - torch.exp(-absolute_error) + epsilon , 0.5) #  [B W H C]
                             
                             result = absolute_error * event_weight * penalty
-
+                            torch.autograd.set_detect_anomaly(True)
                             generation_loss = result.mean()
                             
                     else:
                         generation_loss =  self.ce_criterion(generated_image.flatten(1), class_label)
                     
                     set_generation_loss += generation_loss
-                    if torch.isnan(generation_loss).any():
-                        print("Loss have NaN values")
-                        import IPython; IPython.embed(colors='Linux'); exit(1)
 
                 # set이여서 6으로 나눔
                 set_generation_loss /= 6
@@ -215,19 +214,19 @@ class FourTrainer(Trainer):
                 self.reg_optim.step()
 
                 total_generation_loss += set_generation_loss.item()
-                import IPython; IPython.embed(colors='Linux');exit(1);
-                # del batch, generation_loss, loss_mae, joint_loss  # After backward pass
-                # torch.cuda.empty_cache()
+                
+                del batch, generation_loss, loss_mae, joint_loss  # After backward pass
+                torch.cuda.empty_cache()
             
             
             if self.args.wandb == True:
-                wandb.log({'Generation Loss (Train)': total_generation_loss / len(batch_iter)}, step=epoch)
+                wandb.log({f'Generation Loss {self.args.loss_type} (Train)': total_generation_loss / len(batch_iter)}, step=epoch)
                 wandb.log({'Correlation Image (Train)': correlation_image / len(batch_iter)}, step=epoch)
                 wandb.log({'MAE Train Loss': total_mae / len(batch_iter)}, step=epoch)
 
             post_fix = {
                 "epoch":epoch,
-                "Geneartion Loss(Train)": "{:.6f}".format(total_generation_loss/len(batch_iter)),
+                f"Geneartion Loss {self.args.loss_type} (Train)": "{:.6f}".format(total_generation_loss/len(batch_iter)),
                 "Correlation Image(Train)": "{:.6f}".format(correlation_image/len(batch_iter)),
                 "MAE Loss":"{:.6f}".format(total_mae/len(batch_iter)),
             }
@@ -268,7 +267,7 @@ class FourTrainer(Trainer):
                         generated_image = self.model(image_batch[i],self.args)
                         # generated_image [B 3 R R ], Regression_logits [B x 1 x 150 x 150]
 
-                        correlation_image += torch.abs(self.correlation_image(generated_image.mean(dim=-1), image_batch[i+1])) / self.args.batch
+                        correlation_image += torch.abs(self.correlation_image(generated_image.mean(dim=-1), image_batch[i+1].mean(dim=1))) / self.args.batch
                         # regression_logits = regression_logits.reshape(self.args.batch, -1)
                         precipitation.append(generated_image) 
                         
@@ -299,8 +298,8 @@ class FourTrainer(Trainer):
                     set_generation_loss /= 6
                     correlation_image /= 6
 
-                    import IPython; IPython.embed(colors='Linux'); exit(1)
-                    # self.plot_images(generated_image[0],self.args.model_idx,datetime[0])
+                    # import IPython; IPython.embed(colors='Linux'); exit(1)
+                    # self.plot_images(generated_image[0],self.args.model_idx,datetime[6])
                     
                     stack_precipitation = torch.stack(precipitation) # [6 , B, 150, 150, 100]
                 
@@ -320,8 +319,8 @@ class FourTrainer(Trainer):
                     if test:
                         self.args.test_list.append([datetime, last_elements, label])
                         
-                #     del batch
-                # torch.cuda.empty_cache() 
+                del batch
+                torch.cuda.empty_cache() 
             return self.get_score(epoch, total_generation_loss/len(batch_iter))
             
     
