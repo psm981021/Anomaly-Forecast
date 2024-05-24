@@ -97,7 +97,9 @@ class Trainer:
 
     @staticmethod
     def plot_images(image, model_idx, datetime, flag=None):
-        image = image.cpu().detach().permute(1,2,0).numpy()
+        # image = image.cpu().detach().permute(1,2,0).numpy()
+        # image = image.cpu().detach().permute(2,0,1).numpy()
+        image = image.cpu().detach().numpy()
         plt.imshow(image)
         model_idx=model_idx.replace('.','-')
         datetime = datetime.replace(':', '-').replace(' ', '_')
@@ -298,7 +300,7 @@ class FourTrainer(Trainer):
                     correlation_image /= 6
 
                     import IPython; IPython.embed(colors='Linux'); exit(1)
-                    # self.plot_images(generated_image[0],self.args.model_idx,datetime[6])
+                    # self.plot_images(generated_image[0],self.args.model_idx,datetime[0])
                     
                     stack_precipitation = torch.stack(precipitation) # [6 , B, 150, 150, 100]
                 

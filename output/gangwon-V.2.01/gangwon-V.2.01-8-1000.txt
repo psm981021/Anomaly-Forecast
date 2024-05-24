@@ -526,3 +526,102 @@ EarlyStopping counter: 49 out of 50
 EarlyStopping counter: 50 out of 50
 {'Epoch': 1000, 'Generation Loss (Eval)': '0.246815'}
 Error Handling csvTo run Epoch:1000 , It took 1 hours, 34 minutes, 49 seconds
+---------------------- Configure Info: ----------------------
+data_dir                       : data\radar_full
+image_csv_dir                  : data\\강원_2021_2023_강수량 0.1 미만 제거_상위 10% test.csv
+output_dir                     : output\\gangwon-V.2.01
+gpu_id                         : 0
+device                         : cpu
+seed                           : 0
+no_cuda                        : False
+use_multi_gpu                  : False
+multi_devices                  : 0,1
+wandb                          : False
+pre_train                      : False
+do_eval                        : True
+test_list                      : ['[]']
+grey_scale                     : True
+model_idx                      : gangwon-V.2.01
+batch                          : 8
+sianet                         : False
+epochs                         : 1000
+log_freq                       : 1
+patience                       : 50
+loss_type                      : ed_image
+lr                             : 0.001
+adam_beta1                     : 0.9
+adam_beta2                     : 0.999
+weight_decay                   : 0.0
+initializer_range              : 0.01
+str                            : gangwon-V.2.01-8-1000
+log_file                       : output\\gangwon-V.2.01\gangwon-V.2.01-8-1000.txt
+dataframe_path                 : output\\gangwon-V.2.01\gangwon-V.2.01-8-1000.csv
+checkpoint_path                : output\\gangwon-V.2.01\gangwon-V.2.01-8-1000.pt
+---------------------- Configure Info: ----------------------
+------------------------------ Continue Training ------------------------------ 
+---------------------- Configure Info: ----------------------
+data_dir                       : data\radar_full
+image_csv_dir                  : data\\강원_2021_2023_강수량 0.1 미만 제거_상위 10% test.csv
+output_dir                     : output\\gangwon-V.2.01
+gpu_id                         : 0
+device                         : cpu
+seed                           : 0
+no_cuda                        : False
+use_multi_gpu                  : False
+multi_devices                  : 0,1
+wandb                          : False
+pre_train                      : False
+do_eval                        : True
+test_list                      : ['[]']
+grey_scale                     : True
+model_idx                      : gangwon-V.2.01
+batch                          : 8
+sianet                         : False
+epochs                         : 1000
+log_freq                       : 1
+patience                       : 50
+loss_type                      : ed_image
+lr                             : 0.001
+adam_beta1                     : 0.9
+adam_beta2                     : 0.999
+weight_decay                   : 0.0
+initializer_range              : 0.01
+str                            : gangwon-V.2.01-8-1000
+log_file                       : output\\gangwon-V.2.01\gangwon-V.2.01-8-1000.txt
+dataframe_path                 : output\\gangwon-V.2.01\gangwon-V.2.01-8-1000.csv
+checkpoint_path                : output\\gangwon-V.2.01\gangwon-V.2.01-8-1000.pt
+---------------------- Configure Info: ----------------------
+------------------------------ Continue Training ------------------------------ 
+---------------------- Configure Info: ----------------------
+data_dir                       : data\radar_full
+image_csv_dir                  : data\\강원_2021_2023_강수량 0.1 미만 제거_상위 10% test.csv
+output_dir                     : output\\gangwon-V.2.01
+gpu_id                         : 0
+device                         : cpu
+seed                           : 0
+no_cuda                        : False
+use_multi_gpu                  : False
+multi_devices                  : 0,1
+wandb                          : False
+pre_train                      : False
+do_eval                        : True
+test_list                      : ['[]']
+grey_scale                     : True
+model_idx                      : gangwon-V.2.01
+batch                          : 8
+sianet                         : False
+epochs                         : 1000
+log_freq                       : 1
+patience                       : 50
+loss_type                      : ed_image
+lr                             : 0.001
+adam_beta1                     : 0.9
+adam_beta2                     : 0.999
+weight_decay                   : 0.0
+initializer_range              : 0.01
+str                            : gangwon-V.2.01-8-1000
+log_file                       : output\\gangwon-V.2.01\gangwon-V.2.01-8-1000.txt
+dataframe_path                 : output\\gangwon-V.2.01\gangwon-V.2.01-8-1000.csv
+checkpoint_path                : output\\gangwon-V.2.01\gangwon-V.2.01-8-1000.pt
+---------------------- Configure Info: ----------------------
+------------------------------ Continue Training ------------------------------ 
