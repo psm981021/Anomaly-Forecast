@@ -40,8 +40,8 @@ class Trainer:
 
         # self.data_name = self.args.data_name
         betas = (self.args.adam_beta1, self.args.adam_beta2)
-        self.optim = Adam(self.model.parameters(), lr=self.args.lr, betas=betas, weight_decay=self.args.weight_decay)
-        self.reg_optim=Adam(self.regression_model.parameters(), lr=0.001, betas=betas, weight_decay=self.args.weight_decay)
+        self.optim = Adam(self.model.parameters(), lr=1e-4, betas=betas, weight_decay=self.args.weight_decay)
+        self.reg_optim=Adam(self.regression_model.parameters(), lr=1e-4, betas=betas, weight_decay=self.args.weight_decay)
 
         print("Total Parameters:", sum([p.nelement() for p in self.model.parameters()]))
 
@@ -139,7 +139,10 @@ class FourTrainer(Trainer):
                     # image_batch[i] [B x 3 x R x R]
                     generated_image = self.model(image_batch[i],self.args)
                     
-
+                    if torch.isnan(generated_image).any():
+                        print("Outputs have NaN values")
+                        import IPython; IPython.embed(colors='Linux');exit(1);
+                        break
                     correlation_image += torch.abs(self.correlation_image(generated_image.mean(dim=-1), image_batch[i+1])) / self.args.batch
                     
                     # generated_image [B 3 R R ], Regression_logits [B x 1 x 1 x 1]
@@ -160,19 +163,32 @@ class FourTrainer(Trainer):
 
                     elif self.args.loss_type == 'stamina':
                             
-                            absolute_error = torch.abs(generated_image - image_batch[i+1].permute(0,2,3,1)) # [B W H C]
-                            event_weight = torch.clamp(image_batch[i] + 1, max=24).permute(0,2,3,1) # [B W H 1]
-                            penalty = torch.pow(1 - torch.exp(-absolute_error), 0.5) #  [B W H C]
-                            
-                            
-                            result = absolute_error * event_weight * penalty
+                        absolute_error = torch.abs(generated_image - image_batch[i+1].permute(0, 2, 3, 1))
+                        absolute_error_clamp = torch.clamp(absolute_error, max=5)
+                        event_weight = torch.clamp(image_batch[i] + 1, max=10).permute(0, 2, 3, 1)
+                        exp_input = -absolute_error_clamp
+                        exp_input = torch.clamp(exp_input, min=-50)  # exp 함수의 입력 값을 클램핑하여 불안정성 방지
+                        penalty = torch.pow(1 - torch.exp(exp_input), 0.5)  # [B W H C]
+                        result = absolute_error * event_weight * penalty
+                        generation_loss = result.mean()
+                        
+                        # absolute_error = torch.abs(generated_image - image_batch[i+1].permute(0,2,3,1)) # [B W H C]
+                        # event_weight = torch.clamp(image_batch[i] + 1, max=4).permute(0,2,3,1) # [B W H 1]
+                        # penalty = torch.pow(1 - torch.exp(-absolute_error), 0.5) #  [B W H C]
+                        
+                        
+                        # result = absolute_error * event_weight * penalty
 
-                            generation_loss = result.mean()
+                        # generation_loss = result.mean()
                             
                     else:
                         generation_loss =  self.ce_criterion(generated_image.flatten(1), class_label)
                     
                     set_generation_loss += generation_loss
+                    if torch.isnan(generation_loss).any():
+                        print("loss have NaN values")
+                        import IPython; IPython.embed(colors='Linux');exit(1);
+                        break
                 
                 # set이여서 6으로 나눔
                 set_generation_loss /= 6
@@ -205,11 +221,12 @@ class FourTrainer(Trainer):
                 joint_loss.backward()
                 
                 torch.nn.utils.clip_grad_norm_(self.model.parameters(), max_norm=1.0)
+                torch.nn.utils.clip_grad_norm_(self.regression_model.parameters(), max_norm=1.0)
                 self.optim.step()
                 self.reg_optim.step()
 
                 total_generation_loss += set_generation_loss.item()
-                import IPython; IPython.embed(colors='Linux');exit(1);
+                # import IPython; IPython.embed(colors='Linux');exit(1);
                 # del batch, generation_loss, loss_mae, joint_loss  # After backward pass
                 # torch.cuda.empty_cache()
             
@@ -293,7 +310,7 @@ class FourTrainer(Trainer):
                     set_generation_loss /= 6
                     correlation_image /= 6
 
-                    import IPython; IPython.embed(colors='Linux'); exit(1)
+                    # import IPython; IPython.embed(colors='Linux'); exit(1)
                     # self.plot_images(generated_image[0],self.args.model_idx,datetime[6])
                     
                     stack_precipitation = torch.stack(precipitation) # [6 , B, 150, 150, 100]
