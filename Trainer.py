@@ -184,17 +184,23 @@ class FourTrainer(Trainer):
                 correlation_image /= 6
                 total_correlation += correlation_image
                 
+                last_precipitation = precipitation[-1]
+
                 stack_precipitation = torch.stack(precipitation) # [6 , B, 150, 150, 100]
                 
                 predicted_gaps =  stack_precipitation[1:] - stack_precipitation[:-1] # [5 ,B, 150, 150, 100]
                 total_predict_gap = torch.sum(predicted_gaps, dim=0) # [B, 150, 150, 100] -> [1]
                 
                 total_predict_gap=total_predict_gap.permute(0,3,1,2)
-                reg = self.regression_model(total_predict_gap).view(self.args.batch) # [B] 
+
+                # reg = self.regression_model(image_batch[i+1]).view(self.args.batch) # [B] 
+                
+                last_reg = self.regression_model(last_precipitation.permute(0,3,1,2).contiguous()).view(self.args.batch) # [B] 
+                #reg = self.regression_model(total_predict_gap).view(self.args.batch) # [B] 
                 
                 # Loss_mae
                 if self.args.pre_train == False:
-                    loss_mae = self.mae_criterion(reg, gap) # gap => [B]
+                    loss_mae = self.mae_criterion(last_reg, label) # gap => [B]
                             
                 # joint Loss
                 if self.args.pre_train:
@@ -300,24 +306,27 @@ class FourTrainer(Trainer):
 
                     # import IPython; IPython.embed(colors='Linux'); exit(1)
                     # self.plot_images(generated_image[0],self.args.model_idx,datetime[6])
-                    
+                    last_precipitation = precipitation[-1]
                     stack_precipitation = torch.stack(precipitation) # [6 , B, 150, 150, 100]
                 
                     predicted_gaps =  stack_precipitation[1:] - stack_precipitation[:-1] # [5 ,B, 150, 150, 100]
                     total_predict_gap = torch.sum(predicted_gaps, dim=0) # [B, 150, 150, 100] -> [1]
                     
-                    total_predict_gap=total_predict_gap.permute(0,3,1,2)
-                    reg = self.regression_model(total_predict_gap).view(self.args.batch) # [B] 
-                    
-                    last_elements = reg[-1] 
+                    total_predict_gap=total_predict_gap.permute(0,3,1,2).contiguous()
+
+                    # reg = self.regression_model(image_batch[i+1]).view(self.args.batch) # [B] 
+
+                    # reg = self.regression_model(total_predict_gap).view(self.args.batch) # [B] 
+
+                    last_reg = self.regression_model(last_precipitation.permute(0,3,1,2).contiguous()).view(self.args.batch) # [B] 
 
                     # Loss_mae
-                    loss_mae = self.mae_criterion(reg, gap)
+                    loss_mae = self.mae_criterion(last_reg, label)
 
                     total_generation_loss += set_generation_loss.item()
 
                     if test:
-                        self.args.test_list.append([datetime, last_elements, label])
+                        self.args.test_list.append([datetime, last_reg, label])
                         
                 del batch
                 torch.cuda.empty_cache() 

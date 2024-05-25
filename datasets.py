@@ -17,22 +17,22 @@ class Radar(Dataset):
         super(Radar, self).__init__()
         self.path = 'data\\radar_test'
         self.csv_path = csv_path
-        self.flag=flag
+        self.flag=flag # train/valid/test
         self.augmentations = augmentations
         self.args = args
 
-
-        # 이미지 자를 좌표 - 서울 : 150x150
-        self.left = 240  
-        self.top = 120   
-        self.right = 390
-        self.bottom = 270
-        
-        # 이미지 자를 좌표 - 강원도 150x150
-        # self.left = 300
-        # self.top = 110  
-        # self.right = 450
-        # self.bottom = 260
+        if args.location == "seoul": 
+            # 이미지 자를 좌표 - 서울 : 150x150
+            self.left = 240  
+            self.top = 120   
+            self.right = 390
+            self.bottom = 270
+        else:
+            # 이미지 자를 좌표 - 강원도 150x150
+            self.left = 300
+            self.top = 110  
+            self.right = 450
+            self.bottom = 260
         
         self.transform = transforms.Compose([
             #transforms.CenterCrop((250, 250)) # centercrop 말고 

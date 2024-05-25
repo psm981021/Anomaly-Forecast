@@ -8,6 +8,7 @@ python main.py \
     --model_idx "gangwon-V.3.01" \
     --output_dir "output/gangwon-V.3.01/" \
     --test_list=[] \
+    --png=[] \
     --gpu_id 1 \
     --device cuda:1 \
     --seed 0 \
