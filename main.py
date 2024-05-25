@@ -202,7 +202,7 @@ def main():
         # load the best model
         trainer.model.load_state_dict(torch.load(args.checkpoint_path))
         score = trainer.test(args.epochs)
-
+        import IPython; IPython.embed(colors='Linux'); exit(1)
         # save csv file
         try:
             formatted_data = []
