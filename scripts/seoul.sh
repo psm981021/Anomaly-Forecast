@@ -11,7 +11,6 @@ python main.py \
     --gpu_id 0 \
     --device cuda:0 \
     --seed 0 \
-    --grey_scale \
     --lr 0.0001 \
     --loss_type "stamina" \
     --wandb
