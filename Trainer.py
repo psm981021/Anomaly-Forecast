@@ -40,8 +40,8 @@ class Trainer:
 
         # self.data_name = self.args.data_name
         betas = (self.args.adam_beta1, self.args.adam_beta2)
-        self.optim = Adam(self.model.parameters(), lr=1e-4, betas=betas, weight_decay=self.args.weight_decay)
-        self.reg_optim=Adam(self.regression_model.parameters(), lr=1e-4, betas=betas, weight_decay=self.args.weight_decay)
+        self.optim = Adam(self.model.parameters(), lr=1e-5, betas=betas, weight_decay=self.args.weight_decay)
+        self.reg_optim=Adam(self.regression_model.parameters(), lr=1e-5, betas=betas, weight_decay=self.args.weight_decay)
 
         print("Total Parameters:", sum([p.nelement() for p in self.model.parameters()]))
 
@@ -62,14 +62,19 @@ class Trainer:
         raise NotImplementedError
 
     def correlation_image(self, T,P):
-        # correlation between observation and generated image
         epsilon = 1e-9
-        covariance = torch.sum(P * T)
-        P_squared_sum = torch.sum(P ** 2)
-        T_squared_sum = torch.sum(T ** 2)
-
-        correlation = covariance / torch.sqrt(P_squared_sum * T_squared_sum + epsilon)
-        return correlation
+        
+        T_mean = T.mean(dim=(1, 2), keepdim=True)
+        P_mean = P.mean(dim=(1, 2), keepdim=True)
+        T_centered = T - T_mean
+        P_centered = P - P_mean
+        
+        covariance = (T_centered * P_centered).sum(dim=(1, 2))
+        T_var = (T_centered ** 2).sum(dim=(1, 2))
+        P_var = (P_centered ** 2).sum(dim=(1, 2))
+        
+        correlation = covariance / (torch.sqrt(T_var * P_var) + epsilon)
+        return correlation.mean() 
     
     def get_score(self, epoch, pred):
 
@@ -97,7 +102,9 @@ class Trainer:
 
     @staticmethod
     def plot_images(image, model_idx, datetime, flag=None):
-        image = image.cpu().detach().permute(1,2,0).numpy()
+        # image = image.cpu().detach().permute(1,2,0).numpy()
+        # image = image.cpu().detach().permute(2,0,1).numpy()
+        image = image.cpu().detach().numpy()
         plt.imshow(image)
         model_idx=model_idx.replace('.','-')
         datetime = datetime.replace(':', '-').replace(' ', '_')
@@ -138,12 +145,8 @@ class FourTrainer(Trainer):
                     
                     # image_batch[i] [B x 3 x R x R]
                     generated_image = self.model(image_batch[i],self.args)
-                    
-                    if torch.isnan(generated_image).any():
-                        print("Outputs have NaN values")
-                        import IPython; IPython.embed(colors='Linux');exit(1);
-                        break
-                    correlation_image += torch.abs(self.correlation_image(generated_image.mean(dim=-1), image_batch[i+1])) / self.args.batch
+
+                    correlation_image += torch.abs(self.correlation_image(generated_image.mean(dim=-1), image_batch[i+1].mean(dim=1))) / self.args.batch
                     
                     # generated_image [B 3 R R ], Regression_logits [B x 1 x 1 x 1]
                     # regression_logits = regression_logits.reshape(self.args.batch, -1)
@@ -162,50 +165,42 @@ class FourTrainer(Trainer):
                         generation_loss = torch.sum((preds * err),dim=-1).mean()
 
                     elif self.args.loss_type == 'stamina':
+                            epsilon = 1e-6
+                            absolute_error = torch.abs(generated_image - image_batch[i+1].permute(0,2,3,1)) # [B W H C]
+                            event_weight = torch.clamp(image_batch[i] + 1, max=6).permute(0,2,3,1) # [B W H 1]
+                            penalty = torch.pow(1 - torch.exp(-absolute_error) + epsilon , 0.5) #  [B W H C]
                             
-                        absolute_error = torch.abs(generated_image - image_batch[i+1].permute(0, 2, 3, 1))
-                        absolute_error_clamp = torch.clamp(absolute_error, max=5)
-                        event_weight = torch.clamp(image_batch[i] + 1, max=10).permute(0, 2, 3, 1)
-                        exp_input = -absolute_error_clamp
-                        exp_input = torch.clamp(exp_input, min=-50)  # exp 함수의 입력 값을 클램핑하여 불안정성 방지
-                        penalty = torch.pow(1 - torch.exp(exp_input), 0.5)  # [B W H C]
-                        result = absolute_error * event_weight * penalty
-                        generation_loss = result.mean()
-                        
-                        # absolute_error = torch.abs(generated_image - image_batch[i+1].permute(0,2,3,1)) # [B W H C]
-                        # event_weight = torch.clamp(image_batch[i] + 1, max=4).permute(0,2,3,1) # [B W H 1]
-                        # penalty = torch.pow(1 - torch.exp(-absolute_error), 0.5) #  [B W H C]
-                        
-                        
-                        # result = absolute_error * event_weight * penalty
-
-                        # generation_loss = result.mean()
+                            result = absolute_error * event_weight * penalty
+                            torch.autograd.set_detect_anomaly(True)
+                            generation_loss = result.mean()
                             
                     else:
                         generation_loss =  self.ce_criterion(generated_image.flatten(1), class_label)
                     
                     set_generation_loss += generation_loss
-                    if torch.isnan(generation_loss).any():
-                        print("loss have NaN values")
-                        import IPython; IPython.embed(colors='Linux');exit(1);
-                        break
-                
+
                 # set이여서 6으로 나눔
                 set_generation_loss /= 6
                 correlation_image /= 6
                 total_correlation += correlation_image
                 
+                last_precipitation = precipitation[-1]
+
                 stack_precipitation = torch.stack(precipitation) # [6 , B, 150, 150, 100]
                 
                 predicted_gaps =  stack_precipitation[1:] - stack_precipitation[:-1] # [5 ,B, 150, 150, 100]
                 total_predict_gap = torch.sum(predicted_gaps, dim=0) # [B, 150, 150, 100] -> [1]
                 
                 total_predict_gap=total_predict_gap.permute(0,3,1,2)
-                reg = self.regression_model(total_predict_gap).view(self.args.batch) # [B] 
+
+                # reg = self.regression_model(image_batch[i+1]).view(self.args.batch) # [B] 
+                
+                last_reg = self.regression_model(last_precipitation.permute(0,3,1,2).contiguous()).view(self.args.batch) # [B] 
+                #reg = self.regression_model(total_predict_gap).view(self.args.batch) # [B] 
                 
                 # Loss_mae
                 if self.args.pre_train == False:
-                    loss_mae = self.mae_criterion(reg, gap) # gap => [B]
+                    loss_mae = self.mae_criterion(last_reg, label) # gap => [B]
                             
                 # joint Loss
                 if self.args.pre_train:
@@ -226,19 +221,19 @@ class FourTrainer(Trainer):
                 self.reg_optim.step()
 
                 total_generation_loss += set_generation_loss.item()
-                # import IPython; IPython.embed(colors='Linux');exit(1);
-                # del batch, generation_loss, loss_mae, joint_loss  # After backward pass
-                # torch.cuda.empty_cache()
+                
+                del batch, generation_loss, loss_mae, joint_loss  # After backward pass
+                torch.cuda.empty_cache()
             
             
             if self.args.wandb == True:
-                wandb.log({'Generation Loss (Train)': total_generation_loss / len(batch_iter)}, step=epoch)
+                wandb.log({f'Generation Loss {self.args.loss_type} (Train)': total_generation_loss / len(batch_iter)}, step=epoch)
                 wandb.log({'Correlation Image (Train)': correlation_image / len(batch_iter)}, step=epoch)
                 wandb.log({'MAE Train Loss': total_mae / len(batch_iter)}, step=epoch)
 
             post_fix = {
                 "epoch":epoch,
-                "Geneartion Loss(Train)": "{:.6f}".format(total_generation_loss/len(batch_iter)),
+                f"Geneartion Loss {self.args.loss_type} (Train)": "{:.6f}".format(total_generation_loss/len(batch_iter)),
                 "Correlation Image(Train)": "{:.6f}".format(correlation_image/len(batch_iter)),
                 "MAE Loss":"{:.6f}".format(total_mae/len(batch_iter)),
             }
@@ -279,7 +274,7 @@ class FourTrainer(Trainer):
                         generated_image = self.model(image_batch[i],self.args)
                         # generated_image [B 3 R R ], Regression_logits [B x 1 x 150 x 150]
 
-                        correlation_image += torch.abs(self.correlation_image(generated_image.mean(dim=-1), image_batch[i+1])) / self.args.batch
+                        correlation_image += torch.abs(self.correlation_image(generated_image.mean(dim=-1), image_batch[i+1].mean(dim=1))) / self.args.batch
                         # regression_logits = regression_logits.reshape(self.args.batch, -1)
                         precipitation.append(generated_image) 
                         
@@ -312,27 +307,30 @@ class FourTrainer(Trainer):
 
                     # import IPython; IPython.embed(colors='Linux'); exit(1)
                     # self.plot_images(generated_image[0],self.args.model_idx,datetime[6])
-                    
+                    last_precipitation = precipitation[-1]
                     stack_precipitation = torch.stack(precipitation) # [6 , B, 150, 150, 100]
                 
                     predicted_gaps =  stack_precipitation[1:] - stack_precipitation[:-1] # [5 ,B, 150, 150, 100]
                     total_predict_gap = torch.sum(predicted_gaps, dim=0) # [B, 150, 150, 100] -> [1]
                     
-                    total_predict_gap=total_predict_gap.permute(0,3,1,2)
-                    reg = self.regression_model(total_predict_gap).view(self.args.batch) # [B] 
-                    
-                    last_elements = reg[-1] 
+                    total_predict_gap=total_predict_gap.permute(0,3,1,2).contiguous()
+
+                    # reg = self.regression_model(image_batch[i+1]).view(self.args.batch) # [B] 
+
+                    # reg = self.regression_model(total_predict_gap).view(self.args.batch) # [B] 
+
+                    last_reg = self.regression_model(last_precipitation.permute(0,3,1,2).contiguous()).view(self.args.batch) # [B] 
 
                     # Loss_mae
-                    loss_mae = self.mae_criterion(reg, gap)
+                    loss_mae = self.mae_criterion(last_reg, label)
 
                     total_generation_loss += set_generation_loss.item()
 
                     if test:
-                        self.args.test_list.append([datetime, last_elements, label])
+                        self.args.test_list.append([datetime, last_reg, label])
                         
-                #     del batch
-                # torch.cuda.empty_cache() 
+                del batch
+                torch.cuda.empty_cache() 
             return self.get_score(epoch, total_generation_loss/len(batch_iter))
             
     

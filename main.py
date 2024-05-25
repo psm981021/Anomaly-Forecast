@@ -39,7 +39,7 @@ def main():
         help='A list of values',
     )
     parser.add_argument("--grey_scale", action="store_true")
-
+    parser.add_argument("--location", type=str, default="seoul", help='seoul, gangwon')
 
     # model args
     parser.add_argument("--model_idx", default="test", type=str, help="model identifier")
@@ -161,7 +161,7 @@ def main():
 
 
         score = trainer.test(args.epochs)
-        
+        # import IPython; IPython.embed(colors='Linux');exit(1);
         args.test_list.pop(0)
         formatted_data = []
         for record in args.test_list:
@@ -202,20 +202,21 @@ def main():
         # load the best model
         trainer.model.load_state_dict(torch.load(args.checkpoint_path))
         score = trainer.test(args.epochs)
-
+      
         # save csv file
         try:
+            args.test_list.pop(0)
             formatted_data = []
             for record in args.test_list:
                 for i in range(args.batch):  # Assuming record[0] contains a list of timestamps
                     datetime = record[0][i]
-                    predicted_precipitation = record[1][i].item() if record[1].dim() != 0 else record[1].item()
+                    predicted_precipitation = f"{record[1][i].item():.6f}" if record[1].dim() != 0 else f"{record[1].item():.6f}"
                     ground_truth = record[2][i].item() if record[2].dim() != 0 else record[2].item()
                     formatted_data.append({
                         'datetime': datetime,
                         'predicted precipitation': predicted_precipitation,
                         'ground_truth': ground_truth
-                    })
+            })
             dataframe = pd.DataFrame(formatted_data)
             dataframe.to_csv(args.dataframe_path,index=False)
             
