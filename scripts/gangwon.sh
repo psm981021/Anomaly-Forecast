@@ -5,15 +5,15 @@ python main.py \
     --batch 8 \
     --epochs 1000 \
     --patience 50 \
-    --model_idx "gangwon-V.3.01" \
-    --output_dir "output/gangwon-V.3.01/" \
+    --model_idx "gangwon-V.4.01" \
+    --output_dir "output/gangwon-V.4.01/" \
     --test_list=[] \
-    --png=[] \
     --gpu_id 1 \
     --device cuda:1 \
     --seed 0 \
     --lr 0.0001 \
     --loss_type "stamina" \
+    --location "gangwon" \
     --wandb
 
 

@@ -1,6 +1,6 @@
 ---------------------- Configure Info: ----------------------
 data_dir                       : data\radar_full
-image_csv_dir                  : data\\¼­¿ï_2021_2023_°­¼ö·® 0.1 ¹Ì¸¸ Á¦°Å_»óÀ§ 10% test.csv
+image_csv_dir                  : data\\ï¿½ï¿½ï¿½ï¿½_2021_2023_ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 0.1 ï¿½Ì¸ï¿½ ï¿½ï¿½ï¿½ï¿½_ï¿½ï¿½ï¿½ï¿½ 10% test.csv
 output_dir                     : output\\seoul-V.4.01
 gpu_id                         : 0
 device                         : cuda:0
@@ -34,7 +34,7 @@ checkpoint_path                : output\\seoul-V.4.01\seoul-V.4.01-8-1000.pt
 Current time: 1716661501.342657
 ---------------------- Configure Info: ----------------------
 data_dir                       : data\radar_full
-image_csv_dir                  : data\\¼­¿ï_2021_2023_°­¼ö·® 0.1 ¹Ì¸¸ Á¦°Å_»óÀ§ 10% test.csv
+image_csv_dir                  : data\\ï¿½ï¿½ï¿½ï¿½_2021_2023_ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 0.1 ï¿½Ì¸ï¿½ ï¿½ï¿½ï¿½ï¿½_ï¿½ï¿½ï¿½ï¿½ 10% test.csv
 output_dir                     : output\\seoul-V.4.01
 gpu_id                         : 0
 device                         : cuda:0
@@ -66,3 +66,6 @@ dataframe_path                 : output\\seoul-V.4.01\seoul-V.4.01-8-1000.csv
 checkpoint_path                : output\\seoul-V.4.01\seoul-V.4.01-8-1000.pt
 ---------------------- Configure Info: ----------------------
 Current time: 1716661685.6634705
+{'epoch': 724, 'Geneartion Loss stamina (Train)': '0.190958', 'Correlation Image(Train)': '0.111332', 'MAE Loss': '0.687094'}
+{'Epoch': 724, 'Generation Loss (Eval)': '0.208908'}
+EarlyStopping counter: 5 out of 50

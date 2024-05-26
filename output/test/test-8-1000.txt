@@ -203,3 +203,749 @@ checkpoint_path                : output/test/test-8-1000.pt
 ---------------------- Configure Info: ----------------------
 ------------------------------ Continue Training ------------------------------ 
 Current time: 1716659759.6941462
+---------------------- Configure Info: ----------------------
+data_dir                       : data/data_gangwon_only
+image_csv_dir                  : data/gangwon.csv
+output_dir                     : output/test/
+gpu_id                         : 1
+device                         : cuda:1
+seed                           : 0
+no_cuda                        : False
+use_multi_gpu                  : False
+multi_devices                  : 0,1
+wandb                          : False
+pre_train                      : False
+do_eval                        : False
+test_list                      : ['[]']
+grey_scale                     : False
+location                       : seoul
+model_idx                      : test
+batch                          : 8
+sianet                         : False
+epochs                         : 1000
+log_freq                       : 1
+patience                       : 50
+loss_type                      : stamina
+lr                             : 0.001
+adam_beta1                     : 0.9
+adam_beta2                     : 0.999
+weight_decay                   : 0.0
+initializer_range              : 0.01
+str                            : test-8-1000
+log_file                       : output/test/test-8-1000.txt
+dataframe_path                 : output/test/test-8-1000.csv
+checkpoint_path                : output/test/test-8-1000.pt
+---------------------- Configure Info: ----------------------
+------------------------------ Continue Training ------------------------------ 
+Current time: 1716660019.7947114
+---------------------- Configure Info: ----------------------
+data_dir                       : data/data_gangwon_only
+image_csv_dir                  : data/gangwon.csv
+output_dir                     : output/test/
+gpu_id                         : 1
+device                         : cuda:1
+seed                           : 0
+no_cuda                        : False
+use_multi_gpu                  : False
+multi_devices                  : 0,1
+wandb                          : False
+pre_train                      : False
+do_eval                        : False
+test_list                      : ['[]']
+grey_scale                     : False
+location                       : seoul
+model_idx                      : test
+batch                          : 8
+sianet                         : False
+epochs                         : 1000
+log_freq                       : 1
+patience                       : 50
+loss_type                      : stamina
+lr                             : 0.001
+adam_beta1                     : 0.9
+adam_beta2                     : 0.999
+weight_decay                   : 0.0
+initializer_range              : 0.01
+str                            : test-8-1000
+log_file                       : output/test/test-8-1000.txt
+dataframe_path                 : output/test/test-8-1000.csv
+checkpoint_path                : output/test/test-8-1000.pt
+---------------------- Configure Info: ----------------------
+------------------------------ Continue Training ------------------------------ 
+Current time: 1716660279.4538991
+---------------------- Configure Info: ----------------------
+data_dir                       : data/data_gangwon_only
+image_csv_dir                  : data/gangwon.csv
+output_dir                     : output/test/
+gpu_id                         : 1
+device                         : cuda:1
+seed                           : 0
+no_cuda                        : False
+use_multi_gpu                  : False
+multi_devices                  : 0,1
+wandb                          : False
+pre_train                      : False
+do_eval                        : False
+test_list                      : ['[]']
+grey_scale                     : False
+location                       : seoul
+model_idx                      : test
+batch                          : 8
+sianet                         : False
+epochs                         : 1000
+log_freq                       : 1
+patience                       : 50
+loss_type                      : stamina
+lr                             : 0.001
+adam_beta1                     : 0.9
+adam_beta2                     : 0.999
+weight_decay                   : 0.0
+initializer_range              : 0.01
+str                            : test-8-1000
+log_file                       : output/test/test-8-1000.txt
+dataframe_path                 : output/test/test-8-1000.csv
+checkpoint_path                : output/test/test-8-1000.pt
+---------------------- Configure Info: ----------------------
+------------------------------ Continue Training ------------------------------ 
+Current time: 1716660990.8069715
+---------------------- Configure Info: ----------------------
+data_dir                       : data/data_gangwon_only
+image_csv_dir                  : data/gangwon.csv
+output_dir                     : output/test/
+gpu_id                         : 1
+device                         : cuda:1
+seed                           : 0
+no_cuda                        : False
+use_multi_gpu                  : False
+multi_devices                  : 0,1
+wandb                          : False
+pre_train                      : False
+do_eval                        : False
+test_list                      : ['[]']
+grey_scale                     : False
+location                       : seoul
+model_idx                      : test
+batch                          : 8
+sianet                         : False
+epochs                         : 1000
+log_freq                       : 1
+patience                       : 50
+loss_type                      : stamina
+lr                             : 0.001
+adam_beta1                     : 0.9
+adam_beta2                     : 0.999
+weight_decay                   : 0.0
+initializer_range              : 0.01
+str                            : test-8-1000
+log_file                       : output/test/test-8-1000.txt
+dataframe_path                 : output/test/test-8-1000.csv
+checkpoint_path                : output/test/test-8-1000.pt
+---------------------- Configure Info: ----------------------
+------------------------------ Continue Training ------------------------------ 
+Current time: 1716661203.5777392
+---------------------- Configure Info: ----------------------
+data_dir                       : data/data_gangwon_only
+image_csv_dir                  : data/gangwon.csv
+output_dir                     : output/test/
+gpu_id                         : 1
+device                         : cuda:1
+seed                           : 0
+no_cuda                        : False
+use_multi_gpu                  : False
+multi_devices                  : 0,1
+wandb                          : False
+pre_train                      : False
+do_eval                        : False
+test_list                      : ['[]']
+grey_scale                     : False
+location                       : seoul
+model_idx                      : test
+batch                          : 8
+sianet                         : False
+epochs                         : 1000
+log_freq                       : 1
+patience                       : 50
+loss_type                      : stamina
+lr                             : 0.001
+adam_beta1                     : 0.9
+adam_beta2                     : 0.999
+weight_decay                   : 0.0
+initializer_range              : 0.01
+str                            : test-8-1000
+log_file                       : output/test/test-8-1000.txt
+dataframe_path                 : output/test/test-8-1000.csv
+checkpoint_path                : output/test/test-8-1000.pt
+---------------------- Configure Info: ----------------------
+------------------------------ Continue Training ------------------------------ 
+Current time: 1716700111.594574
+---------------------- Configure Info: ----------------------
+data_dir                       : data/data_seoul_only
+image_csv_dir                  : data/seoul.csv
+output_dir                     : output/test/
+gpu_id                         : 0
+device                         : cuda:0
+seed                           : 0
+no_cuda                        : False
+use_multi_gpu                  : False
+multi_devices                  : 0,1
+wandb                          : False
+pre_train                      : False
+do_eval                        : False
+test_list                      : ['[]']
+grey_scale                     : False
+location                       : seoul
+model_idx                      : test
+batch                          : 8
+sianet                         : False
+epochs                         : 1000
+log_freq                       : 1
+patience                       : 50
+loss_type                      : stamina
+lr                             : 0.0001
+adam_beta1                     : 0.9
+adam_beta2                     : 0.999
+weight_decay                   : 0.0
+initializer_range              : 0.01
+str                            : test-8-1000
+log_file                       : output/test/test-8-1000.txt
+dataframe_path                 : output/test/test-8-1000.csv
+checkpoint_path                : output/test/test-8-1000.pt
+---------------------- Configure Info: ----------------------
+------------------------------ Continue Training ------------------------------ 
+Current time: 1716700176.8073778
+---------------------- Configure Info: ----------------------
+data_dir                       : data/data_gangwon_only
+image_csv_dir                  : data/gangwon.csv
+output_dir                     : output/test/
+gpu_id                         : 1
+device                         : cuda:1
+seed                           : 0
+no_cuda                        : False
+use_multi_gpu                  : False
+multi_devices                  : 0,1
+wandb                          : False
+pre_train                      : False
+do_eval                        : False
+test_list                      : ['[]']
+grey_scale                     : False
+location                       : seoul
+model_idx                      : test
+batch                          : 8
+sianet                         : False
+epochs                         : 1000
+log_freq                       : 1
+patience                       : 50
+loss_type                      : stamina
+lr                             : 0.001
+adam_beta1                     : 0.9
+adam_beta2                     : 0.999
+weight_decay                   : 0.0
+initializer_range              : 0.01
+str                            : test-8-1000
+log_file                       : output/test/test-8-1000.txt
+dataframe_path                 : output/test/test-8-1000.csv
+checkpoint_path                : output/test/test-8-1000.pt
+---------------------- Configure Info: ----------------------
+------------------------------ Continue Training ------------------------------ 
+Current time: 1716700455.2327957
+---------------------- Configure Info: ----------------------
+data_dir                       : data/data_seoul_only
+image_csv_dir                  : data/seoul.csv
+output_dir                     : output/test/
+gpu_id                         : 0
+device                         : cuda:0
+seed                           : 0
+no_cuda                        : False
+use_multi_gpu                  : False
+multi_devices                  : 0,1
+wandb                          : False
+pre_train                      : False
+do_eval                        : False
+test_list                      : ['[]']
+grey_scale                     : False
+location                       : seoul
+model_idx                      : test
+batch                          : 8
+sianet                         : False
+epochs                         : 1000
+log_freq                       : 1
+patience                       : 50
+loss_type                      : stamina
+lr                             : 0.0001
+adam_beta1                     : 0.9
+adam_beta2                     : 0.999
+weight_decay                   : 0.0
+initializer_range              : 0.01
+str                            : test-8-1000
+log_file                       : output/test/test-8-1000.txt
+dataframe_path                 : output/test/test-8-1000.csv
+checkpoint_path                : output/test/test-8-1000.pt
+---------------------- Configure Info: ----------------------
+------------------------------ Continue Training ------------------------------ 
+Current time: 1716700520.200852
+---------------------- Configure Info: ----------------------
+data_dir                       : data/data_gangwon_only
+image_csv_dir                  : data/gangwon.csv
+output_dir                     : output/test/
+gpu_id                         : 1
+device                         : cuda:1
+seed                           : 0
+no_cuda                        : False
+use_multi_gpu                  : False
+multi_devices                  : 0,1
+wandb                          : False
+pre_train                      : False
+do_eval                        : False
+test_list                      : ['[]']
+grey_scale                     : False
+location                       : seoul
+model_idx                      : test
+batch                          : 8
+sianet                         : False
+epochs                         : 1000
+log_freq                       : 1
+patience                       : 50
+loss_type                      : stamina
+lr                             : 0.001
+adam_beta1                     : 0.9
+adam_beta2                     : 0.999
+weight_decay                   : 0.0
+initializer_range              : 0.01
+str                            : test-8-1000
+log_file                       : output/test/test-8-1000.txt
+dataframe_path                 : output/test/test-8-1000.csv
+checkpoint_path                : output/test/test-8-1000.pt
+---------------------- Configure Info: ----------------------
+------------------------------ Continue Training ------------------------------ 
+Current time: 1716700620.0619414
+---------------------- Configure Info: ----------------------
+data_dir                       : data/data_seoul_only
+image_csv_dir                  : data/seoul.csv
+output_dir                     : output/test/
+gpu_id                         : 0
+device                         : cuda:0
+seed                           : 0
+no_cuda                        : False
+use_multi_gpu                  : False
+multi_devices                  : 0,1
+wandb                          : False
+pre_train                      : False
+do_eval                        : False
+test_list                      : ['[]']
+grey_scale                     : False
+location                       : seoul
+model_idx                      : test
+batch                          : 8
+sianet                         : False
+epochs                         : 1000
+log_freq                       : 1
+patience                       : 50
+loss_type                      : stamina
+lr                             : 0.0001
+adam_beta1                     : 0.9
+adam_beta2                     : 0.999
+weight_decay                   : 0.0
+initializer_range              : 0.01
+str                            : test-8-1000
+log_file                       : output/test/test-8-1000.txt
+dataframe_path                 : output/test/test-8-1000.csv
+checkpoint_path                : output/test/test-8-1000.pt
+---------------------- Configure Info: ----------------------
+------------------------------ Continue Training ------------------------------ 
+Current time: 1716700685.303105
+---------------------- Configure Info: ----------------------
+data_dir                       : data/data_gangwon_only
+image_csv_dir                  : data/gangwon.csv
+output_dir                     : output/test/
+gpu_id                         : 1
+device                         : cuda:1
+seed                           : 0
+no_cuda                        : False
+use_multi_gpu                  : False
+multi_devices                  : 0,1
+wandb                          : False
+pre_train                      : False
+do_eval                        : False
+test_list                      : ['[]']
+grey_scale                     : False
+location                       : seoul
+model_idx                      : test
+batch                          : 8
+sianet                         : False
+epochs                         : 1000
+log_freq                       : 1
+patience                       : 50
+loss_type                      : stamina
+lr                             : 0.001
+adam_beta1                     : 0.9
+adam_beta2                     : 0.999
+weight_decay                   : 0.0
+initializer_range              : 0.01
+str                            : test-8-1000
+log_file                       : output/test/test-8-1000.txt
+dataframe_path                 : output/test/test-8-1000.csv
+checkpoint_path                : output/test/test-8-1000.pt
+---------------------- Configure Info: ----------------------
+------------------------------ Continue Training ------------------------------ 
+Current time: 1716701026.4681141
+---------------------- Configure Info: ----------------------
+data_dir                       : data/data_seoul_only
+image_csv_dir                  : data/seoul.csv
+output_dir                     : output/test/
+gpu_id                         : 0
+device                         : cuda:0
+seed                           : 0
+no_cuda                        : False
+use_multi_gpu                  : False
+multi_devices                  : 0,1
+wandb                          : False
+pre_train                      : False
+do_eval                        : False
+test_list                      : ['[]']
+grey_scale                     : False
+location                       : seoul
+model_idx                      : test
+batch                          : 8
+sianet                         : False
+epochs                         : 1000
+log_freq                       : 1
+patience                       : 50
+loss_type                      : stamina
+lr                             : 0.0001
+adam_beta1                     : 0.9
+adam_beta2                     : 0.999
+weight_decay                   : 0.0
+initializer_range              : 0.01
+str                            : test-8-1000
+log_file                       : output/test/test-8-1000.txt
+dataframe_path                 : output/test/test-8-1000.csv
+checkpoint_path                : output/test/test-8-1000.pt
+---------------------- Configure Info: ----------------------
+------------------------------ Continue Training ------------------------------ 
+Current time: 1716701091.4945817
+---------------------- Configure Info: ----------------------
+data_dir                       : data/data_gangwon_only
+image_csv_dir                  : data/gangwon.csv
+output_dir                     : output/test/
+gpu_id                         : 1
+device                         : cuda:1
+seed                           : 0
+no_cuda                        : False
+use_multi_gpu                  : False
+multi_devices                  : 0,1
+wandb                          : False
+pre_train                      : False
+do_eval                        : False
+test_list                      : ['[]']
+grey_scale                     : False
+location                       : seoul
+model_idx                      : test
+batch                          : 8
+sianet                         : False
+epochs                         : 1000
+log_freq                       : 1
+patience                       : 50
+loss_type                      : stamina
+lr                             : 0.001
+adam_beta1                     : 0.9
+adam_beta2                     : 0.999
+weight_decay                   : 0.0
+initializer_range              : 0.01
+str                            : test-8-1000
+log_file                       : output/test/test-8-1000.txt
+dataframe_path                 : output/test/test-8-1000.csv
+checkpoint_path                : output/test/test-8-1000.pt
+---------------------- Configure Info: ----------------------
+------------------------------ Continue Training ------------------------------ 
+Current time: 1716701525.872791
+---------------------- Configure Info: ----------------------
+data_dir                       : data/data_gangwon_only
+image_csv_dir                  : data/gangwon.csv
+output_dir                     : output/test/
+gpu_id                         : 1
+device                         : cuda:1
+seed                           : 0
+no_cuda                        : False
+use_multi_gpu                  : False
+multi_devices                  : 0,1
+wandb                          : False
+pre_train                      : False
+do_eval                        : False
+test_list                      : ['[]']
+grey_scale                     : False
+location                       : seoul
+model_idx                      : test
+batch                          : 8
+sianet                         : False
+epochs                         : 1000
+log_freq                       : 1
+patience                       : 50
+loss_type                      : stamina
+lr                             : 0.001
+adam_beta1                     : 0.9
+adam_beta2                     : 0.999
+weight_decay                   : 0.0
+initializer_range              : 0.01
+str                            : test-8-1000
+log_file                       : output/test/test-8-1000.txt
+dataframe_path                 : output/test/test-8-1000.csv
+checkpoint_path                : output/test/test-8-1000.pt
+---------------------- Configure Info: ----------------------
+------------------------------ Continue Training ------------------------------ 
+Current time: 1716703158.3005264
+{'epoch': 0, 'Geneartion Loss stamina (Train)': '0.896532', 'Correlation Image(Train)': '0.000000', 'MAE Loss': '0.723206'}
+---------------------- Configure Info: ----------------------
+data_dir                       : data/data_gangwon_only
+image_csv_dir                  : data/gangwon.csv
+output_dir                     : output/test/
+gpu_id                         : 1
+device                         : cuda:1
+seed                           : 0
+no_cuda                        : False
+use_multi_gpu                  : False
+multi_devices                  : 0,1
+wandb                          : False
+pre_train                      : False
+do_eval                        : False
+test_list                      : ['[]']
+grey_scale                     : False
+location                       : seoul
+model_idx                      : test
+batch                          : 8
+sianet                         : False
+epochs                         : 1000
+log_freq                       : 1
+patience                       : 50
+loss_type                      : stamina
+lr                             : 0.001
+adam_beta1                     : 0.9
+adam_beta2                     : 0.999
+weight_decay                   : 0.0
+initializer_range              : 0.01
+str                            : test-8-1000
+log_file                       : output/test/test-8-1000.txt
+dataframe_path                 : output/test/test-8-1000.csv
+checkpoint_path                : output/test/test-8-1000.pt
+---------------------- Configure Info: ----------------------
+------------------------------ Continue Training ------------------------------ 
+Current time: 1716703724.0574903
+{'epoch': 0, 'Geneartion Loss stamina (Train)': '0.896768', 'Correlation Image(Train)': '0.000000', 'MAE Loss': '0.721690'}
+{'Epoch': 0, 'Generation Loss (Eval)': '0.891629'}
+{'epoch': 1, 'Geneartion Loss stamina (Train)': '0.864705', 'Correlation Image(Train)': '0.000000', 'MAE Loss': '0.695043'}
+{'Epoch': 1, 'Generation Loss (Eval)': '0.862508'}
+{'epoch': 2, 'Geneartion Loss stamina (Train)': '0.837231', 'Correlation Image(Train)': '0.000000', 'MAE Loss': '0.680821'}
+{'Epoch': 2, 'Generation Loss (Eval)': '0.838348'}
+---------------------- Configure Info: ----------------------
+data_dir                       : data/data_gangwon_only
+image_csv_dir                  : data/gangwon.csv
+output_dir                     : output/test/
+gpu_id                         : 1
+device                         : cuda:1
+seed                           : 0
+no_cuda                        : False
+use_multi_gpu                  : False
+multi_devices                  : 0,1
+wandb                          : False
+pre_train                      : False
+do_eval                        : False
+test_list                      : ['[]']
+grey_scale                     : False
+location                       : seoul
+model_idx                      : test
+batch                          : 8
+sianet                         : False
+epochs                         : 1000
+log_freq                       : 1
+patience                       : 50
+loss_type                      : stamina
+lr                             : 0.001
+adam_beta1                     : 0.9
+adam_beta2                     : 0.999
+weight_decay                   : 0.0
+initializer_range              : 0.01
+str                            : test-8-1000
+log_file                       : output/test/test-8-1000.txt
+dataframe_path                 : output/test/test-8-1000.csv
+checkpoint_path                : output/test/test-8-1000.pt
+---------------------- Configure Info: ----------------------
+------------------------------ Continue Training ------------------------------ 
+Current time: 1716704125.5219345
+---------------------- Configure Info: ----------------------
+data_dir                       : data/data_gangwon_only
+image_csv_dir                  : data/gangwon.csv
+output_dir                     : output/test/
+gpu_id                         : 1
+device                         : cuda:1
+seed                           : 0
+no_cuda                        : False
+use_multi_gpu                  : False
+multi_devices                  : 0,1
+wandb                          : False
+pre_train                      : False
+do_eval                        : False
+test_list                      : ['[]']
+grey_scale                     : False
+location                       : seoul
+model_idx                      : test
+batch                          : 8
+sianet                         : False
+epochs                         : 1000
+log_freq                       : 1
+patience                       : 50
+loss_type                      : stamina
+lr                             : 0.001
+adam_beta1                     : 0.9
+adam_beta2                     : 0.999
+weight_decay                   : 0.0
+initializer_range              : 0.01
+str                            : test-8-1000
+log_file                       : output/test/test-8-1000.txt
+dataframe_path                 : output/test/test-8-1000.csv
+checkpoint_path                : output/test/test-8-1000.pt
+---------------------- Configure Info: ----------------------
+------------------------------ Continue Training ------------------------------ 
+Current time: 1716704378.85814
+---------------------- Configure Info: ----------------------
+data_dir                       : data/data_gangwon_only
+image_csv_dir                  : data/gangwon.csv
+output_dir                     : output/test/
+gpu_id                         : 1
+device                         : cuda:1
+seed                           : 0
+no_cuda                        : False
+use_multi_gpu                  : False
+multi_devices                  : 0,1
+wandb                          : False
+pre_train                      : False
+do_eval                        : False
+test_list                      : ['[]']
+grey_scale                     : False
+location                       : seoul
+model_idx                      : test
+batch                          : 8
+sianet                         : False
+epochs                         : 1000
+log_freq                       : 1
+patience                       : 50
+loss_type                      : stamina
+lr                             : 0.001
+adam_beta1                     : 0.9
+adam_beta2                     : 0.999
+weight_decay                   : 0.0
+initializer_range              : 0.01
+str                            : test-8-1000
+log_file                       : output/test/test-8-1000.txt
+dataframe_path                 : output/test/test-8-1000.csv
+checkpoint_path                : output/test/test-8-1000.pt
+---------------------- Configure Info: ----------------------
+------------------------------ Continue Training ------------------------------ 
+Current time: 1716704805.0803783
+---------------------- Configure Info: ----------------------
+data_dir                       : data/data_gangwon_only
+image_csv_dir                  : data/gangwon.csv
+output_dir                     : output/test/
+gpu_id                         : 1
+device                         : cuda:1
+seed                           : 0
+no_cuda                        : False
+use_multi_gpu                  : False
+multi_devices                  : 0,1
+wandb                          : False
+pre_train                      : False
+do_eval                        : False
+test_list                      : ['[]']
+grey_scale                     : False
+location                       : seoul
+model_idx                      : test
+batch                          : 8
+sianet                         : False
+epochs                         : 1000
+log_freq                       : 1
+patience                       : 50
+loss_type                      : stamina
+lr                             : 0.001
+adam_beta1                     : 0.9
+adam_beta2                     : 0.999
+weight_decay                   : 0.0
+initializer_range              : 0.01
+str                            : test-8-1000
+log_file                       : output/test/test-8-1000.txt
+dataframe_path                 : output/test/test-8-1000.csv
+checkpoint_path                : output/test/test-8-1000.pt
+---------------------- Configure Info: ----------------------
+------------------------------ Continue Training ------------------------------ 
+Current time: 1716705605.141709
+---------------------- Configure Info: ----------------------
+data_dir                       : data/data_gangwon_only
+image_csv_dir                  : data/gangwon.csv
+output_dir                     : output/test/
+gpu_id                         : 1
+device                         : cuda:1
+seed                           : 0
+no_cuda                        : False
+use_multi_gpu                  : False
+multi_devices                  : 0,1
+wandb                          : False
+pre_train                      : False
+do_eval                        : False
+test_list                      : ['[]']
+grey_scale                     : False
+location                       : seoul
+model_idx                      : test
+batch                          : 8
+sianet                         : False
+epochs                         : 1000
+log_freq                       : 1
+patience                       : 50
+loss_type                      : stamina
+lr                             : 0.001
+adam_beta1                     : 0.9
+adam_beta2                     : 0.999
+weight_decay                   : 0.0
+initializer_range              : 0.01
+str                            : test-8-1000
+log_file                       : output/test/test-8-1000.txt
+dataframe_path                 : output/test/test-8-1000.csv
+checkpoint_path                : output/test/test-8-1000.pt
+---------------------- Configure Info: ----------------------
+------------------------------ Continue Training ------------------------------ 
+Current time: 1716705833.2680554
+---------------------- Configure Info: ----------------------
+data_dir                       : data/data_gangwon_only
+image_csv_dir                  : data/gangwon.csv
+output_dir                     : output/test/
+gpu_id                         : 1
+device                         : cuda:1
+seed                           : 0
+no_cuda                        : False
+use_multi_gpu                  : False
+multi_devices                  : 0,1
+wandb                          : False
+pre_train                      : False
+do_eval                        : False
+test_list                      : ['[]']
+grey_scale                     : False
+location                       : seoul
+model_idx                      : test
+batch                          : 8
+sianet                         : False
+epochs                         : 1000
+log_freq                       : 1
+patience                       : 50
+loss_type                      : stamina
+lr                             : 0.001
+adam_beta1                     : 0.9
+adam_beta2                     : 0.999
+weight_decay                   : 0.0
+initializer_range              : 0.01
+str                            : test-8-1000
+log_file                       : output/test/test-8-1000.txt
+dataframe_path                 : output/test/test-8-1000.csv
+checkpoint_path                : output/test/test-8-1000.pt
+---------------------- Configure Info: ----------------------
+------------------------------ Continue Training ------------------------------ 
+Current time: 1716706105.1589708
+{'epoch': 0, 'Geneartion Loss stamina (Train)': '0.896646', 'Correlation Image(Train)': '0.048925', 'MAE Loss': '0.721101'}
+{'Epoch': 0, 'Generation Loss (Eval)': '0.891488'}
+{'epoch': 1, 'Geneartion Loss stamina (Train)': '0.864609', 'Correlation Image(Train)': '0.085130', 'MAE Loss': '0.688561'}
+{'Epoch': 1, 'Generation Loss (Eval)': '0.862400'}

@@ -126,7 +126,10 @@ def main():
     if args.sianet:
         model=sianet()
     else:
-        model = Fourcaster(n_channels=1,n_classes=100,kernels_per_layer=1, args=args)
+        if args.grey_scale:
+            model = Fourcaster(n_channels=1,n_classes=100,kernels_per_layer=1, args=args)
+        else:
+            model = Fourcaster(n_channels=3,n_classes=100,kernels_per_layer=1, args=args)
     
     model.to(args.device)
 

@@ -7,6 +7,7 @@ from PIL import Image
 import matplotlib.pyplot as plt
 
 from models import RainfallPredictor
+import numpy as np
 
 class Trainer:
     def __init__(self, model, train_dataloader, valid_dataloader, test_dataloader, args):
@@ -62,19 +63,22 @@ class Trainer:
         raise NotImplementedError
 
     def correlation_image(self, T,P):
+        """
+        Element-wise multiplication for tensors
+        """
         epsilon = 1e-9
-        
-        T_mean = T.mean(dim=(1, 2), keepdim=True)
-        P_mean = P.mean(dim=(1, 2), keepdim=True)
-        T_centered = T - T_mean
-        P_centered = P - P_mean
-        
-        covariance = (T_centered * P_centered).sum(dim=(1, 2))
-        T_var = (T_centered ** 2).sum(dim=(1, 2))
-        P_var = (P_centered ** 2).sum(dim=(1, 2))
-        
-        correlation = covariance / (torch.sqrt(T_var * P_var) + epsilon)
-        return correlation.mean() 
+        product = P * T
+        numerator = product.sum(dim=0)
+
+        P_squared_sum = (P**2).sum(dim=0)
+        T_squared_sum = (T**2).sum(dim=0)
+
+        denominator = torch.sqrt(P_squared_sum * T_squared_sum)
+
+        # Cosine similarity for each pair of images in each set
+        cosine_similarity = numerator / (denominator + epsilon)
+
+        return cosine_similarity.mean()
     
     def get_score(self, epoch, pred):
 
@@ -100,18 +104,26 @@ class Trainer:
     def load(self, file_name):
         self.model.load_state_dict(torch.load(file_name))
 
-    @staticmethod
-    def plot_images(image, model_idx, datetime, flag=None):
+    
+    def plot_images(self, image ,epoch, model_idx, datetime, flag=None):
         # image = image.cpu().detach().permute(1,2,0).numpy()
         # image = image.cpu().detach().permute(2,0,1).numpy()
-        image = image.cpu().detach().numpy()
-        plt.imshow(image)
-        model_idx=model_idx.replace('.','-')
-        datetime = datetime.replace(':', '-').replace(' ', '_')
-        if flag == 'R':
-            plt.savefig(f'{model_idx}_{datetime}_Real Image')
+        
+        if isinstance(image, torch.Tensor):
+            image = image.cpu().detach().numpy()
+            plt.imshow(image)
+
+            model_idx=model_idx.replace('.','-')
+            datetime = datetime.replace(':', '-').replace(' ', '_')
+
+            if flag == 'R':
+                plt.savefig(f'{self.args.output_dir}/{model_idx}_{datetime}_{epoch}_Real Image')
+            else:
+                plt.savefig(f'{self.args.output_dir}/{model_idx}_{datetime}_{epoch}_Generated Image')
         else:
-            plt.savefig(f'{model_idx}_{datetime}_Generated Image')
+            print("Error: Non-tensor input received")
+
+
 
 class FourTrainer(Trainer):
     def __init__(self,model,train_dataloader, valid_dataloader,test_dataloader, args):
@@ -140,14 +152,22 @@ class FourTrainer(Trainer):
                 set_generation_loss = 0.0
                 correlation_image = 0.0
                 precipitation = []       
-                
+                plot_list = ['2021-08-01 19:00','2021-01-15 16:00']
                 for i in range(len(image_batch)-1):
                     
                     # image_batch[i] [B x 3 x R x R]
-                    generated_image = self.model(image_batch[i],self.args)
-
-                    correlation_image += torch.abs(self.correlation_image(generated_image.mean(dim=-1), image_batch[i+1].mean(dim=1))) / self.args.batch
                     
+                    generated_image = self.model(image_batch[i],self.args)
+                    
+                    correlation_image += torch.abs(self.correlation_image(generated_image.mean(dim=-1), image_batch[i+1].mean(dim=1))) / self.args.batch
+
+                    if epoch % 20 == 0:
+                        if epoch == 0 :
+                            self.plot_images(image_batch[i+1][1].permute(1,2,0),epoch, self.args.model_idx, datetime[i], 'R')
+                        elif datetime[i] in plot_list:
+                            self.plot_images(generated_image[0].mean(dim=-1),epoch, self.args.model_idx, datetime[i], 'G')
+                            
+
                     # generated_image [B 3 R R ], Regression_logits [B x 1 x 1 x 1]
                     # regression_logits = regression_logits.reshape(self.args.batch, -1)
                     precipitation.append(generated_image) # [B x 1]
@@ -166,7 +186,12 @@ class FourTrainer(Trainer):
 
                     elif self.args.loss_type == 'stamina':
                             epsilon = 1e-6
-                            absolute_error = torch.abs(generated_image - image_batch[i+1].permute(0,2,3,1)) # [B W H C]
+                            
+                            if self.args.grey_scale:
+                                absolute_error = torch.abs(generated_image - image_batch[i+1].permute(0,2,3,1)) # [B W H C]
+                            else:
+                                absolute_error = torch.abs(generated_image.mean(dim=-1).unsqueeze(dim=-1) - image_batch[i+1].permute(0,2,3,1)) # [B W H C]
+
                             event_weight = torch.clamp(image_batch[i] + 1, max=6).permute(0,2,3,1) # [B W H 1]
                             penalty = torch.pow(1 - torch.exp(-absolute_error) + epsilon , 0.5) #  [B W H C]
                             
@@ -228,13 +253,13 @@ class FourTrainer(Trainer):
             
             if self.args.wandb == True:
                 wandb.log({f'Generation Loss {self.args.loss_type} (Train)': total_generation_loss / len(batch_iter)}, step=epoch)
-                wandb.log({'Correlation Image (Train)': correlation_image / len(batch_iter)}, step=epoch)
+                wandb.log({'Correlation Image (Train)': total_correlation / len(batch_iter)}, step=epoch)
                 wandb.log({'MAE Train Loss': total_mae / len(batch_iter)}, step=epoch)
 
             post_fix = {
                 "epoch":epoch,
                 f"Geneartion Loss {self.args.loss_type} (Train)": "{:.6f}".format(total_generation_loss/len(batch_iter)),
-                "Correlation Image(Train)": "{:.6f}".format(correlation_image/len(batch_iter)),
+                "Correlation Image(Train)": "{:.6f}".format(total_correlation/len(batch_iter)),
                 "MAE Loss":"{:.6f}".format(total_mae/len(batch_iter)),
             }
             if (epoch+1) % self.args.log_freq ==0:
@@ -289,18 +314,24 @@ class FourTrainer(Trainer):
                             generation_loss = torch.sum((preds * err),dim=-1).mean()
                         
                         elif self.args.loss_type == 'stamina':
-                                
-                            absolute_error = torch.abs(generated_image - image_batch[i+1].permute(0,2,3,1)) # [B W H C]
-                            event_weight = torch.clamp(image_batch[i] + 1, max=24).permute(0,2,3,1) # [B W H 1]
-                            penalty = torch.pow(1 - torch.exp(-absolute_error), 0.5) #  [B W H C]
+                            epsilon = 1e-6
+                            
+                            if self.args.grey_scale:
+                                absolute_error = torch.abs(generated_image - image_batch[i+1].permute(0,2,3,1)) # [B W H C]
+                            else:
+                                absolute_error = torch.abs(generated_image.mean(dim=-1).unsqueeze(dim=-1) - image_batch[i+1].permute(0,2,3,1)) # [B W H C]
 
+                            event_weight = torch.clamp(image_batch[i] + 1, max=6).permute(0,2,3,1) # [B W H 1]
+                            penalty = torch.pow(1 - torch.exp(-absolute_error) + epsilon , 0.5) #  [B W H C]
+                            
                             result = absolute_error * event_weight * penalty
+                            torch.autograd.set_detect_anomaly(True)
                             generation_loss = result.mean()
                         else:
                             generation_loss =  self.ce_criterion(generated_image.flatten(1), class_label)
 
                         set_generation_loss += generation_loss
-
+                    
                     # set이여서 6으로 나눔
                     set_generation_loss /= 6
                     correlation_image /= 6
