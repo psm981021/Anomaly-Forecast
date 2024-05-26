@@ -37,7 +37,21 @@ python main.py \
     --seed 0 \
     --loss_type "stamina" \
 
-
+python main.py \
+    --data_dir "data/data_seoul_only" \
+    --image_csv_dir "data/seoul.csv" \
+    --batch 8 \
+    --epochs 1000 \
+    --patience 50 \
+    --model_idx "test" \
+    --output_dir "output/test/" \
+    --test_list=[] \
+    --gpu_id 0 \
+    --device cuda:0 \
+    --seed 0 \
+    --lr 0.0001 \
+    --loss_type "stamina" \
+    --location "seoul" \
 #scripts/Version1.sh
 
 # python main.py --data_dir "data\data_radar" --image_csv_dir "data\\22.7_22.9 강수량 평균 0.1 이하 제거_set추가.csv" --batch 8 --test_list=[] --model_idx "test-projection"
