@@ -148,7 +148,6 @@ class FourTrainer(Trainer):
                 label = label.to(self.args.device) #answer, B
                 gap = gap.to(self.args.device) #diff between t-1 t, B
                 # #class_label = class_label.to(self.args.device)
-                
                 set_generation_loss = 0.0
                 correlation_image = 0.0
                 precipitation = []       

@@ -116,8 +116,9 @@ class Radar(Dataset):
                 batch_images.append(image)
 
                 # Convert batches to tensors and append to dataset lists
-                dataset_images.append(batch_images)
-
+            dataset_images.append(batch_images)
+            
+        
         # Combine all batches into a single dataset
         # Each element of dataset now corresponds to batched images, labels, or gaps respectively
 
