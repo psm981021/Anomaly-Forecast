@@ -123,7 +123,21 @@ class Trainer:
         else:
             print("Error: Non-tensor input received")
 
+    def plot_images_test(self, image ,epoch, model_idx, i, flag=None):
 
+        
+        if isinstance(image, torch.Tensor):
+            image = image.cpu().detach().numpy()
+            plt.imshow(image)
+
+            model_idx=model_idx.replace('.','-')
+
+            if flag == 'R':
+                plt.savefig(f'{self.args.output_dir}/{model_idx}_{i}_{epoch}_Real Image')
+            else:
+                plt.savefig(f'{self.args.output_dir}/{model_idx}_{i}_{epoch}_Generated Image')
+        else:
+            print("Error: Non-tensor input received")
 
 class FourTrainer(Trainer):
     def __init__(self,model,train_dataloader, valid_dataloader,test_dataloader, args):
@@ -157,11 +171,12 @@ class FourTrainer(Trainer):
                     # image_batch[i] [B x 3 x R x R]
                     
                     generated_image = self.model(image_batch[i],self.args)
+                    import IPython; IPython.embed(colors='Linux');exit(1);
                     
                     correlation_image += torch.abs(self.correlation_image(generated_image.mean(dim=-1), image_batch[i+1].mean(dim=1))) / self.args.batch
 
                     if epoch % 20 == 0:
-                        if epoch == 0 :
+                        if epoch == 0  and datetime[i] in plot_list:
                             self.plot_images(image_batch[i+1][1].permute(1,2,0),epoch, self.args.model_idx, datetime[i], 'R')
                         elif datetime[i] in plot_list:
                             self.plot_images(generated_image[0].mean(dim=-1),epoch, self.args.model_idx, datetime[i], 'G')
