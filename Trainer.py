@@ -363,7 +363,7 @@ class FourTrainer(Trainer):
                     # reg = self.regression_model(image_batch[i+1]).view(self.args.batch) # [B] 
 
                     # reg = self.regression_model(total_predict_gap).view(self.args.batch) # [B] 
-
+                    import IPython; IPython.embed(colors='Linux');exit(1);
                     last_reg = self.regression_model(last_precipitation.permute(0,3,1,2).contiguous()).view(self.args.batch) # [B] 
 
                     # Loss_mae
