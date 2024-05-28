@@ -52,6 +52,7 @@ def main():
     parser.add_argument("--log_freq", type=int, default =1, help="number of log frequency" )
     parser.add_argument("--patience",type=int, default="10")
     parser.add_argument('--loss_type', type=str, default='ce_image', help='ce_image, ce_label')
+    parser.add_argument('--regression', type=str, default='gap', help='gap, label')
 
     # learning args
     parser.add_argument("--lr", type=float, default=0.001, help="learning rate")

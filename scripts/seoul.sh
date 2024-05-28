@@ -5,8 +5,8 @@ python main.py \
     --batch 8 \
     --epochs 1000 \
     --patience 50 \
-    --model_idx "seoul-V.4.01" \
-    --output_dir "output/seoul-V.4.01/" \
+    --model_idx "seoul-V.5.01" \
+    --output_dir "output/seoul-V.5.01/" \
     --test_list=[] \
     --gpu_id 0 \
     --device cuda:0 \
@@ -14,6 +14,8 @@ python main.py \
     --lr 0.0001 \
     --loss_type "stamina" \
     --location "seoul" \
+    --regression "gap" \
+    --grey_scale \
     --wandb
 
 
