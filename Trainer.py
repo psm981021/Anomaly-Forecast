@@ -173,7 +173,7 @@ class FourTrainer(Trainer):
                     # image_batch[i] [B x 3 x R x R]
                     
                     generated_image = self.model(image_batch[i],self.args)
-                    import IPython; IPython.embed(colors='Linux');exit(1);
+                    # import IPython; IPython.embed(colors='Linux');exit(1);
                     
                     correlation_image += torch.abs(self.correlation_image(generated_image.mean(dim=-1), image_batch[i+1].mean(dim=1))) / self.args.batch
 
