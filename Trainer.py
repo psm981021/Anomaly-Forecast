@@ -168,39 +168,50 @@ class FourTrainer(Trainer):
                 correlation_image = 0.0
                 precipitation = []       
                 plot_list = ['2021-08-01 19:00','2021-01-15 16:00']
+
+                # image batch [B, 7, C, W, H]
+                image_batch = torch.stack(image_batch).permute(1,0,2,3,4).contiguous()
+
                 for i in range(len(image_batch)-1):
                     
                     # image_batch[i] [B x 3 x R x R]
                     
                     generated_image = self.model(image_batch[i],self.args)
-                    # import IPython; IPython.embed(colors='Linux');exit(1);
                     
-                    correlation_image += torch.abs(self.correlation_image(generated_image.mean(dim=-1), image_batch[i+1].mean(dim=1))) / self.args.batch
+                    if self.args.grey_scale:
+                        correlation_image += torch.abs(self.correlation_image(generated_image.mean(dim=-1), image_batch[i+1])) / self.args.batch
+                    else:
+                        correlation_image += torch.abs(self.correlation_image(generated_image.mean(dim=-1), image_batch[i+1].mean(dim=1))) / self.args.batch
 
                     if epoch % 20 == 0:
                         if epoch == 0  and datetime[i] in plot_list:
-                            self.plot_images(image_batch[i+1][1].permute(1,2,0),epoch, self.args.model_idx, datetime[i], 'R')
+                            self.plot_images(image_batch[i+1][0].permute(1,2,0),epoch, self.args.model_idx, datetime[i], 'R')
                         elif datetime[i] in plot_list:
                             self.plot_images(generated_image[0].mean(dim=-1),epoch, self.args.model_idx, datetime[i], 'G')
                             
 
-                    # generated_image [B 3 R R ], Regression_logits [B x 1 x 1 x 1]
+                    # generated_image [B, W, H, C], 
                     # regression_logits = regression_logits.reshape(self.args.batch, -1)
                     precipitation.append(generated_image) # [B x 1]
                     
                     
                     if self.args.loss_type == 'ce_image':
-                        generation_loss =  self.ce_criterion(generated_image.flatten(1), image_batch[i+1].flatten(1))
+                        
+                        
+                        generation_loss =  self.ce_criterion(generated_image.mean(dim=-1), image_batch[i+1])
 
                     elif self.args.loss_type == 'mae_image':
-                        generation_loss = self.mae_criterion(generated_image.flatten(1), image_batch[i+1].flatten(1))
+
+                        generation_loss = self.mae_criterion(generated_image.mean(dim=-1), image_batch[i+1])
 
                     elif self.args.loss_type == 'ed_image':
+
                         preds = torch.softmax(generated_image,dim=-1)
                         err = (torch.arange(100).to(self.device).float() - image_batch[i+1].permute(0,2,3,1)).abs()
                         generation_loss = torch.sum((preds * err),dim=-1).mean()
 
                     elif self.args.loss_type == 'stamina':
+
                             epsilon = 1e-6
                             
                             if self.args.grey_scale:
@@ -212,19 +223,20 @@ class FourTrainer(Trainer):
                             penalty = torch.pow(1 - torch.exp(-absolute_error) + epsilon , 0.5) #  [B W H C]
                             
                             result = absolute_error * event_weight * penalty
-                            torch.autograd.set_detect_anomaly(True)
+                            
                             generation_loss = result.mean()
                             
                     else:
                         generation_loss =  self.ce_criterion(generated_image.flatten(1), class_label)
                     
                     set_generation_loss += generation_loss
+                    total_correlation += correlation_image
 
                 # set이여서 6으로 나눔
-                set_generation_loss /= 6
-                correlation_image /= 6
-                total_correlation += correlation_image
-                
+                # set_generation_loss /= 6
+                # correlation_image /= 6
+               
+                import IPython; IPython.embed(colors='Linux');exit(1);
                 last_precipitation = precipitation[-1]
 
                 stack_precipitation = torch.stack(precipitation) # [6 , B, 150, 150, 100]
