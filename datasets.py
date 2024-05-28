@@ -105,18 +105,11 @@ class Radar(Dataset):
                 if self.transform:
                     image = self.transform(image)
 
-                # # Tensor -> 이미지 시각화
-                # # Tensor 이미지를 (H, W, C)로 변환
-                # image_tensor = image.permute(1, 2, 0)
-                # # 이미지 시각화
-                # plt.imshow(image_tensor)
-                # plt.show()
-                # break
                 
                 batch_images.append(image)
-
-                # Convert batches to tensors and append to dataset lists
-                dataset_images.append(batch_images)
+            # Convert batches to tensors and append to dataset lists
+            batch_tensor = torch.stack(batch_images, dim=0)
+            dataset_images.append(batch_tensor)
 
         # Combine all batches into a single dataset
         # Each element of dataset now corresponds to batched images, labels, or gaps respectively
