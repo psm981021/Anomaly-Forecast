@@ -7,6 +7,7 @@ from PIL import Image
 import matplotlib.pyplot as plt
 
 from models import RainfallPredictor
+from rainnet import *
 import numpy as np
 
 class Trainer:
@@ -25,7 +26,8 @@ class Trainer:
             nn.ReLU(),
             nn.AdaptiveAvgPool2d((50, 50))
         )
-        self.regression_model = RainfallPredictor().to(self.args.device)
+        # self.regression_model = RainfallPredictor().to(self.args.device)
+        self.regression_model = RainNet().to(self.args.device)
 
         if self.cuda_condition:
             self.model.cuda()
@@ -234,7 +236,8 @@ class FourTrainer(Trainer):
 
                 # reg = self.regression_model(image_batch[i+1]).view(self.args.batch) # [B] 
                 
-                last_reg = self.regression_model(last_precipitation.permute(0,3,1,2).contiguous()).view(self.args.batch) # [B] 
+                # last_reg = self.regression_model(last_precipitation.permute(0,3,1,2).contiguous()).view(self.args.batch) # [B] 
+                last_reg = self.regression_model(last_precipitation).view(self.args.batch) # [B] # rainnet 
                 #reg = self.regression_model(total_predict_gap).view(self.args.batch) # [B] 
                 
                 # Loss_mae
@@ -297,7 +300,8 @@ class FourTrainer(Trainer):
                 for i, batch in batch_iter:
 
                     # image, label, gap, datetime= batch
-                    image, label, gap, datetime = batch
+                    image, label, gap, datetime = batch # image = [8, 7, 3, 150, 150]
+                    image=image.permute(1,0,2,3,4).contiguous()
                     image_batch = [t.to(self.args.device) for t in image]
                     label = label.to(self.args.device)
                     gap = gap.to(self.args.device)
@@ -363,8 +367,9 @@ class FourTrainer(Trainer):
                     # reg = self.regression_model(image_batch[i+1]).view(self.args.batch) # [B] 
 
                     # reg = self.regression_model(total_predict_gap).view(self.args.batch) # [B] 
-                    import IPython; IPython.embed(colors='Linux');exit(1);
-                    last_reg = self.regression_model(last_precipitation.permute(0,3,1,2).contiguous()).view(self.args.batch) # [B] 
+                    # import IPython; IPython.embed(colors='Linux');exit(1);
+                    # last_reg = self.regression_model(last_precipitation.permute(0,3,1,2).contiguous()).view(self.args.batch) # [B] 
+                    last_reg = self.regression_model(last_precipitation).view(self.args.batch) # [B] 
 
                     # Loss_mae
                     loss_mae = self.mae_criterion(last_reg, label)
