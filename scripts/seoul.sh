@@ -16,7 +16,7 @@ python main.py \
     --location "seoul" \
     --regression "gap" \
     --grey_scale \
-    --wandb
+    --do_eval
 
 
 

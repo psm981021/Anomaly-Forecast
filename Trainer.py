@@ -176,14 +176,14 @@ class FourTrainer(Trainer):
 
                 for i in range(len(image_batch)-1):
                     
-                    # image_batch[i] [B x 3 x R x R]
+                    # image_batch[i] [B x R x R]
                     
                     generated_image = self.model(image_batch[i],self.args)
                     
                     if self.args.grey_scale:
-                        correlation_image += torch.abs(self.correlation_image(generated_image.mean(dim=-1), image_batch[i+1])) / self.args.batch
+                        correlation_image += torch.abs(self.correlation_image(generated_image.mean(dim=-1), image_batch[i+1])) #/ self.args.batch
                     else:
-                        correlation_image += torch.abs(self.correlation_image(generated_image.mean(dim=-1), image_batch[i+1].mean(dim=1))) / self.args.batch
+                        correlation_image += torch.abs(self.correlation_image(generated_image.mean(dim=-1), image_batch[i+1].mean(dim=1))) #/ self.args.batch
 
                     if epoch % 20 == 0:
                         if epoch == 0  and datetime[i] in plot_list:
@@ -198,7 +198,6 @@ class FourTrainer(Trainer):
                     
                     
                     if self.args.loss_type == 'ce_image':
-                        
                         
                         generation_loss =  self.ce_criterion(generated_image.mean(dim=-1), image_batch[i+1])
 
@@ -236,7 +235,7 @@ class FourTrainer(Trainer):
 
                 # set이여서 6으로 나눔
                 # set_generation_loss /= 6
-                # correlation_image /= 6
+                total_correlation /= 6
                
                 
                 last_precipitation = precipitation[-1]
@@ -251,14 +250,18 @@ class FourTrainer(Trainer):
                 
                 # last_reg = self.regression_model(last_precipitation.permute(0,3,1,2).contiguous()).view(self.args.batch) # [B] 
 
-
-                if self.args.regression == 'gap':
-                    reg = abs(self.regression_model(total_predict_gap).view(self.args.batch)) # [B] # rainnet 
-                    reg = self.Linear_layer(reg)
-                    loss_mae = self.mae_criterion(reg, abs(gap))
-                elif self.args.regression == 'label':
-                    reg = abs(self.regression_model(last_precipitation)).view(self.args.batch)
-                    loss_mae = self.mae_criterion(reg, abs(label))
+                if self.args.pre_train :
+                    if self.args.regression == 'gap':
+                        reg = abs(self.regression_model(total_predict_gap).view(self.args.batch)) # [B] # rainnet 
+                        reg = self.Linear_layer(reg)
+                        loss_mae = self.mae_criterion(reg, abs(gap))
+                    elif self.args.regression == 'label':
+                        reg = abs(self.regression_model(last_precipitation)).view(self.args.batch)
+                        loss_mae = self.mae_criterion(reg, abs(label))
+                    
+                elif self.args.pre_train == False:
+                    # crop 2 x 2
+                    import IPython; IPython.embed(colors='Linux');exit(1);
             
                 #reg = self.regression_model(total_predict_gap).view(self.args.batch) # [B] 
                 
@@ -335,10 +338,10 @@ class FourTrainer(Trainer):
                         generated_image = self.model(image_batch[i],self.args)
                         # generated_image [B 3 R R ], Regression_logits [B x 1 x 150 x 150]
 
-                        if self.args.grey_scale:
-                            correlation_image += torch.abs(self.correlation_image(generated_image.mean(dim=-1), image_batch[i+1])) / self.args.batch
-                        else:
-                            correlation_image += torch.abs(self.correlation_image(generated_image.mean(dim=-1), image_batch[i+1].mean(dim=1))) / self.args.batch
+                        # if self.args.grey_scale:
+                        #     correlation_image += torch.abs(self.correlation_image(generated_image.mean(dim=-1), image_batch[i+1])) / self.args.batch
+                        # else:
+                        #     correlation_image += torch.abs(self.correlation_image(generated_image.mean(dim=-1), image_batch[i+1].mean(dim=1))) / self.args.batch
 
                         # regression_logits = regression_logits.reshape(self.args.batch, -1)
                         precipitation.append(generated_image) 
@@ -373,7 +376,7 @@ class FourTrainer(Trainer):
                             generation_loss =  self.ce_criterion(generated_image.flatten(1), class_label)
                         
                     set_generation_loss += generation_loss
-                    total_correlation += correlation_image
+                    # total_correlation += correlation_image
                     
                     # set이여서 6으로 나눔
                     # set_generation_loss /= 6
@@ -406,8 +409,10 @@ class FourTrainer(Trainer):
 
                     total_generation_loss += set_generation_loss.item()
 
-                    if test:
+                    if test and self.args.regression == 'label':
                         self.args.test_list.append([datetime, reg, label])
+                    elif test and self.args.regression == 'gap':
+                        self.args.test_list.append([datetime, reg, abs(gap)])
                         
                 del batch
                 torch.cuda.empty_cache() 

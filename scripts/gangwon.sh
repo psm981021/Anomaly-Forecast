@@ -16,7 +16,8 @@ python main.py \
     --location "gangwon" \
     --regression "gap" \
     --grey_scale \
-    --wandb
+    --do_eval
+    #--wandb
 
 
 # scripts/gangwon.sh
