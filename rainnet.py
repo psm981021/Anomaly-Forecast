@@ -52,6 +52,7 @@ class RainNet(nn.Module):
 
         if mode == "regression":
             self.final = nn.Conv2d(2, 1, kernel_size=1)
+            self.relu = nn.ReLU()
         elif mode == "segmentation":
             self.final = nn.Conv2d(2, 1, kernel_size=1)
             self.sigmoid = nn.Sigmoid()
@@ -93,8 +94,9 @@ class RainNet(nn.Module):
         
         if self.mode == "regression":
             final_output = self.final(conv10) # [8, 1, 144, 144]
+            # final_output = self.relu(final_output)
             global_avg_pool = F.adaptive_avg_pool2d(final_output, (1, 1))
-            return global_avg_pool.view(global_avg_pool.size(0), -1),final_output  # Flatten to [batch_size, 1]
+            return global_avg_pool.view(global_avg_pool.size(0), -1)  # Flatten to [batch_size, 1]
         elif self.mode == "segmentation":
             return self.sigmoid(self.final(conv10))
 

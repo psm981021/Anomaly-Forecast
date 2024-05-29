@@ -5,8 +5,8 @@ python main.py \
     --batch 8 \
     --epochs 1000 \
     --patience 50 \
-    --model_idx "gangwon-V.4.01" \
-    --output_dir "output/gangwon-V.4.01/" \
+    --model_idx "gangwon-V.5.01" \
+    --output_dir "output/gangwon-V.5.01/" \
     --test_list=[] \
     --gpu_id 1 \
     --device cuda:1 \
@@ -14,7 +14,10 @@ python main.py \
     --lr 0.0001 \
     --loss_type "stamina" \
     --location "gangwon" \
-    --wandb
+    --regression "gap" \
+    --grey_scale \
+    --do_eval
+    #--wandb
 
 
 # scripts/gangwon.sh

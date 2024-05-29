@@ -53,6 +53,7 @@ python main.py \
     --grey_scale \
     --test_list=[] \
     --loss_type "stamina" \
+    
 
 # python main.py \
 #     --data_dir "data/data_seoul_only" \
