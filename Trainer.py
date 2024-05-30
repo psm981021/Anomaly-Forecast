@@ -261,15 +261,25 @@ class FourTrainer(Trainer):
                     
                 elif self.args.pre_train == False:
                     # crop 2 x 2
-                    import IPython; IPython.embed(colors='Linux');exit(1);
+                    # image_batch[0][0][:, 70:90, 55:85]
+                    crop_predict_gap = total_predict_gap[:,:,70:90, 55:85]
+                    
+                    reg = abs(self.regression_model(crop_predict_gap)).view(self.args.batch)
+                    reg = self.Linear_layer(reg)
+                    loss_mae = self.mae_criterion(reg, abs(gap))
+
             
                 #reg = self.regression_model(total_predict_gap).view(self.args.batch) # [B] 
                 
+                if self.args.pre_train:
 
-                joint_loss = set_generation_loss + loss_mae
-
-                total_mae += loss_mae.item()
-                total_generation_loss += set_generation_loss.item()
+                    joint_loss = set_generation_loss #+ loss_mae
+                    total_generation_loss += set_generation_loss.item()
+                
+                elif self.args.pre_train == False: #fine-tuning
+                    joint_loss = loss_mae
+                    total_mae += loss_mae.item()
+                    # total_generation_loss += set_generation_loss.item()
 
                 self.optim.zero_grad()
                 self.reg_optim.zero_grad()
@@ -278,10 +288,9 @@ class FourTrainer(Trainer):
                 
                 torch.nn.utils.clip_grad_norm_(self.model.parameters(), max_norm=1.0)
                 torch.nn.utils.clip_grad_norm_(self.regression_model.parameters(), max_norm=1.0)
+                
                 self.optim.step()
                 self.reg_optim.step()
-
-                
                 
                 del batch, generation_loss, loss_mae, joint_loss  # After backward pass
                 torch.cuda.empty_cache()
@@ -314,7 +323,7 @@ class FourTrainer(Trainer):
             self.regression_model.eval()
 
             with torch.no_grad():
-                total_generation_loss = torch.tensor(0.0, device=self.args.device)
+                total_generation_loss,total_mae = torch.tensor(0.0, device=self.args.device),torch.tensor(0.0, device=self.args.device)
                 batch_iter = tqdm(enumerate(dataloader), total= len(dataloader))
                 for i, batch in batch_iter:
 
@@ -329,6 +338,7 @@ class FourTrainer(Trainer):
                     precipitation =[]
                     set_generation_loss =0.0
                     correlation_image =0.0
+                    mae_loss =0.0
 
                     image_batch = torch.stack(image_batch).permute(1,0,2,3,4).contiguous()
 
@@ -397,17 +407,36 @@ class FourTrainer(Trainer):
                     # reg = self.regression_model(total_predict_gap).view(self.args.batch) # [B] 
                     # import IPython; IPython.embed(colors='Linux');exit(1);
                     # last_reg = self.regression_model(last_precipitation.permute(0,3,1,2).contiguous()).view(self.args.batch) # [B] 
-                    if self.args.regression == 'gap':
-                        reg = abs(self.regression_model(total_predict_gap).view(self.args.batch)) # [B] # rainnet 
+                    
+                    if self.args.pre_train:
+                        if self.args.regression == 'gap':
+                            reg = abs(self.regression_model(total_predict_gap).view(self.args.batch)) # [B] # rainnet 
+                            reg = self.Linear_layer(reg)
+                            loss_mae = self.mae_criterion(reg, abs(gap))
+
+                        elif self.args.regression == 'label':
+                            reg = abs(self.regression_model(last_precipitation)).view(self.args.batch)
+                            loss_mae = self.mae_criterion(reg, abs(label))
+
+                        total_mae += loss_mae
+                    elif self.args.pre_train == False:
+
+                        crop_predict_gap = total_predict_gap[:,:,70:90, 55:85]
+                        
+                        reg = abs(self.regression_model(crop_predict_gap)).view(self.args.batch)
                         reg = self.Linear_layer(reg)
                         loss_mae = self.mae_criterion(reg, abs(gap))
+                        total_mae += loss_mae
 
-                    elif self.args.regression == 'label':
-                        reg = abs(self.regression_model(last_precipitation)).view(self.args.batch)
-                        loss_mae = self.mae_criterion(reg, abs(label))
+                    # if self.args.pre_train:
 
+                    #     joint_loss = set_generation_loss #+ loss_mae
+                    #     total_generation_loss += set_generation_loss.item()
+                    
+                    # elif self.args.pre_train == False: #fine-tuning
+                    #     joint_loss = loss_mae
+                    #     total_mae_loss += total_mae.item()
 
-                    total_generation_loss += set_generation_loss.item()
 
                     if test and self.args.regression == 'label':
                         self.args.test_list.append([datetime, reg, label])
@@ -416,7 +445,12 @@ class FourTrainer(Trainer):
                         
                 del batch
                 torch.cuda.empty_cache() 
-            return self.get_score(epoch, total_generation_loss/len(batch_iter))
+
+            if self.args.pre_train:
+                return self.get_score(epoch, total_generation_loss/len(batch_iter))
+            elif self.args.pre_train == False:
+                return self.get_score(epoch, total_mae/len(batch_iter))
+            
             
     
 class SianetTrainer(Trainer):

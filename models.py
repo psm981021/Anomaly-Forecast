@@ -108,7 +108,7 @@ class Fourcaster(nn.Module):
 
         # regression logits
 
-        return generated_image # , regression_logits 
+        return generated_image
     
 
 class RainfallPredictor(nn.Module):

@@ -15,7 +15,7 @@ class ConvBlock(nn.Module):
         return x
 
 class RainNet(nn.Module):
-    def __init__(self, input_shape=[8, 100, 150, 150], mode="regression"):
+    def __init__(self, input_shape=[8, 100, 20, 30], mode="regression"):
         super(RainNet, self).__init__()
         self.mode = mode
         in_channels = input_shape[1]
