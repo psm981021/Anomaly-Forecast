@@ -5,8 +5,8 @@ python main.py \
     --batch 8 \
     --epochs 1000 \
     --patience 50 \
-    --model_idx "gangwon-V.5.01" \
-    --output_dir "output/gangwon-V.5.01/" \
+    --model_idx "gangwon-V.4.01" \
+    --output_dir "output/gangwon-V.4.01/" \
     --test_list=[] \
     --gpu_id 1 \
     --device cuda:1 \

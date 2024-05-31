@@ -3,10 +3,10 @@ python main.py \
     --data_dir "data/data_seoul_only" \
     --image_csv_dir "data/seoul.csv" \
     --batch 8 \
-    --epochs 2000 \
-    --patience 50 \
-    --model_idx "seoul-V.5.02" \
-    --output_dir "output/seoul-V.5.02/" \
+    --epochs 1000 \
+    --patience 40 \
+    --model_idx "seoul-V.4.01" \
+    --output_dir "output/seoul-V.4.01/" \
     --test_list=[] \
     --gpu_id 0 \
     --device cuda:0 \
@@ -16,7 +16,7 @@ python main.py \
     --location "seoul" \
     --regression "gap" \
     --grey_scale \
-    --do_eval
+
 
 
 

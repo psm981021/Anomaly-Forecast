@@ -9,6 +9,7 @@ import matplotlib.pyplot as plt
 from models import RainfallPredictor
 from rainnet import *
 import numpy as np
+from utils import *
 
 class Trainer:
     def __init__(self, model, train_dataloader, valid_dataloader, test_dataloader, args):
@@ -36,7 +37,13 @@ class Trainer:
             self.regression_model.cuda()
             self.Linear_layer.cuda()
 
-        
+        if not self.args.pre_train:
+            for param in self.model.parameters():
+                param.requires_grad = False
+
+            # Assuming the regression model is meant to be trained
+            for param in self.regression_model.parameters():
+                param.requires_grad = True
 
         # Setting the train and test data loader
         self.train_dataloader = train_dataloader
@@ -46,7 +53,7 @@ class Trainer:
         # self.data_name = self.args.data_name
         betas = (self.args.adam_beta1, self.args.adam_beta2)
         self.optim = Adam(self.model.parameters(), lr=1e-5, betas=betas, weight_decay=self.args.weight_decay)
-        self.reg_optim=Adam(self.regression_model.parameters(), lr=1e-5, betas=betas, weight_decay=self.args.weight_decay)
+        self.reg_optim = Adam(filter(lambda p: p.requires_grad, self.regression_model.parameters()), lr=1e-5, betas=betas, weight_decay=self.args.weight_decay)
 
         print("Total Parameters:", sum([p.nelement() for p in self.model.parameters()]))
 
@@ -88,10 +95,16 @@ class Trainer:
 
         # pred has to values, cross-entropy loss and mae loss
         ce = pred
-        post_fix = {
-            "Epoch":epoch,
-            "Generation Loss (Eval)":"{:.6f}".format(ce),
-        }
+        if self.args.pre_train:
+            post_fix = {
+                "Epoch":epoch,
+                "Generation Loss (Eval)":"{:.6f}".format(ce),
+            }
+        else:
+            post_fix = {
+                "Epoch":epoch,
+                "MAE Loss (Eval)":"{:.6f}".format(ce),
+            }
         print(post_fix)
         with open(self.args.log_file, "a") as f:
             f.write(str(post_fix) + "\n")
@@ -120,10 +133,13 @@ class Trainer:
             model_idx=model_idx.replace('.','-')
             datetime = datetime.replace(':', '-').replace(' ', '_')
 
+            path = os.path.join(self.args.output_dir, str(self.args.pre_train))
+            check_path(path)
+
             if flag == 'R':
-                plt.savefig(f'{self.args.output_dir}/{model_idx}_{datetime}_{epoch}_Real Image')
+                plt.savefig(f'{self.args.output_dir}/{self.args.pre_train}/{model_idx}_{datetime}_{epoch}_Real Image')
             else:
-                plt.savefig(f'{self.args.output_dir}/{model_idx}_{datetime}_{epoch}_Generated Image')
+                plt.savefig(f'{self.args.output_dir}/{self.args.pre_train}/{model_idx}_{datetime}_{epoch}_Generated Image')
         else:
             print("Error: Non-tensor input received")
 
@@ -293,7 +309,7 @@ class FourTrainer(Trainer):
                 self.reg_optim.step()
                 
                 del batch, generation_loss, loss_mae, joint_loss  # After backward pass
-                torch.cuda.empty_cache()
+            torch.cuda.empty_cache()
             
             
             if self.args.wandb == True:
