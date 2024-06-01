@@ -426,6 +426,7 @@ class FourTrainer(Trainer):
                     
                     if self.args.pre_train:
                         if self.args.regression == 'gap':
+                            import IPython; IPython.embed(colors='Linux'); exit(1)
                             reg = abs(self.regression_model(total_predict_gap).view(self.args.batch)) # [B] # rainnet 
                             reg = self.Linear_layer(reg)
                             loss_mae = self.mae_criterion(reg, abs(gap))
@@ -438,7 +439,7 @@ class FourTrainer(Trainer):
                     elif self.args.pre_train == False:
 
                         crop_predict_gap = total_predict_gap[:,:,70:90, 55:85]
-                        
+                        import IPython; IPython.embed(colors='Linux'); exit(1)
                         reg = abs(self.regression_model(crop_predict_gap)).view(self.args.batch)
                         reg = self.Linear_layer(reg)
                         loss_mae = self.mae_criterion(reg, abs(gap))
