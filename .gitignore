@@ -34,3 +34,4 @@ test.py
 #cb
 data/images_classification/
 classification_model/
+__pycache__/
