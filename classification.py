@@ -117,6 +117,9 @@ def initialize_model(learning_rate, loss_type):
 
 # 모델 학습
 def train_model(model, train_loader, val_loader, criterion, optimizer, num_epochs, save_path):
+    best_loss = 10e9
+    patience = 0
+    
     for epoch in range(num_epochs):
         model.train()
         running_loss = 0.0
@@ -129,6 +132,15 @@ def train_model(model, train_loader, val_loader, criterion, optimizer, num_epoch
             running_loss += loss.item()
         
         print(f"Epoch {epoch + 1}/{num_epochs}, Loss: {running_loss / len(train_loader)}")
+
+        if running_loss < best_loss:
+            best_loss = running_loss
+            patience = 0
+        else:
+            patience += 1
+        
+        if patience >= 20: #early stopping
+            break
         
         # 10 epoch마다 모델 저장 및 검증
         if (epoch + 1) % 10 == 0:
