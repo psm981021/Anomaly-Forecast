@@ -1,75 +1,22 @@
-# python main.py \
-#     --data_dir "data/radar_test" \
-#     --image_csv_dir "data/data_sample.csv" \
-#     --batch 8 \
-#     --test_list []
-#     --model_idx "test-projection" \
-
-
-# python main.py \
-#     --data_dir "data/radar_test" \
-#     --image_csv_dir "data/data_sample_train.csv" \
-#     --epochs 1000 \
-#     --patience 50 \
-#     --batch 9 \
-#     --model_idx "test_debug" \
-#     --output_dir "output/test" \
-#     --test_list=[]\
-#     --gpu_id 1 \
-#     --grey_scale \
-#     --device "cuda:1" \
-#     --loss_type "ed_image" \
-#     --grey_scale \
-#     --seed 0
-    
-# python main.py \
-#     --data_dir "data/seoul_only" \
-#     --image_csv_dir "data/seoul_sample.csv" \
-#     --epochs 1000 \
-#     --patience 50 \
-#     --batch 8 \
-#     --model_idx "test_debug" \
-#     --output_dir "output/test" \
-#     --test_list=[]\
-#     --gpu_id 1 \
-#     --grey_scale \
-#     --device "cuda:1" \
-#     --loss_type "ed_image" \
-#     --grey_scale \
-#     --seed 0 \
-
 python main.py \
-    --data_dir "data/data_gangwon_only" \
-    --image_csv_dir "data/gangwon.csv" \
+    --data_dir "data/data_seoul_only_v2" \
+    --image_csv_dir "data/seoul_data_v2.csv" \
     --batch 8 \
     --epochs 1000 \
-    --patience 50 \
-    --model_idx "test" \
-    --output_dir "output/test/" \
+    --patience 40 \
+    --model_idx "seoul-V.3.01" \
+    --output_dir "output/seoul-V.3.01/" \
     --test_list=[] \
     --gpu_id 1 \
     --device cuda:1 \
     --seed 0 \
-    --grey_scale \
-    --test_list=[] \
+    --lr 0.0005 \
     --loss_type "stamina" \
-    
+    --location "seoul" \
+    --regression "gap"\
+    --grey_scale
 
-# python main.py \
-#     --data_dir "data/data_seoul_only" \
-#     --image_csv_dir "data/seoul.csv" \
-#     --batch 8 \
-#     --epochs 1000 \
-#     --patience 50 \
-#     --model_idx "test" \
-#     --output_dir "output/test/" \
-#     --test_list=[] \
-#     --gpu_id 0 \
-#     --device cuda:0 \
-#     --seed 0 \
-#     --lr 0.0001 \
-#     --loss_type "stamina" \
-#     --location "seoul" \
+
 
 
 #scripts/Version1.sh
