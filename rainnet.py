@@ -94,7 +94,7 @@ class RainNet(nn.Module):
         if self.mode == "regression":
             final_output = self.final(conv10) # [8, 1, 144, 144]
             global_avg_pool = F.adaptive_avg_pool2d(final_output, (1, 1))
-            return global_avg_pool.view(global_avg_pool.size(0), -1),final_output  # Flatten to [batch_size, 1]
+            return global_avg_pool.view(global_avg_pool.size(0), -1)  # Flatten to [batch_size, 1]
         elif self.mode == "segmentation":
             return self.sigmoid(self.final(conv10))
 
@@ -115,7 +115,7 @@ class RainNet(nn.Module):
 # Example usage:
 # input_tensor = torch.randn(8, 100, 150, 150)  # 8 samples, 100 channels, 150x150 spatial dimensions
 # model = RainNet(input_shape=input_tensor.shape, mode="regression")
-# output,final = model(input_tensor)
+# output = model(input_tensor)
 # print(output.shape)  # Should print torch.Size([8, 1])
 # print(output)
 # print(final.shape)

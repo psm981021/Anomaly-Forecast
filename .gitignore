@@ -8,6 +8,7 @@ data/*.zip
 data/*.csv
 data/*.ipynb
 /data/data_radar
+data/*.png
 
 
 # clone models
