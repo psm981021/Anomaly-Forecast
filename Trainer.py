@@ -9,6 +9,7 @@ import matplotlib.pyplot as plt
 from models import RainfallPredictor
 from rainnet import *
 import numpy as np
+from utils import *
 
 class Trainer:
     def __init__(self, model, train_dataloader, valid_dataloader, test_dataloader, args):
@@ -28,13 +29,21 @@ class Trainer:
         )
         # self.regression_model = RainfallPredictor().to(self.args.device)
         self.regression_model = RainNet().to(self.args.device)
+        self.Linear_layer = nn.Linear(self.args.batch, self.args.batch)
 
         if self.cuda_condition:
             self.model.cuda()
             self.projection.cuda()
             self.regression_model.cuda()
+            self.Linear_layer.cuda()
 
-        
+        if not self.args.pre_train:
+            for param in self.model.parameters():
+                param.requires_grad = False
+
+            # Assuming the regression model is meant to be trained
+            for param in self.regression_model.parameters():
+                param.requires_grad = True
 
         # Setting the train and test data loader
         self.train_dataloader = train_dataloader
@@ -44,7 +53,7 @@ class Trainer:
         # self.data_name = self.args.data_name
         betas = (self.args.adam_beta1, self.args.adam_beta2)
         self.optim = Adam(self.model.parameters(), lr=1e-5, betas=betas, weight_decay=self.args.weight_decay)
-        self.reg_optim=Adam(self.regression_model.parameters(), lr=1e-5, betas=betas, weight_decay=self.args.weight_decay)
+        self.reg_optim = Adam(filter(lambda p: p.requires_grad, self.regression_model.parameters()), lr=1e-5, betas=betas, weight_decay=self.args.weight_decay)
 
         print("Total Parameters:", sum([p.nelement() for p in self.model.parameters()]))
 
@@ -86,10 +95,16 @@ class Trainer:
 
         # pred has to values, cross-entropy loss and mae loss
         ce = pred
-        post_fix = {
-            "Epoch":epoch,
-            "Generation Loss (Eval)":"{:.6f}".format(ce),
-        }
+        if self.args.pre_train:
+            post_fix = {
+                "Epoch":epoch,
+                "Generation Loss (Eval)":"{:.6f}".format(ce),
+            }
+        else:
+            post_fix = {
+                "Epoch":epoch,
+                "MAE Loss (Eval)":"{:.6f}".format(ce),
+            }
         print(post_fix)
         with open(self.args.log_file, "a") as f:
             f.write(str(post_fix) + "\n")
@@ -118,10 +133,13 @@ class Trainer:
             model_idx=model_idx.replace('.','-')
             datetime = datetime.replace(':', '-').replace(' ', '_')
 
+            path = os.path.join(self.args.output_dir, str(self.args.pre_train))
+            check_path(path)
+
             if flag == 'R':
-                plt.savefig(f'{self.args.output_dir}/{model_idx}_{datetime}_{epoch}_Real Image')
+                plt.savefig(f'{self.args.output_dir}/{self.args.pre_train}/{model_idx}_{datetime}_{epoch}_Real Image')
             else:
-                plt.savefig(f'{self.args.output_dir}/{model_idx}_{datetime}_{epoch}_Generated Image')
+                plt.savefig(f'{self.args.output_dir}/{self.args.pre_train}/{model_idx}_{datetime}_{epoch}_Generated Image')
         else:
             print("Error: Non-tensor input received")
 
@@ -174,14 +192,14 @@ class FourTrainer(Trainer):
 
                 for i in range(len(image_batch)-1):
                     
-                    # image_batch[i] [B x 3 x R x R]
+                    # image_batch[i] [B x R x R]
                     
                     generated_image = self.model(image_batch[i],self.args)
                     
                     if self.args.grey_scale:
-                        correlation_image += torch.abs(self.correlation_image(generated_image.mean(dim=-1), image_batch[i+1])) / self.args.batch
+                        correlation_image += torch.abs(self.correlation_image(generated_image.mean(dim=-1), image_batch[i+1])) #/ self.args.batch
                     else:
-                        correlation_image += torch.abs(self.correlation_image(generated_image.mean(dim=-1), image_batch[i+1].mean(dim=1))) / self.args.batch
+                        correlation_image += torch.abs(self.correlation_image(generated_image.mean(dim=-1), image_batch[i+1].mean(dim=1))) #/ self.args.batch
 
                     if epoch % 20 == 0:
                         if epoch == 0  and datetime[i] in plot_list:
@@ -196,7 +214,6 @@ class FourTrainer(Trainer):
                     
                     
                     if self.args.loss_type == 'ce_image':
-                        
                         
                         generation_loss =  self.ce_criterion(generated_image.mean(dim=-1), image_batch[i+1])
 
@@ -234,35 +251,51 @@ class FourTrainer(Trainer):
 
                 # set이여서 6으로 나눔
                 # set_generation_loss /= 6
-                # correlation_image /= 6
+                total_correlation /= 6
                
-                import IPython; IPython.embed(colors='Linux');exit(1);
+                
                 last_precipitation = precipitation[-1]
-
                 stack_precipitation = torch.stack(precipitation) # [6 , B, 150, 150, 100]
                 
+                # check
                 predicted_gaps =  stack_precipitation[1:] - stack_precipitation[:-1] # [5 ,B, 150, 150, 100]
                 total_predict_gap = torch.sum(predicted_gaps, dim=0) # [B, 150, 150, 100] -> [1]
-                
                 total_predict_gap=total_predict_gap.permute(0,3,1,2)
 
                 # reg = self.regression_model(image_batch[i+1]).view(self.args.batch) # [B] 
                 
                 # last_reg = self.regression_model(last_precipitation.permute(0,3,1,2).contiguous()).view(self.args.batch) # [B] 
-                last_reg = self.regression_model(last_precipitation).view(self.args.batch) # [B] # rainnet 
+
+                if self.args.pre_train :
+                    if self.args.regression == 'gap':
+                        reg = abs(self.regression_model(total_predict_gap).view(self.args.batch)) # [B] # rainnet 
+                        reg = self.Linear_layer(reg)
+                        loss_mae = self.mae_criterion(reg, abs(gap))
+                    elif self.args.regression == 'label':
+                        reg = abs(self.regression_model(last_precipitation)).view(self.args.batch)
+                        loss_mae = self.mae_criterion(reg, abs(label))
+                    
+                elif self.args.pre_train == False:
+                    # crop 2 x 2
+                    # image_batch[0][0][:, 70:90, 55:85]
+                    crop_predict_gap = total_predict_gap[:,:,70:90, 55:85]
+                    
+                    reg = abs(self.regression_model(crop_predict_gap)).view(self.args.batch)
+                    reg = self.Linear_layer(reg)
+                    loss_mae = self.mae_criterion(reg, abs(gap))
+
+            
                 #reg = self.regression_model(total_predict_gap).view(self.args.batch) # [B] 
                 
-                # Loss_mae
-                if self.args.pre_train == False:
-                    loss_mae = self.mae_criterion(last_reg, label) # gap => [B]
-                            
-                # joint Loss
                 if self.args.pre_train:
-                    joint_loss = set_generation_loss
 
-                else:
-                    joint_loss = set_generation_loss + loss_mae
+                    joint_loss = set_generation_loss #+ loss_mae
+                    total_generation_loss += set_generation_loss.item()
+                
+                elif self.args.pre_train == False: #fine-tuning
+                    joint_loss = loss_mae
                     total_mae += loss_mae.item()
+                    # total_generation_loss += set_generation_loss.item()
 
                 self.optim.zero_grad()
                 self.reg_optim.zero_grad()
@@ -271,13 +304,12 @@ class FourTrainer(Trainer):
                 
                 torch.nn.utils.clip_grad_norm_(self.model.parameters(), max_norm=1.0)
                 torch.nn.utils.clip_grad_norm_(self.regression_model.parameters(), max_norm=1.0)
+                
                 self.optim.step()
                 self.reg_optim.step()
-
-                total_generation_loss += set_generation_loss.item()
                 
                 del batch, generation_loss, loss_mae, joint_loss  # After backward pass
-                torch.cuda.empty_cache()
+            torch.cuda.empty_cache()
             
             
             if self.args.wandb == True:
@@ -307,13 +339,13 @@ class FourTrainer(Trainer):
             self.regression_model.eval()
 
             with torch.no_grad():
-                total_generation_loss = torch.tensor(0.0, device=self.args.device)
+                total_generation_loss,total_mae = torch.tensor(0.0, device=self.args.device),torch.tensor(0.0, device=self.args.device)
                 batch_iter = tqdm(enumerate(dataloader), total= len(dataloader))
                 for i, batch in batch_iter:
 
                     # image, label, gap, datetime= batch
                     image, label, gap, datetime = batch # image = [8, 7, 3, 150, 150]
-                    image=image.permute(1,0,2,3,4).contiguous()
+                    
                     image_batch = [t.to(self.args.device) for t in image]
                     label = label.to(self.args.device)
                     gap = gap.to(self.args.device)
@@ -322,6 +354,9 @@ class FourTrainer(Trainer):
                     precipitation =[]
                     set_generation_loss =0.0
                     correlation_image =0.0
+                    mae_loss =0.0
+
+                    image_batch = torch.stack(image_batch).permute(1,0,2,3,4).contiguous()
 
                     for i in range(len(image_batch)-1):
                     
@@ -329,23 +364,28 @@ class FourTrainer(Trainer):
                         generated_image = self.model(image_batch[i],self.args)
                         # generated_image [B 3 R R ], Regression_logits [B x 1 x 150 x 150]
 
-                        correlation_image += torch.abs(self.correlation_image(generated_image.mean(dim=-1), image_batch[i+1].mean(dim=1))) / self.args.batch
+                        # if self.args.grey_scale:
+                        #     correlation_image += torch.abs(self.correlation_image(generated_image.mean(dim=-1), image_batch[i+1])) / self.args.batch
+                        # else:
+                        #     correlation_image += torch.abs(self.correlation_image(generated_image.mean(dim=-1), image_batch[i+1].mean(dim=1))) / self.args.batch
+
                         # regression_logits = regression_logits.reshape(self.args.batch, -1)
                         precipitation.append(generated_image) 
                         
-                        #projection_image = self.projection(image_batch[i+1])
                         if self.args.loss_type == 'ce_image':
-                            generation_loss =  self.ce_criterion(generated_image.flatten(1), image_batch[i+1].flatten(1))
-                        elif self.args.loss_type == 'mse_image':
-                            generation_loss = self.mae_criterion(generated_image.flatten(1), image_batch[i+1].flatten(1))
+                            generation_loss =  self.ce_criterion(generated_image.mean(dim=-1), image_batch[i+1])
+
+                        elif self.args.loss_type == 'mae_image':
+                            generation_loss = self.mae_criterion(generated_image.mean(dim=-1), image_batch[i+1])
+
                         elif self.args.loss_type == 'ed_image':
                             preds = torch.softmax(generated_image,dim=-1)
                             err = (torch.arange(100).to(self.device).float() - image_batch[i+1].permute(0,2,3,1)).abs()
                             generation_loss = torch.sum((preds * err),dim=-1).mean()
-                        
+
                         elif self.args.loss_type == 'stamina':
-                            epsilon = 1e-6
-                            
+
+                            epsilon = 1e-6 
                             if self.args.grey_scale:
                                 absolute_error = torch.abs(generated_image - image_batch[i+1].permute(0,2,3,1)) # [B W H C]
                             else:
@@ -355,20 +395,22 @@ class FourTrainer(Trainer):
                             penalty = torch.pow(1 - torch.exp(-absolute_error) + epsilon , 0.5) #  [B W H C]
                             
                             result = absolute_error * event_weight * penalty
-                            torch.autograd.set_detect_anomaly(True)
+
                             generation_loss = result.mean()
+                                
                         else:
                             generation_loss =  self.ce_criterion(generated_image.flatten(1), class_label)
-
-                        set_generation_loss += generation_loss
+                        
+                    set_generation_loss += generation_loss
+                    # total_correlation += correlation_image
                     
                     # set이여서 6으로 나눔
-                    set_generation_loss /= 6
-                    correlation_image /= 6
+                    # set_generation_loss /= 6
+                    # correlation_image /= 6
 
                     # import IPython; IPython.embed(colors='Linux'); exit(1)
                     # self.plot_images(generated_image[0],self.args.model_idx,datetime[6])
-                    last_precipitation = precipitation[-1]
+                    last_precipitation = precipitation[-1].permute(0,3,1,2,)
                     stack_precipitation = torch.stack(precipitation) # [6 , B, 150, 150, 100]
                 
                     predicted_gaps =  stack_precipitation[1:] - stack_precipitation[:-1] # [5 ,B, 150, 150, 100]
@@ -381,19 +423,50 @@ class FourTrainer(Trainer):
                     # reg = self.regression_model(total_predict_gap).view(self.args.batch) # [B] 
                     # import IPython; IPython.embed(colors='Linux');exit(1);
                     # last_reg = self.regression_model(last_precipitation.permute(0,3,1,2).contiguous()).view(self.args.batch) # [B] 
-                    last_reg = self.regression_model(last_precipitation).view(self.args.batch) # [B] 
+                    
+                    if self.args.pre_train:
+                        if self.args.regression == 'gap':
+                            reg = abs(self.regression_model(total_predict_gap).view(self.args.batch)) # [B] # rainnet 
+                            reg = self.Linear_layer(reg)
+                            loss_mae = self.mae_criterion(reg, abs(gap))
 
-                    # Loss_mae
-                    loss_mae = self.mae_criterion(last_reg, label)
+                        elif self.args.regression == 'label':
+                            reg = abs(self.regression_model(last_precipitation)).view(self.args.batch)
+                            loss_mae = self.mae_criterion(reg, abs(label))
 
-                    total_generation_loss += set_generation_loss.item()
+                        total_mae += loss_mae
+                    elif self.args.pre_train == False:
 
-                    if test:
-                        self.args.test_list.append([datetime, last_reg, label])
+                        crop_predict_gap = total_predict_gap[:,:,70:90, 55:85]
+                        
+                        reg = abs(self.regression_model(crop_predict_gap)).view(self.args.batch)
+                        reg = self.Linear_layer(reg)
+                        loss_mae = self.mae_criterion(reg, abs(gap))
+                        total_mae += loss_mae
+
+                    # if self.args.pre_train:
+
+                    #     joint_loss = set_generation_loss #+ loss_mae
+                    #     total_generation_loss += set_generation_loss.item()
+                    
+                    # elif self.args.pre_train == False: #fine-tuning
+                    #     joint_loss = loss_mae
+                    #     total_mae_loss += total_mae.item()
+
+
+                    if test and self.args.regression == 'label':
+                        self.args.test_list.append([datetime, reg, label])
+                    elif test and self.args.regression == 'gap':
+                        self.args.test_list.append([datetime, reg, abs(gap)])
                         
                 del batch
                 torch.cuda.empty_cache() 
-            return self.get_score(epoch, total_generation_loss/len(batch_iter))
+
+            if self.args.pre_train:
+                return self.get_score(epoch, total_generation_loss/len(batch_iter))
+            elif self.args.pre_train == False:
+                return self.get_score(epoch, total_mae/len(batch_iter))
+            
             
     
 class SianetTrainer(Trainer):

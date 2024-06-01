@@ -14,7 +14,10 @@ python main.py \
     --lr 0.0001 \
     --loss_type "stamina" \
     --location "gangwon" \
-    --wandb
+    --regression "gap" \
+    --grey_scale \
+    --do_eval
+    #--wandb
 
 
 # scripts/gangwon.sh
