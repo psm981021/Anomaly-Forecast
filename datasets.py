@@ -17,22 +17,22 @@ class Radar(Dataset):
         super(Radar, self).__init__()
         self.path = 'data\\radar_test'
         self.csv_path = csv_path
-        self.flag=flag
+        self.flag=flag # train/valid/test
         self.augmentations = augmentations
         self.args = args
 
-
-        # 이미지 자를 좌표 - 서울 : 150x150
-        self.left = 240  
-        self.top = 120   
-        self.right = 390
-        self.bottom = 270
-        
-        # 이미지 자를 좌표 - 강원도 150x150
-        # self.left = 300
-        # self.top = 110  
-        # self.right = 450
-        # self.bottom = 260
+        if args.location == "seoul": 
+            # 이미지 자를 좌표 - 서울 : 150x150
+            self.left = 240  
+            self.top = 120   
+            self.right = 390
+            self.bottom = 270
+        else:
+            # 이미지 자를 좌표 - 강원도 150x150
+            self.left = 300
+            self.top = 110  
+            self.right = 450
+            self.bottom = 260
         
         self.transform = transforms.Compose([
             #transforms.CenterCrop((250, 250)) # centercrop 말고 
@@ -105,18 +105,11 @@ class Radar(Dataset):
                 if self.transform:
                     image = self.transform(image)
 
-                # # Tensor -> 이미지 시각화
-                # # Tensor 이미지를 (H, W, C)로 변환
-                # image_tensor = image.permute(1, 2, 0)
-                # # 이미지 시각화
-                # plt.imshow(image_tensor)
-                # plt.show()
-                # break
                 
                 batch_images.append(image)
-
-                # Convert batches to tensors and append to dataset lists
-                dataset_images.append(batch_images)
+            # Convert batches to tensors and append to dataset lists
+            batch_tensor = torch.stack(batch_images, dim=0)
+            dataset_images.append(batch_tensor)
 
         # Combine all batches into a single dataset
         # Each element of dataset now corresponds to batched images, labels, or gaps respectively
