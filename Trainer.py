@@ -203,11 +203,12 @@ class FourTrainer(Trainer):
                         correlation_image += torch.abs(self.correlation_image(generated_image.mean(dim=-1), image_batch[i+1])) #/ self.args.batch
                     else:
                         correlation_image += torch.abs(self.correlation_image(generated_image.mean(dim=-1), image_batch[i+1].mean(dim=1))) #/ self.args.batch
+                    
                     if epoch == 0:
                         
-                        for j in range(len(datetime)):
+                        for j in range(len(datetime)-1):
                             if datetime[j] in plot_list_seoul:
-                                import IPython; IPython.embed(colors='Linux');exit(1);
+                                # import IPython; IPython.embed(colors='Linux');exit(1);
                                 self.plot_images(image_batch[j+1][0].permute(1,2,0),epoch, self.args.model_idx, datetime[j], 'R')
                     
                     
@@ -465,7 +466,7 @@ class FourTrainer(Trainer):
                     
                     if self.args.pre_train:
                         if self.args.regression == 'gap':
-                            import IPython; IPython.embed(colors='Linux'); exit(1)
+                            # import IPython; IPython.embed(colors='Linux'); exit(1)
                             reg = abs(self.regression_model(total_predict_gap).view(self.args.batch)) # [B] # rainnet 
                             reg = self.Linear_layer(reg)
                             loss_mae = self.mae_criterion(reg, abs(gap))

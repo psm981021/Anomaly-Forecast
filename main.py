@@ -106,25 +106,6 @@ def main():
         
     args.device = torch.device("cuda:" + args.gpu_id if torch.cuda.is_available() and not args.no_cuda else "cpu")
     
-    # save model args
-    args.str = f"{args.model_idx}-{args.batch}-{args.epochs}"
-    args.log_file = os.path.join(args.output_dir,args.str + ".txt" )
-
-    args.dataframe_path = os.path.join(args.output_dir,args.str + ".csv")
-
-    #checkpoint
-    checkpoint = args.str + ".pt"
-    checkpoint_finetune = args.str + "_finetune.pt" 
-    
-    if args.pre_train:
-        args.checkpoint_path = os.path.join(args.output_dir, checkpoint)
-    elif args.pre_train == False:
-
-        args.checkpoint_path = os.path.join(args.output_dir, checkpoint)
-        trainer.model.load_state_dict(torch.load(args.checkpoint_path, map_location=map_location))
-        args.checkpoint_path = os.path.join(args.output_dir,checkpoint_finetune )
-
-    
     #model
     # n_classes = channel
     if args.sianet:
@@ -148,6 +129,26 @@ def main():
     else:
         trainer = FourTrainer(model, train_loader,valid_loader,test_loader, args)
 
+# save model args
+    args.str = f"{args.model_idx}-{args.batch}-{args.epochs}"
+    args.log_file = os.path.join(args.output_dir,args.str + ".txt" )
+
+    args.dataframe_path = os.path.join(args.output_dir,args.str + ".csv")
+
+    #checkpoint
+    checkpoint = args.str + ".pt"
+    checkpoint_finetune = args.str + "_finetune.pt" 
+    
+    if args.pre_train:
+        args.checkpoint_path = os.path.join(args.output_dir, checkpoint)
+    elif args.pre_train == False:
+        map_location = torch.device('cpu') if args.device == torch.device('cpu') else None
+        args.checkpoint_path = os.path.join(args.output_dir, checkpoint_finetune)
+        trainer.model.load_state_dict(torch.load(args.output_dir + args.str + ".pt", map_location=map_location))
+        # args.checkpoint_path = os.path.join(args.output_dir,checkpoint_finetune )
+
+
+# time start
     start_time = time.time()
 
 
