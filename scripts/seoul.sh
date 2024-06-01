@@ -1,21 +1,22 @@
 
 python main.py \
-    --data_dir "data/data_seoul_only" \
-    --image_csv_dir "data/seoul.csv" \
+    --data_dir "data/data_seoul_only_v2" \
+    --image_csv_dir "data/seoul_data_v2.csv" \
     --batch 8 \
-    --epochs 1000 \
+    --epochs 2000 \
     --patience 40 \
-    --model_idx "seoul-V.4.01" \
-    --output_dir "output/seoul-V.4.01/" \
+    --model_idx "seoul-L3.01" \
+    --output_dir "output/seoul-L3.01/" \
     --test_list=[] \
     --gpu_id 0 \
     --device cuda:0 \
     --seed 0 \
     --lr 0.0001 \
-    --loss_type "stamina" \
+    --loss_type "ed_image" \
     --location "seoul" \
     --regression "gap" \
-    --grey_scale \
+    --pre_train \
+    --wandb 
 
 
 
