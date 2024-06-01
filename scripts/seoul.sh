@@ -4,7 +4,7 @@ python main.py \
     --image_csv_dir "data/seoul.csv" \
     --batch 8 \
     --epochs 1000 \
-    --patience 50 \
+    --patience 40 \
     --model_idx "seoul-V.4.01" \
     --output_dir "output/seoul-V.4.01/" \
     --test_list=[] \
@@ -14,7 +14,9 @@ python main.py \
     --lr 0.0001 \
     --loss_type "stamina" \
     --location "seoul" \
-    --wandb
+    --regression "gap" \
+    --grey_scale \
+
 
 
 
