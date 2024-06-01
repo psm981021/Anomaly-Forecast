@@ -392,3 +392,168 @@ EarlyStopping counter: 49 out of 50
 EarlyStopping counter: 50 out of 50
 {'Epoch': 1000, 'Generation Loss (Eval)': '0.270455'}
 Error Handling csvTo run Epoch:1000 , It took 0 hours, 52 minutes, 11 seconds
+---------------------- Configure Info: ----------------------
+data_dir                       : data\radar_full
+image_csv_dir                  : data\서울_2021_2023_강수량 0.1 미만 제거_상위 10% test.csv
+output_dir                     : output\\seoul-V.2.01
+gpu_id                         : 0
+device                         : cpu
+seed                           : 0
+no_cuda                        : False
+use_multi_gpu                  : False
+multi_devices                  : 0,1
+wandb                          : False
+pre_train                      : False
+do_eval                        : True
+test_list                      : ['[]']
+grey_scale                     : False
+model_idx                      : seoul-V.2.01
+batch                          : 8
+sianet                         : True
+epochs                         : 1000
+log_freq                       : 1
+patience                       : 50
+loss_type                      : ce_image
+lr                             : 0.001
+adam_beta1                     : 0.9
+adam_beta2                     : 0.999
+weight_decay                   : 0.0
+initializer_range              : 0.01
+str                            : seoul-V.2.01-8-1000
+log_file                       : output\\seoul-V.2.01\seoul-V.2.01-8-1000.txt
+dataframe_path                 : output\\seoul-V.2.01\seoul-V.2.01-8-1000.csv
+checkpoint_path                : output\\seoul-V.2.01\seoul-V.2.01-8-1000.pt
+---------------------- Configure Info: ----------------------
+------------------------------ Continue Training ------------------------------ 
+---------------------- Configure Info: ----------------------
+data_dir                       : data\radar_full
+image_csv_dir                  : data\서울_2021_2023_강수량 0.1 미만 제거_상위 10% test.csv
+output_dir                     : output\\seoul-V.2.01
+gpu_id                         : 0
+device                         : cpu
+seed                           : 0
+no_cuda                        : False
+use_multi_gpu                  : False
+multi_devices                  : 0,1
+wandb                          : False
+pre_train                      : False
+do_eval                        : True
+test_list                      : ['[]']
+grey_scale                     : False
+model_idx                      : seoul-V.2.01
+batch                          : 8
+sianet                         : False
+epochs                         : 1000
+log_freq                       : 1
+patience                       : 50
+loss_type                      : ce_image
+lr                             : 0.001
+adam_beta1                     : 0.9
+adam_beta2                     : 0.999
+weight_decay                   : 0.0
+initializer_range              : 0.01
+str                            : seoul-V.2.01-8-1000
+log_file                       : output\\seoul-V.2.01\seoul-V.2.01-8-1000.txt
+dataframe_path                 : output\\seoul-V.2.01\seoul-V.2.01-8-1000.csv
+checkpoint_path                : output\\seoul-V.2.01\seoul-V.2.01-8-1000.pt
+---------------------- Configure Info: ----------------------
+------------------------------ Continue Training ------------------------------ 
+---------------------- Configure Info: ----------------------
+data_dir                       : data\radar_full
+image_csv_dir                  : data\서울_2021_2023_강수량 0.1 미만 제거_상위 10% test.csv
+output_dir                     : output\\seoul-V.2.01
+gpu_id                         : 0
+device                         : cpu
+seed                           : 0
+no_cuda                        : False
+use_multi_gpu                  : False
+multi_devices                  : 0,1
+wandb                          : False
+pre_train                      : False
+do_eval                        : True
+test_list                      : ['[]']
+grey_scale                     : False
+model_idx                      : seoul-V.2.01
+batch                          : 8
+sianet                         : False
+epochs                         : 1000
+log_freq                       : 1
+patience                       : 50
+loss_type                      : ce_image
+lr                             : 0.001
+adam_beta1                     : 0.9
+adam_beta2                     : 0.999
+weight_decay                   : 0.0
+initializer_range              : 0.01
+str                            : seoul-V.2.01-8-1000
+log_file                       : output\\seoul-V.2.01\seoul-V.2.01-8-1000.txt
+dataframe_path                 : output\\seoul-V.2.01\seoul-V.2.01-8-1000.csv
+checkpoint_path                : output\\seoul-V.2.01\seoul-V.2.01-8-1000.pt
+---------------------- Configure Info: ----------------------
+------------------------------ Continue Training ------------------------------ 
+---------------------- Configure Info: ----------------------
+data_dir                       : data\radar_full
+image_csv_dir                  : data\서울_2021_2023_강수량 0.1 미만 제거_상위 10% test.csv
+output_dir                     : output\\seoul-V.2.01
+gpu_id                         : 0
+device                         : cpu
+seed                           : 0
+no_cuda                        : False
+use_multi_gpu                  : False
+multi_devices                  : 0,1
+wandb                          : False
+pre_train                      : False
+do_eval                        : True
+test_list                      : ['[]']
+grey_scale                     : False
+model_idx                      : seoul-V.2.01
+batch                          : 8
+sianet                         : False
+epochs                         : 1000
+log_freq                       : 1
+patience                       : 50
+loss_type                      : ce_image
+lr                             : 0.001
+adam_beta1                     : 0.9
+adam_beta2                     : 0.999
+weight_decay                   : 0.0
+initializer_range              : 0.01
+str                            : seoul-V.2.01-8-1000
+log_file                       : output\\seoul-V.2.01\seoul-V.2.01-8-1000.txt
+dataframe_path                 : output\\seoul-V.2.01\seoul-V.2.01-8-1000.csv
+checkpoint_path                : output\\seoul-V.2.01\seoul-V.2.01-8-1000.pt
+---------------------- Configure Info: ----------------------
+------------------------------ Continue Training ------------------------------ 
+---------------------- Configure Info: ----------------------
+data_dir                       : data\radar_full
+image_csv_dir                  : data\서울_2021_2023_강수량 0.1 미만 제거_상위 10% test.csv
+output_dir                     : output\\seoul-V.2.01
+gpu_id                         : 0
+device                         : cpu
+seed                           : 0
+no_cuda                        : False
+use_multi_gpu                  : False
+multi_devices                  : 0,1
+wandb                          : False
+pre_train                      : False
+do_eval                        : True
+test_list                      : ['[]']
+grey_scale                     : False
+model_idx                      : seoul-V.2.01
+batch                          : 8
+sianet                         : False
+epochs                         : 1000
+log_freq                       : 1
+patience                       : 50
+loss_type                      : ce_image
+lr                             : 0.001
+adam_beta1                     : 0.9
+adam_beta2                     : 0.999
+weight_decay                   : 0.0
+initializer_range              : 0.01
+str                            : seoul-V.2.01-8-1000
+log_file                       : output\\seoul-V.2.01\seoul-V.2.01-8-1000.txt
+dataframe_path                 : output\\seoul-V.2.01\seoul-V.2.01-8-1000.csv
+checkpoint_path                : output\\seoul-V.2.01\seoul-V.2.01-8-1000.pt
+---------------------- Configure Info: ----------------------
+------------------------------ Continue Training ------------------------------ 

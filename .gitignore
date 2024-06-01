@@ -30,3 +30,7 @@ test.py
 /data/data_gangwon_only/
 /wandb/
 /test.py
+
+#cb
+data/images_classification/
+classification_model/
