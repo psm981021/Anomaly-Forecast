@@ -1,0 +1,159 @@
+---------------------- Configure Info: ----------------------
+data_dir                       : data/data_seoul_only_v2
+image_csv_dir                  : data/seoul_data_v2.csv
+output_dir                     : output/seoul-L3.01/
+gpu_id                         : 0
+device                         : cuda:0
+seed                           : 0
+no_cuda                        : False
+use_multi_gpu                  : False
+multi_devices                  : 0,1
+wandb                          : True
+pre_train                      : True
+do_eval                        : False
+test_list                      : ['[]']
+grey_scale                     : False
+location                       : seoul
+model_idx                      : seoul-L3.01
+batch                          : 8
+n_classes                      : 100
+sianet                         : False
+epochs                         : 2000
+log_freq                       : 1
+patience                       : 40
+loss_type                      : ed_image
+regression                     : gap
+lr                             : 0.0001
+adam_beta1                     : 0.9
+adam_beta2                     : 0.999
+weight_decay                   : 0.0
+initializer_range              : 0.01
+str                            : seoul-L3.01-8-2000
+log_file                       : output/seoul-L3.01/seoul-L3.01-8-2000.txt
+dataframe_path                 : output/seoul-L3.01/seoul-L3.01-8-2000.csv
+checkpoint_path                : output/seoul-L3.01/seoul-L3.01-8-2000.pt
+---------------------- Configure Info: ----------------------
+Current time: 1717224856.7859046
+---------------------- Configure Info: ----------------------
+data_dir                       : data/data_seoul_only_v2
+image_csv_dir                  : data/seoul_data_v2.csv
+output_dir                     : output/seoul-L3.01/
+gpu_id                         : 0
+device                         : cuda:0
+seed                           : 0
+no_cuda                        : False
+use_multi_gpu                  : False
+multi_devices                  : 0,1
+wandb                          : True
+pre_train                      : True
+do_eval                        : False
+test_list                      : ['[]']
+grey_scale                     : False
+location                       : seoul
+model_idx                      : seoul-L3.01
+batch                          : 8
+n_classes                      : 100
+sianet                         : False
+epochs                         : 2000
+log_freq                       : 1
+patience                       : 40
+loss_type                      : ed_image
+regression                     : gap
+lr                             : 0.0001
+adam_beta1                     : 0.9
+adam_beta2                     : 0.999
+weight_decay                   : 0.0
+initializer_range              : 0.01
+str                            : seoul-L3.01-8-2000
+log_file                       : output/seoul-L3.01/seoul-L3.01-8-2000.txt
+dataframe_path                 : output/seoul-L3.01/seoul-L3.01-8-2000.csv
+checkpoint_path                : output/seoul-L3.01/seoul-L3.01-8-2000.pt
+---------------------- Configure Info: ----------------------
+Current time: 1717225130.9781616
+{'epoch': 0, 'Geneartion Loss ed_image (Train)': '876.753357', 'Correlation Image(Train)': '0.014689', 'MAE Loss': '0.000000'}
+{'Epoch': 0, 'Generation Loss (Eval)': '142.911362'}
+{'epoch': 1, 'Geneartion Loss ed_image (Train)': '856.143188', 'Correlation Image(Train)': '0.011959', 'MAE Loss': '0.000000'}
+{'Epoch': 1, 'Generation Loss (Eval)': '138.742691'}
+{'epoch': 2, 'Geneartion Loss ed_image (Train)': '837.397888', 'Correlation Image(Train)': '0.005342', 'MAE Loss': '0.000000'}
+{'Epoch': 2, 'Generation Loss (Eval)': '134.806915'}
+{'epoch': 3, 'Geneartion Loss ed_image (Train)': '819.628052', 'Correlation Image(Train)': '0.001727', 'MAE Loss': '0.000000'}
+{'Epoch': 3, 'Generation Loss (Eval)': '131.406174'}
+{'epoch': 4, 'Geneartion Loss ed_image (Train)': '802.536316', 'Correlation Image(Train)': '0.007122', 'MAE Loss': '0.000000'}
+{'Epoch': 4, 'Generation Loss (Eval)': '128.870438'}
+{'epoch': 5, 'Geneartion Loss ed_image (Train)': '785.766724', 'Correlation Image(Train)': '0.011354', 'MAE Loss': '0.000000'}
+{'Epoch': 5, 'Generation Loss (Eval)': '126.303703'}
+{'epoch': 6, 'Geneartion Loss ed_image (Train)': '769.038879', 'Correlation Image(Train)': '0.015168', 'MAE Loss': '0.000000'}
+{'Epoch': 6, 'Generation Loss (Eval)': '123.715202'}
+{'epoch': 7, 'Geneartion Loss ed_image (Train)': '752.017517', 'Correlation Image(Train)': '0.018878', 'MAE Loss': '0.000000'}
+{'Epoch': 7, 'Generation Loss (Eval)': '121.212601'}
+{'epoch': 8, 'Geneartion Loss ed_image (Train)': '734.899536', 'Correlation Image(Train)': '0.022033', 'MAE Loss': '0.000000'}
+{'Epoch': 8, 'Generation Loss (Eval)': '118.894470'}
+{'epoch': 9, 'Geneartion Loss ed_image (Train)': '716.769714', 'Correlation Image(Train)': '0.025146', 'MAE Loss': '0.000000'}
+{'Epoch': 9, 'Generation Loss (Eval)': '116.271416'}
+{'epoch': 10, 'Geneartion Loss ed_image (Train)': '698.483215', 'Correlation Image(Train)': '0.027789', 'MAE Loss': '0.000000'}
+{'Epoch': 10, 'Generation Loss (Eval)': '113.804504'}
+{'epoch': 11, 'Geneartion Loss ed_image (Train)': '681.053528', 'Correlation Image(Train)': '0.030136', 'MAE Loss': '0.000000'}
+{'Epoch': 11, 'Generation Loss (Eval)': '111.163902'}
+{'epoch': 12, 'Geneartion Loss ed_image (Train)': '663.213196', 'Correlation Image(Train)': '0.032442', 'MAE Loss': '0.000000'}
+{'Epoch': 12, 'Generation Loss (Eval)': '108.490250'}
+{'epoch': 13, 'Geneartion Loss ed_image (Train)': '646.778015', 'Correlation Image(Train)': '0.034607', 'MAE Loss': '0.000000'}
+{'Epoch': 13, 'Generation Loss (Eval)': '105.906204'}
+{'epoch': 14, 'Geneartion Loss ed_image (Train)': '631.162476', 'Correlation Image(Train)': '0.037005', 'MAE Loss': '0.000000'}
+{'Epoch': 14, 'Generation Loss (Eval)': '103.480034'}
+{'epoch': 15, 'Geneartion Loss ed_image (Train)': '616.326782', 'Correlation Image(Train)': '0.039339', 'MAE Loss': '0.000000'}
+{'Epoch': 15, 'Generation Loss (Eval)': '101.163795'}
+{'epoch': 16, 'Geneartion Loss ed_image (Train)': '601.602356', 'Correlation Image(Train)': '0.041217', 'MAE Loss': '0.000000'}
+{'Epoch': 16, 'Generation Loss (Eval)': '98.743248'}
+{'epoch': 17, 'Geneartion Loss ed_image (Train)': '586.541809', 'Correlation Image(Train)': '0.042329', 'MAE Loss': '0.000000'}
+{'Epoch': 17, 'Generation Loss (Eval)': '96.306221'}
+{'epoch': 18, 'Geneartion Loss ed_image (Train)': '571.537964', 'Correlation Image(Train)': '0.043205', 'MAE Loss': '0.000000'}
+{'Epoch': 18, 'Generation Loss (Eval)': '94.029861'}
+{'epoch': 19, 'Geneartion Loss ed_image (Train)': '557.980286', 'Correlation Image(Train)': '0.043910', 'MAE Loss': '0.000000'}
+{'Epoch': 19, 'Generation Loss (Eval)': '91.965576'}
+{'epoch': 20, 'Geneartion Loss ed_image (Train)': '544.979370', 'Correlation Image(Train)': '0.044327', 'MAE Loss': '0.000000'}
+{'Epoch': 20, 'Generation Loss (Eval)': '89.719048'}
+{'epoch': 21, 'Geneartion Loss ed_image (Train)': '530.883545', 'Correlation Image(Train)': '0.044645', 'MAE Loss': '0.000000'}
+{'Epoch': 21, 'Generation Loss (Eval)': '87.527031'}
+{'epoch': 22, 'Geneartion Loss ed_image (Train)': '518.215637', 'Correlation Image(Train)': '0.044858', 'MAE Loss': '0.000000'}
+{'Epoch': 22, 'Generation Loss (Eval)': '85.517113'}
+{'epoch': 23, 'Geneartion Loss ed_image (Train)': '506.447845', 'Correlation Image(Train)': '0.044949', 'MAE Loss': '0.000000'}
+{'Epoch': 23, 'Generation Loss (Eval)': '83.584381'}
+{'epoch': 24, 'Geneartion Loss ed_image (Train)': '495.076416', 'Correlation Image(Train)': '0.044966', 'MAE Loss': '0.000000'}
+{'Epoch': 24, 'Generation Loss (Eval)': '81.727142'}
+---------------------- Configure Info: ----------------------
+data_dir                       : data/data_seoul_only_v2
+image_csv_dir                  : data/seoul_data_v2.csv
+output_dir                     : output/seoul-L3.01/
+gpu_id                         : 0
+device                         : cuda:0
+seed                           : 0
+no_cuda                        : False
+use_multi_gpu                  : False
+multi_devices                  : 0,1
+wandb                          : False
+pre_train                      : True
+do_eval                        : False
+test_list                      : ['[]']
+grey_scale                     : False
+location                       : seoul
+model_idx                      : seoul-L3.01
+batch                          : 8
+n_classes                      : 100
+sianet                         : False
+epochs                         : 2000
+log_freq                       : 1
+patience                       : 40
+loss_type                      : ed_image
+regression                     : gap
+lr                             : 0.0001
+adam_beta1                     : 0.9
+adam_beta2                     : 0.999
+weight_decay                   : 0.0
+initializer_range              : 0.01
+str                            : seoul-L3.01-8-2000
+log_file                       : output/seoul-L3.01/seoul-L3.01-8-2000.txt
+dataframe_path                 : output/seoul-L3.01/seoul-L3.01-8-2000.csv
+checkpoint_path                : output/seoul-L3.01/seoul-L3.01-8-2000.pt
+---------------------- Configure Info: ----------------------
+------------------------------ Continue Training ------------------------------ 
+Load pt for trainingCurrent time: 1717226180.6398287

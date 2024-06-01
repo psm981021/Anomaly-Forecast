@@ -133,13 +133,15 @@ class Trainer:
             model_idx=model_idx.replace('.','-')
             datetime = datetime.replace(':', '-').replace(' ', '_')
 
-            path = os.path.join(self.args.output_dir, str(self.args.pre_train))
+            path = os.path.join(self.args.output_dir, str(self.args.pre_train),str(datetime))
             check_path(path)
 
             if flag == 'R':
-                plt.savefig(f'{self.args.output_dir}/{self.args.pre_train}/{model_idx}_{datetime}_{epoch}_Real Image')
+                plt.savefig(f'{self.args.output_dir}/{self.args.pre_train}/{datetime}/{model_idx}_{datetime}_{epoch}_Real Image')
             else:
-                plt.savefig(f'{self.args.output_dir}/{self.args.pre_train}/{model_idx}_{datetime}_{epoch}_Generated Image')
+                plt.savefig(f'{self.args.output_dir}/{self.args.pre_train}/{datetime}/{model_idx}_{datetime}_{epoch}_Generated Image')
+
+            import IPython; IPython.embed(colors='Linux');exit(1);
         else:
             print("Error: Non-tensor input received")
 
@@ -185,7 +187,8 @@ class FourTrainer(Trainer):
                 set_generation_loss = 0.0
                 correlation_image = 0.0
                 precipitation = []       
-                plot_list = ['2021-08-01 19:00','2021-01-15 16:00']
+                plot_list_seoul = ['2022-06-30 05:00', '2022-07-06 22:00', '2022-07-13 16:00', '2022-07-13 18:00', '2022-08-08 23:00', '2022-08-08 22:00']
+                plot_list_gangwon = ['2021-08-01 19:00','2021-01-15 16:00']
 
                 # image batch [B, 7, C, W, H]
                 image_batch = torch.stack(image_batch).permute(1,0,2,3,4).contiguous()
@@ -200,13 +203,32 @@ class FourTrainer(Trainer):
                         correlation_image += torch.abs(self.correlation_image(generated_image.mean(dim=-1), image_batch[i+1])) #/ self.args.batch
                     else:
                         correlation_image += torch.abs(self.correlation_image(generated_image.mean(dim=-1), image_batch[i+1].mean(dim=1))) #/ self.args.batch
-
+                    if epoch == 0:
+                        
+                        for j in range(len(datetime)):
+                            if datetime[j] in plot_list_seoul:
+                                import IPython; IPython.embed(colors='Linux');exit(1);
+                                self.plot_images(image_batch[j+1][0].permute(1,2,0),epoch, self.args.model_idx, datetime[j], 'R')
+                    
+                    
                     if epoch % 20 == 0:
-                        if epoch == 0  and datetime[i] in plot_list:
-                            self.plot_images(image_batch[i+1][0].permute(1,2,0),epoch, self.args.model_idx, datetime[i], 'R')
-                        elif datetime[i] in plot_list:
-                            self.plot_images(generated_image[0].mean(dim=-1),epoch, self.args.model_idx, datetime[i], 'G')
-                            
+                        if self.args.location == "seoul":
+
+                            if datetime[j] in plot_list_seoul:
+                                for i in range(len(datetime)):
+                                    if datetime[j] in plot_list_seoul:
+                                        self.plot_images(generated_image[0].mean(dim=-1),epoch, self.args.model_idx, datetime[j], 'G')
+
+                        elif self.args.location == "gangwon":
+                            if epoch == 0:
+                                for j in range(len(datetime)):
+                                    if datetime[j] in plot_list_gangwon:
+                                        self.plot_images(image_batch[j+1][0].permute(1,2,0),epoch, self.args.model_idx, datetime[j], 'R')
+                            elif datetime[j] in plot_list_gangwon:
+                                for i in range(len(datetime)):
+                                    if datetime[j] in plot_list_gangwon:
+                                        self.plot_images(generated_image[0].mean(dim=-1),epoch, self.args.model_idx, datetime[j], 'G')
+
 
                     # generated_image [B, W, H, C], 
                     # regression_logits = regression_logits.reshape(self.args.batch, -1)
@@ -224,8 +246,15 @@ class FourTrainer(Trainer):
                     elif self.args.loss_type == 'ed_image':
 
                         preds = torch.softmax(generated_image,dim=-1)
-                        err = (torch.arange(100).to(self.device).float() - image_batch[i+1].permute(0,2,3,1)).abs()
-                        generation_loss = torch.sum((preds * err),dim=-1).mean()
+                        
+                        if self.args.grey_scale == False:
+                            label_tensor = torch.arange(100).to(self.device).float()
+                            err_r, err_g, err_b = (label_tensor - image_batch[i+1][:,0,:,:].unsqueeze(-1)).abs(), (label_tensor - image_batch[i+1][:,1,:,:].unsqueeze(-1)).abs(), (label_tensor - image_batch[i+1][:,2,:,:].unsqueeze(-1)).abs()
+                            generation_loss = torch.sum( (preds * err_r) + (preds * err_g) + (preds * err_b) ,dim=-1).mean()
+
+                        else:
+                            err = (torch.arange(100).to(self.device).float() - image_batch[i+1].permute(0,2,3,1)).abs()
+                            generation_loss = torch.sum((preds * err),dim=-1).mean()
 
                     elif self.args.loss_type == 'stamina':
 
@@ -276,6 +305,7 @@ class FourTrainer(Trainer):
                         loss_mae = self.mae_criterion(reg, abs(label))
                     
                 elif self.args.pre_train == False:
+                    import IPython; IPython.embed(colors='Linux');exit(1);
                     # crop 2 x 2
                     # image_batch[0][0][:, 70:90, 55:85]
                     crop_predict_gap = total_predict_gap[:,:,70:90, 55:85]
@@ -291,23 +321,26 @@ class FourTrainer(Trainer):
 
                     joint_loss = set_generation_loss #+ loss_mae
                     total_generation_loss += set_generation_loss.item()
+
                 
                 elif self.args.pre_train == False: #fine-tuning
                     joint_loss = loss_mae
                     total_mae += loss_mae.item()
-                    # total_generation_loss += set_generation_loss.item()
 
-                self.optim.zero_grad()
-                self.reg_optim.zero_grad()
-                
+            
                 joint_loss.backward()
                 
                 torch.nn.utils.clip_grad_norm_(self.model.parameters(), max_norm=1.0)
                 torch.nn.utils.clip_grad_norm_(self.regression_model.parameters(), max_norm=1.0)
-                
-                self.optim.step()
-                self.reg_optim.step()
-                
+
+                if self.args.pre_train:
+                    self.optim.step()
+                    self.optim.zero_grad()
+
+                elif self.args.pre_train == False: #fine-tuning 
+                    self.reg_optim.step()
+                    self.reg_optim.zero_grad()
+
                 del batch, generation_loss, loss_mae, joint_loss  # After backward pass
             torch.cuda.empty_cache()
             
@@ -380,8 +413,14 @@ class FourTrainer(Trainer):
 
                         elif self.args.loss_type == 'ed_image':
                             preds = torch.softmax(generated_image,dim=-1)
-                            err = (torch.arange(100).to(self.device).float() - image_batch[i+1].permute(0,2,3,1)).abs()
-                            generation_loss = torch.sum((preds * err),dim=-1).mean()
+
+                            if self.args.grey_scale == False:
+                                label_tensor = torch.arange(100).to(self.device).float()
+                                err_r, err_g, err_b = (label_tensor - image_batch[i+1][:,0,:,:].unsqueeze(-1)).abs(), (label_tensor - image_batch[i+1][:,1,:,:].unsqueeze(-1)).abs(), (label_tensor - image_batch[i+1][:,2,:,:].unsqueeze(-1)).abs()
+                                generation_loss = torch.sum( (preds * err_r) + (preds * err_g) + (preds * err_b) ,dim=-1).mean()
+                            else:
+                                err = (torch.arange(100).to(self.device).float() - image_batch[i+1].permute(0,2,3,1)).abs()
+                                generation_loss = torch.sum((preds * err),dim=-1).mean()
 
                         elif self.args.loss_type == 'stamina':
 
@@ -444,14 +483,14 @@ class FourTrainer(Trainer):
                         loss_mae = self.mae_criterion(reg, abs(gap))
                         total_mae += loss_mae
 
-                    # if self.args.pre_train:
+                    if self.args.pre_train:
 
-                    #     joint_loss = set_generation_loss #+ loss_mae
-                    #     total_generation_loss += set_generation_loss.item()
+                        joint_loss = set_generation_loss #+ loss_mae
+                        total_generation_loss += set_generation_loss.item()
                     
-                    # elif self.args.pre_train == False: #fine-tuning
-                    #     joint_loss = loss_mae
-                    #     total_mae_loss += total_mae.item()
+                    elif self.args.pre_train == False: #fine-tuning
+                        joint_loss = loss_mae
+                        total_mae_loss += total_mae.item()
 
 
                     if test and self.args.regression == 'label':
