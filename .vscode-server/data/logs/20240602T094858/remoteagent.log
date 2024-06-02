@@ -1,0 +1,77 @@
+2024-06-02 09:48:58.272 [info] 
+
+
+
+
+2024-06-02 09:48:58.272 [info] Extension host agent started.
+2024-06-02 09:48:58.272 [info] Started initializing default profile extensions in extensions installation folder. file:///root/.vscode-server/extensions
+2024-06-02 09:48:58.295 [info] Completed initializing default profile extensions in extensions installation folder. file:///root/.vscode-server/extensions
+2024-06-02 09:48:58.929 [info] [<unknown>][68c12547][ManagementConnection] New connection established.
+2024-06-02 09:48:58.930 [info] [<unknown>][4fbbfd93][ExtensionHostConnection] New connection established.
+2024-06-02 09:48:58.967 [error] ExtensionHostConnection#buildUserEnvironment resolving shell environment failed Unable to resolve your shell environment: Unexpected exit code from spawned shell (code 1, signal null)
+2024-06-02 09:48:58.974 [info] [<unknown>][4fbbfd93][ExtensionHostConnection] <184> Launched Extension Host Process.
+2024-06-02 09:48:59.449 [error] resolving shell environment failed Unable to resolve your shell environment: Unexpected exit code from spawned shell (code 1, signal null)
+2024-06-02 09:48:59.692 [error] ptyHost was unable to resolve shell environment Unable to resolve your shell environment: Unexpected exit code from spawned shell (code 1, signal null)
+2024-06-02 09:48:59.692 [error] ptyHost was unable to resolve shell environment Unable to resolve your shell environment: Unexpected exit code from spawned shell (code 1, signal null)
+2024-06-02 09:48:59.693 [error] ptyHost was unable to resolve shell environment Unable to resolve your shell environment: Unexpected exit code from spawned shell (code 1, signal null)
+2024-06-02 09:48:59.693 [error] ptyHost was unable to resolve shell environment Unable to resolve your shell environment: Unexpected exit code from spawned shell (code 1, signal null)
+2024-06-02 09:49:02.839 [error] ExtensionHostConnection#buildUserEnvironment resolving shell environment failed Unable to resolve your shell environment: Unexpected exit code from spawned shell (code 1, signal null)
+2024-06-02 09:49:02.850 [error] ExtensionHostConnection#buildUserEnvironment resolving shell environment failed Unable to resolve your shell environment: Unexpected exit code from spawned shell (code 1, signal null)
+2024-06-02 09:49:02.850 [error] ExtensionHostConnection#buildUserEnvironment resolving shell environment failed Unable to resolve your shell environment: Unexpected exit code from spawned shell (code 1, signal null)
+2024-06-02 09:49:02.851 [error] ExtensionHostConnection#buildUserEnvironment resolving shell environment failed Unable to resolve your shell environment: Unexpected exit code from spawned shell (code 1, signal null)
+2024-06-02 09:49:20.228 [info] [<unknown>][593d12bc][ManagementConnection] New connection established.
+2024-06-02 09:49:20.229 [info] [<unknown>][20a5c33a][ExtensionHostConnection] New connection established.
+2024-06-02 09:49:20.229 [error] ExtensionHostConnection#buildUserEnvironment resolving shell environment failed Unable to resolve your shell environment: Unexpected exit code from spawned shell (code 1, signal null)
+2024-06-02 09:49:20.234 [info] [<unknown>][20a5c33a][ExtensionHostConnection] <286> Launched Extension Host Process.
+2024-06-02 09:49:20.950 [error] ptyHost was unable to resolve shell environment Unable to resolve your shell environment: Unexpected exit code from spawned shell (code 1, signal null)
+2024-06-02 09:49:20.950 [error] ptyHost was unable to resolve shell environment Unable to resolve your shell environment: Unexpected exit code from spawned shell (code 1, signal null)
+2024-06-02 09:49:20.950 [error] ptyHost was unable to resolve shell environment Unable to resolve your shell environment: Unexpected exit code from spawned shell (code 1, signal null)
+2024-06-02 09:49:21.537 [error] ptyHost was unable to resolve shell environment Unable to resolve your shell environment: Unexpected exit code from spawned shell (code 1, signal null)
+2024-06-02 09:49:21.935 [error] ExtensionHostConnection#buildUserEnvironment resolving shell environment failed Unable to resolve your shell environment: Unexpected exit code from spawned shell (code 1, signal null)
+2024-06-02 09:49:21.937 [error] ExtensionHostConnection#buildUserEnvironment resolving shell environment failed Unable to resolve your shell environment: Unexpected exit code from spawned shell (code 1, signal null)
+2024-06-02 09:49:21.938 [error] ExtensionHostConnection#buildUserEnvironment resolving shell environment failed Unable to resolve your shell environment: Unexpected exit code from spawned shell (code 1, signal null)
+2024-06-02 09:49:21.939 [error] ExtensionHostConnection#buildUserEnvironment resolving shell environment failed Unable to resolve your shell environment: Unexpected exit code from spawned shell (code 1, signal null)
+2024-06-02 09:49:29.199 [error] ptyHost was unable to resolve shell environment Unable to resolve your shell environment: Unexpected exit code from spawned shell (code 1, signal null)
+2024-06-02 09:49:34.594 [error] ptyHost was unable to resolve shell environment Unable to resolve your shell environment: Unexpected exit code from spawned shell (code 1, signal null)
+2024-06-02 09:49:35.587 [error] ExtensionHostConnection#buildUserEnvironment resolving shell environment failed Unable to resolve your shell environment: Unexpected exit code from spawned shell (code 1, signal null)
+2024-06-02 09:51:45.387 [error] ptyHost was unable to resolve shell environment Unable to resolve your shell environment: Unexpected exit code from spawned shell (code 1, signal null)
+2024-06-02 09:51:46.661 [error] ExtensionHostConnection#buildUserEnvironment resolving shell environment failed Unable to resolve your shell environment: Unexpected exit code from spawned shell (code 1, signal null)
+2024-06-02 09:53:38.181 [error] ptyHost was unable to resolve shell environment Unable to resolve your shell environment: Unexpected exit code from spawned shell (code 1, signal null)
+2024-06-02 09:53:38.184 [error] Error: Unexpected SIGPIPE
+    at process.<anonymous> (/root/.vscode-server/cli/servers/Stable-dc96b837cf6bb4af9cd736aa3af08cf8279f7685/server/out/vs/server/node/server.main.js:189:6057)
+    at process.emit (node:events:517:28)
+2024-06-02 09:53:39.198 [error] ExtensionHostConnection#buildUserEnvironment resolving shell environment failed Unable to resolve your shell environment: Unexpected exit code from spawned shell (code 1, signal null)
+2024-06-02 09:53:58.245 [info] New EH opened, aborting shutdown
+2024-06-02 09:54:20.398 [info] [<unknown>][4fbbfd93][ExtensionHostConnection] <184> Extension Host Process exited with code: 0, signal: null.
+2024-06-02 09:54:24.971 [error] ptyHost was unable to resolve shell environment Unable to resolve your shell environment: Unexpected exit code from spawned shell (code 1, signal null)
+2024-06-02 09:54:25.525 [error] ExtensionHostConnection#buildUserEnvironment resolving shell environment failed Unable to resolve your shell environment: Unexpected exit code from spawned shell (code 1, signal null)
+2024-06-02 09:54:31.130 [error] ptyHost was unable to resolve shell environment Unable to resolve your shell environment: Unexpected exit code from spawned shell (code 1, signal null)
+2024-06-02 09:54:31.831 [error] ExtensionHostConnection#buildUserEnvironment resolving shell environment failed Unable to resolve your shell environment: Unexpected exit code from spawned shell (code 1, signal null)
+2024-06-02 09:55:22.724 [error] ptyHost was unable to resolve shell environment Unable to resolve your shell environment: Unexpected exit code from spawned shell (code 1, signal null)
+2024-06-02 09:55:23.851 [error] ExtensionHostConnection#buildUserEnvironment resolving shell environment failed Unable to resolve your shell environment: Unexpected exit code from spawned shell (code 1, signal null)
+2024-06-02 09:56:28.658 [info] Getting Manifest... ms-python.python
+2024-06-02 09:56:28.731 [info] Installing extension: ms-python.python
+2024-06-02 09:56:29.358 [info] Getting Manifest... ms-python.vscode-pylance
+2024-06-02 09:56:29.393 [info] Getting Manifest... ms-python.debugpy
+2024-06-02 09:56:29.455 [info] Installing extension: ms-python.vscode-pylance
+2024-06-02 09:56:29.456 [info] Installing extension: ms-python.debugpy
+2024-06-02 09:56:31.086 [info] Extension signature verification result for ms-python.debugpy: Success. Duration: 1192ms.
+2024-06-02 09:56:31.341 [info] Extracted extension to file:///root/.vscode-server/extensions/ms-python.debugpy-2024.6.0-linux-x64: ms-python.debugpy
+2024-06-02 09:56:31.345 [info] Renamed to /root/.vscode-server/extensions/ms-python.debugpy-2024.6.0-linux-x64
+2024-06-02 09:56:31.347 [info] Extracting extension completed. ms-python.debugpy
+2024-06-02 09:56:31.399 [info] Extension signature verification result for ms-python.vscode-pylance: Success. Duration: 1510ms.
+2024-06-02 09:56:31.697 [info] Extension signature verification result for ms-python.python: Success. Duration: 1001ms.
+2024-06-02 09:56:32.861 [info] Extracted extension to file:///root/.vscode-server/extensions/ms-python.python-2024.6.0: ms-python.python
+2024-06-02 09:56:32.868 [info] Renamed to /root/.vscode-server/extensions/ms-python.python-2024.6.0
+2024-06-02 09:56:32.879 [info] Extracting extension completed. ms-python.python
+2024-06-02 09:56:33.958 [info] Extracted extension to file:///root/.vscode-server/extensions/ms-python.vscode-pylance-2024.5.1: ms-python.vscode-pylance
+2024-06-02 09:56:33.987 [info] Renamed to /root/.vscode-server/extensions/ms-python.vscode-pylance-2024.5.1
+2024-06-02 09:56:33.992 [info] Extracting extension completed. ms-python.vscode-pylance
+2024-06-02 09:56:33.995 [info] Extension installed successfully: ms-python.debugpy
+2024-06-02 09:56:33.995 [info] Extension installed successfully: ms-python.python
+2024-06-02 09:56:33.995 [info] Extension installed successfully: ms-python.vscode-pylance
+2024-06-02 09:56:34.919 [error] ptyHost was unable to resolve shell environment Unable to resolve your shell environment: Unexpected exit code from spawned shell (code 1, signal null)
+2024-06-02 09:56:36.754 [error] ptyHost was unable to resolve shell environment Unable to resolve your shell environment: Unexpected exit code from spawned shell (code 1, signal null)
+2024-06-02 09:56:36.817 [error] ExtensionHostConnection#buildUserEnvironment resolving shell environment failed Unable to resolve your shell environment: Unexpected exit code from spawned shell (code 1, signal null)
+2024-06-02 09:57:06.252 [error] ptyHost was unable to resolve shell environment Unable to resolve your shell environment: Unexpected exit code from spawned shell (code 1, signal null)
+2024-06-02 09:57:07.377 [error] ExtensionHostConnection#buildUserEnvironment resolving shell environment failed Unable to resolve your shell environment: Unexpected exit code from spawned shell (code 1, signal null)

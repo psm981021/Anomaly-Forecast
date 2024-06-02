@@ -1,0 +1,10 @@
+conda info --envs
+conda create -n ano python=3.8
+conda activate ano
+conda info --envs
+conda activate ano
+ls
+exit
+git clone https://github.com/psm981021/Anomaly-Forecast.git
+pip install pandas 
+exit

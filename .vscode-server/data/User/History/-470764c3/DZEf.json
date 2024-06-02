@@ -1,0 +1,10 @@
+{
+    "git.autofetch": true,
+    "remote.SSH.remotePlatform": {
+        "203.250.148.45": "linux",
+        "166.104.112.69": "linux",
+        "142.179.76.200": "linux"
+    },
+    "workbench.colorTheme": "Visual Studio Dark",
+    "git.suggestSmartCommit": false
+}

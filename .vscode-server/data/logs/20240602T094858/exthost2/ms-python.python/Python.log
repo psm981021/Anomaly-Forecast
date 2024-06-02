@@ -1,0 +1,58 @@
+2024-06-02 09:56:36.053 [info] Experiment 'pythonCreateEnvOnPipInstall' is active
+2024-06-02 09:56:36.053 [info] Experiment 'pythonRecommendTensorboardExt' is active
+2024-06-02 09:56:36.053 [info] Experiment 'pythonTerminalEnvVarActivation' is active
+2024-06-02 09:56:36.053 [info] Experiment 'pythonTestAdapter' is active
+2024-06-02 09:56:36.053 [info] Default formatter is set to null for workspace /root
+2024-06-02 09:56:36.053 [info] > hatch env show --json
+2024-06-02 09:56:36.053 [info] cwd: .
+2024-06-02 09:56:36.090 [info] > C:\Users\PC\AppData\Local\Programs\Python\Python312\python.exe -I ./.vscode-server/extensions/ms-python.python-2024.6.0/python_files/get_output_via_markers.py ./.vscode-server/extensions/ms-python.python-2024.6.0/python_files/interpreterInfo.py
+2024-06-02 09:56:36.093 [error] [Error: Command failed: C:\Users\PC\AppData\Local\Programs\Python\Python312\python.exe -I /root/.vscode-server/extensions/ms-python.python-2024.6.0/python_files/get_output_via_markers.py /root/.vscode-server/extensions/ms-python.python-2024.6.0/python_files/interpreterInfo.py
+/bin/sh: 1: C:UsersPCAppDataLocalProgramsPythonPython312python.exe: not found
+
+	at ChildProcess.exithandler (node:child_process:422:12)
+	at ChildProcess.emit (node:events:529:35)
+	at maybeClose (node:internal/child_process:1098:16)
+	at Socket.<anonymous> (node:internal/child_process:450:11)
+	at Socket.emit (node:events:517:28)
+	at Pipe.<anonymous> (node:net:350:12)] {
+  code: 127,
+  killed: false,
+  signal: null,
+  cmd: 'C:\\Users\\PC\\AppData\\Local\\Programs\\Python\\Python312\\python.exe -I /root/.vscode-server/extensions/ms-python.python-2024.6.0/python_files/get_output_via_markers.py /root/.vscode-server/extensions/ms-python.python-2024.6.0/python_files/interpreterInfo.py'
+}
+2024-06-02 09:56:38.103 [info] > C:\Users\PC\AppData\Local\Programs\Python\Python312\python.exe -I ./.vscode-server/extensions/ms-python.python-2024.6.0/python_files/get_output_via_markers.py ./.vscode-server/extensions/ms-python.python-2024.6.0/python_files/interpreterInfo.py
+2024-06-02 09:56:38.104 [error] [Error: Command failed: C:\Users\PC\AppData\Local\Programs\Python\Python312\python.exe -I /root/.vscode-server/extensions/ms-python.python-2024.6.0/python_files/get_output_via_markers.py /root/.vscode-server/extensions/ms-python.python-2024.6.0/python_files/interpreterInfo.py
+/bin/sh: 1: C:UsersPCAppDataLocalProgramsPythonPython312python.exe: not found
+
+	at ChildProcess.exithandler (node:child_process:422:12)
+	at ChildProcess.emit (node:events:529:35)
+	at maybeClose (node:internal/child_process:1098:16)
+	at Socket.<anonymous> (node:internal/child_process:450:11)
+	at Socket.emit (node:events:517:28)
+	at Pipe.<anonymous> (node:net:350:12)] {
+  code: 127,
+  killed: false,
+  signal: null,
+  cmd: 'C:\\Users\\PC\\AppData\\Local\\Programs\\Python\\Python312\\python.exe -I /root/.vscode-server/extensions/ms-python.python-2024.6.0/python_files/get_output_via_markers.py /root/.vscode-server/extensions/ms-python.python-2024.6.0/python_files/interpreterInfo.py'
+}
+2024-06-02 09:56:38.115 [info] > pyenv which python
+2024-06-02 09:56:38.115 [info] cwd: .
+2024-06-02 09:56:38.129 [info] > C:\Users\PC\AppData\Local\Programs\Python\Python312\python.exe -c "import sys;print(sys.executable)"
+2024-06-02 09:56:38.129 [error] [Error: Command failed: C:\Users\PC\AppData\Local\Programs\Python\Python312\python.exe -c "import sys;print(sys.executable)"
+/bin/sh: 1: C:UsersPCAppDataLocalProgramsPythonPython312python.exe: not found
+
+	at ChildProcess.exithandler (node:child_process:422:12)
+	at ChildProcess.emit (node:events:529:35)
+	at maybeClose (node:internal/child_process:1098:16)
+	at Socket.<anonymous> (node:internal/child_process:450:11)
+	at Socket.emit (node:events:517:28)
+	at Pipe.<anonymous> (node:net:350:12)] {
+  code: 127,
+  killed: false,
+  signal: null,
+  cmd: 'C:\\Users\\PC\\AppData\\Local\\Programs\\Python\\Python312\\python.exe -c "import sys;print(sys.executable)"'
+}
+2024-06-02 09:56:38.140 [info] > pyenv which python
+2024-06-02 09:56:38.140 [info] cwd: .
+2024-06-02 09:56:39.769 [info] Starting Pylance language server.
+2024-06-02 09:58:31.294 [info] Discover tests for workspace name: root - uri: /root/data/data_unzip.py

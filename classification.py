@@ -46,15 +46,15 @@ def make_image_dataframe(csv_file):
     label_list = []
 
     for i in range(len(data)):
-        if data.loc[i]['Class_Label'] == 0:
+        if data.loc[i]['Class_label'] == 0:
             idx_list.append(data.loc[i]['t'])
-            label_list.append(data.loc[i]['Class_Label'])
+            label_list.append(data.loc[i]['Class_label'])
         else:
             for j in range(2, 8):
                 idx_list.append(data.iloc[i][j])
-                label_list.append(data.loc[i]['Class_Label'])
+                label_list.append(data.loc[i]['Class_label'])
                 
-    df = pd.DataFrame({"Timestamp": idx_list, "Class_Label": label_list})
+    df = pd.DataFrame({"Timestamp": idx_list, "Class_label": label_list})
     df.drop_duplicates(keep='first', inplace=True)
     
     return df
@@ -75,7 +75,7 @@ class ImageDataset(Dataset):
         image = Image.open(img_path).convert("L")
         if self.transform:
             image = self.transform(image)
-        label = self.data.iloc[idx]['Class_Label']
+        label = self.data.iloc[idx]['Class_label']
         return image, label
 
 # 데이터 로드
@@ -245,11 +245,12 @@ def inference(model, image_path, transform):
         return predicted.item()
 
 if __name__ == "__main__":
-    csv_file = 'data/서울_2021_2023_강수량 0.1 미만 제거_상위 10% test.csv'
-    img_dir = 'radar_total' 
+    csv_dict = {'급격' : 'C:/Users/USER/Desktop/Anomaly-Forecast/data/서울_2021_2023_강수량 0.1 미만 제거_Class label O_급격 랜덤 20개 + 앞뒤 5시간 test_.csv', '완만' : 'C:/Users/USER/Desktop/Anomaly-Forecast/data/서울_2021_2023_강수량 0.1 미만 제거_Class label O_완만 랜덤 20개 + 앞뒤 5시간 test_.csv'}
+    csv_file = csv_dict['급격']
+    img_dir = 'C:/Users/USER/Desktop/Anomaly-Forecast/data/images_classification/' 
     batch_size = 32
     learning_rate = 0.001
-    num_epochs = 100
+    num_epochs = 500
     loss_type = 'focal'  # 'focal' 또는 'evl'
     
     # 서울 crop 150x150
