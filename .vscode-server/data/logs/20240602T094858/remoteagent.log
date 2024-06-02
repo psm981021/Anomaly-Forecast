@@ -497,3 +497,17 @@
 2024-06-02 11:40:20.031 [warning] RequestStore#acceptReply was called without receiving a matching request 815
 2024-06-02 11:40:20.031 [warning] RequestStore#acceptReply was called without receiving a matching request 816
 2024-06-02 11:40:20.393 [error] ExtensionHostConnection#buildUserEnvironment resolving shell environment failed Unable to resolve your shell environment: Unexpected exit code from spawned shell (code 1, signal null)
+2024-06-02 11:42:17.272 [error] ptyHost was unable to resolve shell environment Unable to resolve your shell environment: Unexpected exit code from spawned shell (code 1, signal null)
+2024-06-02 11:42:17.443 [warning] RequestStore#acceptReply was called without receiving a matching request 817
+2024-06-02 11:42:17.443 [warning] RequestStore#acceptReply was called without receiving a matching request 818
+2024-06-02 11:42:17.443 [warning] RequestStore#acceptReply was called without receiving a matching request 819
+2024-06-02 11:42:17.443 [warning] RequestStore#acceptReply was called without receiving a matching request 820
+2024-06-02 11:42:17.443 [warning] RequestStore#acceptReply was called without receiving a matching request 821
+2024-06-02 11:42:17.443 [warning] RequestStore#acceptReply was called without receiving a matching request 822
+2024-06-02 11:42:17.443 [warning] RequestStore#acceptReply was called without receiving a matching request 823
+2024-06-02 11:42:17.443 [warning] RequestStore#acceptReply was called without receiving a matching request 824
+2024-06-02 11:42:17.444 [warning] RequestStore#acceptReply was called without receiving a matching request 825
+2024-06-02 11:42:17.444 [warning] RequestStore#acceptReply was called without receiving a matching request 826
+2024-06-02 11:42:17.444 [warning] RequestStore#acceptReply was called without receiving a matching request 827
+2024-06-02 11:42:17.444 [warning] RequestStore#acceptReply was called without receiving a matching request 828
+2024-06-02 11:42:17.858 [error] ExtensionHostConnection#buildUserEnvironment resolving shell environment failed Unable to resolve your shell environment: Unexpected exit code from spawned shell (code 1, signal null)
