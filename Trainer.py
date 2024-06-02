@@ -306,7 +306,7 @@ class FourTrainer(Trainer):
                         loss_mae = self.mae_criterion(reg, abs(label))
                     
                 elif self.args.pre_train == False:
-                    # import IPython; IPython.embed(colors='Linux');exit(1);
+                    import IPython; IPython.embed(colors='Linux');exit(1);
                     # crop 2 x 2
                     # image_batch[0][0][:, 70:90, 55:85]
                     crop_predict_gap = total_predict_gap[:,:,70:90, 55:85]
@@ -479,7 +479,7 @@ class FourTrainer(Trainer):
                     elif self.args.pre_train == False:
 
                         crop_predict_gap = total_predict_gap[:,:,70:90, 55:85]
-                        # import IPython; IPython.embed(colors='Linux'); exit(1)
+                        import IPython; IPython.embed(colors='Linux'); exit(1)
                         reg = abs(self.regression_model(crop_predict_gap)).view(self.args.batch)
                         reg = self.Linear_layer(reg)
                         loss_mae = self.mae_criterion(reg, abs(gap))
