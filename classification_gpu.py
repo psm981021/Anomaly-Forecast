@@ -106,7 +106,7 @@ def initialize_model(learning_rate, loss_type, device):
     model = EfficientNet.from_pretrained('efficientnet-b0', num_classes=2)
     
     # 첫 번째 레이어 수정 (1 채널을 받을 수 있도록) - grayscale로 돌릴려고
-    model._conv_stem = nn.Conv2d(1, 32, kernel_size=(3, 3), stride=(2, 2), bias=False)
+    #model._conv_stem = nn.Conv2d(1, 32, kernel_size=(3, 3), stride=(2, 2), bias=False)
     
     if loss_type == 'focal':
         criterion = FocalLoss()
