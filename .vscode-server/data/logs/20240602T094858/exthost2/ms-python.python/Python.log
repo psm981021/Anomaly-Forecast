@@ -56,3 +56,15 @@
 2024-06-02 09:56:38.140 [info] cwd: .
 2024-06-02 09:56:39.769 [info] Starting Pylance language server.
 2024-06-02 09:58:31.294 [info] Discover tests for workspace name: root - uri: /root/data/data_unzip.py
+2024-06-02 10:33:47.923 [info] > conda info --json
+2024-06-02 10:33:47.938 [info] > /opt/conda/bin/conda info --json
+2024-06-02 10:33:47.939 [info] Found: /bin/python3 --> /bin/python3.10
+2024-06-02 10:33:47.940 [info] Found: /bin/python3.10 --> /bin/python3.10
+2024-06-02 10:33:47.948 [info] Found: /usr/bin/python3 --> /usr/bin/python3.10
+2024-06-02 10:33:47.952 [info] Found: /usr/bin/python3.10 --> /usr/bin/python3.10
+2024-06-02 10:33:47.999 [info] > /bin/python3 -I ./.vscode-server/extensions/ms-python.python-2024.6.0/python_files/get_output_via_markers.py ./.vscode-server/extensions/ms-python.python-2024.6.0/python_files/interpreterInfo.py
+2024-06-02 10:33:48.028 [info] > /usr/bin/python3 -I ./.vscode-server/extensions/ms-python.python-2024.6.0/python_files/get_output_via_markers.py ./.vscode-server/extensions/ms-python.python-2024.6.0/python_files/interpreterInfo.py
+2024-06-02 10:33:48.510 [info] > /opt/conda/bin/python -I ./.vscode-server/extensions/ms-python.python-2024.6.0/python_files/get_output_via_markers.py ./.vscode-server/extensions/ms-python.python-2024.6.0/python_files/interpreterInfo.py
+2024-06-02 10:33:48.523 [info] > /opt/conda/envs/ano/bin/python -I ./.vscode-server/extensions/ms-python.python-2024.6.0/python_files/get_output_via_markers.py ./.vscode-server/extensions/ms-python.python-2024.6.0/python_files/interpreterInfo.py
+2024-06-02 11:18:15.853 [info] Discover tests for workspace name: root - uri: /root/data/data_unzip.py
+2024-06-02 11:25:14.644 [info] Discover tests for workspace name: root - uri: /root/data/data_unzip.py

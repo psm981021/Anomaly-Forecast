@@ -1,7 +1,7 @@
 
 python main.py \
-    --data_dir "data/data_seoul_only_v2" \
-    --image_csv_dir "data/seoul_data_v2.csv" \
+    --data_dir "data/radar_full" \
+    --image_csv_dir "data/Seoul_V2.csv" \
     --batch 8 \
     --epochs 2000 \
     --patience 40 \

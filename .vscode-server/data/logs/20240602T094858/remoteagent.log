@@ -75,3 +75,198 @@
 2024-06-02 09:56:36.817 [error] ExtensionHostConnection#buildUserEnvironment resolving shell environment failed Unable to resolve your shell environment: Unexpected exit code from spawned shell (code 1, signal null)
 2024-06-02 09:57:06.252 [error] ptyHost was unable to resolve shell environment Unable to resolve your shell environment: Unexpected exit code from spawned shell (code 1, signal null)
 2024-06-02 09:57:07.377 [error] ExtensionHostConnection#buildUserEnvironment resolving shell environment failed Unable to resolve your shell environment: Unexpected exit code from spawned shell (code 1, signal null)
+2024-06-02 10:15:02.229 [error] ptyHost was unable to resolve shell environment Unable to resolve your shell environment: Unexpected exit code from spawned shell (code 1, signal null)
+2024-06-02 10:15:02.754 [error] ExtensionHostConnection#buildUserEnvironment resolving shell environment failed Unable to resolve your shell environment: Unexpected exit code from spawned shell (code 1, signal null)
+2024-06-02 10:15:20.414 [error] ptyHost was unable to resolve shell environment Unable to resolve your shell environment: Unexpected exit code from spawned shell (code 1, signal null)
+2024-06-02 10:15:21.290 [error] ExtensionHostConnection#buildUserEnvironment resolving shell environment failed Unable to resolve your shell environment: Unexpected exit code from spawned shell (code 1, signal null)
+2024-06-02 10:15:33.368 [error] ptyHost was unable to resolve shell environment Unable to resolve your shell environment: Unexpected exit code from spawned shell (code 1, signal null)
+2024-06-02 10:15:34.250 [error] ExtensionHostConnection#buildUserEnvironment resolving shell environment failed Unable to resolve your shell environment: Unexpected exit code from spawned shell (code 1, signal null)
+2024-06-02 10:15:36.829 [error] ptyHost was unable to resolve shell environment Unable to resolve your shell environment: Unexpected exit code from spawned shell (code 1, signal null)
+2024-06-02 10:15:37.893 [error] ExtensionHostConnection#buildUserEnvironment resolving shell environment failed Unable to resolve your shell environment: Unexpected exit code from spawned shell (code 1, signal null)
+2024-06-02 10:15:50.947 [error] ptyHost was unable to resolve shell environment Unable to resolve your shell environment: Unexpected exit code from spawned shell (code 1, signal null)
+2024-06-02 10:15:51.466 [error] ExtensionHostConnection#buildUserEnvironment resolving shell environment failed Unable to resolve your shell environment: Unexpected exit code from spawned shell (code 1, signal null)
+2024-06-02 10:21:11.414 [info] [<unknown>][eb53f1ad][ManagementConnection] New connection established.
+2024-06-02 10:21:11.416 [info] [<unknown>][84c7f37a][ExtensionHostConnection] New connection established.
+2024-06-02 10:21:11.417 [error] ExtensionHostConnection#buildUserEnvironment resolving shell environment failed Unable to resolve your shell environment: Unexpected exit code from spawned shell (code 1, signal null)
+2024-06-02 10:21:11.426 [info] [<unknown>][84c7f37a][ExtensionHostConnection] <7584> Launched Extension Host Process.
+2024-06-02 10:21:11.935 [error] ptyHost was unable to resolve shell environment Unable to resolve your shell environment: Unexpected exit code from spawned shell (code 1, signal null)
+2024-06-02 10:21:11.935 [error] ptyHost was unable to resolve shell environment Unable to resolve your shell environment: Unexpected exit code from spawned shell (code 1, signal null)
+2024-06-02 10:21:11.935 [error] ptyHost was unable to resolve shell environment Unable to resolve your shell environment: Unexpected exit code from spawned shell (code 1, signal null)
+2024-06-02 10:21:13.381 [error] ptyHost was unable to resolve shell environment Unable to resolve your shell environment: Unexpected exit code from spawned shell (code 1, signal null)
+2024-06-02 10:21:13.669 [error] ExtensionHostConnection#buildUserEnvironment resolving shell environment failed Unable to resolve your shell environment: Unexpected exit code from spawned shell (code 1, signal null)
+2024-06-02 10:21:13.671 [error] ExtensionHostConnection#buildUserEnvironment resolving shell environment failed Unable to resolve your shell environment: Unexpected exit code from spawned shell (code 1, signal null)
+2024-06-02 10:21:13.672 [error] ExtensionHostConnection#buildUserEnvironment resolving shell environment failed Unable to resolve your shell environment: Unexpected exit code from spawned shell (code 1, signal null)
+2024-06-02 10:21:13.673 [error] ExtensionHostConnection#buildUserEnvironment resolving shell environment failed Unable to resolve your shell environment: Unexpected exit code from spawned shell (code 1, signal null)
+2024-06-02 10:21:26.088 [info] [<unknown>][824e8b9e][ManagementConnection] New connection established.
+2024-06-02 10:21:26.089 [info] [<unknown>][2ad73637][ExtensionHostConnection] New connection established.
+2024-06-02 10:21:26.090 [error] ExtensionHostConnection#buildUserEnvironment resolving shell environment failed Unable to resolve your shell environment: Unexpected exit code from spawned shell (code 1, signal null)
+2024-06-02 10:21:26.098 [info] [<unknown>][2ad73637][ExtensionHostConnection] <7768> Launched Extension Host Process.
+2024-06-02 10:21:26.619 [error] ptyHost was unable to resolve shell environment Unable to resolve your shell environment: Unexpected exit code from spawned shell (code 1, signal null)
+2024-06-02 10:21:26.619 [error] ptyHost was unable to resolve shell environment Unable to resolve your shell environment: Unexpected exit code from spawned shell (code 1, signal null)
+2024-06-02 10:21:26.620 [error] ptyHost was unable to resolve shell environment Unable to resolve your shell environment: Unexpected exit code from spawned shell (code 1, signal null)
+2024-06-02 10:21:27.378 [warning] RequestStore#acceptReply was called without receiving a matching request 325
+2024-06-02 10:21:27.378 [warning] RequestStore#acceptReply was called without receiving a matching request 326
+2024-06-02 10:21:27.378 [warning] RequestStore#acceptReply was called without receiving a matching request 327
+2024-06-02 10:21:27.378 [warning] RequestStore#acceptReply was called without receiving a matching request 328
+2024-06-02 10:21:27.378 [warning] RequestStore#acceptReply was called without receiving a matching request 329
+2024-06-02 10:21:27.378 [warning] RequestStore#acceptReply was called without receiving a matching request 330
+2024-06-02 10:21:27.378 [warning] RequestStore#acceptReply was called without receiving a matching request 331
+2024-06-02 10:21:27.378 [warning] RequestStore#acceptReply was called without receiving a matching request 332
+2024-06-02 10:21:27.379 [warning] RequestStore#acceptReply was called without receiving a matching request 333
+2024-06-02 10:21:27.379 [warning] RequestStore#acceptReply was called without receiving a matching request 334
+2024-06-02 10:21:27.379 [warning] RequestStore#acceptReply was called without receiving a matching request 335
+2024-06-02 10:21:27.379 [warning] RequestStore#acceptReply was called without receiving a matching request 336
+2024-06-02 10:21:27.379 [warning] RequestStore#acceptReply was called without receiving a matching request 337
+2024-06-02 10:21:27.379 [warning] RequestStore#acceptReply was called without receiving a matching request 338
+2024-06-02 10:21:27.379 [warning] RequestStore#acceptReply was called without receiving a matching request 339
+2024-06-02 10:21:27.379 [warning] RequestStore#acceptReply was called without receiving a matching request 340
+2024-06-02 10:21:27.379 [warning] RequestStore#acceptReply was called without receiving a matching request 341
+2024-06-02 10:21:27.379 [warning] RequestStore#acceptReply was called without receiving a matching request 342
+2024-06-02 10:21:27.379 [warning] RequestStore#acceptReply was called without receiving a matching request 343
+2024-06-02 10:21:27.379 [warning] RequestStore#acceptReply was called without receiving a matching request 344
+2024-06-02 10:21:27.379 [warning] RequestStore#acceptReply was called without receiving a matching request 345
+2024-06-02 10:21:27.379 [warning] RequestStore#acceptReply was called without receiving a matching request 346
+2024-06-02 10:21:27.379 [warning] RequestStore#acceptReply was called without receiving a matching request 347
+2024-06-02 10:21:27.379 [warning] RequestStore#acceptReply was called without receiving a matching request 348
+2024-06-02 10:21:27.379 [warning] RequestStore#acceptReply was called without receiving a matching request 349
+2024-06-02 10:21:27.379 [warning] RequestStore#acceptReply was called without receiving a matching request 350
+2024-06-02 10:21:27.379 [warning] RequestStore#acceptReply was called without receiving a matching request 351
+2024-06-02 10:21:27.379 [warning] RequestStore#acceptReply was called without receiving a matching request 352
+2024-06-02 10:21:27.379 [warning] RequestStore#acceptReply was called without receiving a matching request 353
+2024-06-02 10:21:27.379 [warning] RequestStore#acceptReply was called without receiving a matching request 354
+2024-06-02 10:21:27.379 [warning] RequestStore#acceptReply was called without receiving a matching request 355
+2024-06-02 10:21:27.379 [warning] RequestStore#acceptReply was called without receiving a matching request 356
+2024-06-02 10:21:27.379 [warning] RequestStore#acceptReply was called without receiving a matching request 357
+2024-06-02 10:21:27.379 [warning] RequestStore#acceptReply was called without receiving a matching request 358
+2024-06-02 10:21:27.379 [warning] RequestStore#acceptReply was called without receiving a matching request 359
+2024-06-02 10:21:27.380 [warning] RequestStore#acceptReply was called without receiving a matching request 360
+2024-06-02 10:21:27.617 [error] ExtensionHostConnection#buildUserEnvironment resolving shell environment failed Unable to resolve your shell environment: Unexpected exit code from spawned shell (code 1, signal null)
+2024-06-02 10:21:27.619 [error] ExtensionHostConnection#buildUserEnvironment resolving shell environment failed Unable to resolve your shell environment: Unexpected exit code from spawned shell (code 1, signal null)
+2024-06-02 10:21:27.620 [error] ExtensionHostConnection#buildUserEnvironment resolving shell environment failed Unable to resolve your shell environment: Unexpected exit code from spawned shell (code 1, signal null)
+2024-06-02 10:21:27.620 [error] ExtensionHostConnection#buildUserEnvironment resolving shell environment failed Unable to resolve your shell environment: Unexpected exit code from spawned shell (code 1, signal null)
+2024-06-02 10:21:34.342 [error] ptyHost was unable to resolve shell environment Unable to resolve your shell environment: Unexpected exit code from spawned shell (code 1, signal null)
+2024-06-02 10:21:34.527 [warning] RequestStore#acceptReply was called without receiving a matching request 361
+2024-06-02 10:21:34.527 [warning] RequestStore#acceptReply was called without receiving a matching request 362
+2024-06-02 10:21:34.527 [warning] RequestStore#acceptReply was called without receiving a matching request 363
+2024-06-02 10:21:34.527 [warning] RequestStore#acceptReply was called without receiving a matching request 364
+2024-06-02 10:21:34.527 [warning] RequestStore#acceptReply was called without receiving a matching request 365
+2024-06-02 10:21:34.527 [warning] RequestStore#acceptReply was called without receiving a matching request 366
+2024-06-02 10:21:34.527 [warning] RequestStore#acceptReply was called without receiving a matching request 367
+2024-06-02 10:21:34.527 [warning] RequestStore#acceptReply was called without receiving a matching request 368
+2024-06-02 10:21:34.528 [warning] RequestStore#acceptReply was called without receiving a matching request 369
+2024-06-02 10:21:34.528 [warning] RequestStore#acceptReply was called without receiving a matching request 370
+2024-06-02 10:21:34.528 [warning] RequestStore#acceptReply was called without receiving a matching request 371
+2024-06-02 10:21:34.528 [warning] RequestStore#acceptReply was called without receiving a matching request 372
+2024-06-02 10:22:29.239 [error] ptyHost was unable to resolve shell environment Unable to resolve your shell environment: Unexpected exit code from spawned shell (code 1, signal null)
+2024-06-02 10:22:29.482 [warning] RequestStore#acceptReply was called without receiving a matching request 373
+2024-06-02 10:22:29.482 [warning] RequestStore#acceptReply was called without receiving a matching request 374
+2024-06-02 10:22:29.482 [warning] RequestStore#acceptReply was called without receiving a matching request 375
+2024-06-02 10:22:29.482 [warning] RequestStore#acceptReply was called without receiving a matching request 376
+2024-06-02 10:22:29.482 [warning] RequestStore#acceptReply was called without receiving a matching request 377
+2024-06-02 10:22:29.482 [warning] RequestStore#acceptReply was called without receiving a matching request 378
+2024-06-02 10:22:29.483 [warning] RequestStore#acceptReply was called without receiving a matching request 379
+2024-06-02 10:22:29.483 [warning] RequestStore#acceptReply was called without receiving a matching request 380
+2024-06-02 10:22:29.483 [warning] RequestStore#acceptReply was called without receiving a matching request 381
+2024-06-02 10:22:29.483 [warning] RequestStore#acceptReply was called without receiving a matching request 382
+2024-06-02 10:22:29.483 [warning] RequestStore#acceptReply was called without receiving a matching request 383
+2024-06-02 10:22:29.483 [warning] RequestStore#acceptReply was called without receiving a matching request 384
+2024-06-02 10:22:30.170 [error] ExtensionHostConnection#buildUserEnvironment resolving shell environment failed Unable to resolve your shell environment: Unexpected exit code from spawned shell (code 1, signal null)
+2024-06-02 10:22:41.076 [error] ptyHost was unable to resolve shell environment Unable to resolve your shell environment: Unexpected exit code from spawned shell (code 1, signal null)
+2024-06-02 10:22:41.249 [warning] RequestStore#acceptReply was called without receiving a matching request 385
+2024-06-02 10:22:41.250 [warning] RequestStore#acceptReply was called without receiving a matching request 386
+2024-06-02 10:22:41.250 [warning] RequestStore#acceptReply was called without receiving a matching request 387
+2024-06-02 10:22:41.250 [warning] RequestStore#acceptReply was called without receiving a matching request 388
+2024-06-02 10:22:41.250 [warning] RequestStore#acceptReply was called without receiving a matching request 389
+2024-06-02 10:22:41.250 [warning] RequestStore#acceptReply was called without receiving a matching request 390
+2024-06-02 10:22:41.250 [warning] RequestStore#acceptReply was called without receiving a matching request 391
+2024-06-02 10:22:41.250 [warning] RequestStore#acceptReply was called without receiving a matching request 392
+2024-06-02 10:22:41.250 [warning] RequestStore#acceptReply was called without receiving a matching request 393
+2024-06-02 10:22:41.251 [warning] RequestStore#acceptReply was called without receiving a matching request 394
+2024-06-02 10:22:41.251 [warning] RequestStore#acceptReply was called without receiving a matching request 395
+2024-06-02 10:22:41.251 [warning] RequestStore#acceptReply was called without receiving a matching request 396
+2024-06-02 10:22:41.589 [error] ExtensionHostConnection#buildUserEnvironment resolving shell environment failed Unable to resolve your shell environment: Unexpected exit code from spawned shell (code 1, signal null)
+2024-06-02 10:24:31.422 [error] ptyHost was unable to resolve shell environment Unable to resolve your shell environment: Unexpected exit code from spawned shell (code 1, signal null)
+2024-06-02 10:24:31.607 [warning] RequestStore#acceptReply was called without receiving a matching request 397
+2024-06-02 10:24:31.607 [warning] RequestStore#acceptReply was called without receiving a matching request 398
+2024-06-02 10:24:31.608 [warning] RequestStore#acceptReply was called without receiving a matching request 399
+2024-06-02 10:24:31.608 [warning] RequestStore#acceptReply was called without receiving a matching request 400
+2024-06-02 10:24:31.608 [warning] RequestStore#acceptReply was called without receiving a matching request 401
+2024-06-02 10:24:31.608 [warning] RequestStore#acceptReply was called without receiving a matching request 402
+2024-06-02 10:24:31.608 [warning] RequestStore#acceptReply was called without receiving a matching request 403
+2024-06-02 10:24:31.608 [warning] RequestStore#acceptReply was called without receiving a matching request 404
+2024-06-02 10:24:31.608 [warning] RequestStore#acceptReply was called without receiving a matching request 405
+2024-06-02 10:24:31.608 [warning] RequestStore#acceptReply was called without receiving a matching request 406
+2024-06-02 10:24:31.608 [warning] RequestStore#acceptReply was called without receiving a matching request 407
+2024-06-02 10:24:31.608 [warning] RequestStore#acceptReply was called without receiving a matching request 408
+2024-06-02 10:24:32.029 [error] ExtensionHostConnection#buildUserEnvironment resolving shell environment failed Unable to resolve your shell environment: Unexpected exit code from spawned shell (code 1, signal null)
+2024-06-02 10:26:26.223 [info] [<unknown>][84c7f37a][ExtensionHostConnection] <7584> Extension Host Process exited with code: 0, signal: null.
+2024-06-02 10:27:56.837 [error] ptyHost was unable to resolve shell environment Unable to resolve your shell environment: Unexpected exit code from spawned shell (code 1, signal null)
+2024-06-02 10:27:57.012 [warning] RequestStore#acceptReply was called without receiving a matching request 409
+2024-06-02 10:27:57.013 [warning] RequestStore#acceptReply was called without receiving a matching request 410
+2024-06-02 10:27:57.013 [warning] RequestStore#acceptReply was called without receiving a matching request 411
+2024-06-02 10:27:57.013 [warning] RequestStore#acceptReply was called without receiving a matching request 412
+2024-06-02 10:27:57.013 [warning] RequestStore#acceptReply was called without receiving a matching request 413
+2024-06-02 10:27:57.013 [warning] RequestStore#acceptReply was called without receiving a matching request 414
+2024-06-02 10:27:57.013 [warning] RequestStore#acceptReply was called without receiving a matching request 415
+2024-06-02 10:27:57.013 [warning] RequestStore#acceptReply was called without receiving a matching request 416
+2024-06-02 10:27:57.013 [warning] RequestStore#acceptReply was called without receiving a matching request 417
+2024-06-02 10:27:57.013 [warning] RequestStore#acceptReply was called without receiving a matching request 418
+2024-06-02 10:27:57.013 [warning] RequestStore#acceptReply was called without receiving a matching request 419
+2024-06-02 10:27:57.013 [warning] RequestStore#acceptReply was called without receiving a matching request 420
+2024-06-02 10:27:57.723 [error] ExtensionHostConnection#buildUserEnvironment resolving shell environment failed Unable to resolve your shell environment: Unexpected exit code from spawned shell (code 1, signal null)
+2024-06-02 10:34:28.893 [error] ptyHost was unable to resolve shell environment Unable to resolve your shell environment: Unexpected exit code from spawned shell (code 1, signal null)
+2024-06-02 10:34:29.075 [warning] RequestStore#acceptReply was called without receiving a matching request 421
+2024-06-02 10:34:29.075 [warning] RequestStore#acceptReply was called without receiving a matching request 422
+2024-06-02 10:34:29.075 [warning] RequestStore#acceptReply was called without receiving a matching request 423
+2024-06-02 10:34:29.075 [warning] RequestStore#acceptReply was called without receiving a matching request 424
+2024-06-02 10:34:29.075 [warning] RequestStore#acceptReply was called without receiving a matching request 425
+2024-06-02 10:34:29.075 [warning] RequestStore#acceptReply was called without receiving a matching request 426
+2024-06-02 10:34:29.075 [warning] RequestStore#acceptReply was called without receiving a matching request 427
+2024-06-02 10:34:29.075 [warning] RequestStore#acceptReply was called without receiving a matching request 428
+2024-06-02 10:34:29.076 [warning] RequestStore#acceptReply was called without receiving a matching request 429
+2024-06-02 10:34:29.076 [warning] RequestStore#acceptReply was called without receiving a matching request 430
+2024-06-02 10:34:29.076 [warning] RequestStore#acceptReply was called without receiving a matching request 431
+2024-06-02 10:34:29.076 [warning] RequestStore#acceptReply was called without receiving a matching request 432
+2024-06-02 10:34:29.764 [error] ExtensionHostConnection#buildUserEnvironment resolving shell environment failed Unable to resolve your shell environment: Unexpected exit code from spawned shell (code 1, signal null)
+2024-06-02 10:34:32.764 [error] ptyHost was unable to resolve shell environment Unable to resolve your shell environment: Unexpected exit code from spawned shell (code 1, signal null)
+2024-06-02 10:34:32.940 [warning] RequestStore#acceptReply was called without receiving a matching request 433
+2024-06-02 10:34:32.940 [warning] RequestStore#acceptReply was called without receiving a matching request 434
+2024-06-02 10:34:32.940 [warning] RequestStore#acceptReply was called without receiving a matching request 435
+2024-06-02 10:34:32.941 [warning] RequestStore#acceptReply was called without receiving a matching request 436
+2024-06-02 10:34:32.941 [warning] RequestStore#acceptReply was called without receiving a matching request 437
+2024-06-02 10:34:32.941 [warning] RequestStore#acceptReply was called without receiving a matching request 438
+2024-06-02 10:34:32.941 [warning] RequestStore#acceptReply was called without receiving a matching request 439
+2024-06-02 10:34:32.941 [warning] RequestStore#acceptReply was called without receiving a matching request 440
+2024-06-02 10:34:32.941 [warning] RequestStore#acceptReply was called without receiving a matching request 441
+2024-06-02 10:34:32.941 [warning] RequestStore#acceptReply was called without receiving a matching request 442
+2024-06-02 10:34:32.942 [warning] RequestStore#acceptReply was called without receiving a matching request 443
+2024-06-02 10:34:32.942 [warning] RequestStore#acceptReply was called without receiving a matching request 444
+2024-06-02 10:34:33.282 [error] ExtensionHostConnection#buildUserEnvironment resolving shell environment failed Unable to resolve your shell environment: Unexpected exit code from spawned shell (code 1, signal null)
+2024-06-02 10:58:49.129 [error] ptyHost was unable to resolve shell environment Unable to resolve your shell environment: Unexpected exit code from spawned shell (code 1, signal null)
+2024-06-02 10:58:49.305 [warning] RequestStore#acceptReply was called without receiving a matching request 445
+2024-06-02 10:58:49.306 [warning] RequestStore#acceptReply was called without receiving a matching request 446
+2024-06-02 10:58:49.306 [warning] RequestStore#acceptReply was called without receiving a matching request 447
+2024-06-02 10:58:49.306 [warning] RequestStore#acceptReply was called without receiving a matching request 448
+2024-06-02 10:58:49.306 [warning] RequestStore#acceptReply was called without receiving a matching request 449
+2024-06-02 10:58:49.306 [warning] RequestStore#acceptReply was called without receiving a matching request 450
+2024-06-02 10:58:49.306 [warning] RequestStore#acceptReply was called without receiving a matching request 451
+2024-06-02 10:58:49.306 [warning] RequestStore#acceptReply was called without receiving a matching request 452
+2024-06-02 10:58:49.306 [warning] RequestStore#acceptReply was called without receiving a matching request 453
+2024-06-02 10:58:49.306 [warning] RequestStore#acceptReply was called without receiving a matching request 454
+2024-06-02 10:58:49.306 [warning] RequestStore#acceptReply was called without receiving a matching request 455
+2024-06-02 10:58:49.306 [warning] RequestStore#acceptReply was called without receiving a matching request 456
+2024-06-02 10:58:49.644 [error] ExtensionHostConnection#buildUserEnvironment resolving shell environment failed Unable to resolve your shell environment: Unexpected exit code from spawned shell (code 1, signal null)
+2024-06-02 11:01:39.551 [error] ptyHost was unable to resolve shell environment Unable to resolve your shell environment: Unexpected exit code from spawned shell (code 1, signal null)
+2024-06-02 11:01:39.727 [warning] RequestStore#acceptReply was called without receiving a matching request 457
+2024-06-02 11:01:39.727 [warning] RequestStore#acceptReply was called without receiving a matching request 458
+2024-06-02 11:01:39.727 [warning] RequestStore#acceptReply was called without receiving a matching request 459
+2024-06-02 11:01:39.727 [warning] RequestStore#acceptReply was called without receiving a matching request 460
+2024-06-02 11:01:39.727 [warning] RequestStore#acceptReply was called without receiving a matching request 461
+2024-06-02 11:01:39.727 [warning] RequestStore#acceptReply was called without receiving a matching request 462
+2024-06-02 11:01:39.727 [warning] RequestStore#acceptReply was called without receiving a matching request 463
+2024-06-02 11:01:39.727 [warning] RequestStore#acceptReply was called without receiving a matching request 464
+2024-06-02 11:01:39.727 [warning] RequestStore#acceptReply was called without receiving a matching request 465
+2024-06-02 11:01:39.727 [warning] RequestStore#acceptReply was called without receiving a matching request 466
+2024-06-02 11:01:39.727 [warning] RequestStore#acceptReply was called without receiving a matching request 467
+2024-06-02 11:01:39.727 [warning] RequestStore#acceptReply was called without receiving a matching request 468
+2024-06-02 11:01:40.065 [error] ExtensionHostConnection#buildUserEnvironment resolving shell environment failed Unable to resolve your shell environment: Unexpected exit code from spawned shell (code 1, signal null)

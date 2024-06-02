@@ -1,0 +1,15 @@
+2024-06-02 10:21:27.260 [info] Extension host with pid 7768 started
+2024-06-02 10:21:27.260 [error] Error: EEXIST: file already exists, open '/root/.vscode-server/data/User/workspaceStorage/1da45d16602028ad2216435bcac9dc5d/vscode.lock'
+2024-06-02 10:21:27.260 [info] Lock '/root/.vscode-server/data/User/workspaceStorage/1da45d16602028ad2216435bcac9dc5d/vscode.lock': Could not acquire lock, checking if the file is stale.
+2024-06-02 10:21:27.261 [info] Lock '/root/.vscode-server/data/User/workspaceStorage/1da45d16602028ad2216435bcac9dc5d/vscode.lock': The lock does not look stale, elapsed: 890 ms, giving up.
+2024-06-02 10:21:27.264 [info] Lock '/root/.vscode-server/data/User/workspaceStorage/1da45d16602028ad2216435bcac9dc5d-1/vscode.lock': Lock acquired.
+2024-06-02 10:21:27.533 [info] Eager extensions activated
+2024-06-02 10:21:34.748 [info] ExtensionService#_doActivateExtension vscode.debug-auto-launch, startup: false, activationEvent: 'onStartupFinished'
+2024-06-02 10:21:34.750 [info] ExtensionService#_doActivateExtension vscode.git-base, startup: false, activationEvent: '*', root cause: vscode.git
+2024-06-02 10:21:34.750 [info] ExtensionService#_doActivateExtension vscode.merge-conflict, startup: false, activationEvent: 'onStartupFinished'
+2024-06-02 10:21:34.992 [info] ExtensionService#_doActivateExtension vscode.git, startup: false, activationEvent: '*'
+2024-06-02 10:21:34.992 [info] ExtensionService#_doActivateExtension vscode.github, startup: false, activationEvent: '*'
+2024-06-02 10:24:30.281 [info] ExtensionService#_doActivateExtension ms-python.python, startup: false, activationEvent: 'onLanguage:python', root cause: ms-python.debugpy
+2024-06-02 10:24:30.282 [info] ExtensionService#_doActivateExtension vscode.emmet, startup: false, activationEvent: 'onLanguage'
+2024-06-02 10:24:30.936 [info] ExtensionService#_doActivateExtension ms-python.debugpy, startup: false, activationEvent: 'onLanguage:python'
+2024-06-02 10:24:30.936 [info] ExtensionService#_doActivateExtension ms-python.vscode-pylance, startup: false, activationEvent: 'onLanguage:python'

@@ -416,3 +416,6 @@
 	at ChildProcess.emit (node:events:529:35)
 	at ChildProcess._handle.onexit (node:internal/child_process:292:12)
 2024-06-02 10:07:53.606 [warning] [Decorations] CAPPING events from decorations provider vscode.git 10002
+2024-06-02 11:21:43.727 [warning] [Decorations] CAPPING events from decorations provider vscode.git 10000
+2024-06-02 11:21:45.325 [warning] [Decorations] CAPPING events from decorations provider vscode.git 10001
+2024-06-02 11:24:46.050 [warning] [Decorations] CAPPING events from decorations provider vscode.git 10000

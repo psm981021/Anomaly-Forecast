@@ -1,5 +1,4 @@
 
-
 #data
 data/*.zip
 /data/radar_sample_images/
@@ -9,6 +8,7 @@ data/*.csv
 data/*.ipynb
 /data/data_radar
 data/*.png
+/data/images_classification
 
 
 # clone models
@@ -34,6 +34,9 @@ test.py
 /test.py
 
 #cb
-data/images_classification/
+/data/images_classification/
 classification_model/
+/data/*csv
 __pycache__/
+/root/.vscode-server/
+/root/.vscode-server

@@ -122,6 +122,7 @@ def initialize_model(learning_rate, loss_type, device):
 # 모델 학습
 def train_model(model, train_loader, val_loader, criterion, optimizer, num_epochs, save_path, device):
     best_loss = 10e9
+    best_epoch = 0
     patience = 0
     
     for epoch in range(num_epochs):
@@ -140,17 +141,26 @@ def train_model(model, train_loader, val_loader, criterion, optimizer, num_epoch
 
         if running_loss < best_loss:
             best_loss = running_loss
+            best_epoch = epoch
+            print("New Best Loss!")
+            save_model(model, f"{save_path}_epoch_{epoch + 1}.pth")
+            print("--" * 30)
             patience = 0
         else:
             patience += 1
         
         if patience >= 20: #early stopping
+            print(f"Early Stopped at epoch {epoch + 1}")
+            print("Best Loss : ", best_loss)
+            print("Best epoch :", best_epoch)
             break
         
-        # 10 epoch마다 모델 저장 및 검증
+        # 10 epoch마다 모델 검증
         if (epoch + 1) % 10 == 0:
-            save_model(model, f"{save_path}_epoch_{epoch + 1}.pth")
+            print(f"Check validation at every 10 epochs : {epoch + 1}")
             evaluate_model(model, val_loader, device)
+            save_model(model, f"{save_path}_epoch_{epoch + 1}.pth")
+            print("--" * 30)
 
 # 모델 평가
 def evaluate_model(model, data_loader, device):
@@ -185,7 +195,7 @@ def evaluate_model(model, data_loader, device):
     print(f"CSI: {csi}")
     print(f"POD: {pod}")
     print(f"FAR: {far}")
-    print(f"Confusion Matrix: /n{confusion_matrix(label_list, pred_list)}")
+    print(f"Confusion Matrix: \n{confusion_matrix(label_list, pred_list)}")
 
     return accuracy, f1, csi, pod, far
 
@@ -238,7 +248,7 @@ def predict(model, data_loader, device):
     print(f"Test CSI: {csi}")
     print(f"Test POD: {pod}")
     print(f"Test FAR: {far}")
-    print(f"Confusion Matrix: /n{confusion_matrix(label_list, pred_list)}")
+    print(f"Confusion Matrix: \n{confusion_matrix(label_list, pred_list)}")
 
     return accuracy, f1, csi, pod, far
 
@@ -254,9 +264,9 @@ def inference(model, image_path, transform, device):
         return predicted.item()
 
 if __name__ == "__main__":
-    csv_dict = {'급격' : 'C:/Users/USER/Desktop/Anomaly-Forecast/data/서울_2021_2023_강수량 0.1 미만 제거_Class label O_급격 랜덤 20개 + 앞뒤 5시간 test_.csv', '완만' : 'C:/Users/USER/Desktop/Anomaly-Forecast/data/서울_2021_2023_강수량 0.1 미만 제거_Class label O_완만 랜덤 20개 + 앞뒤 5시간 test_.csv'}
+    csv_dict = {'급격' : '/root/data/Seoul_V1.csv', '완만' : '/root/data/Seoul_V2.csv'}
     csv_file = csv_dict['급격']
-    img_dir = 'C:/Users/USER/Desktop/Anomaly-Forecast/data/images_classification/' 
+    img_dir = '/root/data/images_classification/' 
     batch_size = 32
     learning_rate = 0.001
     num_epochs = 500

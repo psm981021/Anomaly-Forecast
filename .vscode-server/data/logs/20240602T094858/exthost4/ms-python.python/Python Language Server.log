@@ -1,0 +1,21 @@
+2024-06-02 10:24:32.705 [info] (Client) Pylance async client (2024.5.1) started with python extension (2024.6.0)
+2024-06-02 10:24:33.058 [info] [Info  - 10:24:33 AM] (9094) Pylance language server 2024.5.1 (pyright version 1.1.360, commit 4bc8428d) starting
+2024-06-02 10:24:33.058 [info] [Info  - 10:24:33 AM] (9094) Server root directory: file:///root/.vscode-server/extensions/ms-python.vscode-pylance-2024.5.1/dist
+2024-06-02 10:24:33.058 [info] [Info  - 10:24:33 AM] (9094) Starting service instance "root"
+2024-06-02 10:24:33.062 [info] [Info  - 10:24:33 AM] (9094) Auto-Indent enabled
+2024-06-02 10:24:33.093 [info] [Info  - 10:24:33 AM] (9094) Setting environmentName for service "root": "python"
+2024-06-02 10:24:33.177 [info] [Info  - 10:24:33 AM] (9094) Found 15 source files
+2024-06-02 10:24:33.438 [info] [Info  - 10:24:33 AM] (9094) Background analysis(1) root directory: file:///root/.vscode-server/extensions/ms-python.vscode-pylance-2024.5.1/dist
+2024-06-02 10:24:33.438 [info] [Info  - 10:24:33 AM] (9094) Background analysis(1) started
+2024-06-02 10:24:33.578 [info] [Info  - 10:24:33 AM] (9094) Indexer background runner(2) root directory: file:///root/.vscode-server/extensions/ms-python.vscode-pylance-2024.5.1/dist (index)
+2024-06-02 10:24:33.578 [info] [Info  - 10:24:33 AM] (9094) Indexing(2) started
+2024-06-02 10:24:33.912 [info] [Info  - 10:24:33 AM] (9094) scanned(2) 29 files over 1 exec env
+2024-06-02 10:24:34.117 [info] [Info  - 10:24:34 AM] (9094) indexed(2) 16 files over 1 exec env
+2024-06-02 10:24:34.142 [info] [Info  - 10:24:34 AM] (9094) Indexing finished(2).
+2024-06-02 10:31:57.524 [info] [Info  - 10:31:57 AM] (9094) Setting environmentName for service "root": "python"
+2024-06-02 10:31:57.614 [info] [Info  - 10:31:57 AM] (9094) Found 15 source files
+2024-06-02 10:31:57.987 [info] [Info  - 10:31:57 AM] (9094) Indexer background runner(3) root directory: file:///root/.vscode-server/extensions/ms-python.vscode-pylance-2024.5.1/dist (index)
+2024-06-02 10:31:57.987 [info] [Info  - 10:31:57 AM] (9094) Indexing(3) started
+2024-06-02 10:31:58.225 [info] [Info  - 10:31:58 AM] (9094) scanned(3) 29 files over 1 exec env
+2024-06-02 10:31:58.445 [info] [Info  - 10:31:58 AM] (9094) indexed(3) 16 files over 1 exec env
+2024-06-02 10:31:58.472 [info] [Info  - 10:31:58 AM] (9094) Indexing finished(3).

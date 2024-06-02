@@ -12,3 +12,10 @@
 2024-06-02 09:56:40.615 [info] [Info  - 9:56:40 AM] (2067) scanned(2) 29 files over 1 exec env
 2024-06-02 09:56:41.285 [info] [Info  - 9:56:41 AM] (2067) indexed(2) 16 files over 1 exec env
 2024-06-02 09:56:41.317 [info] [Info  - 9:56:41 AM] (2067) Indexing finished(2).
+2024-06-02 10:33:48.015 [info] [Info  - 10:33:48 AM] (2067) Setting environmentName for service "root": "C:\Users\PC\AppData\Local\Programs\Python\Python312\python.exe"
+2024-06-02 10:33:48.090 [info] [Info  - 10:33:48 AM] (2067) Found 15 source files
+2024-06-02 10:33:48.523 [info] [Info  - 10:33:48 AM] (2067) Indexer background runner(3) root directory: file:///root/.vscode-server/extensions/ms-python.vscode-pylance-2024.5.1/dist (index)
+2024-06-02 10:33:48.524 [info] [Info  - 10:33:48 AM] (2067) Indexing(3) started
+2024-06-02 10:33:48.806 [info] [Info  - 10:33:48 AM] (2067) scanned(3) 29 files over 1 exec env
+2024-06-02 10:33:49.011 [info] [Info  - 10:33:49 AM] (2067) indexed(3) 16 files over 1 exec env
+2024-06-02 10:33:49.036 [info] [Info  - 10:33:49 AM] (2067) Indexing finished(3).

@@ -1,0 +1,24 @@
+{
+  "security.workspace.trust.untrustedFiles": "open",
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "[html]": {
+    "editor.defaultFormatter": "vscode.html-language-features"
+  },
+  "[css]": {
+    "editor.defaultFormatter": "vscode.css-language-features"
+  },
+  "terminal.integrated.automationProfile.windows": {},
+  "terminal.integrated.defaultProfile.windows": "Command Prompt",
+  "[python]": {
+    "editor.formatOnType": true
+  },
+  "remote.SSH.remotePlatform": {
+    "sejong-com": "linux",
+    "fnai": "linux",
+    "142.179.76.200": "linux"
+  },
+  "workbench.iconTheme": "material-icon-theme",
+  "editor.formatOnSave": true,
+  "editor.stickyScroll.enabled": true,
+  "notebook.output.textLineLimit": 50
+}
