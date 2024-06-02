@@ -56,6 +56,8 @@ class Fourcaster(nn.Module):
             nn.ReLU(),
             nn.AdaptiveAvgPool2d((50, 50))
         )
+        self.moe = nn.ModuleList([nn.Linear(100,1) for i in range(3)])
+        
     @staticmethod
     def plot_image(image, flag=None):
         

@@ -10,6 +10,8 @@ from models import RainfallPredictor
 from rainnet import *
 import numpy as np
 from utils import *
+from classification_gpu import *
+from efficientnet_pytorch import EfficientNet
 
 class Trainer:
     def __init__(self, model, train_dataloader, valid_dataloader, test_dataloader, args):
@@ -27,6 +29,16 @@ class Trainer:
             nn.ReLU(),
             nn.AdaptiveAvgPool2d((50, 50))
         )
+
+        # self.classifier, self.class_criterion, self.class_optimizer = initialize_model(
+        #     learning_rate=args.learning_rate,
+        #     loss_type="focal",
+        #     device=self.device
+        # )
+
+        # self.classifier = load_model("cf_models\Seoul_V1_epoch_2.pth", self.device)
+        self.classifier = EfficientNet.from_pretrained('efficientnet-b0', num_classes=3)
+
         # self.regression_layer = RainfallPredictor().to(self.args.device)
         # self.regression_model = RainNet().to(self.args.device)
         # self.Linear_layer = nn.Linear(self.args.batch, self.args.batch)
@@ -35,9 +47,13 @@ class Trainer:
         if self.cuda_condition:
             self.model.cuda()
             self.projection.cuda()
+            self.classifier.cuda()
             #self.regression_model.cuda()
             # self.Linear_layer.cuda()
             # self.regression_layer.cuda()
+        
+        for param in self.classifier.parameters():
+            param.requires_grad = False
 
         if not self.args.pre_train:
             for param in self.model.parameters():
@@ -46,7 +62,7 @@ class Trainer:
             # Assuming the regression model is meant to be trained
             for param in self.model.regression_layer.parameters():
                 param.requires_grad = True
-
+            
         # Setting the train and test data loader
         self.train_dataloader = train_dataloader
         self.valid_dataloader = valid_dataloader
@@ -74,7 +90,7 @@ class Trainer:
 
     def iteration(self, epoch, dataloader, train=True):
         raise NotImplementedError
-
+    
     def correlation_image(self, T,P):
         """
         Element-wise multiplication for tensors
@@ -300,19 +316,24 @@ class FourTrainer(Trainer):
 
                 if self.args.pre_train == False:
                     
-                    # total_predict_gap[:,:,75,85] 관악
+                    # total_predict_gap[:,:,71,86] 관악
+                    # total_predict_gap[:,:,58,44] 철원
                     # total_predict_gap[:,:,70:90, 55:85], seoul
                     
                     if self.args.regression == 'gap':
 
-                        crop_predict_gap = (total_predict_gap[:,:,75,85] * 255).clamp(0,255)
+                        crop_predict_gap = (total_predict_gap[:,:,71,86] * 255).clamp(0,255)
+
+                        import IPython; IPython.embed(colors="Linux");exit(1);
+                        predict=inference_jw(self.classifier, crop_predict_gap)
+
                         reg = abs(self.model.regression_layer(crop_predict_gap)).view(self.args.batch)
                         
                         loss_mae = self.mae_criterion(reg, abs(gap))
                         
 
                     elif self.args.regression == 'label':
-                        last_precipitation = (last_precipitation[:,75,85,:] * 255).clamp(0,255)
+                        last_precipitation = (last_precipitation[:,71,86,:] * 255).clamp(0,255)
                         reg = abs(self.model.regression_layer(last_precipitation)).view(self.args.batch)
                         
                         loss_mae = self.mae_criterion(reg, abs(label))
@@ -467,13 +488,13 @@ class FourTrainer(Trainer):
                        
                     if self.args.pre_train == False:
                         if self.args.regression == 'gap':
-                            crop_predict_gap = (total_predict_gap[:,:,75,85] * 255).clamp(0,255)
+                            crop_predict_gap = (total_predict_gap[:,:,71,86] * 255).clamp(0,255)
                             reg = abs(self.model.regression_layer(crop_predict_gap)).view(self.args.batch)
                             
                             loss_mae = self.mae_criterion(reg, abs(gap))
 
                         elif self.args.regression == 'label':
-                            last_precipitation = (last_precipitation[:,:,75,85] * 255).clamp(0,255)
+                            last_precipitation = (last_precipitation[:,:,71,86] * 255).clamp(0,255)
                             reg = abs(self.model.regression_layer(last_precipitation)).view(self.args.batch)
 
                             loss_mae = self.mae_criterion(reg, abs(label))
@@ -490,7 +511,7 @@ class FourTrainer(Trainer):
 
 
                     if test:
-                        last_precipitation = (last_precipitation[:,:,75,85] * 255).clamp(0,255)
+                        last_precipitation = (last_precipitation[:,:,71,86] * 255).clamp(0,255)
                         reg = abs(self.regression_layer(last_precipitation)).view(self.args.batch)
                         
                         self.args.test_list.append([datetime, reg, label])

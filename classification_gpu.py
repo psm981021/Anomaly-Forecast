@@ -262,6 +262,16 @@ def inference(model, image_path, transform, device):
         outputs = model(image)
         _, predicted = torch.max(outputs.data, 1)
         return predicted.item()
+    
+
+def inference_jw(model,image):
+    model.eval()
+    with torch.no_grad():
+        outputs = model(image)
+        _, predicted = torch.max(outputs.data, 1)
+        return predicted.item()
+    
+
 
 if __name__ == "__main__":
     csv_dict = {'급격' : 'Seoul_V1', '완만' : 'Seoul_V2'}
