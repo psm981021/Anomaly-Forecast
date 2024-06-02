@@ -1,0 +1,59 @@
+2024-06-02 11:31:25.784 [info] Log level: Info
+2024-06-02 11:31:25.785 [info] Validating found git in: "git"
+2024-06-02 11:31:25.785 [info] Using git "2.34.1" from "git"
+2024-06-02 11:31:25.785 [info] > git rev-parse --show-toplevel [4ms]
+2024-06-02 11:31:25.785 [info] fatal: not a git repository (or any of the parent directories): .git
+2024-06-02 11:31:25.785 [info] > git rev-parse --show-toplevel [39ms]
+2024-06-02 11:31:25.786 [info] fatal: not a git repository (or any of the parent directories): .git
+2024-06-02 11:31:25.860 [info] > git rev-parse --show-toplevel [14ms]
+2024-06-02 11:31:25.860 [info] fatal: not a git repository (or any parent up to mount point /)
+Stopping at filesystem boundary (GIT_DISCOVERY_ACROSS_FILESYSTEM not set).
+2024-06-02 11:31:25.882 [info] > git rev-parse --show-toplevel [1ms]
+2024-06-02 11:31:25.882 [info] fatal: not a git repository (or any of the parent directories): .git
+2024-06-02 11:31:25.965 [info] > git rev-parse --show-toplevel [1ms]
+2024-06-02 11:31:25.965 [info] fatal: not a git repository (or any of the parent directories): .git
+2024-06-02 11:31:25.982 [info] > git rev-parse --show-toplevel [1ms]
+2024-06-02 11:31:25.982 [info] fatal: not a git repository (or any of the parent directories): .git
+2024-06-02 11:31:26.056 [info] > git rev-parse --show-toplevel [5ms]
+2024-06-02 11:31:26.056 [info] fatal: not a git repository (or any of the parent directories): .git
+2024-06-02 11:31:26.073 [info] > git rev-parse --show-toplevel [1ms]
+2024-06-02 11:31:26.073 [info] fatal: not a git repository (or any of the parent directories): .git
+2024-06-02 11:31:26.147 [info] > git rev-parse --show-toplevel [2ms]
+2024-06-02 11:31:26.147 [info] fatal: not a git repository (or any parent up to mount point /)
+Stopping at filesystem boundary (GIT_DISCOVERY_ACROSS_FILESYSTEM not set).
+2024-06-02 11:31:26.185 [info] > git rev-parse --show-toplevel [7ms]
+2024-06-02 11:31:26.256 [info] > git rev-parse --git-dir --git-common-dir [10ms]
+2024-06-02 11:31:26.347 [info] Open repository: /root
+2024-06-02 11:31:26.447 [info] > git rev-parse --show-toplevel [2ms]
+2024-06-02 11:31:26.447 [info] fatal: not a git repository (or any of the parent directories): .git
+2024-06-02 11:31:26.449 [info] > git config --get commit.template [75ms]
+2024-06-02 11:31:26.547 [info] > git rev-parse --show-toplevel [71ms]
+2024-06-02 11:31:26.547 [info] fatal: not a git repository (or any of the parent directories): .git
+2024-06-02 11:31:26.548 [info] > git for-each-ref --format=%(refname)%00%(upstream:short)%00%(objectname)%00%(upstream:track)%00%(upstream:remotename)%00%(upstream:remoteref) refs/heads/cb refs/remotes/cb [3ms]
+2024-06-02 11:31:26.648 [info] > git rev-parse --show-toplevel [76ms]
+2024-06-02 11:31:26.648 [info] fatal: not a git repository (or any parent up to mount point /)
+Stopping at filesystem boundary (GIT_DISCOVERY_ACROSS_FILESYSTEM not set).
+2024-06-02 11:31:26.666 [info] > git rev-parse --show-toplevel [2ms]
+2024-06-02 11:31:26.666 [info] fatal: not a git repository (or any of the parent directories): .git
+2024-06-02 11:31:26.683 [info] > git rev-parse --show-toplevel [7ms]
+2024-06-02 11:31:26.683 [info] fatal: not a git repository (or any of the parent directories): .git
+2024-06-02 11:31:26.770 [info] > git rev-parse --show-toplevel [0ms]
+2024-06-02 11:31:26.770 [info] fatal: not a git repository (or any of the parent directories): .git
+2024-06-02 11:31:26.845 [info] > git rev-parse --show-toplevel [58ms]
+2024-06-02 11:31:26.845 [info] fatal: not a git repository (or any of the parent directories): .git
+2024-06-02 11:31:26.858 [info] > git status -z -uall [212ms]
+2024-06-02 11:31:26.973 [info] > git merge-base refs/heads/cb refs/remotes/origin/cb [92ms]
+2024-06-02 11:31:27.088 [info] > git rev-list --count --left-right refs/heads/cb...refs/remotes/origin/cb [38ms]
+2024-06-02 11:31:27.158 [info] > git config --get commit.template [185ms]
+2024-06-02 11:31:27.158 [info] > git fetch [812ms]
+2024-06-02 11:31:27.249 [info] > git diff --name-status -z --diff-filter=ADMR 43b58404b46a433adf46e32b84a54f6b68e17e24...refs/remotes/origin/cb [92ms]
+2024-06-02 11:31:27.262 [info] > git config --get commit.template [16ms]
+2024-06-02 11:31:27.286 [info] > git check-ignore -v -z --stdin [113ms]
+2024-06-02 11:31:27.287 [info] > git for-each-ref --format=%(refname)%00%(upstream:short)%00%(objectname)%00%(upstream:track)%00%(upstream:remotename)%00%(upstream:remoteref) refs/heads/cb refs/remotes/cb [26ms]
+2024-06-02 11:31:27.288 [info] > git for-each-ref --format=%(refname)%00%(upstream:short)%00%(objectname)%00%(upstream:track)%00%(upstream:remotename)%00%(upstream:remoteref) refs/heads/cb refs/remotes/cb [2ms]
+2024-06-02 11:31:27.744 [info] > git status -z -uall [370ms]
+2024-06-02 11:31:48.344 [info] > git merge-base refs/heads/cb refs/remotes/origin/cb [1ms]
+2024-06-02 11:31:48.350 [info] > git rev-list --count --left-right refs/heads/cb...refs/remotes/origin/cb [2ms]
+2024-06-02 11:31:48.687 [info] > git rev-parse --show-toplevel [1ms]
+2024-06-02 11:31:48.687 [info] fatal: not a git repository (or any of the parent directories): .git
+2024-06-02 11:31:49.175 [info] > git check-ignore -v -z --stdin [9ms]

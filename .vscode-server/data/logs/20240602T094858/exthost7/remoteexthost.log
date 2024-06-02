@@ -1,0 +1,15 @@
+2024-06-02 11:32:58.663 [info] Extension host with pid 57430 started
+2024-06-02 11:32:58.663 [error] Error: EEXIST: file already exists, open '/root/.vscode-server/data/User/workspaceStorage/1da45d16602028ad2216435bcac9dc5d/vscode.lock'
+2024-06-02 11:32:58.665 [info] Lock '/root/.vscode-server/data/User/workspaceStorage/1da45d16602028ad2216435bcac9dc5d/vscode.lock': Could not acquire lock, checking if the file is stale.
+2024-06-02 11:32:58.668 [info] Lock '/root/.vscode-server/data/User/workspaceStorage/1da45d16602028ad2216435bcac9dc5d/vscode.lock': The lock does not look stale, elapsed: 366 ms, giving up.
+2024-06-02 11:32:58.668 [error] Error: EEXIST: file already exists, open '/root/.vscode-server/data/User/workspaceStorage/1da45d16602028ad2216435bcac9dc5d-1/vscode.lock'
+2024-06-02 11:32:58.668 [info] Lock '/root/.vscode-server/data/User/workspaceStorage/1da45d16602028ad2216435bcac9dc5d-1/vscode.lock': Could not acquire lock, checking if the file is stale.
+2024-06-02 11:32:58.669 [info] Lock '/root/.vscode-server/data/User/workspaceStorage/1da45d16602028ad2216435bcac9dc5d-1/vscode.lock': The lock does not look stale, elapsed: 105 ms, giving up.
+2024-06-02 11:32:58.670 [info] Lock '/root/.vscode-server/data/User/workspaceStorage/1da45d16602028ad2216435bcac9dc5d-2/vscode.lock': Lock acquired.
+2024-06-02 11:32:59.260 [info] ExtensionService#_doActivateExtension vscode.emmet, startup: false, activationEvent: 'onLanguage'
+2024-06-02 11:32:59.479 [info] ExtensionService#_doActivateExtension vscode.git-base, startup: true, activationEvent: '*', root cause: vscode.git
+2024-06-02 11:32:59.653 [info] ExtensionService#_doActivateExtension vscode.git, startup: true, activationEvent: '*'
+2024-06-02 11:32:59.653 [info] ExtensionService#_doActivateExtension vscode.github, startup: true, activationEvent: '*'
+2024-06-02 11:32:59.967 [info] Eager extensions activated
+2024-06-02 11:32:59.967 [info] ExtensionService#_doActivateExtension vscode.debug-auto-launch, startup: false, activationEvent: 'onStartupFinished'
+2024-06-02 11:32:59.967 [info] ExtensionService#_doActivateExtension vscode.merge-conflict, startup: false, activationEvent: 'onStartupFinished'
