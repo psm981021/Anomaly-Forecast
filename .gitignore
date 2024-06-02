@@ -1,3 +1,4 @@
+/root/.vscode-server
 
 #data
 data/*.zip
@@ -38,5 +39,6 @@ test.py
 classification_model/
 /data/*csv
 __pycache__/
-/root/.vscode-server/
+/.vscode-server/
 /root/.vscode-server
+images

@@ -214,7 +214,7 @@ def load_model(filepath, device):
     model = EfficientNet.from_pretrained('efficientnet-b0', num_classes=2)
     
     # 첫 번째 레이어 수정 (1 채널을 받을 수 있도록)
-    model._conv_stem = nn.Conv2d(1, 32, kernel_size=(3, 3), stride=(2, 2), bias=False)
+    #model._conv_stem = nn.Conv2d(1, 32, kernel_size=(3, 3), stride=(2, 2), bias=False)
     
     model.load_state_dict(torch.load(filepath, map_location=device))
     model.to(device)
@@ -264,8 +264,9 @@ def inference(model, image_path, transform, device):
         return predicted.item()
 
 if __name__ == "__main__":
-    csv_dict = {'급격' : '/root/data/Seoul_V1.csv', '완만' : '/root/data/Seoul_V2.csv'}
-    csv_file = csv_dict['급격']
+    csv_dict = {'급격' : 'Seoul_V1', '완만' : 'Seoul_V2'}
+    version = '급격'
+    csv_file = 'root/data/' + csv_dict[version] + '.csv'
     img_dir = '/root/data/images_classification/' 
     batch_size = 32
     learning_rate = 0.001
@@ -289,17 +290,16 @@ if __name__ == "__main__":
     
     transform = transforms.Compose([
         transforms.Lambda(lambda x: x.crop((left, top, right, bottom))), # crop
-        transforms.Grayscale(num_output_channels=1), # grayscale
+        #transforms.Grayscale(num_output_channels=1), # grayscale
         transforms.ToTensor()
     ])
 
     train_loader, val_loader, test_loader = load_data(csv_file, img_dir, batch_size, transform)
     model, criterion, optimizer = initialize_model(learning_rate, loss_type, device)
-    train_model(model, train_loader, val_loader, criterion, optimizer, num_epochs, 'cf_models/classification_model_seoul2', device)
+    train_model(model, train_loader, val_loader, criterion, optimizer, num_epochs, f'classification_model/{csv_dict[version]}', device)
     evaluate_model(model, val_loader, device)
-    save_model(model, 'cf_models/classification_model_seoul1.pth')
 
-    loaded_model = load_model('cf_models/classification_model_seoul1.pth', device)
+    loaded_model = load_model('cf_models/classification_model_seoul1.pth', device) #수정 필요
     predict(loaded_model, test_loader, device)
 
     # # 예측 수행
