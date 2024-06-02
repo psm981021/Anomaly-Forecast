@@ -142,12 +142,23 @@ def main():
     if args.pre_train:
         args.checkpoint_path = os.path.join(args.output_dir, checkpoint)
 
-        
+
     elif args.pre_train == False:
         args.log_file = os.path.join(args.output_dir,args.str + "-Fine-tune.txt" )
-        map_location = torch.device('cpu') if args.device == torch.device('cpu') else None
+        map_location = args.device
+        
+
         args.checkpoint_path = os.path.join(args.output_dir, checkpoint_finetune)
-        trainer.model.load_state_dict(torch.load(args.output_dir + args.str + ".pt", map_location=map_location))
+
+        if os.path.exists(args.checkpoint_path):
+            print(f"Load model from existing Fine-tune {args.checkpoint_path} for Continue Training!")
+            trainer.model.load_state_dict(torch.load(args.checkpoint_path, map_location=map_location))
+
+        else:
+            args.checkpoint_path = os.path.join(args.output_dir, checkpoint)
+            print(f"Load model from existing pre-train {args.checkpoint_path} for Continue Training!")
+            trainer.model.load_state_dict(torch.load(args.checkpoint_path, map_location=map_location))
+            args.checkpoint_path = os.path.join(args.output_dir, checkpoint_finetune)
         
 
 
@@ -162,9 +173,7 @@ def main():
         args = wandb.config
         
     if args.do_eval:
-        map_location = torch.device('cpu') if args.device == torch.device('cpu') else None
-        trainer.model.load_state_dict(torch.load(args.checkpoint_path, map_location=map_location))
-        print(f"Load model from {args.checkpoint_path} for test!")
+        
 
         score = trainer.test(args.epochs)
         # import IPython; IPython.embed(colors='Linux');exit(1);
@@ -226,17 +235,15 @@ def main():
         #test
         print("-----------------Test-----------------")
         # load the best model
-        trainer.model.load_state_dict(torch.load(args.checkpoint_path))
+        map_location = args.device
+        trainer.model.load_state_dict(torch.load(args.checkpoint_path, map_location=map_location))
+        print(f"Load model from {args.checkpoint_path} for test!")
+
         score = trainer.test(args.epochs)
     
         # save csv file
         try:
-            map_location = torch.device('cpu') if args.device == torch.device('cpu') else None
-            trainer.model.load_state_dict(torch.load(args.checkpoint_path, map_location=map_location))
-            print(f"Load model from {args.checkpoint_path} for test!")
 
-
-            score = trainer.test(args.epochs)
             # import IPython; IPython.embed(colors='Linux');exit(1);
             args.test_list.pop(0)
             formatted_data = []

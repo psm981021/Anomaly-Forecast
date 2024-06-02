@@ -3810,3 +3810,117 @@ EarlyStopping counter: 40 out of 40
 {'Epoch': 2000, 'MAE Loss (Eval)': '4.587254'}
 To run Epoch:2000 , It took 7 hours, 43 minutes, 47 seconds
 {'Epoch': 2000, 'MAE Loss (Eval)': '17.591633'}
+Fine-tuning 
+---------------------- Configure Info: ----------------------
+data_dir                       : data/data_seoul_only_v2
+image_csv_dir                  : data/seoul_v2.csv
+output_dir                     : output/seoul-L4.01/
+gpu_id                         : 0
+device                         : cuda:0
+seed                           : 0
+no_cuda                        : False
+use_multi_gpu                  : False
+multi_devices                  : 0,1
+wandb                          : False
+pre_train                      : False
+do_eval                        : False
+test_list                      : ['[]']
+grey_scale                     : False
+location                       : seoul
+model_idx                      : seoul-L4.01
+batch                          : 8
+n_classes                      : 100
+sianet                         : False
+epochs                         : 2000
+log_freq                       : 1
+patience                       : 40
+loss_type                      : stamina
+regression                     : gap
+lr                             : 0.001
+adam_beta1                     : 0.9
+adam_beta2                     : 0.999
+weight_decay                   : 0.0
+initializer_range              : 0.01
+str                            : seoul-L4.01-8
+log_file                       : output/seoul-L4.01/seoul-L4.01-8-Fine-tune.txt
+dataframe_path                 : output/seoul-L4.01/seoul-L4.01-8.csv
+checkpoint_path                : output/seoul-L4.01/seoul-L4.01-8_finetune.pt
+---------------------- Configure Info: ----------------------
+{'epoch': 0, 'Geneartion Loss stamina (Train)': '0.000000', 'Correlation Image(Train)': '0.035657', 'MAE Loss': '19.815647'}
+Fine-tuning 
+---------------------- Configure Info: ----------------------
+data_dir                       : data/data_seoul_only_v2
+image_csv_dir                  : data/seoul_v2.csv
+output_dir                     : output/seoul-L4.01/
+gpu_id                         : 0
+device                         : cuda:0
+seed                           : 0
+no_cuda                        : False
+use_multi_gpu                  : False
+multi_devices                  : 0,1
+wandb                          : False
+pre_train                      : False
+do_eval                        : False
+test_list                      : ['[]']
+grey_scale                     : False
+location                       : seoul
+model_idx                      : seoul-L4.01
+batch                          : 8
+n_classes                      : 100
+sianet                         : False
+epochs                         : 2000
+log_freq                       : 1
+patience                       : 40
+loss_type                      : stamina
+regression                     : gap
+lr                             : 0.001
+adam_beta1                     : 0.9
+adam_beta2                     : 0.999
+weight_decay                   : 0.0
+initializer_range              : 0.01
+str                            : seoul-L4.01-8
+log_file                       : output/seoul-L4.01/seoul-L4.01-8-Fine-tune.txt
+dataframe_path                 : output/seoul-L4.01/seoul-L4.01-8.csv
+checkpoint_path                : output/seoul-L4.01/seoul-L4.01-8_finetune.pt
+---------------------- Configure Info: ----------------------
+{'epoch': 0, 'Geneartion Loss stamina (Train)': '0.000000', 'Correlation Image(Train)': '0.035657', 'MAE Loss': '19.815647'}
+{'Epoch': 2000, 'MAE Loss (Eval)': '17.591633'}
+{'Epoch': 2000, 'MAE Loss (Eval)': '17.591633'}
+{'Epoch': 2000, 'MAE Loss (Eval)': '17.591633'}
+Fine-tuning 
+---------------------- Configure Info: ----------------------
+data_dir                       : data/data_seoul_only_v2
+image_csv_dir                  : data/seoul_v2.csv
+output_dir                     : output/seoul-L4.01/
+gpu_id                         : 0
+device                         : cuda:0
+seed                           : 0
+no_cuda                        : False
+use_multi_gpu                  : False
+multi_devices                  : 0,1
+wandb                          : False
+pre_train                      : False
+do_eval                        : False
+test_list                      : ['[]']
+grey_scale                     : False
+location                       : seoul
+model_idx                      : seoul-L4.01
+batch                          : 8
+n_classes                      : 100
+sianet                         : False
+epochs                         : 2000
+log_freq                       : 1
+patience                       : 40
+loss_type                      : stamina
+regression                     : gap
+lr                             : 0.001
+adam_beta1                     : 0.9
+adam_beta2                     : 0.999
+weight_decay                   : 0.0
+initializer_range              : 0.01
+str                            : seoul-L4.01-8
+log_file                       : output/seoul-L4.01/seoul-L4.01-8-Fine-tune.txt
+dataframe_path                 : output/seoul-L4.01/seoul-L4.01-8.csv
+checkpoint_path                : output/seoul-L4.01/seoul-L4.01-8_finetune.pt
+---------------------- Configure Info: ----------------------
+{'epoch': 0, 'Geneartion Loss stamina (Train)': '0.000000', 'Correlation Image(Train)': '0.035657', 'MAE Loss': '19.815647'}

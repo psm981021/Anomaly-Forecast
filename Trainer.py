@@ -492,7 +492,7 @@ class FourTrainer(Trainer):
                     if test:
                         last_precipitation = (last_precipitation[:,:,75,85] * 255).clamp(0,255)
                         reg = abs(self.regression_layer(last_precipitation)).view(self.args.batch)
-
+                        
                         self.args.test_list.append([datetime, reg, label])
                         
                 del batch
