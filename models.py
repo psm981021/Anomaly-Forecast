@@ -49,6 +49,7 @@ class Fourcaster(nn.Module):
             nn.Conv2d(16, 1, kernel_size=3, padding=1),
             nn.AdaptiveAvgPool2d((1, 1)),  # Global average pooling
         )
+        self.regression_layer = nn.Linear(100,1)
 
         self.projection = nn.Sequential(
             nn.Conv2d(64, 3, kernel_size=3, stride=2, padding=1),  # 64 input channels
@@ -129,7 +130,6 @@ class RainfallPredictor(nn.Module):
         x = torch.relu(self.fc1(x))
         x = self.fc2(x)
         return x
-
 
 
 if __name__ == "__main__":

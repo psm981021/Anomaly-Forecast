@@ -17,6 +17,30 @@ def show_args_info(args,log_file):
             f.write(f"{arg:<30} : {getattr(args, arg)}\n")
         f.write("---------------------- Configure Info: ----------------------\n")
 
+def set_device(args):
+    if not torch.cuda.is_available() or args.no_cuda:
+        return torch.device('cpu')
+    if args.use_multi_gpu:
+        return torch.device(f"cuda:{args.multi_devices.split(',')[0]}")  # Default to first GPU in list
+    return torch.device(f"cuda:{args.gpu_id}")
+
+def get_model(args):
+    if args.sianet:
+        return sianet()  # Assuming sianet is a function or constructor available in scope
+    model_cls = Fourcaster  # Default model class
+    return model_cls(n_channels=1 if args.grey_scale else 3, n_classes=100, kernels_per_layer=1, args=args)
+
+def load_models(checkpoint_path, model, device):
+    # Load the checkpoint
+    checkpoint = torch.load(checkpoint_path, map_location=device)
+    
+    # Load state dicts into the respective models
+    model.load_state_dict(checkpoint['model_state_dict'])
+
+
+    # Ensure the models are on the correct device
+    model.to(device)
+
 def main():
     parser = argparse.ArgumentParser()
 
@@ -91,37 +115,37 @@ def main():
 
     print("Using Cuda:", torch.cuda.is_available())
 
-    if args.use_multi_gpu and torch.cuda.is_available():
-        device_ids = list(map(int, args.multi_devices.split(',')))
-        args.device_ids = device_ids  # Store device IDs for potential use in DataParallel
-        args.device = f"cuda:{device_ids[0]}"  # Set default device to the first GPU
-        torch.cuda.set_device(args.device)  # Explicitly set the default device
-        print(f"Using multiple GPUs: {device_ids}")
-    else:
-        if torch.cuda.is_available():
-            args.device = torch.device(f"cuda:{args.gpu_id}")
-        else:
-            args.device = torch.device("cpu")
-        print(f"Using single device: {args.device}")
+    # if args.use_multi_gpu and torch.cuda.is_available():
+    #     device_ids = list(map(int, args.multi_devices.split(',')))
+    #     args.device_ids = device_ids  # Store device IDs for potential use in DataParallel
+    #     args.device = f"cuda:{device_ids[0]}"  # Set default device to the first GPU
+    #     torch.cuda.set_device(args.device)  # Explicitly set the default device
+    #     print(f"Using multiple GPUs: {device_ids}")
+    # else:
+    #     if torch.cuda.is_available():
+    #         args.device = torch.device(f"cuda:{args.gpu_id}")
+    #     else:
+    #         args.device = torch.device("cpu")
+    #     print(f"Using single device: {args.device}")
         
-    args.device = torch.device("cuda:" + args.gpu_id if torch.cuda.is_available() and not args.no_cuda else "cpu")
+    args.device = set_device(args)
     
     #model
     # n_classes = channel
-    if args.sianet:
-        model=sianet()
-    else:
-        if args.grey_scale:
-            model = Fourcaster(n_channels=1,n_classes=100,kernels_per_layer=1, args=args)
-        else:
-            model = Fourcaster(n_channels=3,n_classes=100,kernels_per_layer=1, args=args)
+    # if args.sianet:
+    #     model=sianet()
+    # else:
+    #     if args.grey_scale:
+    #         model = Fourcaster(n_channels=1,n_classes=100,kernels_per_layer=1, args=args)
+    #     else:
+    #         model = Fourcaster(n_channels=3,n_classes=100,kernels_per_layer=1, args=args)
     
-    model.to(args.device)
+    model = get_model(args).to(args.device)
 
-    if args.use_multi_gpu:
-        print(args.device_ids)
+
+    if args.use_multi_gpu and torch.cuda.device_count() > 1:
+        args.device_ids = list(map(int, args.multi_devices.split(',')))
         model = nn.DataParallel(model, device_ids=args.device_ids)
-    
 
     #trainer
     if args.sianet:
@@ -129,40 +153,62 @@ def main():
     else:
         trainer = FourTrainer(model, train_loader,valid_loader,test_loader, args)
 
-# save model args
-    args.str = f"{args.model_idx}-{args.batch}"
-    args.log_file = os.path.join(args.output_dir,args.str + ".txt" )
 
+    # model idx
+    args.str = f"{args.model_idx}-{args.batch}"
     args.dataframe_path = os.path.join(args.output_dir,args.str + ".csv")
 
-    #checkpoint
-    checkpoint = args.str + ".pt"
-    checkpoint_finetune = args.str + "_finetune.pt" 
-    
+
     if args.pre_train:
-        args.checkpoint_path = os.path.join(args.output_dir, checkpoint)
+        # image generation
 
-
-    elif args.pre_train == False:
-        args.log_file = os.path.join(args.output_dir,args.str + "-Fine-tune.txt" )
-        map_location = args.device
-        
-
-        args.checkpoint_path = os.path.join(args.output_dir, checkpoint_finetune)
+        args.log_file = os.path.join(args.output_dir,args.str + ".txt")
+        checkpoint = args.str + ".pt"
+        args.checkpoint_path =  os.path.join(args.output_dir, checkpoint)
 
         if os.path.exists(args.checkpoint_path):
-            print(f"Load model from existing Fine-tune {args.checkpoint_path} for Continue Training!")
+            print("Continue Pre-Training")
+
+            map_location = args.device
             trainer.model.load_state_dict(torch.load(args.checkpoint_path, map_location=map_location))
 
-        else:
-            args.checkpoint_path = os.path.join(args.output_dir, checkpoint)
-            print(f"Load model from existing pre-train {args.checkpoint_path} for Continue Training!")
-            trainer.model.load_state_dict(torch.load(args.checkpoint_path, map_location=map_location))
-            args.checkpoint_path = os.path.join(args.output_dir, checkpoint_finetune)
+            with open(args.log_file, "a") as f:
+                f.write("------------------------------ Continue Training ------------------------------ \n")
+                f.write("Load pt for Pre-training")
+
+    elif args.pre_train == False:
         
 
+        # Load from Pre-train pt
+        checkpoint = args.str + ".pt"
+        args.checkpoint_path =  os.path.join(args.output_dir, checkpoint)
 
-# time start
+
+        print(f"Start Fine-Tuning from {args.checkpoint_path}!")
+        map_location = args.device
+        trainer.model.load_state_dict(torch.load(args.checkpoint_path, map_location=map_location))
+        
+
+        # Regression 
+        args.log_file = os.path.join(args.output_dir,args.str + "-Fine-tune.txt" )
+        checkpoint_finetune = args.str + "_finetune.pt" 
+        args.checkpoint_path =  os.path.join(args.output_dir, checkpoint_finetune)
+
+        if os.path.exists(args.checkpoint_path):
+
+            trainer.model.load_state_dict(torch.load(args.checkpoint_path, map_location=map_location))
+
+            print("Continue Finetune-Training")
+            with open(args.log_file, "a") as f:
+                f.write("------------------------------ Continue Training ------------------------------ \n")
+                f.write("Load pt for Finetune-training")
+
+
+    
+            
+
+
+    # time start
     start_time = time.time()
 
 
@@ -174,9 +220,8 @@ def main():
         
     if args.do_eval:
         
-
         score = trainer.test(args.epochs)
-        # import IPython; IPython.embed(colors='Linux');exit(1);
+
         args.test_list.pop(0)
         formatted_data = []
         for record in args.test_list:
@@ -191,26 +236,11 @@ def main():
         })
         dataframe = pd.DataFrame(formatted_data)
         dataframe.to_csv(args.dataframe_path,index=False)
-        # import IPython; IPython.embed(colors='Linux');exit(1);
 
 
         
     else:
-
-        if os.path.exists(args.checkpoint_path):
-            if args.pre_train:
-                print("Continue Trainging")
-                with open(args.log_file, "a") as f:
-                    f.write("------------------------------ Continue Training ------------------------------ \n")
-                    f.write("Load pt for training")
-                
-                
-            elif args.pre_train == False:
-                print("Fine-tuning")
-                with open(args.log_file, "a") as f:
-                    f.write("Fine-tuning \n")
-                trainer.model.load_state_dict(torch.load(args.checkpoint_path, map_location=map_location))
-            
+        
         show_args_info(args,args.log_file)
         early_stopping = EarlyStopping(args.log_file,args.checkpoint_path, args.patience, verbose=True)
         for epoch in range(args.epochs):
@@ -235,16 +265,16 @@ def main():
         #test
         print("-----------------Test-----------------")
         # load the best model
+
         map_location = args.device
         trainer.model.load_state_dict(torch.load(args.checkpoint_path, map_location=map_location))
+
         print(f"Load model from {args.checkpoint_path} for test!")
 
         score = trainer.test(args.epochs)
     
         # save csv file
         try:
-
-            # import IPython; IPython.embed(colors='Linux');exit(1);
             args.test_list.pop(0)
             formatted_data = []
             for record in args.test_list:
@@ -262,8 +292,6 @@ def main():
         except:
             with open(args.log_file, "a") as f:
                 f.write("Error Handling csv")
-            print("Error Handling csv");
-            
             
         
     

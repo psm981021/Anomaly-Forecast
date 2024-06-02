@@ -1,0 +1,63 @@
+---------------------- Configure Info: ----------------------
+data_dir                       : data/data_seoul_only_v2
+image_csv_dir                  : data/seoul_v2.csv
+output_dir                     : output/seoul-L4.02/
+gpu_id                         : 0
+device                         : cuda:0
+seed                           : 0
+no_cuda                        : False
+use_multi_gpu                  : False
+multi_devices                  : 0,1
+wandb                          : False
+pre_train                      : True
+do_eval                        : False
+test_list                      : ['[]']
+grey_scale                     : False
+location                       : seoul
+model_idx                      : seoul-L4.02
+batch                          : 8
+n_classes                      : 100
+sianet                         : False
+epochs                         : 2000
+log_freq                       : 1
+patience                       : 40
+loss_type                      : stamina
+regression                     : gap
+lr                             : 0.05
+adam_beta1                     : 0.9
+adam_beta2                     : 0.999
+weight_decay                   : 0.0
+initializer_range              : 0.01
+str                            : seoul-L4.02-8
+dataframe_path                 : output/seoul-L4.02/seoul-L4.02-8.csv
+log_file                       : output/seoul-L4.02/seoul-L4.02-8.txt
+checkpoint_path                : output/seoul-L4.02/seoul-L4.02-8.pt
+---------------------- Configure Info: ----------------------
+{'epoch': 0, 'Geneartion Loss stamina (Train)': '5.348449', 'Correlation Image(Train)': '0.025820', 'MAE Loss': '0.000000'}
+{'Epoch': 0, 'Generation Loss (Eval)': '0.852331'}
+{'epoch': 1, 'Geneartion Loss stamina (Train)': '5.016807', 'Correlation Image(Train)': '0.029233', 'MAE Loss': '0.000000'}
+{'Epoch': 1, 'Generation Loss (Eval)': '0.787500'}
+{'epoch': 2, 'Geneartion Loss stamina (Train)': '4.719401', 'Correlation Image(Train)': '0.030882', 'MAE Loss': '0.000000'}
+{'Epoch': 2, 'Generation Loss (Eval)': '0.727136'}
+{'epoch': 3, 'Geneartion Loss stamina (Train)': '4.432064', 'Correlation Image(Train)': '0.031705', 'MAE Loss': '0.000000'}
+{'Epoch': 3, 'Generation Loss (Eval)': '0.670245'}
+{'epoch': 4, 'Geneartion Loss stamina (Train)': '4.153968', 'Correlation Image(Train)': '0.032225', 'MAE Loss': '0.000000'}
+{'Epoch': 4, 'Generation Loss (Eval)': '0.616179'}
+{'epoch': 5, 'Geneartion Loss stamina (Train)': '3.884186', 'Correlation Image(Train)': '0.032561', 'MAE Loss': '0.000000'}
+{'Epoch': 5, 'Generation Loss (Eval)': '0.565286'}
+{'epoch': 6, 'Geneartion Loss stamina (Train)': '3.620087', 'Correlation Image(Train)': '0.032824', 'MAE Loss': '0.000000'}
+{'Epoch': 6, 'Generation Loss (Eval)': '0.518504'}
+{'epoch': 7, 'Geneartion Loss stamina (Train)': '3.365241', 'Correlation Image(Train)': '0.033076', 'MAE Loss': '0.000000'}
+{'Epoch': 7, 'Generation Loss (Eval)': '0.475479'}
+{'epoch': 8, 'Geneartion Loss stamina (Train)': '3.122465', 'Correlation Image(Train)': '0.033316', 'MAE Loss': '0.000000'}
+{'Epoch': 8, 'Generation Loss (Eval)': '0.435748'}
+{'epoch': 9, 'Geneartion Loss stamina (Train)': '2.893760', 'Correlation Image(Train)': '0.033530', 'MAE Loss': '0.000000'}
+{'Epoch': 9, 'Generation Loss (Eval)': '0.399201'}
+{'epoch': 10, 'Geneartion Loss stamina (Train)': '2.680341', 'Correlation Image(Train)': '0.033727', 'MAE Loss': '0.000000'}
+{'Epoch': 10, 'Generation Loss (Eval)': '0.365798'}
+{'epoch': 11, 'Geneartion Loss stamina (Train)': '2.482921', 'Correlation Image(Train)': '0.033922', 'MAE Loss': '0.000000'}
+{'Epoch': 11, 'Generation Loss (Eval)': '0.335785'}
+{'epoch': 12, 'Geneartion Loss stamina (Train)': '2.301798', 'Correlation Image(Train)': '0.034124', 'MAE Loss': '0.000000'}
+{'Epoch': 12, 'Generation Loss (Eval)': '0.308676'}
+{'epoch': 13, 'Geneartion Loss stamina (Train)': '2.137137', 'Correlation Image(Train)': '0.034327', 'MAE Loss': '0.000000'}
+{'Epoch': 13, 'Generation Loss (Eval)': '0.285052'}

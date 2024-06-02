@@ -1,0 +1,86 @@
+---------------------- Configure Info: ----------------------
+_items                         : {'data_dir': 'data/data_seoul_only_v2', 'image_csv_dir': 'data/seoul_v2.csv', 'output_dir': 'output/seoul-L3.01/', 'gpu_id': '1', 'device': 'cuda:1', 'seed': 0, 'no_cuda': False, 'use_multi_gpu': False, 'multi_devices': '0,1', 'wandb': True, 'pre_train': True, 'do_eval': False, 'test_list': ['[]'], 'grey_scale': False, 'location': 'seoul', 'model_idx': 'seoul-L3.01', 'batch': 8, 'n_classes': 100, 'sianet': False, 'epochs': 2000, 'log_freq': 1, 'patience': 40, 'loss_type': 'ed_image', 'regression': 'gap', 'lr': 0.005, 'adam_beta1': 0.9, 'adam_beta2': 0.999, 'weight_decay': 0.0, 'initializer_range': 0.01, 'str': 'seoul-L3.01-8', 'log_file': 'output/seoul-L3.01/seoul-L3.01-8.txt', 'dataframe_path': 'output/seoul-L3.01/seoul-L3.01-8.csv', 'checkpoint_path': 'output/seoul-L3.01/seoul-L3.01-8.pt', '_wandb': {}}
+_locked                        : {}
+_users                         : {}
+_users_inv                     : {}
+_users_cnt                     : 0
+_callback                      : <bound method Run._config_callback of <wandb.sdk.wandb_run.Run object at 0x7f05a43c9880>>
+_settings                      : <Settings {'_args': ['--data_dir', 'data/data_seoul_only_v2', '--image_csv_dir', 'data/seoul_v2.csv', '--batch', '8', '--epochs', '2000', '--patience', '40', '--model_idx', 'seoul-L3.01', '--output_dir', 'output/seoul-L3.01/', '--test_list=[]', '--gpu_id', '1', '--device', 'cuda:1', '--seed', '0', '--lr', '0.005', '--loss_type', 'ed_image', '--location', 'seoul', '--regression', 'gap', '--pre_train', '--wandb'], '_aws_lambda': False, '_cli_only_mode': None, '_code_path_local': 'main.py', '_colab': False, '_cuda': None, '_disable_meta': False, '_disable_service': False, '_disable_setproctitle': False, '_disable_stats': False, '_disable_update_check': None, '_disable_viewer': None, '_disable_machine_info': False, '_executable': '/home/seongbeom/anaconda3/envs/anomaly/bin/python', '_extra_http_headers': None, '_file_stream_retry_max': 125, '_file_stream_retry_wait_min_seconds': 2.0, '_file_stream_retry_wait_max_seconds': 60.0, '_file_stream_timeout_seconds': 180.0, '_file_transfer_retry_max': 20, '_file_transfer_retry_wait_min_seconds': 2.0, '_file_transfer_retry_wait_max_seconds': 60.0, '_file_transfer_timeout_seconds': 0.0, '_flow_control_custom': False, '_flow_control_disabled': False, '_graphql_retry_max': 20, '_graphql_retry_wait_min_seconds': 2.0, '_graphql_retry_wait_max_seconds': 60.0, '_graphql_timeout_seconds': 30.0, '_internal_check_process': 8.0, '_internal_queue_timeout': 2.0, '_ipython': False, '_jupyter': False, '_jupyter_name': None, '_jupyter_path': None, '_jupyter_root': None, '_kaggle': False, '_live_policy_rate_limit': None, '_live_policy_wait_time': None, '_log_level': 10, '_network_buffer': None, '_noop': False, '_notebook': False, '_offline': False, '_sync': False, '_os': 'Linux-5.19.0-41-generic-x86_64-with-glibc2.35', '_platform': 'linux', '_proxies': None, '_python': '3.9.19', '_runqueue_item_id': None, '_require_core': False, '_save_requirements': True, '_service_transport': None, '_service_wait': 30.0, '_shared': False, '_start_datetime': '20240602_215455', '_start_time': 1717332895.0681663, '_stats_pid': 292885, '_stats_sample_rate_seconds': 2.0, '_stats_samples_to_average': 15, '_stats_join_assets': True, '_stats_neuron_monitor_config_path': None, '_stats_open_metrics_endpoints': None, '_stats_open_metrics_filters': ('.*',), '_stats_disk_paths': ('/',), '_stats_buffer_size': 0, '_tmp_code_dir': '/home/seongbeom/paper/anomaly/wandb/run-20240602_215455-1auaru9h/tmp/code', '_tracelog': None, '_unsaved_keys': None, '_windows': False, 'allow_val_change': None, 'anonymous': None, 'api_key': '***REDACTED***', 'azure_account_url_to_access_key': None, 'base_url': 'https://api.wandb.ai', 'code_dir': None, 'colab_url': None, 'config_paths': None, 'console': 'wrap', 'deployment': 'cloud', 'disable_code': False, 'disable_git': False, 'disable_hints': None, 'disable_job_creation': False, 'disabled': False, 'docker': None, 'email': 'seongbeompark@gmail.com', 'entity': 'prac', 'files_dir': '/home/seongbeom/paper/anomaly/wandb/run-20240602_215455-1auaru9h/files', 'force': None, 'fork_from': None, 'git_commit': '616f5bcf332935d5c62be067c11a6afd487f879c', 'git_remote': 'origin', 'git_remote_url': 'https://github.com/psm981021/Anomaly-Forecast.git', 'git_root': None, 'heartbeat_seconds': 30, 'host': 'gpusvr0410', 'ignore_globs': (), 'init_timeout': 90.0, 'is_local': False, 'job_name': None, 'job_source': None, 'label_disable': None, 'launch': None, 'launch_config_path': None, 'log_dir': '/home/seongbeom/paper/anomaly/wandb/run-20240602_215455-1auaru9h/logs', 'log_internal': '/home/seongbeom/paper/anomaly/wandb/run-20240602_215455-1auaru9h/logs/debug-internal.log', 'log_symlink_internal': '/home/seongbeom/paper/anomaly/wandb/debug-internal.log', 'log_symlink_user': '/home/seongbeom/paper/anomaly/wandb/debug.log', 'log_user': '/home/seongbeom/paper/anomaly/wandb/run-20240602_215455-1auaru9h/logs/debug.log', 'login_timeout': None, 'mode': 'online', 'notebook_name': None, 'program': '/home/seongbeom/paper/anomaly/main.py', 'program_abspath': '/home/seongbeom/paper/anomaly/main.py', 'program_relpath': 'main.py', 'project': 'anomaly_forecast ', 'project_url': 'https://wandb.ai/prac/anomaly_forecast%20', 'quiet': None, 'reinit': None, 'relogin': None, 'resume': None, 'resume_fname': '/home/seongbeom/paper/anomaly/wandb/wandb-resume.json', 'resumed': False, 'root_dir': '/home/seongbeom/paper/anomaly', 'run_group': None, 'run_id': '1auaru9h', 'run_job_type': None, 'run_mode': 'run', 'run_name': 'seoul-L3.01_8_2000', 'run_notes': None, 'run_tags': None, 'run_url': 'https://wandb.ai/prac/anomaly_forecast%20/runs/1auaru9h', 'sagemaker_disable': None, 'save_code': None, 'settings_system': '/home/seongbeom/.config/wandb/settings', 'settings_workspace': '/home/seongbeom/paper/anomaly/wandb/settings', 'show_colors': None, 'show_emoji': None, 'show_errors': True, 'show_info': True, 'show_warnings': True, 'silent': False, 'start_method': None, 'strict': None, 'summary_errors': None, 'summary_timeout': 60, 'summary_warnings': 5, 'sweep_id': None, 'sweep_param_path': None, 'sweep_url': '', 'symlink': True, 'sync_dir': '/home/seongbeom/paper/anomaly/wandb/run-20240602_215455-1auaru9h', 'sync_file': '/home/seongbeom/paper/anomaly/wandb/run-20240602_215455-1auaru9h/run-1auaru9h.wandb', 'sync_symlink_latest': '/home/seongbeom/paper/anomaly/wandb/latest-run', 'system_sample': 15, 'system_sample_seconds': 2, 'table_raise_on_max_row_limit_exceeded': False, 'timespec': '20240602_215455', 'tmp_dir': '/home/seongbeom/paper/anomaly/wandb/run-20240602_215455-1auaru9h/tmp', 'username': 'seongbeom', 'wandb_dir': '/home/seongbeom/paper/anomaly/wandb/'}>
+_artifact_callback             : <bound method Run._config_artifact_callback of <wandb.sdk.wandb_run.Run object at 0x7f05a43c9880>>
+---------------------- Configure Info: ----------------------
+{'epoch': 0, 'Geneartion Loss ed_image (Train)': '873.956238', 'Correlation Image(Train)': '0.011101', 'MAE Loss': '0.000000'}
+{'Epoch': 0, 'Generation Loss (Eval)': '141.956741'}
+{'epoch': 1, 'Geneartion Loss ed_image (Train)': '848.113403', 'Correlation Image(Train)': '0.006386', 'MAE Loss': '0.000000'}
+{'Epoch': 1, 'Generation Loss (Eval)': '136.939423'}
+{'epoch': 2, 'Geneartion Loss ed_image (Train)': '824.738281', 'Correlation Image(Train)': '0.000430', 'MAE Loss': '0.000000'}
+{'Epoch': 2, 'Generation Loss (Eval)': '132.432968'}
+{'epoch': 3, 'Geneartion Loss ed_image (Train)': '802.726685', 'Correlation Image(Train)': '0.004652', 'MAE Loss': '0.000000'}
+{'Epoch': 3, 'Generation Loss (Eval)': '129.068893'}
+{'epoch': 4, 'Geneartion Loss ed_image (Train)': '780.669739', 'Correlation Image(Train)': '0.007815', 'MAE Loss': '0.000000'}
+{'Epoch': 4, 'Generation Loss (Eval)': '125.846916'}
+{'epoch': 5, 'Geneartion Loss ed_image (Train)': '758.402588', 'Correlation Image(Train)': '0.010562', 'MAE Loss': '0.000000'}
+{'Epoch': 5, 'Generation Loss (Eval)': '122.670906'}
+{'epoch': 6, 'Geneartion Loss ed_image (Train)': '736.143188', 'Correlation Image(Train)': '0.012879', 'MAE Loss': '0.000000'}
+{'Epoch': 6, 'Generation Loss (Eval)': '119.172462'}
+{'epoch': 7, 'Geneartion Loss ed_image (Train)': '713.319153', 'Correlation Image(Train)': '0.016401', 'MAE Loss': '0.000000'}
+{'Epoch': 7, 'Generation Loss (Eval)': '115.228729'}
+{'epoch': 8, 'Geneartion Loss ed_image (Train)': '690.289185', 'Correlation Image(Train)': '0.019724', 'MAE Loss': '0.000000'}
+{'Epoch': 8, 'Generation Loss (Eval)': '111.649994'}
+{'epoch': 9, 'Geneartion Loss ed_image (Train)': '669.773987', 'Correlation Image(Train)': '0.022782', 'MAE Loss': '0.000000'}
+{'Epoch': 9, 'Generation Loss (Eval)': '108.514236'}
+{'epoch': 10, 'Geneartion Loss ed_image (Train)': '650.021667', 'Correlation Image(Train)': '0.025417', 'MAE Loss': '0.000000'}
+{'Epoch': 10, 'Generation Loss (Eval)': '105.325302'}
+{'epoch': 11, 'Geneartion Loss ed_image (Train)': '629.398560', 'Correlation Image(Train)': '0.028041', 'MAE Loss': '0.000000'}
+{'Epoch': 11, 'Generation Loss (Eval)': '102.436737'}
+{'epoch': 12, 'Geneartion Loss ed_image (Train)': '610.905151', 'Correlation Image(Train)': '0.030713', 'MAE Loss': '0.000000'}
+{'Epoch': 12, 'Generation Loss (Eval)': '99.749603'}
+{'epoch': 13, 'Geneartion Loss ed_image (Train)': '591.518372', 'Correlation Image(Train)': '0.031744', 'MAE Loss': '0.000000'}
+{'Epoch': 13, 'Generation Loss (Eval)': '96.405594'}
+{'epoch': 14, 'Geneartion Loss ed_image (Train)': '570.039246', 'Correlation Image(Train)': '0.033140', 'MAE Loss': '0.000000'}
+{'Epoch': 14, 'Generation Loss (Eval)': '93.251732'}
+{'epoch': 15, 'Geneartion Loss ed_image (Train)': '551.256470', 'Correlation Image(Train)': '0.033620', 'MAE Loss': '0.000000'}
+{'Epoch': 15, 'Generation Loss (Eval)': '90.415802'}
+{'epoch': 16, 'Geneartion Loss ed_image (Train)': '534.173401', 'Correlation Image(Train)': '0.033753', 'MAE Loss': '0.000000'}
+{'Epoch': 16, 'Generation Loss (Eval)': '87.757874'}
+{'epoch': 17, 'Geneartion Loss ed_image (Train)': '518.427429', 'Correlation Image(Train)': '0.033757', 'MAE Loss': '0.000000'}
+{'Epoch': 17, 'Generation Loss (Eval)': '85.246948'}
+{'epoch': 18, 'Geneartion Loss ed_image (Train)': '503.571808', 'Correlation Image(Train)': '0.033725', 'MAE Loss': '0.000000'}
+{'Epoch': 18, 'Generation Loss (Eval)': '82.849586'}
+{'epoch': 19, 'Geneartion Loss ed_image (Train)': '489.288483', 'Correlation Image(Train)': '0.033702', 'MAE Loss': '0.000000'}
+{'Epoch': 19, 'Generation Loss (Eval)': '80.553238'}
+{'epoch': 20, 'Geneartion Loss ed_image (Train)': '475.582916', 'Correlation Image(Train)': '0.033705', 'MAE Loss': '0.000000'}
+{'Epoch': 20, 'Generation Loss (Eval)': '78.331177'}
+{'epoch': 21, 'Geneartion Loss ed_image (Train)': '462.348206', 'Correlation Image(Train)': '0.033721', 'MAE Loss': '0.000000'}
+{'Epoch': 21, 'Generation Loss (Eval)': '76.194443'}
+{'epoch': 22, 'Geneartion Loss ed_image (Train)': '449.487854', 'Correlation Image(Train)': '0.033753', 'MAE Loss': '0.000000'}
+{'Epoch': 22, 'Generation Loss (Eval)': '74.091927'}
+{'epoch': 23, 'Geneartion Loss ed_image (Train)': '436.895416', 'Correlation Image(Train)': '0.033802', 'MAE Loss': '0.000000'}
+{'Epoch': 23, 'Generation Loss (Eval)': '72.047997'}
+{'epoch': 24, 'Geneartion Loss ed_image (Train)': '424.452728', 'Correlation Image(Train)': '0.033835', 'MAE Loss': '0.000000'}
+{'Epoch': 24, 'Generation Loss (Eval)': '69.972923'}
+{'epoch': 25, 'Geneartion Loss ed_image (Train)': '412.333160', 'Correlation Image(Train)': '0.033854', 'MAE Loss': '0.000000'}
+{'Epoch': 25, 'Generation Loss (Eval)': '67.953270'}
+{'epoch': 26, 'Geneartion Loss ed_image (Train)': '400.472870', 'Correlation Image(Train)': '0.033869', 'MAE Loss': '0.000000'}
+{'Epoch': 26, 'Generation Loss (Eval)': '65.950562'}
+{'epoch': 27, 'Geneartion Loss ed_image (Train)': '388.742615', 'Correlation Image(Train)': '0.033881', 'MAE Loss': '0.000000'}
+{'Epoch': 27, 'Generation Loss (Eval)': '64.006516'}
+{'epoch': 28, 'Geneartion Loss ed_image (Train)': '377.436920', 'Correlation Image(Train)': '0.033886', 'MAE Loss': '0.000000'}
+{'Epoch': 28, 'Generation Loss (Eval)': '62.135696'}
+{'epoch': 29, 'Geneartion Loss ed_image (Train)': '366.418579', 'Correlation Image(Train)': '0.033891', 'MAE Loss': '0.000000'}
+{'Epoch': 29, 'Generation Loss (Eval)': '60.275906'}
+{'epoch': 30, 'Geneartion Loss ed_image (Train)': '355.399780', 'Correlation Image(Train)': '0.033897', 'MAE Loss': '0.000000'}
+{'Epoch': 30, 'Generation Loss (Eval)': '58.478451'}
+{'epoch': 31, 'Geneartion Loss ed_image (Train)': '344.492462', 'Correlation Image(Train)': '0.033897', 'MAE Loss': '0.000000'}
+{'Epoch': 31, 'Generation Loss (Eval)': '56.629513'}
+{'epoch': 32, 'Geneartion Loss ed_image (Train)': '331.301361', 'Correlation Image(Train)': '0.033913', 'MAE Loss': '0.000000'}
+{'Epoch': 32, 'Generation Loss (Eval)': '53.967983'}
+{'epoch': 33, 'Geneartion Loss ed_image (Train)': '314.764832', 'Correlation Image(Train)': '0.033902', 'MAE Loss': '0.000000'}
+{'Epoch': 33, 'Generation Loss (Eval)': '51.305161'}
+{'epoch': 34, 'Geneartion Loss ed_image (Train)': '300.712219', 'Correlation Image(Train)': '0.033907', 'MAE Loss': '0.000000'}
+{'Epoch': 34, 'Generation Loss (Eval)': '49.246410'}
+{'epoch': 35, 'Geneartion Loss ed_image (Train)': '289.404449', 'Correlation Image(Train)': '0.033914', 'MAE Loss': '0.000000'}
+{'Epoch': 35, 'Generation Loss (Eval)': '47.485580'}
+{'epoch': 36, 'Geneartion Loss ed_image (Train)': '278.803650', 'Correlation Image(Train)': '0.033915', 'MAE Loss': '0.000000'}
+{'Epoch': 36, 'Generation Loss (Eval)': '45.652668'}
+{'epoch': 37, 'Geneartion Loss ed_image (Train)': '268.006714', 'Correlation Image(Train)': '0.033917', 'MAE Loss': '0.000000'}
+{'Epoch': 37, 'Generation Loss (Eval)': '43.987522'}

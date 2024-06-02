@@ -29,22 +29,22 @@ class Trainer:
         )
         # self.regression_layer = RainfallPredictor().to(self.args.device)
         # self.regression_model = RainNet().to(self.args.device)
-        self.Linear_layer = nn.Linear(self.args.batch, self.args.batch)
-        self.regression_layer =nn.Linear(100, 1)
+        # self.Linear_layer = nn.Linear(self.args.batch, self.args.batch)
+        # self.regression_layer =nn.Linear(100, 1)
 
         if self.cuda_condition:
             self.model.cuda()
             self.projection.cuda()
             #self.regression_model.cuda()
-            self.Linear_layer.cuda()
-            self.regression_layer.cuda()
+            # self.Linear_layer.cuda()
+            # self.regression_layer.cuda()
 
         if not self.args.pre_train:
             for param in self.model.parameters():
                 param.requires_grad = False
 
             # Assuming the regression model is meant to be trained
-            for param in self.regression_layer.parameters():
+            for param in self.model.regression_layer.parameters():
                 param.requires_grad = True
 
         # Setting the train and test data loader
@@ -55,7 +55,7 @@ class Trainer:
         # self.data_name = self.args.data_name
         betas = (self.args.adam_beta1, self.args.adam_beta2)
         self.optim = Adam(self.model.parameters(), lr=1e-5, betas=betas, weight_decay=self.args.weight_decay)
-        self.reg_optim = Adam(filter(lambda p: p.requires_grad, self.regression_layer.parameters()), lr=1e-5, betas=betas, weight_decay=self.args.weight_decay)
+        self.reg_optim = Adam(filter(lambda p: p.requires_grad, self.model.regression_layer.parameters()), lr=1e-5, betas=betas, weight_decay=self.args.weight_decay)
 
         print("Total Parameters:", sum([p.nelement() for p in self.model.parameters()]))
 
@@ -118,10 +118,13 @@ class Trainer:
             'epochs': self.args.epochs,
             'model_state_dict': self.model.cpu().state_dict(),
         }, file_name)
+
         self.model.to(self.device)
 
     def load(self, file_name):
-        self.model.load_state_dict(torch.load(file_name))
+        checkpoint = torch.load(file_name)
+        self.model.load_state_dict(checkpoint['model_state_dict'])
+        self.model.to(self.device)
 
     
     def plot_images(self, image ,epoch, model_idx, datetime, flag=None):
@@ -171,7 +174,6 @@ class FourTrainer(Trainer):
         if train:
             print("Train Fourcaster")            
             self.model.train()
-            self.regression_layer.train()
             
             batch_iter = tqdm(enumerate(dataloader), total= len(dataloader))
             total_generation_loss, total_mae_loss, total_correlation = torch.tensor(0.0, device=self.device), torch.tensor(0.0, device=self.device) , torch.tensor(0.0, device=self.device)
@@ -214,7 +216,7 @@ class FourTrainer(Trainer):
                                 self.plot_images(image_batch[-1][j].permute(1,2,0),epoch, self.args.model_idx, datetime[j], 'R')
                     
                     
-                    if epoch % 2 == 0 and self.args.pre_train:
+                    if epoch % 10 == 0 and self.args.pre_train:
                         if self.args.location == "seoul":
                             for j in range(len(datetime)-1):
                                 if datetime[j] in plot_list_seoul:
@@ -304,14 +306,14 @@ class FourTrainer(Trainer):
                     if self.args.regression == 'gap':
 
                         crop_predict_gap = (total_predict_gap[:,:,75,85] * 255).clamp(0,255)
-                        reg = abs(self.regression_layer(crop_predict_gap)).view(self.args.batch)
+                        reg = abs(self.model.regression_layer(crop_predict_gap)).view(self.args.batch)
                         
                         loss_mae = self.mae_criterion(reg, abs(gap))
                         
 
                     elif self.args.regression == 'label':
                         last_precipitation = (last_precipitation[:,75,85,:] * 255).clamp(0,255)
-                        reg = abs(self.regression_layer(last_precipitation)).view(self.args.batch)
+                        reg = abs(self.model.regression_layer(last_precipitation)).view(self.args.batch)
                         
                         loss_mae = self.mae_criterion(reg, abs(label))
                     
@@ -333,7 +335,6 @@ class FourTrainer(Trainer):
                 joint_loss.backward()
                 
                 torch.nn.utils.clip_grad_norm_(self.model.parameters(), max_norm=1.0)
-                torch.nn.utils.clip_grad_norm_(self.regression_layer.parameters(), max_norm=1.0)
 
                 if self.args.pre_train:
                     self.optim.step()
@@ -371,7 +372,6 @@ class FourTrainer(Trainer):
             #valid and test
             print("Eval Fourcaster")
             self.model.eval()
-            self.regression_layer.eval()
 
             with torch.no_grad():
                 total_generation_loss,total_mae_loss = torch.tensor(0.0, device=self.args.device),torch.tensor(0.0, device=self.args.device)
@@ -468,13 +468,13 @@ class FourTrainer(Trainer):
                     if self.args.pre_train == False:
                         if self.args.regression == 'gap':
                             crop_predict_gap = (total_predict_gap[:,:,75,85] * 255).clamp(0,255)
-                            reg = abs(self.regression_layer(crop_predict_gap)).view(self.args.batch)
+                            reg = abs(self.model.regression_layer(crop_predict_gap)).view(self.args.batch)
                             
                             loss_mae = self.mae_criterion(reg, abs(gap))
 
                         elif self.args.regression == 'label':
                             last_precipitation = (last_precipitation[:,:,75,85] * 255).clamp(0,255)
-                            reg = abs(self.regression_layer(last_precipitation)).view(self.args.batch)
+                            reg = abs(self.model.regression_layer(last_precipitation)).view(self.args.batch)
 
                             loss_mae = self.mae_criterion(reg, abs(label))
                         total_mae += loss_mae
