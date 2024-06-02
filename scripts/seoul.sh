@@ -1,22 +1,21 @@
 
 python main.py \
-    --data_dir "data/radar_full" \
-    --image_csv_dir "data/Seoul_V2.csv" \
+    --data_dir "data/data_seoul_only_v2" \
+    --image_csv_dir "data/seoul_v2.csv" \
     --batch 8 \
     --epochs 2000 \
     --patience 40 \
-    --model_idx "seoul-L3.01" \
-    --output_dir "output/seoul-L3.01/" \
+    --model_idx "seoul-L4.01" \
+    --output_dir "output/seoul-L4.01/" \
     --test_list=[] \
     --gpu_id 0 \
     --device cuda:0 \
     --seed 0 \
-    --lr 0.0001 \
-    --loss_type "ed_image" \
+    --lr 0.001 \
+    --loss_type "stamina" \
     --location "seoul" \
     --regression "gap" \
-    --pre_train \
-    --wandb 
+    --do_eval
 
 
 

@@ -130,7 +130,7 @@ def main():
         trainer = FourTrainer(model, train_loader,valid_loader,test_loader, args)
 
 # save model args
-    args.str = f"{args.model_idx}-{args.batch}-{args.epochs}"
+    args.str = f"{args.model_idx}-{args.batch}"
     args.log_file = os.path.join(args.output_dir,args.str + ".txt" )
 
     args.dataframe_path = os.path.join(args.output_dir,args.str + ".csv")
@@ -141,11 +141,25 @@ def main():
     
     if args.pre_train:
         args.checkpoint_path = os.path.join(args.output_dir, checkpoint)
+
+
     elif args.pre_train == False:
-        map_location = torch.device('cpu') if args.device == torch.device('cpu') else None
+        args.log_file = os.path.join(args.output_dir,args.str + "-Fine-tune.txt" )
+        map_location = args.device
+        
+
         args.checkpoint_path = os.path.join(args.output_dir, checkpoint_finetune)
-        trainer.model.load_state_dict(torch.load(args.output_dir + args.str + ".pt", map_location=map_location))
-        # args.checkpoint_path = os.path.join(args.output_dir,checkpoint_finetune )
+
+        if os.path.exists(args.checkpoint_path):
+            print(f"Load model from existing Fine-tune {args.checkpoint_path} for Continue Training!")
+            trainer.model.load_state_dict(torch.load(args.checkpoint_path, map_location=map_location))
+
+        else:
+            args.checkpoint_path = os.path.join(args.output_dir, checkpoint)
+            print(f"Load model from existing pre-train {args.checkpoint_path} for Continue Training!")
+            trainer.model.load_state_dict(torch.load(args.checkpoint_path, map_location=map_location))
+            args.checkpoint_path = os.path.join(args.output_dir, checkpoint_finetune)
+        
 
 
 # time start
@@ -159,11 +173,7 @@ def main():
         args = wandb.config
         
     if args.do_eval:
-        #trainer.load(args.checkpoint_path)
-
-        map_location = torch.device('cpu') if args.device == torch.device('cpu') else None
-        trainer.model.load_state_dict(torch.load(args.checkpoint_path, map_location=map_location))
-        print(f"Load model from {args.checkpoint_path} for test!")
+        
 
         score = trainer.test(args.epochs)
         # import IPython; IPython.embed(colors='Linux');exit(1);
@@ -189,86 +199,84 @@ def main():
 
         if os.path.exists(args.checkpoint_path):
             if args.pre_train:
+                print("Continue Trainging")
                 with open(args.log_file, "a") as f:
                     f.write("------------------------------ Continue Training ------------------------------ \n")
                     f.write("Load pt for training")
                 
                 
             elif args.pre_train == False:
+                print("Fine-tuning")
                 with open(args.log_file, "a") as f:
-                    f.write("Fine-tuning")
+                    f.write("Fine-tuning \n")
                 trainer.model.load_state_dict(torch.load(args.checkpoint_path, map_location=map_location))
             
-            
-        else:
-            show_args_info(args,args.log_file)
-            early_stopping = EarlyStopping(args.log_file,args.checkpoint_path, args.patience, verbose=True)
-            for epoch in range(args.epochs):
-            
-                trainer.train(epoch)
-
-                score,_ = trainer.valid(epoch)
-                if args.wandb == True:
-
-                    if args.pre_train:
-                        wandb.log({"Generation Loss (Valid)": score},step=epoch)
-                    else:
-                        wandb.log({"MAE Loss (Valid)": score},step=epoch)
-
-                early_stopping(score, trainer.model)
-
-                if early_stopping.early_stop:
-                    print("Early stopping")
-                    break
-                
-
-            #test
-            print("-----------------Test-----------------")
-            # load the best model
-            trainer.model.load_state_dict(torch.load(args.checkpoint_path))
-            score = trainer.test(args.epochs)
+        show_args_info(args,args.log_file)
+        early_stopping = EarlyStopping(args.log_file,args.checkpoint_path, args.patience, verbose=True)
+        for epoch in range(args.epochs):
         
-            # save csv file
-            try:
-                map_location = torch.device('cpu') if args.device == torch.device('cpu') else None
-                trainer.model.load_state_dict(torch.load(args.checkpoint_path, map_location=map_location))
-                print(f"Load model from {args.checkpoint_path} for test!")
+            trainer.train(epoch)
 
+            score,_ = trainer.valid(epoch)
+            if args.wandb == True:
 
-                score = trainer.test(args.epochs)
-                # import IPython; IPython.embed(colors='Linux');exit(1);
-                args.test_list.pop(0)
-                formatted_data = []
-                for record in args.test_list:
-                    for i in range(args.batch):  # Assuming record[0] contains a list of timestamps
-                        datetime = record[0][i]
-                        predicted_precipitation = f"{record[1][i].item():.6f}" if record[1].dim() != 0 else f"{record[1].item():.6f}"
-                        ground_truth = record[2][i].item() if record[2].dim() != 0 else record[2].item()
-                        formatted_data.append({
-                            'datetime': datetime,
-                            'predicted precipitation': predicted_precipitation,
-                            'ground_truth': ground_truth
-                })
-                dataframe = pd.DataFrame(formatted_data)
-                dataframe.to_csv(args.dataframe_path,index=False)
-            except:
-                with open(args.log_file, "a") as f:
-                    f.write("Error Handling csv")
-                print("Error Handling csv");
-                
-                
+                if args.pre_train:
+                    wandb.log({"Generation Loss (Valid)": score},step=epoch)
+                else:
+                    wandb.log({"MAE Loss (Valid)": score},step=epoch)
+
+            early_stopping(score, trainer.model)
+
+            if early_stopping.early_stop:
+                print("Early stopping")
+                break
             
-        
-            # time check
-            end_time = time.time()
-            execution_time = end_time - start_time
 
-            hours = int(execution_time // 3600)
-            minutes = int((execution_time % 3600) // 60)
-            seconds = int(execution_time % 60)
+        #test
+        print("-----------------Test-----------------")
+        # load the best model
+        map_location = args.device
+        trainer.model.load_state_dict(torch.load(args.checkpoint_path, map_location=map_location))
+        print(f"Load model from {args.checkpoint_path} for test!")
 
+        score = trainer.test(args.epochs)
+    
+        # save csv file
+        try:
+
+            # import IPython; IPython.embed(colors='Linux');exit(1);
+            args.test_list.pop(0)
+            formatted_data = []
+            for record in args.test_list:
+                for i in range(args.batch):  # Assuming record[0] contains a list of timestamps
+                    datetime = record[0][i]
+                    predicted_precipitation = f"{record[1][i].item():.6f}" if record[1].dim() != 0 else f"{record[1].item():.6f}"
+                    ground_truth = record[2][i].item() if record[2].dim() != 0 else record[2].item()
+                    formatted_data.append({
+                        'datetime': datetime,
+                        'predicted precipitation': predicted_precipitation,
+                        'ground_truth': ground_truth
+            })
+            dataframe = pd.DataFrame(formatted_data)
+            dataframe.to_csv(args.dataframe_path,index=False)
+        except:
             with open(args.log_file, "a") as f:
-                f.write(f"To run Epoch:{args.epochs} , It took {hours} hours, {minutes} minutes, {seconds} seconds\n")
+                f.write("Error Handling csv")
+            print("Error Handling csv");
+            
+            
+        
+    
+        # time check
+        end_time = time.time()
+        execution_time = end_time - start_time
+
+        hours = int(execution_time // 3600)
+        minutes = int((execution_time % 3600) // 60)
+        seconds = int(execution_time % 60)
+
+        with open(args.log_file, "a") as f:
+            f.write(f"To run Epoch:{args.epochs} , It took {hours} hours, {minutes} minutes, {seconds} seconds\n")
                 
 if __name__ == "__main__":
     main()
