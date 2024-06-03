@@ -1,6 +1,6 @@
 python main.py \
     --data_dir "data/data_seoul_only_v2" \
-    --image_csv_dir "data/Seoul_V2.csv" \
+    --image_csv_dir "data/seoul_v2.csv" \
     --batch 8 \
     --epochs 3000 \
     --patience 40 \
@@ -14,6 +14,7 @@ python main.py \
     --loss_type "ed_image" \
     --location "seoul" \
     --regression "gap" \
+    --do_eval
 
 
 # scripts/seoul_ed.sh

@@ -262,11 +262,14 @@ class FourTrainer(Trainer):
                     
                     if self.args.loss_type == 'ce_image':
                         
-                        generation_loss =  self.ce_criterion(generated_image.mean(dim=-1), image_batch[i+1])
+                        generation_loss =  self.ce_criterion(generated_image.mean(dim=-1), image_batch[i+1].mean(dim=1))
 
                     elif self.args.loss_type == 'mae_image':
-                        import IPython; IPython.embed(colors='Linux');exit(1);
-                        generation_loss = self.mae_criterion(generated_image.mean(dim=-1), image_batch[i+1])
+                        
+                        loss_r, loss_g, loss_b = self.mae_criterion(generated_image.permute(0,3,1,2),image_batch[i+1][:,0,:,:].unsqueeze(1)),self.mae_criterion(generated_image.permute(0,3,1,2),image_batch[i+1][:,1,:,:].unsqueeze(1)),self.mae_criterion(generated_image.permute(0,3,1,2),image_batch[i+1][:,2,:,:].unsqueeze(1))
+                        generation_loss = (loss_r +  loss_g + loss_b) / 3
+                        
+                        #generation_loss = self.mae_criterion(generated_image.mean(dim=-1), image_batch[i+1])
 
                     elif self.args.loss_type == 'ed_image':
 
