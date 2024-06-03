@@ -29,7 +29,7 @@ def extract_image_file(csv_path,raw_data_path, extract_path):
 if __name__ == "__main__":
 
     path_to_zipfile = 'data/radar_full.zip'
-    directory_to_unzip = 'data/radar_full'
+    directory_to_unzip = 'data/'
 
     with zipfile.ZipFile(path_to_zipfile, 'r') as zip_ref:
         zip_ref.extractall(directory_to_unzip)
