@@ -77,7 +77,7 @@ def main():
     parser.add_argument("--patience",type=int, default="10")
     parser.add_argument('--loss_type', type=str, default='ce_image', help='ce_image, ce_label')
     parser.add_argument('--regression', type=str, default='gap', help='gap, label')
-
+    parser.add_argument('--classification', action="store_true")
     # learning args
     parser.add_argument("--lr", type=float, default=0.001, help="learning rate")
     parser.add_argument("--adam_beta1", type=float, default=0.9, help="adam first beta value")

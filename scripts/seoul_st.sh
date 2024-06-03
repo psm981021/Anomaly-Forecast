@@ -1,5 +1,5 @@
 python main.py \
-    --data_dir "/workspace/chanbeen/Anomaly-Forecast/data/images_classification" \
+    --data_dir "/dev/shm/data_seoul_only_v2" \
     --image_csv_dir "data/seoul_v2.csv" \
     --batch 8 \
     --epochs 2000 \
@@ -17,7 +17,6 @@ python main.py \
 
 
 
-# /workspace/chanbeen/Anomaly-Forecast/data/images_classification
 
 # scripts/seoul_st.sh
 

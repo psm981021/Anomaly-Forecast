@@ -324,7 +324,7 @@ class FourTrainer(Trainer):
                     # total_predict_gap[:,:,70:90, 55:86], seoul
                     
                     if self.args.regression == 'gap':
-                        # crop_predict_gap = (total_predict_gap[:,:,71,86] * 255).clamp(0,255)
+                        crop_predict_gap = (total_predict_gap[:,:,71,86] * 255).clamp(0,255)
                         
                         if self.args.classification:
                             crop_predict_gap = (total_predict_gap[:,:,70:72,85:87] * 255).clamp(0,255)
