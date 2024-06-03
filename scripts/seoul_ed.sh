@@ -14,7 +14,6 @@ python main.py \
     --loss_type "ed_image" \
     --location "seoul" \
     --regression "gap" \
-    --pre_train
 
 
 # scripts/seoul_ed.sh

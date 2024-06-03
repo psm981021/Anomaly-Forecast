@@ -901,3 +901,6 @@ EarlyStopping counter: 39 out of 40
 {'epoch': 255, 'Geneartion Loss ed_image (Train)': '3.402811', 'Correlation Image(Train)': '0.033810', 'MAE Loss': '0.000000'}
 {'Epoch': 255, 'Generation Loss (Eval)': '0.575811'}
 EarlyStopping counter: 40 out of 40
+------------------------------ Continue Training ------------------------------ 
+Load pt for Pre-training------------------------------ Continue Training ------------------------------ 
+Load pt for Pre-training{'Epoch': 3000, 'Generation Loss (Eval)': '0.601529'}
