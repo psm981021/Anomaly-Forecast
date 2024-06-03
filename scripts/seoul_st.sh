@@ -14,7 +14,6 @@ python main.py \
     --loss_type "stamina" \
     --location "seoul" \
     --regression "gap" \
-    --pre_train
 
 
 
