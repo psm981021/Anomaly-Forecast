@@ -1,11 +1,11 @@
 python main.py \
-    --data_dir "/dev/shm/data_seoul_only_v2" \
+    --data_dir "/dev/shm/data_Seoul" \
     --image_csv_dir "data/Seoul.csv" \
     --batch 8 \
     --epochs 3000 \
     --patience 40 \
-    --model_idx "test2" \
-    --output_dir "output/test2/" \
+    --model_idx "seoul-L4.04" \
+    --output_dir "output/seoul-L4.04" \
     --test_list=[] \
     --gpu_id 1 \
     --device cuda:1 \
@@ -18,13 +18,13 @@ python main.py \
 
 
 python main.py \
-    --data_dir "/dev/shm/data_seoul_only_v2" \
+    --data_dir "/dev/shm/data_Seoul" \
     --image_csv_dir "data/Seoul.csv" \
     --batch 8 \
     --epochs 3000 \
     --patience 40 \
-    --model_idx "test2" \
-    --output_dir "output/test2/" \
+    --model_idx "seoul-L4.04" \
+    --output_dir "output/seoul-L4.04" \
     --test_list=[] \
     --gpu_id 1 \
     --device cuda:1 \
