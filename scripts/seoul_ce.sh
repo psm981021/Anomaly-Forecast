@@ -14,7 +14,5 @@ python main.py \
     --loss_type "stamina" \
     --location "seoul" \
     --regression "gap" \
-    --do_eval
-
 
 # scripts/seoul_ce.sh
