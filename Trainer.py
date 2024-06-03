@@ -324,13 +324,35 @@ class FourTrainer(Trainer):
                     # total_predict_gap[:,:,70:90, 55:86], seoul
                     
                     if self.args.regression == 'gap':
+                        # crop_predict_gap = (total_predict_gap[:,:,71,86] * 255).clamp(0,255)
+                        
+                        if self.args.classification:
+                            crop_predict_gap = (total_predict_gap[:,:,70:72,85:87] * 255).clamp(0,255)
+                            conv1x1=nn.Conv2d(100,3,kernel_size=1).to(self.device)
 
-                        crop_predict_gap = (total_predict_gap[:,:,71,86] * 255).clamp(0,255)
-                        # predict = inferecne_jw(self.classifier, crop_predict_gap)
-                        reg = abs(self.model.regression_layer(crop_predict_gap)).view(self.args.batch)
-                        
-                        loss_mae = self.mae_criterion(reg, abs(gap))
-                        
+                            padding_needed = (1,1,1,1)
+                            crop_predict_gap = F.pad(crop_predict_gap, padding_needed, "constant", 0)
+
+                            crop_predict_gap = conv1x1(crop_predict_gap)
+
+                            resize = transforms.Resize((40,40))
+                            crop_predict_gap = resize(crop_predict_gap)
+                            predict = inference_jw(self.classifier, crop_predict_gap)
+
+                            output_list = torch.zeros(self.args.batch).to(self.args.device)
+                            for i, model_index in enumerate(predict):
+                                selected_model = self.model.moe[model_index]
+                                output_list[i] = selected_model(total_predict_gap[:,:,71,86][i])
+                            
+                            loss_mae = self.mae_criterion(abs(output_list), abs(gap))
+                            
+                        else:
+
+                            # predict = inferecne_jw(self.classifier, crop_predict_gap)
+                            reg = abs(self.model.regression_layer(crop_predict_gap)).view(self.args.batch)
+                            
+                            loss_mae = self.mae_criterion(reg, abs(gap))
+                            
 
                     elif self.args.regression == 'label':
                         last_precipitation = (last_precipitation[:,71,86,:] * 255).clamp(0,255)
