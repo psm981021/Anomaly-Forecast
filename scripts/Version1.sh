@@ -4,8 +4,8 @@ python main.py \
     --batch 8 \
     --epochs 2000 \
     --patience 40 \
-    --model_idx "seoul-L4.02" \
-    --output_dir "output/seoul-L4.02/" \
+    --model_idx "tests" \
+    --output_dir "output/tests" \
     --test_list=[] \
     --gpu_id 0 \
     --device cuda:0 \
@@ -14,7 +14,7 @@ python main.py \
     --loss_type "stamina" \
     --location "seoul" \
     --regression "gap" \
-    --pre_train \
+    --pre_train  
     
 
 

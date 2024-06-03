@@ -10,6 +10,7 @@ from models import RainfallPredictor
 from rainnet import *
 import numpy as np
 from utils import *
+from efficientnet_pytorch import EfficientNet
 
 class Trainer:
     def __init__(self, model, train_dataloader, valid_dataloader, test_dataloader, args):
@@ -27,18 +28,26 @@ class Trainer:
             nn.ReLU(),
             nn.AdaptiveAvgPool2d((50, 50))
         )
+
+        self.classifier = EfficientNet.from_pretrained('efficientnet-b0', num_classes= 3)
         # self.regression_layer = RainfallPredictor().to(self.args.device)
         # self.regression_model = RainNet().to(self.args.device)
         # self.Linear_layer = nn.Linear(self.args.batch, self.args.batch)
         # self.regression_layer =nn.Linear(100, 1)
 
+
+
         if self.cuda_condition:
             self.model.cuda()
             self.projection.cuda()
+            self.classifier.cuda()
             #self.regression_model.cuda()
             # self.Linear_layer.cuda()
             # self.regression_layer.cuda()
 
+        for param in self.classifier.parameters():
+            param.requires_grad = False
+            
         if not self.args.pre_train:
             for param in self.model.parameters():
                 param.requires_grad = False
@@ -300,19 +309,22 @@ class FourTrainer(Trainer):
 
                 if self.args.pre_train == False:
                     
-                    # total_predict_gap[:,:,75,85] 관악
-                    # total_predict_gap[:,:,70:90, 55:85], seoul
+                    # total_predict_gap[:,:,71,86] 관악
+                    # total_predict_gap[:,:,58,44] 철원 
+
+                    # total_predict_gap[:,:,70:90, 55:86], seoul
                     
                     if self.args.regression == 'gap':
 
-                        crop_predict_gap = (total_predict_gap[:,:,75,85] * 255).clamp(0,255)
+                        crop_predict_gap = (total_predict_gap[:,:,71,86] * 255).clamp(0,255)
+                        # predict = inferecne_jw(self.classifier, crop_predict_gap)
                         reg = abs(self.model.regression_layer(crop_predict_gap)).view(self.args.batch)
                         
                         loss_mae = self.mae_criterion(reg, abs(gap))
                         
 
                     elif self.args.regression == 'label':
-                        last_precipitation = (last_precipitation[:,75,85,:] * 255).clamp(0,255)
+                        last_precipitation = (last_precipitation[:,71,86,:] * 255).clamp(0,255)
                         reg = abs(self.model.regression_layer(last_precipitation)).view(self.args.batch)
                         
                         loss_mae = self.mae_criterion(reg, abs(label))
@@ -467,13 +479,13 @@ class FourTrainer(Trainer):
                        
                     if self.args.pre_train == False:
                         if self.args.regression == 'gap':
-                            crop_predict_gap = (total_predict_gap[:,:,75,85] * 255).clamp(0,255)
+                            crop_predict_gap = (total_predict_gap[:,:,71,86] * 255).clamp(0,255)
                             reg = abs(self.model.regression_layer(crop_predict_gap)).view(self.args.batch)
                             
                             loss_mae = self.mae_criterion(reg, abs(gap))
 
                         elif self.args.regression == 'label':
-                            last_precipitation = (last_precipitation[:,:,75,85] * 255).clamp(0,255)
+                            last_precipitation = (last_precipitation[:,:,71,86] * 255).clamp(0,255)
                             reg = abs(self.model.regression_layer(last_precipitation)).view(self.args.batch)
 
                             loss_mae = self.mae_criterion(reg, abs(label))
@@ -490,7 +502,7 @@ class FourTrainer(Trainer):
 
 
                     if test:
-                        last_precipitation = (last_precipitation[:,:,75,85] * 255).clamp(0,255)
+                        last_precipitation = (last_precipitation[:,:,71,86] * 255).clamp(0,255)
                         reg = abs(self.regression_layer(last_precipitation)).view(self.args.batch)
                         
                         self.args.test_list.append([datetime, reg, label])

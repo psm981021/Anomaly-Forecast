@@ -1,0 +1,866 @@
+---------------------- Configure Info: ----------------------
+data_dir                       : data/data_seoul_only_v2
+image_csv_dir                  : data/seoul_v2.csv
+output_dir                     : output/seoul-L4.03/
+gpu_id                         : 1
+device                         : cuda:1
+seed                           : 0
+no_cuda                        : False
+use_multi_gpu                  : False
+multi_devices                  : 0,1
+wandb                          : False
+pre_train                      : True
+do_eval                        : False
+test_list                      : ['[]']
+grey_scale                     : False
+location                       : seoul
+model_idx                      : seoul-L4.03
+batch                          : 8
+n_classes                      : 100
+sianet                         : False
+epochs                         : 2000
+log_freq                       : 1
+patience                       : 40
+loss_type                      : staminia
+regression                     : gap
+lr                             : 0.001
+adam_beta1                     : 0.9
+adam_beta2                     : 0.999
+weight_decay                   : 0.0
+initializer_range              : 0.01
+str                            : seoul-L4.03-8
+dataframe_path                 : output/seoul-L4.03/seoul-L4.03-8.csv
+log_file                       : output/seoul-L4.03/seoul-L4.03-8.txt
+checkpoint_path                : output/seoul-L4.03/seoul-L4.03-8.pt
+---------------------- Configure Info: ----------------------
+---------------------- Configure Info: ----------------------
+data_dir                       : data/data_seoul_only_v2
+image_csv_dir                  : data/seoul_v2.csv
+output_dir                     : output/seoul-L4.03/
+gpu_id                         : 1
+device                         : cuda:1
+seed                           : 0
+no_cuda                        : False
+use_multi_gpu                  : False
+multi_devices                  : 0,1
+wandb                          : False
+pre_train                      : True
+do_eval                        : False
+test_list                      : ['[]']
+grey_scale                     : False
+location                       : seoul
+model_idx                      : seoul-L4.03
+batch                          : 8
+n_classes                      : 100
+sianet                         : False
+epochs                         : 2000
+log_freq                       : 1
+patience                       : 40
+loss_type                      : stamina
+regression                     : gap
+lr                             : 0.001
+adam_beta1                     : 0.9
+adam_beta2                     : 0.999
+weight_decay                   : 0.0
+initializer_range              : 0.01
+str                            : seoul-L4.03-8
+dataframe_path                 : output/seoul-L4.03/seoul-L4.03-8.csv
+log_file                       : output/seoul-L4.03/seoul-L4.03-8.txt
+checkpoint_path                : output/seoul-L4.03/seoul-L4.03-8.pt
+---------------------- Configure Info: ----------------------
+{'epoch': 0, 'Geneartion Loss stamina (Train)': '5.348446', 'Correlation Image(Train)': '0.025820', 'MAE Loss': '0.000000'}
+{'Epoch': 0, 'Generation Loss (Eval)': '0.852298'}
+{'epoch': 1, 'Geneartion Loss stamina (Train)': '5.016792', 'Correlation Image(Train)': '0.029237', 'MAE Loss': '0.000000'}
+{'Epoch': 1, 'Generation Loss (Eval)': '0.787479'}
+{'epoch': 2, 'Geneartion Loss stamina (Train)': '4.719351', 'Correlation Image(Train)': '0.030886', 'MAE Loss': '0.000000'}
+{'Epoch': 2, 'Generation Loss (Eval)': '0.727088'}
+{'epoch': 3, 'Geneartion Loss stamina (Train)': '4.432042', 'Correlation Image(Train)': '0.031706', 'MAE Loss': '0.000000'}
+{'Epoch': 3, 'Generation Loss (Eval)': '0.670219'}
+{'epoch': 4, 'Geneartion Loss stamina (Train)': '4.153977', 'Correlation Image(Train)': '0.032224', 'MAE Loss': '0.000000'}
+{'Epoch': 4, 'Generation Loss (Eval)': '0.616104'}
+{'epoch': 5, 'Geneartion Loss stamina (Train)': '3.884148', 'Correlation Image(Train)': '0.032559', 'MAE Loss': '0.000000'}
+{'Epoch': 5, 'Generation Loss (Eval)': '0.565181'}
+{'epoch': 6, 'Geneartion Loss stamina (Train)': '3.619953', 'Correlation Image(Train)': '0.032822', 'MAE Loss': '0.000000'}
+{'Epoch': 6, 'Generation Loss (Eval)': '0.518486'}
+{'epoch': 7, 'Geneartion Loss stamina (Train)': '3.365174', 'Correlation Image(Train)': '0.033074', 'MAE Loss': '0.000000'}
+{'Epoch': 7, 'Generation Loss (Eval)': '0.475470'}
+{'epoch': 8, 'Geneartion Loss stamina (Train)': '3.122453', 'Correlation Image(Train)': '0.033313', 'MAE Loss': '0.000000'}
+{'Epoch': 8, 'Generation Loss (Eval)': '0.435868'}
+{'epoch': 9, 'Geneartion Loss stamina (Train)': '2.893809', 'Correlation Image(Train)': '0.033528', 'MAE Loss': '0.000000'}
+{'Epoch': 9, 'Generation Loss (Eval)': '0.399199'}
+{'epoch': 10, 'Geneartion Loss stamina (Train)': '2.680413', 'Correlation Image(Train)': '0.033725', 'MAE Loss': '0.000000'}
+{'Epoch': 10, 'Generation Loss (Eval)': '0.365899'}
+{'epoch': 11, 'Geneartion Loss stamina (Train)': '2.482996', 'Correlation Image(Train)': '0.033920', 'MAE Loss': '0.000000'}
+{'Epoch': 11, 'Generation Loss (Eval)': '0.335693'}
+{'epoch': 12, 'Geneartion Loss stamina (Train)': '2.301862', 'Correlation Image(Train)': '0.034123', 'MAE Loss': '0.000000'}
+{'Epoch': 12, 'Generation Loss (Eval)': '0.308752'}
+{'epoch': 13, 'Geneartion Loss stamina (Train)': '2.137209', 'Correlation Image(Train)': '0.034326', 'MAE Loss': '0.000000'}
+{'Epoch': 13, 'Generation Loss (Eval)': '0.285148'}
+{'epoch': 14, 'Geneartion Loss stamina (Train)': '1.989311', 'Correlation Image(Train)': '0.034518', 'MAE Loss': '0.000000'}
+{'Epoch': 14, 'Generation Loss (Eval)': '0.264757'}
+{'epoch': 15, 'Geneartion Loss stamina (Train)': '1.857881', 'Correlation Image(Train)': '0.034693', 'MAE Loss': '0.000000'}
+{'Epoch': 15, 'Generation Loss (Eval)': '0.247594'}
+{'epoch': 16, 'Geneartion Loss stamina (Train)': '1.742277', 'Correlation Image(Train)': '0.034853', 'MAE Loss': '0.000000'}
+{'Epoch': 16, 'Generation Loss (Eval)': '0.233407'}
+{'epoch': 17, 'Geneartion Loss stamina (Train)': '1.641893', 'Correlation Image(Train)': '0.034995', 'MAE Loss': '0.000000'}
+{'Epoch': 17, 'Generation Loss (Eval)': '0.221760'}
+{'epoch': 18, 'Geneartion Loss stamina (Train)': '1.556036', 'Correlation Image(Train)': '0.035115', 'MAE Loss': '0.000000'}
+{'Epoch': 18, 'Generation Loss (Eval)': '0.212329'}
+{'epoch': 19, 'Geneartion Loss stamina (Train)': '1.483397', 'Correlation Image(Train)': '0.035214', 'MAE Loss': '0.000000'}
+{'Epoch': 19, 'Generation Loss (Eval)': '0.204684'}
+{'epoch': 20, 'Geneartion Loss stamina (Train)': '1.422402', 'Correlation Image(Train)': '0.035292', 'MAE Loss': '0.000000'}
+{'Epoch': 20, 'Generation Loss (Eval)': '0.198512'}
+{'epoch': 21, 'Geneartion Loss stamina (Train)': '1.371461', 'Correlation Image(Train)': '0.035354', 'MAE Loss': '0.000000'}
+{'Epoch': 21, 'Generation Loss (Eval)': '0.193562'}
+{'epoch': 22, 'Geneartion Loss stamina (Train)': '1.329104', 'Correlation Image(Train)': '0.035401', 'MAE Loss': '0.000000'}
+{'Epoch': 22, 'Generation Loss (Eval)': '0.189479'}
+{'epoch': 23, 'Geneartion Loss stamina (Train)': '1.293798', 'Correlation Image(Train)': '0.035439', 'MAE Loss': '0.000000'}
+{'Epoch': 23, 'Generation Loss (Eval)': '0.186219'}
+{'epoch': 24, 'Geneartion Loss stamina (Train)': '1.264291', 'Correlation Image(Train)': '0.035467', 'MAE Loss': '0.000000'}
+{'Epoch': 24, 'Generation Loss (Eval)': '0.183575'}
+{'epoch': 25, 'Geneartion Loss stamina (Train)': '1.239524', 'Correlation Image(Train)': '0.035488', 'MAE Loss': '0.000000'}
+{'Epoch': 25, 'Generation Loss (Eval)': '0.181473'}
+{'epoch': 26, 'Geneartion Loss stamina (Train)': '1.218500', 'Correlation Image(Train)': '0.035504', 'MAE Loss': '0.000000'}
+{'Epoch': 26, 'Generation Loss (Eval)': '0.179816'}
+{'epoch': 27, 'Geneartion Loss stamina (Train)': '1.200326', 'Correlation Image(Train)': '0.035516', 'MAE Loss': '0.000000'}
+{'Epoch': 27, 'Generation Loss (Eval)': '0.178495'}
+{'epoch': 28, 'Geneartion Loss stamina (Train)': '1.184259', 'Correlation Image(Train)': '0.035524', 'MAE Loss': '0.000000'}
+{'Epoch': 28, 'Generation Loss (Eval)': '0.177417'}
+{'epoch': 29, 'Geneartion Loss stamina (Train)': '1.169779', 'Correlation Image(Train)': '0.035532', 'MAE Loss': '0.000000'}
+{'Epoch': 29, 'Generation Loss (Eval)': '0.176504'}
+{'epoch': 30, 'Geneartion Loss stamina (Train)': '1.156581', 'Correlation Image(Train)': '0.035538', 'MAE Loss': '0.000000'}
+{'Epoch': 30, 'Generation Loss (Eval)': '0.175700'}
+{'epoch': 31, 'Geneartion Loss stamina (Train)': '1.144519', 'Correlation Image(Train)': '0.035543', 'MAE Loss': '0.000000'}
+{'Epoch': 31, 'Generation Loss (Eval)': '0.174981'}
+{'epoch': 32, 'Geneartion Loss stamina (Train)': '1.133506', 'Correlation Image(Train)': '0.035549', 'MAE Loss': '0.000000'}
+{'Epoch': 32, 'Generation Loss (Eval)': '0.174309'}
+{'epoch': 33, 'Geneartion Loss stamina (Train)': '1.123430', 'Correlation Image(Train)': '0.035553', 'MAE Loss': '0.000000'}
+{'Epoch': 33, 'Generation Loss (Eval)': '0.173680'}
+{'epoch': 34, 'Geneartion Loss stamina (Train)': '1.114137', 'Correlation Image(Train)': '0.035557', 'MAE Loss': '0.000000'}
+{'Epoch': 34, 'Generation Loss (Eval)': '0.173098'}
+{'epoch': 35, 'Geneartion Loss stamina (Train)': '1.105537', 'Correlation Image(Train)': '0.035560', 'MAE Loss': '0.000000'}
+{'Epoch': 35, 'Generation Loss (Eval)': '0.172550'}
+{'epoch': 36, 'Geneartion Loss stamina (Train)': '1.097593', 'Correlation Image(Train)': '0.035562', 'MAE Loss': '0.000000'}
+{'Epoch': 36, 'Generation Loss (Eval)': '0.172017'}
+{'epoch': 37, 'Geneartion Loss stamina (Train)': '1.090239', 'Correlation Image(Train)': '0.035565', 'MAE Loss': '0.000000'}
+{'Epoch': 37, 'Generation Loss (Eval)': '0.171491'}
+{'epoch': 38, 'Geneartion Loss stamina (Train)': '1.083417', 'Correlation Image(Train)': '0.035568', 'MAE Loss': '0.000000'}
+{'Epoch': 38, 'Generation Loss (Eval)': '0.170944'}
+{'epoch': 39, 'Geneartion Loss stamina (Train)': '1.077062', 'Correlation Image(Train)': '0.035570', 'MAE Loss': '0.000000'}
+{'Epoch': 39, 'Generation Loss (Eval)': '0.170409'}
+{'epoch': 40, 'Geneartion Loss stamina (Train)': '1.071162', 'Correlation Image(Train)': '0.035573', 'MAE Loss': '0.000000'}
+{'Epoch': 40, 'Generation Loss (Eval)': '0.169840'}
+{'epoch': 41, 'Geneartion Loss stamina (Train)': '1.065708', 'Correlation Image(Train)': '0.035576', 'MAE Loss': '0.000000'}
+{'Epoch': 41, 'Generation Loss (Eval)': '0.169344'}
+{'epoch': 42, 'Geneartion Loss stamina (Train)': '1.060723', 'Correlation Image(Train)': '0.035576', 'MAE Loss': '0.000000'}
+{'Epoch': 42, 'Generation Loss (Eval)': '0.169136'}
+{'epoch': 43, 'Geneartion Loss stamina (Train)': '1.056576', 'Correlation Image(Train)': '0.035572', 'MAE Loss': '0.000000'}
+{'Epoch': 43, 'Generation Loss (Eval)': '0.169755'}
+EarlyStopping counter: 1 out of 40
+{'epoch': 44, 'Geneartion Loss stamina (Train)': '1.053028', 'Correlation Image(Train)': '0.035568', 'MAE Loss': '0.000000'}
+{'Epoch': 44, 'Generation Loss (Eval)': '0.169619'}
+EarlyStopping counter: 2 out of 40
+{'epoch': 45, 'Geneartion Loss stamina (Train)': '1.048648', 'Correlation Image(Train)': '0.035572', 'MAE Loss': '0.000000'}
+{'Epoch': 45, 'Generation Loss (Eval)': '0.168594'}
+{'epoch': 46, 'Geneartion Loss stamina (Train)': '1.044063', 'Correlation Image(Train)': '0.035576', 'MAE Loss': '0.000000'}
+{'Epoch': 46, 'Generation Loss (Eval)': '0.168127'}
+{'epoch': 47, 'Geneartion Loss stamina (Train)': '1.040254', 'Correlation Image(Train)': '0.035572', 'MAE Loss': '0.000000'}
+{'Epoch': 47, 'Generation Loss (Eval)': '0.168089'}
+{'epoch': 48, 'Geneartion Loss stamina (Train)': '1.036898', 'Correlation Image(Train)': '0.035581', 'MAE Loss': '0.000000'}
+{'Epoch': 48, 'Generation Loss (Eval)': '0.167110'}
+{'epoch': 49, 'Geneartion Loss stamina (Train)': '1.034025', 'Correlation Image(Train)': '0.035588', 'MAE Loss': '0.000000'}
+{'Epoch': 49, 'Generation Loss (Eval)': '0.166613'}
+{'epoch': 50, 'Geneartion Loss stamina (Train)': '1.031704', 'Correlation Image(Train)': '0.035579', 'MAE Loss': '0.000000'}
+{'Epoch': 50, 'Generation Loss (Eval)': '0.168450'}
+EarlyStopping counter: 1 out of 40
+{'epoch': 51, 'Geneartion Loss stamina (Train)': '1.029112', 'Correlation Image(Train)': '0.035584', 'MAE Loss': '0.000000'}
+{'Epoch': 51, 'Generation Loss (Eval)': '0.167798'}
+EarlyStopping counter: 2 out of 40
+{'epoch': 52, 'Geneartion Loss stamina (Train)': '1.026642', 'Correlation Image(Train)': '0.035580', 'MAE Loss': '0.000000'}
+{'Epoch': 52, 'Generation Loss (Eval)': '0.168332'}
+EarlyStopping counter: 3 out of 40
+{'epoch': 53, 'Geneartion Loss stamina (Train)': '1.024649', 'Correlation Image(Train)': '0.035582', 'MAE Loss': '0.000000'}
+{'Epoch': 53, 'Generation Loss (Eval)': '0.168320'}
+EarlyStopping counter: 4 out of 40
+{'epoch': 54, 'Geneartion Loss stamina (Train)': '1.022306', 'Correlation Image(Train)': '0.035587', 'MAE Loss': '0.000000'}
+{'Epoch': 54, 'Generation Loss (Eval)': '0.167095'}
+EarlyStopping counter: 5 out of 40
+{'epoch': 55, 'Geneartion Loss stamina (Train)': '1.020125', 'Correlation Image(Train)': '0.035587', 'MAE Loss': '0.000000'}
+{'Epoch': 55, 'Generation Loss (Eval)': '0.167297'}
+EarlyStopping counter: 6 out of 40
+{'epoch': 56, 'Geneartion Loss stamina (Train)': '1.019101', 'Correlation Image(Train)': '0.035588', 'MAE Loss': '0.000000'}
+{'Epoch': 56, 'Generation Loss (Eval)': '0.167128'}
+EarlyStopping counter: 7 out of 40
+{'epoch': 57, 'Geneartion Loss stamina (Train)': '1.018630', 'Correlation Image(Train)': '0.035582', 'MAE Loss': '0.000000'}
+{'Epoch': 57, 'Generation Loss (Eval)': '0.167546'}
+EarlyStopping counter: 8 out of 40
+{'epoch': 58, 'Geneartion Loss stamina (Train)': '1.017760', 'Correlation Image(Train)': '0.035581', 'MAE Loss': '0.000000'}
+{'Epoch': 58, 'Generation Loss (Eval)': '0.166425'}
+{'epoch': 59, 'Geneartion Loss stamina (Train)': '1.015254', 'Correlation Image(Train)': '0.035591', 'MAE Loss': '0.000000'}
+{'Epoch': 59, 'Generation Loss (Eval)': '0.166424'}
+{'epoch': 60, 'Geneartion Loss stamina (Train)': '1.013429', 'Correlation Image(Train)': '0.035594', 'MAE Loss': '0.000000'}
+{'Epoch': 60, 'Generation Loss (Eval)': '0.165674'}
+{'epoch': 61, 'Geneartion Loss stamina (Train)': '1.011830', 'Correlation Image(Train)': '0.035590', 'MAE Loss': '0.000000'}
+{'Epoch': 61, 'Generation Loss (Eval)': '0.164729'}
+{'epoch': 62, 'Geneartion Loss stamina (Train)': '1.012813', 'Correlation Image(Train)': '0.035612', 'MAE Loss': '0.000000'}
+{'Epoch': 62, 'Generation Loss (Eval)': '0.164104'}
+{'epoch': 63, 'Geneartion Loss stamina (Train)': '1.010146', 'Correlation Image(Train)': '0.035613', 'MAE Loss': '0.000000'}
+{'Epoch': 63, 'Generation Loss (Eval)': '0.163955'}
+{'epoch': 64, 'Geneartion Loss stamina (Train)': '1.008727', 'Correlation Image(Train)': '0.035621', 'MAE Loss': '0.000000'}
+{'Epoch': 64, 'Generation Loss (Eval)': '0.163837'}
+{'epoch': 65, 'Geneartion Loss stamina (Train)': '1.005754', 'Correlation Image(Train)': '0.035616', 'MAE Loss': '0.000000'}
+{'Epoch': 65, 'Generation Loss (Eval)': '0.163686'}
+{'epoch': 66, 'Geneartion Loss stamina (Train)': '1.003877', 'Correlation Image(Train)': '0.035617', 'MAE Loss': '0.000000'}
+{'Epoch': 66, 'Generation Loss (Eval)': '0.163545'}
+{'epoch': 67, 'Geneartion Loss stamina (Train)': '1.002094', 'Correlation Image(Train)': '0.035617', 'MAE Loss': '0.000000'}
+{'Epoch': 67, 'Generation Loss (Eval)': '0.163450'}
+{'epoch': 68, 'Geneartion Loss stamina (Train)': '1.000850', 'Correlation Image(Train)': '0.035616', 'MAE Loss': '0.000000'}
+{'Epoch': 68, 'Generation Loss (Eval)': '0.163311'}
+{'epoch': 69, 'Geneartion Loss stamina (Train)': '0.999615', 'Correlation Image(Train)': '0.035621', 'MAE Loss': '0.000000'}
+{'Epoch': 69, 'Generation Loss (Eval)': '0.163219'}
+{'epoch': 70, 'Geneartion Loss stamina (Train)': '0.998189', 'Correlation Image(Train)': '0.035622', 'MAE Loss': '0.000000'}
+{'Epoch': 70, 'Generation Loss (Eval)': '0.163352'}
+EarlyStopping counter: 1 out of 40
+{'epoch': 71, 'Geneartion Loss stamina (Train)': '1.000190', 'Correlation Image(Train)': '0.035622', 'MAE Loss': '0.000000'}
+{'Epoch': 71, 'Generation Loss (Eval)': '0.163137'}
+{'epoch': 72, 'Geneartion Loss stamina (Train)': '0.998635', 'Correlation Image(Train)': '0.035632', 'MAE Loss': '0.000000'}
+{'Epoch': 72, 'Generation Loss (Eval)': '0.163078'}
+{'epoch': 73, 'Geneartion Loss stamina (Train)': '0.998812', 'Correlation Image(Train)': '0.035635', 'MAE Loss': '0.000000'}
+{'Epoch': 73, 'Generation Loss (Eval)': '0.163111'}
+EarlyStopping counter: 1 out of 40
+{'epoch': 74, 'Geneartion Loss stamina (Train)': '0.997599', 'Correlation Image(Train)': '0.035633', 'MAE Loss': '0.000000'}
+{'Epoch': 74, 'Generation Loss (Eval)': '0.163203'}
+EarlyStopping counter: 2 out of 40
+{'epoch': 75, 'Geneartion Loss stamina (Train)': '0.994797', 'Correlation Image(Train)': '0.035629', 'MAE Loss': '0.000000'}
+{'Epoch': 75, 'Generation Loss (Eval)': '0.163004'}
+{'epoch': 76, 'Geneartion Loss stamina (Train)': '0.993680', 'Correlation Image(Train)': '0.035631', 'MAE Loss': '0.000000'}
+{'Epoch': 76, 'Generation Loss (Eval)': '0.163035'}
+EarlyStopping counter: 1 out of 40
+{'epoch': 77, 'Geneartion Loss stamina (Train)': '0.991446', 'Correlation Image(Train)': '0.035625', 'MAE Loss': '0.000000'}
+{'Epoch': 77, 'Generation Loss (Eval)': '0.162902'}
+{'epoch': 78, 'Geneartion Loss stamina (Train)': '0.992953', 'Correlation Image(Train)': '0.035623', 'MAE Loss': '0.000000'}
+{'Epoch': 78, 'Generation Loss (Eval)': '0.163388'}
+EarlyStopping counter: 1 out of 40
+{'epoch': 79, 'Geneartion Loss stamina (Train)': '0.989941', 'Correlation Image(Train)': '0.035630', 'MAE Loss': '0.000000'}
+{'Epoch': 79, 'Generation Loss (Eval)': '0.163190'}
+EarlyStopping counter: 2 out of 40
+{'epoch': 80, 'Geneartion Loss stamina (Train)': '0.989479', 'Correlation Image(Train)': '0.035628', 'MAE Loss': '0.000000'}
+{'Epoch': 80, 'Generation Loss (Eval)': '0.163121'}
+EarlyStopping counter: 3 out of 40
+{'epoch': 81, 'Geneartion Loss stamina (Train)': '0.987770', 'Correlation Image(Train)': '0.035624', 'MAE Loss': '0.000000'}
+{'Epoch': 81, 'Generation Loss (Eval)': '0.163404'}
+EarlyStopping counter: 4 out of 40
+{'epoch': 82, 'Geneartion Loss stamina (Train)': '0.986656', 'Correlation Image(Train)': '0.035617', 'MAE Loss': '0.000000'}
+{'Epoch': 82, 'Generation Loss (Eval)': '0.163572'}
+EarlyStopping counter: 5 out of 40
+{'epoch': 83, 'Geneartion Loss stamina (Train)': '0.985701', 'Correlation Image(Train)': '0.035625', 'MAE Loss': '0.000000'}
+{'Epoch': 83, 'Generation Loss (Eval)': '0.162727'}
+{'epoch': 84, 'Geneartion Loss stamina (Train)': '0.985458', 'Correlation Image(Train)': '0.035623', 'MAE Loss': '0.000000'}
+{'Epoch': 84, 'Generation Loss (Eval)': '0.163471'}
+EarlyStopping counter: 1 out of 40
+{'epoch': 85, 'Geneartion Loss stamina (Train)': '0.986453', 'Correlation Image(Train)': '0.035625', 'MAE Loss': '0.000000'}
+{'Epoch': 85, 'Generation Loss (Eval)': '0.164183'}
+EarlyStopping counter: 2 out of 40
+{'epoch': 86, 'Geneartion Loss stamina (Train)': '0.984936', 'Correlation Image(Train)': '0.035630', 'MAE Loss': '0.000000'}
+{'Epoch': 86, 'Generation Loss (Eval)': '0.163455'}
+EarlyStopping counter: 3 out of 40
+{'epoch': 87, 'Geneartion Loss stamina (Train)': '0.983812', 'Correlation Image(Train)': '0.035623', 'MAE Loss': '0.000000'}
+{'Epoch': 87, 'Generation Loss (Eval)': '0.164398'}
+EarlyStopping counter: 4 out of 40
+{'epoch': 88, 'Geneartion Loss stamina (Train)': '0.988110', 'Correlation Image(Train)': '0.035613', 'MAE Loss': '0.000000'}
+{'Epoch': 88, 'Generation Loss (Eval)': '0.163896'}
+EarlyStopping counter: 5 out of 40
+{'epoch': 89, 'Geneartion Loss stamina (Train)': '0.986266', 'Correlation Image(Train)': '0.035615', 'MAE Loss': '0.000000'}
+{'Epoch': 89, 'Generation Loss (Eval)': '0.163199'}
+EarlyStopping counter: 6 out of 40
+{'epoch': 90, 'Geneartion Loss stamina (Train)': '0.985014', 'Correlation Image(Train)': '0.035617', 'MAE Loss': '0.000000'}
+{'Epoch': 90, 'Generation Loss (Eval)': '0.162446'}
+{'epoch': 91, 'Geneartion Loss stamina (Train)': '0.982659', 'Correlation Image(Train)': '0.035613', 'MAE Loss': '0.000000'}
+{'Epoch': 91, 'Generation Loss (Eval)': '0.162173'}
+{'epoch': 92, 'Geneartion Loss stamina (Train)': '0.980444', 'Correlation Image(Train)': '0.035617', 'MAE Loss': '0.000000'}
+{'Epoch': 92, 'Generation Loss (Eval)': '0.162445'}
+EarlyStopping counter: 1 out of 40
+{'epoch': 93, 'Geneartion Loss stamina (Train)': '0.978683', 'Correlation Image(Train)': '0.035624', 'MAE Loss': '0.000000'}
+{'Epoch': 93, 'Generation Loss (Eval)': '0.161742'}
+{'epoch': 94, 'Geneartion Loss stamina (Train)': '0.978425', 'Correlation Image(Train)': '0.035620', 'MAE Loss': '0.000000'}
+{'Epoch': 94, 'Generation Loss (Eval)': '0.162784'}
+EarlyStopping counter: 1 out of 40
+{'epoch': 95, 'Geneartion Loss stamina (Train)': '0.976948', 'Correlation Image(Train)': '0.035620', 'MAE Loss': '0.000000'}
+{'Epoch': 95, 'Generation Loss (Eval)': '0.162595'}
+EarlyStopping counter: 2 out of 40
+{'epoch': 96, 'Geneartion Loss stamina (Train)': '0.976097', 'Correlation Image(Train)': '0.035623', 'MAE Loss': '0.000000'}
+{'Epoch': 96, 'Generation Loss (Eval)': '0.161664'}
+{'epoch': 97, 'Geneartion Loss stamina (Train)': '0.976128', 'Correlation Image(Train)': '0.035623', 'MAE Loss': '0.000000'}
+{'Epoch': 97, 'Generation Loss (Eval)': '0.162791'}
+EarlyStopping counter: 1 out of 40
+{'epoch': 98, 'Geneartion Loss stamina (Train)': '0.975047', 'Correlation Image(Train)': '0.035618', 'MAE Loss': '0.000000'}
+{'Epoch': 98, 'Generation Loss (Eval)': '0.161641'}
+{'epoch': 99, 'Geneartion Loss stamina (Train)': '0.974830', 'Correlation Image(Train)': '0.035623', 'MAE Loss': '0.000000'}
+{'Epoch': 99, 'Generation Loss (Eval)': '0.161336'}
+{'epoch': 100, 'Geneartion Loss stamina (Train)': '0.975396', 'Correlation Image(Train)': '0.035625', 'MAE Loss': '0.000000'}
+{'Epoch': 100, 'Generation Loss (Eval)': '0.160832'}
+{'epoch': 101, 'Geneartion Loss stamina (Train)': '0.975361', 'Correlation Image(Train)': '0.035625', 'MAE Loss': '0.000000'}
+{'Epoch': 101, 'Generation Loss (Eval)': '0.160877'}
+EarlyStopping counter: 1 out of 40
+{'epoch': 102, 'Geneartion Loss stamina (Train)': '0.974137', 'Correlation Image(Train)': '0.035634', 'MAE Loss': '0.000000'}
+{'Epoch': 102, 'Generation Loss (Eval)': '0.160882'}
+EarlyStopping counter: 2 out of 40
+{'epoch': 103, 'Geneartion Loss stamina (Train)': '0.972811', 'Correlation Image(Train)': '0.035630', 'MAE Loss': '0.000000'}
+{'Epoch': 103, 'Generation Loss (Eval)': '0.161086'}
+EarlyStopping counter: 3 out of 40
+{'epoch': 104, 'Geneartion Loss stamina (Train)': '0.972337', 'Correlation Image(Train)': '0.035637', 'MAE Loss': '0.000000'}
+{'Epoch': 104, 'Generation Loss (Eval)': '0.160836'}
+EarlyStopping counter: 4 out of 40
+{'epoch': 105, 'Geneartion Loss stamina (Train)': '0.972389', 'Correlation Image(Train)': '0.035641', 'MAE Loss': '0.000000'}
+{'Epoch': 105, 'Generation Loss (Eval)': '0.161005'}
+EarlyStopping counter: 5 out of 40
+{'epoch': 106, 'Geneartion Loss stamina (Train)': '0.974357', 'Correlation Image(Train)': '0.035645', 'MAE Loss': '0.000000'}
+{'Epoch': 106, 'Generation Loss (Eval)': '0.160798'}
+{'epoch': 107, 'Geneartion Loss stamina (Train)': '0.972639', 'Correlation Image(Train)': '0.035651', 'MAE Loss': '0.000000'}
+{'Epoch': 107, 'Generation Loss (Eval)': '0.161031'}
+EarlyStopping counter: 1 out of 40
+{'epoch': 108, 'Geneartion Loss stamina (Train)': '0.971090', 'Correlation Image(Train)': '0.035639', 'MAE Loss': '0.000000'}
+{'Epoch': 108, 'Generation Loss (Eval)': '0.161255'}
+EarlyStopping counter: 2 out of 40
+{'epoch': 109, 'Geneartion Loss stamina (Train)': '0.969906', 'Correlation Image(Train)': '0.035642', 'MAE Loss': '0.000000'}
+{'Epoch': 109, 'Generation Loss (Eval)': '0.160778'}
+{'epoch': 110, 'Geneartion Loss stamina (Train)': '0.969751', 'Correlation Image(Train)': '0.035642', 'MAE Loss': '0.000000'}
+{'Epoch': 110, 'Generation Loss (Eval)': '0.160779'}
+EarlyStopping counter: 1 out of 40
+{'epoch': 111, 'Geneartion Loss stamina (Train)': '0.970057', 'Correlation Image(Train)': '0.035645', 'MAE Loss': '0.000000'}
+{'Epoch': 111, 'Generation Loss (Eval)': '0.160676'}
+{'epoch': 112, 'Geneartion Loss stamina (Train)': '0.972240', 'Correlation Image(Train)': '0.035639', 'MAE Loss': '0.000000'}
+{'Epoch': 112, 'Generation Loss (Eval)': '0.160953'}
+EarlyStopping counter: 1 out of 40
+{'epoch': 113, 'Geneartion Loss stamina (Train)': '0.970711', 'Correlation Image(Train)': '0.035632', 'MAE Loss': '0.000000'}
+{'Epoch': 113, 'Generation Loss (Eval)': '0.161189'}
+EarlyStopping counter: 2 out of 40
+{'epoch': 114, 'Geneartion Loss stamina (Train)': '0.968955', 'Correlation Image(Train)': '0.035649', 'MAE Loss': '0.000000'}
+{'Epoch': 114, 'Generation Loss (Eval)': '0.161460'}
+EarlyStopping counter: 3 out of 40
+{'epoch': 115, 'Geneartion Loss stamina (Train)': '0.968440', 'Correlation Image(Train)': '0.035651', 'MAE Loss': '0.000000'}
+{'Epoch': 115, 'Generation Loss (Eval)': '0.161317'}
+EarlyStopping counter: 4 out of 40
+{'epoch': 116, 'Geneartion Loss stamina (Train)': '0.967446', 'Correlation Image(Train)': '0.035641', 'MAE Loss': '0.000000'}
+{'Epoch': 116, 'Generation Loss (Eval)': '0.160871'}
+EarlyStopping counter: 5 out of 40
+{'epoch': 117, 'Geneartion Loss stamina (Train)': '0.967658', 'Correlation Image(Train)': '0.035642', 'MAE Loss': '0.000000'}
+{'Epoch': 117, 'Generation Loss (Eval)': '0.161432'}
+EarlyStopping counter: 6 out of 40
+{'epoch': 118, 'Geneartion Loss stamina (Train)': '0.965900', 'Correlation Image(Train)': '0.035638', 'MAE Loss': '0.000000'}
+{'Epoch': 118, 'Generation Loss (Eval)': '0.161782'}
+EarlyStopping counter: 7 out of 40
+{'epoch': 119, 'Geneartion Loss stamina (Train)': '0.965969', 'Correlation Image(Train)': '0.035638', 'MAE Loss': '0.000000'}
+{'Epoch': 119, 'Generation Loss (Eval)': '0.161318'}
+EarlyStopping counter: 8 out of 40
+{'epoch': 120, 'Geneartion Loss stamina (Train)': '0.964345', 'Correlation Image(Train)': '0.035640', 'MAE Loss': '0.000000'}
+{'Epoch': 120, 'Generation Loss (Eval)': '0.160648'}
+{'epoch': 121, 'Geneartion Loss stamina (Train)': '0.963993', 'Correlation Image(Train)': '0.035641', 'MAE Loss': '0.000000'}
+{'Epoch': 121, 'Generation Loss (Eval)': '0.161090'}
+EarlyStopping counter: 1 out of 40
+{'epoch': 122, 'Geneartion Loss stamina (Train)': '0.964552', 'Correlation Image(Train)': '0.035637', 'MAE Loss': '0.000000'}
+{'Epoch': 122, 'Generation Loss (Eval)': '0.161420'}
+EarlyStopping counter: 2 out of 40
+{'epoch': 123, 'Geneartion Loss stamina (Train)': '0.963454', 'Correlation Image(Train)': '0.035635', 'MAE Loss': '0.000000'}
+{'Epoch': 123, 'Generation Loss (Eval)': '0.161313'}
+EarlyStopping counter: 3 out of 40
+{'epoch': 124, 'Geneartion Loss stamina (Train)': '0.963656', 'Correlation Image(Train)': '0.035638', 'MAE Loss': '0.000000'}
+{'Epoch': 124, 'Generation Loss (Eval)': '0.160187'}
+{'epoch': 125, 'Geneartion Loss stamina (Train)': '0.964336', 'Correlation Image(Train)': '0.035631', 'MAE Loss': '0.000000'}
+{'Epoch': 125, 'Generation Loss (Eval)': '0.162008'}
+EarlyStopping counter: 1 out of 40
+{'epoch': 126, 'Geneartion Loss stamina (Train)': '0.965572', 'Correlation Image(Train)': '0.035637', 'MAE Loss': '0.000000'}
+{'Epoch': 126, 'Generation Loss (Eval)': '0.161725'}
+EarlyStopping counter: 2 out of 40
+{'epoch': 127, 'Geneartion Loss stamina (Train)': '0.966457', 'Correlation Image(Train)': '0.035640', 'MAE Loss': '0.000000'}
+{'Epoch': 127, 'Generation Loss (Eval)': '0.161820'}
+EarlyStopping counter: 3 out of 40
+{'epoch': 128, 'Geneartion Loss stamina (Train)': '0.967414', 'Correlation Image(Train)': '0.035634', 'MAE Loss': '0.000000'}
+{'Epoch': 128, 'Generation Loss (Eval)': '0.161204'}
+EarlyStopping counter: 4 out of 40
+{'epoch': 129, 'Geneartion Loss stamina (Train)': '0.964523', 'Correlation Image(Train)': '0.035627', 'MAE Loss': '0.000000'}
+{'Epoch': 129, 'Generation Loss (Eval)': '0.161363'}
+EarlyStopping counter: 5 out of 40
+{'epoch': 130, 'Geneartion Loss stamina (Train)': '0.962682', 'Correlation Image(Train)': '0.035633', 'MAE Loss': '0.000000'}
+{'Epoch': 130, 'Generation Loss (Eval)': '0.160625'}
+EarlyStopping counter: 6 out of 40
+{'epoch': 131, 'Geneartion Loss stamina (Train)': '0.961906', 'Correlation Image(Train)': '0.035637', 'MAE Loss': '0.000000'}
+{'Epoch': 131, 'Generation Loss (Eval)': '0.159925'}
+{'epoch': 132, 'Geneartion Loss stamina (Train)': '0.961396', 'Correlation Image(Train)': '0.035639', 'MAE Loss': '0.000000'}
+{'Epoch': 132, 'Generation Loss (Eval)': '0.160888'}
+EarlyStopping counter: 1 out of 40
+{'epoch': 133, 'Geneartion Loss stamina (Train)': '0.961053', 'Correlation Image(Train)': '0.035629', 'MAE Loss': '0.000000'}
+{'Epoch': 133, 'Generation Loss (Eval)': '0.160704'}
+EarlyStopping counter: 2 out of 40
+{'epoch': 134, 'Geneartion Loss stamina (Train)': '0.960552', 'Correlation Image(Train)': '0.035637', 'MAE Loss': '0.000000'}
+{'Epoch': 134, 'Generation Loss (Eval)': '0.159981'}
+EarlyStopping counter: 3 out of 40
+{'epoch': 135, 'Geneartion Loss stamina (Train)': '0.960132', 'Correlation Image(Train)': '0.035636', 'MAE Loss': '0.000000'}
+{'Epoch': 135, 'Generation Loss (Eval)': '0.160356'}
+EarlyStopping counter: 4 out of 40
+{'epoch': 136, 'Geneartion Loss stamina (Train)': '0.959900', 'Correlation Image(Train)': '0.035645', 'MAE Loss': '0.000000'}
+{'Epoch': 136, 'Generation Loss (Eval)': '0.160070'}
+EarlyStopping counter: 5 out of 40
+{'epoch': 137, 'Geneartion Loss stamina (Train)': '0.960131', 'Correlation Image(Train)': '0.035637', 'MAE Loss': '0.000000'}
+{'Epoch': 137, 'Generation Loss (Eval)': '0.160340'}
+EarlyStopping counter: 6 out of 40
+{'epoch': 138, 'Geneartion Loss stamina (Train)': '0.960662', 'Correlation Image(Train)': '0.035641', 'MAE Loss': '0.000000'}
+{'Epoch': 138, 'Generation Loss (Eval)': '0.159616'}
+{'epoch': 139, 'Geneartion Loss stamina (Train)': '0.961574', 'Correlation Image(Train)': '0.035653', 'MAE Loss': '0.000000'}
+{'Epoch': 139, 'Generation Loss (Eval)': '0.159639'}
+EarlyStopping counter: 1 out of 40
+{'epoch': 140, 'Geneartion Loss stamina (Train)': '0.961777', 'Correlation Image(Train)': '0.035643', 'MAE Loss': '0.000000'}
+{'Epoch': 140, 'Generation Loss (Eval)': '0.159565'}
+{'epoch': 141, 'Geneartion Loss stamina (Train)': '0.963459', 'Correlation Image(Train)': '0.035654', 'MAE Loss': '0.000000'}
+{'Epoch': 141, 'Generation Loss (Eval)': '0.159780'}
+EarlyStopping counter: 1 out of 40
+{'epoch': 142, 'Geneartion Loss stamina (Train)': '0.959699', 'Correlation Image(Train)': '0.035651', 'MAE Loss': '0.000000'}
+{'Epoch': 142, 'Generation Loss (Eval)': '0.159759'}
+EarlyStopping counter: 2 out of 40
+{'epoch': 143, 'Geneartion Loss stamina (Train)': '0.957846', 'Correlation Image(Train)': '0.035650', 'MAE Loss': '0.000000'}
+{'Epoch': 143, 'Generation Loss (Eval)': '0.159843'}
+EarlyStopping counter: 3 out of 40
+{'epoch': 144, 'Geneartion Loss stamina (Train)': '0.958516', 'Correlation Image(Train)': '0.035652', 'MAE Loss': '0.000000'}
+{'Epoch': 144, 'Generation Loss (Eval)': '0.159738'}
+EarlyStopping counter: 4 out of 40
+{'epoch': 145, 'Geneartion Loss stamina (Train)': '0.958494', 'Correlation Image(Train)': '0.035654', 'MAE Loss': '0.000000'}
+{'Epoch': 145, 'Generation Loss (Eval)': '0.160146'}
+EarlyStopping counter: 5 out of 40
+{'epoch': 146, 'Geneartion Loss stamina (Train)': '0.957108', 'Correlation Image(Train)': '0.035654', 'MAE Loss': '0.000000'}
+{'Epoch': 146, 'Generation Loss (Eval)': '0.159785'}
+EarlyStopping counter: 6 out of 40
+{'epoch': 147, 'Geneartion Loss stamina (Train)': '0.956852', 'Correlation Image(Train)': '0.035658', 'MAE Loss': '0.000000'}
+{'Epoch': 147, 'Generation Loss (Eval)': '0.159685'}
+EarlyStopping counter: 7 out of 40
+{'epoch': 148, 'Geneartion Loss stamina (Train)': '0.957250', 'Correlation Image(Train)': '0.035653', 'MAE Loss': '0.000000'}
+{'Epoch': 148, 'Generation Loss (Eval)': '0.159822'}
+EarlyStopping counter: 8 out of 40
+{'epoch': 149, 'Geneartion Loss stamina (Train)': '0.957161', 'Correlation Image(Train)': '0.035651', 'MAE Loss': '0.000000'}
+{'Epoch': 149, 'Generation Loss (Eval)': '0.160073'}
+EarlyStopping counter: 9 out of 40
+{'epoch': 150, 'Geneartion Loss stamina (Train)': '0.956454', 'Correlation Image(Train)': '0.035654', 'MAE Loss': '0.000000'}
+{'Epoch': 150, 'Generation Loss (Eval)': '0.160568'}
+EarlyStopping counter: 10 out of 40
+{'epoch': 151, 'Geneartion Loss stamina (Train)': '0.956779', 'Correlation Image(Train)': '0.035658', 'MAE Loss': '0.000000'}
+{'Epoch': 151, 'Generation Loss (Eval)': '0.160152'}
+EarlyStopping counter: 11 out of 40
+{'epoch': 152, 'Geneartion Loss stamina (Train)': '0.954536', 'Correlation Image(Train)': '0.035652', 'MAE Loss': '0.000000'}
+{'Epoch': 152, 'Generation Loss (Eval)': '0.160018'}
+EarlyStopping counter: 12 out of 40
+{'epoch': 153, 'Geneartion Loss stamina (Train)': '0.955754', 'Correlation Image(Train)': '0.035647', 'MAE Loss': '0.000000'}
+{'Epoch': 153, 'Generation Loss (Eval)': '0.160424'}
+EarlyStopping counter: 13 out of 40
+{'epoch': 154, 'Geneartion Loss stamina (Train)': '0.954413', 'Correlation Image(Train)': '0.035647', 'MAE Loss': '0.000000'}
+{'Epoch': 154, 'Generation Loss (Eval)': '0.161036'}
+EarlyStopping counter: 14 out of 40
+{'epoch': 155, 'Geneartion Loss stamina (Train)': '0.953507', 'Correlation Image(Train)': '0.035650', 'MAE Loss': '0.000000'}
+{'Epoch': 155, 'Generation Loss (Eval)': '0.160342'}
+EarlyStopping counter: 15 out of 40
+{'epoch': 156, 'Geneartion Loss stamina (Train)': '0.953246', 'Correlation Image(Train)': '0.035645', 'MAE Loss': '0.000000'}
+{'Epoch': 156, 'Generation Loss (Eval)': '0.160895'}
+EarlyStopping counter: 16 out of 40
+{'epoch': 157, 'Geneartion Loss stamina (Train)': '0.952570', 'Correlation Image(Train)': '0.035640', 'MAE Loss': '0.000000'}
+{'Epoch': 157, 'Generation Loss (Eval)': '0.159590'}
+EarlyStopping counter: 17 out of 40
+{'epoch': 158, 'Geneartion Loss stamina (Train)': '0.954487', 'Correlation Image(Train)': '0.035651', 'MAE Loss': '0.000000'}
+{'Epoch': 158, 'Generation Loss (Eval)': '0.160065'}
+EarlyStopping counter: 18 out of 40
+{'epoch': 159, 'Geneartion Loss stamina (Train)': '0.952798', 'Correlation Image(Train)': '0.035646', 'MAE Loss': '0.000000'}
+{'Epoch': 159, 'Generation Loss (Eval)': '0.161121'}
+EarlyStopping counter: 19 out of 40
+{'epoch': 160, 'Geneartion Loss stamina (Train)': '0.954248', 'Correlation Image(Train)': '0.035638', 'MAE Loss': '0.000000'}
+{'Epoch': 160, 'Generation Loss (Eval)': '0.161416'}
+EarlyStopping counter: 20 out of 40
+{'epoch': 161, 'Geneartion Loss stamina (Train)': '0.953223', 'Correlation Image(Train)': '0.035641', 'MAE Loss': '0.000000'}
+{'Epoch': 161, 'Generation Loss (Eval)': '0.162055'}
+EarlyStopping counter: 21 out of 40
+{'epoch': 162, 'Geneartion Loss stamina (Train)': '0.952990', 'Correlation Image(Train)': '0.035647', 'MAE Loss': '0.000000'}
+{'Epoch': 162, 'Generation Loss (Eval)': '0.160436'}
+EarlyStopping counter: 22 out of 40
+{'epoch': 163, 'Geneartion Loss stamina (Train)': '0.951823', 'Correlation Image(Train)': '0.035642', 'MAE Loss': '0.000000'}
+{'Epoch': 163, 'Generation Loss (Eval)': '0.160717'}
+EarlyStopping counter: 23 out of 40
+{'epoch': 164, 'Geneartion Loss stamina (Train)': '0.952011', 'Correlation Image(Train)': '0.035644', 'MAE Loss': '0.000000'}
+{'Epoch': 164, 'Generation Loss (Eval)': '0.161792'}
+EarlyStopping counter: 24 out of 40
+{'epoch': 165, 'Geneartion Loss stamina (Train)': '0.954256', 'Correlation Image(Train)': '0.035638', 'MAE Loss': '0.000000'}
+{'Epoch': 165, 'Generation Loss (Eval)': '0.159782'}
+EarlyStopping counter: 25 out of 40
+{'epoch': 166, 'Geneartion Loss stamina (Train)': '0.955231', 'Correlation Image(Train)': '0.035642', 'MAE Loss': '0.000000'}
+{'Epoch': 166, 'Generation Loss (Eval)': '0.159775'}
+EarlyStopping counter: 26 out of 40
+{'epoch': 167, 'Geneartion Loss stamina (Train)': '0.953983', 'Correlation Image(Train)': '0.035643', 'MAE Loss': '0.000000'}
+{'Epoch': 167, 'Generation Loss (Eval)': '0.159374'}
+{'epoch': 168, 'Geneartion Loss stamina (Train)': '0.951918', 'Correlation Image(Train)': '0.035651', 'MAE Loss': '0.000000'}
+{'Epoch': 168, 'Generation Loss (Eval)': '0.159576'}
+EarlyStopping counter: 1 out of 40
+{'epoch': 169, 'Geneartion Loss stamina (Train)': '0.951927', 'Correlation Image(Train)': '0.035637', 'MAE Loss': '0.000000'}
+{'Epoch': 169, 'Generation Loss (Eval)': '0.159511'}
+EarlyStopping counter: 2 out of 40
+{'epoch': 170, 'Geneartion Loss stamina (Train)': '0.950581', 'Correlation Image(Train)': '0.035646', 'MAE Loss': '0.000000'}
+{'Epoch': 170, 'Generation Loss (Eval)': '0.159608'}
+EarlyStopping counter: 3 out of 40
+{'epoch': 171, 'Geneartion Loss stamina (Train)': '0.951393', 'Correlation Image(Train)': '0.035645', 'MAE Loss': '0.000000'}
+{'Epoch': 171, 'Generation Loss (Eval)': '0.158799'}
+{'epoch': 172, 'Geneartion Loss stamina (Train)': '0.950308', 'Correlation Image(Train)': '0.035645', 'MAE Loss': '0.000000'}
+{'Epoch': 172, 'Generation Loss (Eval)': '0.158980'}
+EarlyStopping counter: 1 out of 40
+{'epoch': 173, 'Geneartion Loss stamina (Train)': '0.950756', 'Correlation Image(Train)': '0.035650', 'MAE Loss': '0.000000'}
+{'Epoch': 173, 'Generation Loss (Eval)': '0.158866'}
+EarlyStopping counter: 2 out of 40
+{'epoch': 174, 'Geneartion Loss stamina (Train)': '0.949907', 'Correlation Image(Train)': '0.035652', 'MAE Loss': '0.000000'}
+{'Epoch': 174, 'Generation Loss (Eval)': '0.159028'}
+EarlyStopping counter: 3 out of 40
+{'epoch': 175, 'Geneartion Loss stamina (Train)': '0.949607', 'Correlation Image(Train)': '0.035653', 'MAE Loss': '0.000000'}
+{'Epoch': 175, 'Generation Loss (Eval)': '0.159057'}
+EarlyStopping counter: 4 out of 40
+{'epoch': 176, 'Geneartion Loss stamina (Train)': '0.950758', 'Correlation Image(Train)': '0.035661', 'MAE Loss': '0.000000'}
+{'Epoch': 176, 'Generation Loss (Eval)': '0.159208'}
+EarlyStopping counter: 5 out of 40
+{'epoch': 177, 'Geneartion Loss stamina (Train)': '0.953446', 'Correlation Image(Train)': '0.035659', 'MAE Loss': '0.000000'}
+{'Epoch': 177, 'Generation Loss (Eval)': '0.159412'}
+EarlyStopping counter: 6 out of 40
+{'epoch': 178, 'Geneartion Loss stamina (Train)': '0.949665', 'Correlation Image(Train)': '0.035663', 'MAE Loss': '0.000000'}
+{'Epoch': 178, 'Generation Loss (Eval)': '0.159201'}
+EarlyStopping counter: 7 out of 40
+{'epoch': 179, 'Geneartion Loss stamina (Train)': '0.952341', 'Correlation Image(Train)': '0.035664', 'MAE Loss': '0.000000'}
+{'Epoch': 179, 'Generation Loss (Eval)': '0.159204'}
+EarlyStopping counter: 8 out of 40
+{'epoch': 180, 'Geneartion Loss stamina (Train)': '0.950801', 'Correlation Image(Train)': '0.035663', 'MAE Loss': '0.000000'}
+{'Epoch': 180, 'Generation Loss (Eval)': '0.159656'}
+EarlyStopping counter: 9 out of 40
+{'epoch': 181, 'Geneartion Loss stamina (Train)': '0.949316', 'Correlation Image(Train)': '0.035658', 'MAE Loss': '0.000000'}
+{'Epoch': 181, 'Generation Loss (Eval)': '0.159583'}
+EarlyStopping counter: 10 out of 40
+{'epoch': 182, 'Geneartion Loss stamina (Train)': '0.948732', 'Correlation Image(Train)': '0.035661', 'MAE Loss': '0.000000'}
+{'Epoch': 182, 'Generation Loss (Eval)': '0.160167'}
+EarlyStopping counter: 11 out of 40
+{'epoch': 183, 'Geneartion Loss stamina (Train)': '0.948188', 'Correlation Image(Train)': '0.035666', 'MAE Loss': '0.000000'}
+{'Epoch': 183, 'Generation Loss (Eval)': '0.159706'}
+EarlyStopping counter: 12 out of 40
+{'epoch': 184, 'Geneartion Loss stamina (Train)': '0.947780', 'Correlation Image(Train)': '0.035661', 'MAE Loss': '0.000000'}
+{'Epoch': 184, 'Generation Loss (Eval)': '0.159959'}
+EarlyStopping counter: 13 out of 40
+{'epoch': 185, 'Geneartion Loss stamina (Train)': '0.947921', 'Correlation Image(Train)': '0.035656', 'MAE Loss': '0.000000'}
+{'Epoch': 185, 'Generation Loss (Eval)': '0.160120'}
+EarlyStopping counter: 14 out of 40
+{'epoch': 186, 'Geneartion Loss stamina (Train)': '0.948200', 'Correlation Image(Train)': '0.035659', 'MAE Loss': '0.000000'}
+{'Epoch': 186, 'Generation Loss (Eval)': '0.161388'}
+EarlyStopping counter: 15 out of 40
+{'epoch': 187, 'Geneartion Loss stamina (Train)': '0.946724', 'Correlation Image(Train)': '0.035657', 'MAE Loss': '0.000000'}
+{'Epoch': 187, 'Generation Loss (Eval)': '0.160447'}
+EarlyStopping counter: 16 out of 40
+{'epoch': 188, 'Geneartion Loss stamina (Train)': '0.945878', 'Correlation Image(Train)': '0.035661', 'MAE Loss': '0.000000'}
+{'Epoch': 188, 'Generation Loss (Eval)': '0.160007'}
+EarlyStopping counter: 17 out of 40
+{'epoch': 189, 'Geneartion Loss stamina (Train)': '0.946587', 'Correlation Image(Train)': '0.035656', 'MAE Loss': '0.000000'}
+{'Epoch': 189, 'Generation Loss (Eval)': '0.160757'}
+EarlyStopping counter: 18 out of 40
+{'epoch': 190, 'Geneartion Loss stamina (Train)': '0.945541', 'Correlation Image(Train)': '0.035652', 'MAE Loss': '0.000000'}
+{'Epoch': 190, 'Generation Loss (Eval)': '0.161525'}
+EarlyStopping counter: 19 out of 40
+{'epoch': 191, 'Geneartion Loss stamina (Train)': '0.947331', 'Correlation Image(Train)': '0.035651', 'MAE Loss': '0.000000'}
+{'Epoch': 191, 'Generation Loss (Eval)': '0.160286'}
+EarlyStopping counter: 20 out of 40
+{'epoch': 192, 'Geneartion Loss stamina (Train)': '0.947118', 'Correlation Image(Train)': '0.035643', 'MAE Loss': '0.000000'}
+{'Epoch': 192, 'Generation Loss (Eval)': '0.161155'}
+EarlyStopping counter: 21 out of 40
+{'epoch': 193, 'Geneartion Loss stamina (Train)': '0.950514', 'Correlation Image(Train)': '0.035640', 'MAE Loss': '0.000000'}
+{'Epoch': 193, 'Generation Loss (Eval)': '0.160102'}
+EarlyStopping counter: 22 out of 40
+{'epoch': 194, 'Geneartion Loss stamina (Train)': '0.947902', 'Correlation Image(Train)': '0.035645', 'MAE Loss': '0.000000'}
+{'Epoch': 194, 'Generation Loss (Eval)': '0.159740'}
+EarlyStopping counter: 23 out of 40
+{'epoch': 195, 'Geneartion Loss stamina (Train)': '0.946994', 'Correlation Image(Train)': '0.035638', 'MAE Loss': '0.000000'}
+{'Epoch': 195, 'Generation Loss (Eval)': '0.158622'}
+{'epoch': 196, 'Geneartion Loss stamina (Train)': '0.946710', 'Correlation Image(Train)': '0.035647', 'MAE Loss': '0.000000'}
+{'Epoch': 196, 'Generation Loss (Eval)': '0.159580'}
+EarlyStopping counter: 1 out of 40
+{'epoch': 197, 'Geneartion Loss stamina (Train)': '0.946654', 'Correlation Image(Train)': '0.035650', 'MAE Loss': '0.000000'}
+{'Epoch': 197, 'Generation Loss (Eval)': '0.158774'}
+EarlyStopping counter: 2 out of 40
+{'epoch': 198, 'Geneartion Loss stamina (Train)': '0.945452', 'Correlation Image(Train)': '0.035656', 'MAE Loss': '0.000000'}
+{'Epoch': 198, 'Generation Loss (Eval)': '0.158776'}
+EarlyStopping counter: 3 out of 40
+{'epoch': 199, 'Geneartion Loss stamina (Train)': '0.945418', 'Correlation Image(Train)': '0.035652', 'MAE Loss': '0.000000'}
+{'Epoch': 199, 'Generation Loss (Eval)': '0.158586'}
+{'epoch': 200, 'Geneartion Loss stamina (Train)': '0.945135', 'Correlation Image(Train)': '0.035655', 'MAE Loss': '0.000000'}
+{'Epoch': 200, 'Generation Loss (Eval)': '0.158667'}
+EarlyStopping counter: 1 out of 40
+{'epoch': 201, 'Geneartion Loss stamina (Train)': '0.944406', 'Correlation Image(Train)': '0.035652', 'MAE Loss': '0.000000'}
+{'Epoch': 201, 'Generation Loss (Eval)': '0.158915'}
+EarlyStopping counter: 2 out of 40
+{'epoch': 202, 'Geneartion Loss stamina (Train)': '0.945034', 'Correlation Image(Train)': '0.035660', 'MAE Loss': '0.000000'}
+{'Epoch': 202, 'Generation Loss (Eval)': '0.158815'}
+EarlyStopping counter: 3 out of 40
+{'epoch': 203, 'Geneartion Loss stamina (Train)': '0.945635', 'Correlation Image(Train)': '0.035673', 'MAE Loss': '0.000000'}
+{'Epoch': 203, 'Generation Loss (Eval)': '0.158968'}
+EarlyStopping counter: 4 out of 40
+{'epoch': 204, 'Geneartion Loss stamina (Train)': '0.945179', 'Correlation Image(Train)': '0.035664', 'MAE Loss': '0.000000'}
+{'Epoch': 204, 'Generation Loss (Eval)': '0.159229'}
+EarlyStopping counter: 5 out of 40
+{'epoch': 205, 'Geneartion Loss stamina (Train)': '0.945633', 'Correlation Image(Train)': '0.035665', 'MAE Loss': '0.000000'}
+{'Epoch': 205, 'Generation Loss (Eval)': '0.159101'}
+EarlyStopping counter: 6 out of 40
+{'epoch': 206, 'Geneartion Loss stamina (Train)': '0.944906', 'Correlation Image(Train)': '0.035670', 'MAE Loss': '0.000000'}
+{'Epoch': 206, 'Generation Loss (Eval)': '0.159106'}
+EarlyStopping counter: 7 out of 40
+{'epoch': 207, 'Geneartion Loss stamina (Train)': '0.943437', 'Correlation Image(Train)': '0.035670', 'MAE Loss': '0.000000'}
+{'Epoch': 207, 'Generation Loss (Eval)': '0.159274'}
+EarlyStopping counter: 8 out of 40
+{'epoch': 208, 'Geneartion Loss stamina (Train)': '0.943341', 'Correlation Image(Train)': '0.035663', 'MAE Loss': '0.000000'}
+{'Epoch': 208, 'Generation Loss (Eval)': '0.159672'}
+EarlyStopping counter: 9 out of 40
+{'epoch': 209, 'Geneartion Loss stamina (Train)': '0.942461', 'Correlation Image(Train)': '0.035672', 'MAE Loss': '0.000000'}
+{'Epoch': 209, 'Generation Loss (Eval)': '0.159299'}
+EarlyStopping counter: 10 out of 40
+{'epoch': 210, 'Geneartion Loss stamina (Train)': '0.942209', 'Correlation Image(Train)': '0.035667', 'MAE Loss': '0.000000'}
+{'Epoch': 210, 'Generation Loss (Eval)': '0.159864'}
+EarlyStopping counter: 11 out of 40
+{'epoch': 211, 'Geneartion Loss stamina (Train)': '0.943177', 'Correlation Image(Train)': '0.035664', 'MAE Loss': '0.000000'}
+{'Epoch': 211, 'Generation Loss (Eval)': '0.160600'}
+EarlyStopping counter: 12 out of 40
+{'epoch': 212, 'Geneartion Loss stamina (Train)': '0.942538', 'Correlation Image(Train)': '0.035654', 'MAE Loss': '0.000000'}
+{'Epoch': 212, 'Generation Loss (Eval)': '0.159909'}
+EarlyStopping counter: 13 out of 40
+{'epoch': 213, 'Geneartion Loss stamina (Train)': '0.942150', 'Correlation Image(Train)': '0.035666', 'MAE Loss': '0.000000'}
+{'Epoch': 213, 'Generation Loss (Eval)': '0.160049'}
+EarlyStopping counter: 14 out of 40
+{'epoch': 214, 'Geneartion Loss stamina (Train)': '0.942724', 'Correlation Image(Train)': '0.035648', 'MAE Loss': '0.000000'}
+{'Epoch': 214, 'Generation Loss (Eval)': '0.161359'}
+EarlyStopping counter: 15 out of 40
+{'epoch': 215, 'Geneartion Loss stamina (Train)': '0.943460', 'Correlation Image(Train)': '0.035665', 'MAE Loss': '0.000000'}
+{'Epoch': 215, 'Generation Loss (Eval)': '0.160617'}
+EarlyStopping counter: 16 out of 40
+{'epoch': 216, 'Geneartion Loss stamina (Train)': '0.941680', 'Correlation Image(Train)': '0.035660', 'MAE Loss': '0.000000'}
+{'Epoch': 216, 'Generation Loss (Eval)': '0.160112'}
+EarlyStopping counter: 17 out of 40
+{'epoch': 217, 'Geneartion Loss stamina (Train)': '0.943519', 'Correlation Image(Train)': '0.035656', 'MAE Loss': '0.000000'}
+{'Epoch': 217, 'Generation Loss (Eval)': '0.160834'}
+EarlyStopping counter: 18 out of 40
+{'epoch': 218, 'Geneartion Loss stamina (Train)': '0.944996', 'Correlation Image(Train)': '0.035656', 'MAE Loss': '0.000000'}
+{'Epoch': 218, 'Generation Loss (Eval)': '0.159058'}
+EarlyStopping counter: 19 out of 40
+{'epoch': 219, 'Geneartion Loss stamina (Train)': '0.942682', 'Correlation Image(Train)': '0.035644', 'MAE Loss': '0.000000'}
+{'Epoch': 219, 'Generation Loss (Eval)': '0.158920'}
+EarlyStopping counter: 20 out of 40
+{'epoch': 220, 'Geneartion Loss stamina (Train)': '0.941093', 'Correlation Image(Train)': '0.035657', 'MAE Loss': '0.000000'}
+{'Epoch': 220, 'Generation Loss (Eval)': '0.159122'}
+EarlyStopping counter: 21 out of 40
+{'epoch': 221, 'Geneartion Loss stamina (Train)': '0.940425', 'Correlation Image(Train)': '0.035654', 'MAE Loss': '0.000000'}
+{'Epoch': 221, 'Generation Loss (Eval)': '0.159218'}
+EarlyStopping counter: 22 out of 40
+{'epoch': 222, 'Geneartion Loss stamina (Train)': '0.939748', 'Correlation Image(Train)': '0.035655', 'MAE Loss': '0.000000'}
+{'Epoch': 222, 'Generation Loss (Eval)': '0.160013'}
+EarlyStopping counter: 23 out of 40
+{'epoch': 223, 'Geneartion Loss stamina (Train)': '0.939195', 'Correlation Image(Train)': '0.035659', 'MAE Loss': '0.000000'}
+{'Epoch': 223, 'Generation Loss (Eval)': '0.159935'}
+EarlyStopping counter: 24 out of 40
+{'epoch': 224, 'Geneartion Loss stamina (Train)': '0.939155', 'Correlation Image(Train)': '0.035660', 'MAE Loss': '0.000000'}
+{'Epoch': 224, 'Generation Loss (Eval)': '0.159774'}
+EarlyStopping counter: 25 out of 40
+{'epoch': 225, 'Geneartion Loss stamina (Train)': '0.940246', 'Correlation Image(Train)': '0.035664', 'MAE Loss': '0.000000'}
+{'Epoch': 225, 'Generation Loss (Eval)': '0.159190'}
+EarlyStopping counter: 26 out of 40
+{'epoch': 226, 'Geneartion Loss stamina (Train)': '0.940977', 'Correlation Image(Train)': '0.035665', 'MAE Loss': '0.000000'}
+{'Epoch': 226, 'Generation Loss (Eval)': '0.158471'}
+{'epoch': 227, 'Geneartion Loss stamina (Train)': '0.942528', 'Correlation Image(Train)': '0.035670', 'MAE Loss': '0.000000'}
+{'Epoch': 227, 'Generation Loss (Eval)': '0.158585'}
+EarlyStopping counter: 1 out of 40
+{'epoch': 228, 'Geneartion Loss stamina (Train)': '0.938919', 'Correlation Image(Train)': '0.035667', 'MAE Loss': '0.000000'}
+{'Epoch': 228, 'Generation Loss (Eval)': '0.158758'}
+EarlyStopping counter: 2 out of 40
+{'epoch': 229, 'Geneartion Loss stamina (Train)': '0.938198', 'Correlation Image(Train)': '0.035663', 'MAE Loss': '0.000000'}
+{'Epoch': 229, 'Generation Loss (Eval)': '0.159114'}
+EarlyStopping counter: 3 out of 40
+{'epoch': 230, 'Geneartion Loss stamina (Train)': '0.937889', 'Correlation Image(Train)': '0.035663', 'MAE Loss': '0.000000'}
+{'Epoch': 230, 'Generation Loss (Eval)': '0.158959'}
+EarlyStopping counter: 4 out of 40
+{'epoch': 231, 'Geneartion Loss stamina (Train)': '0.937827', 'Correlation Image(Train)': '0.035663', 'MAE Loss': '0.000000'}
+{'Epoch': 231, 'Generation Loss (Eval)': '0.158545'}
+EarlyStopping counter: 5 out of 40
+{'epoch': 232, 'Geneartion Loss stamina (Train)': '0.937906', 'Correlation Image(Train)': '0.035670', 'MAE Loss': '0.000000'}
+{'Epoch': 232, 'Generation Loss (Eval)': '0.158836'}
+EarlyStopping counter: 6 out of 40
+{'epoch': 233, 'Geneartion Loss stamina (Train)': '0.937348', 'Correlation Image(Train)': '0.035673', 'MAE Loss': '0.000000'}
+{'Epoch': 233, 'Generation Loss (Eval)': '0.158957'}
+EarlyStopping counter: 7 out of 40
+{'epoch': 234, 'Geneartion Loss stamina (Train)': '0.938061', 'Correlation Image(Train)': '0.035671', 'MAE Loss': '0.000000'}
+{'Epoch': 234, 'Generation Loss (Eval)': '0.159369'}
+EarlyStopping counter: 8 out of 40
+{'epoch': 235, 'Geneartion Loss stamina (Train)': '0.938451', 'Correlation Image(Train)': '0.035674', 'MAE Loss': '0.000000'}
+{'Epoch': 235, 'Generation Loss (Eval)': '0.159035'}
+EarlyStopping counter: 9 out of 40
+{'epoch': 236, 'Geneartion Loss stamina (Train)': '0.937793', 'Correlation Image(Train)': '0.035673', 'MAE Loss': '0.000000'}
+{'Epoch': 236, 'Generation Loss (Eval)': '0.159006'}
+EarlyStopping counter: 10 out of 40
+{'epoch': 237, 'Geneartion Loss stamina (Train)': '0.938303', 'Correlation Image(Train)': '0.035672', 'MAE Loss': '0.000000'}
+{'Epoch': 237, 'Generation Loss (Eval)': '0.159735'}
+EarlyStopping counter: 11 out of 40
+{'epoch': 238, 'Geneartion Loss stamina (Train)': '0.939106', 'Correlation Image(Train)': '0.035684', 'MAE Loss': '0.000000'}
+{'Epoch': 238, 'Generation Loss (Eval)': '0.160277'}
+EarlyStopping counter: 12 out of 40
+{'epoch': 239, 'Geneartion Loss stamina (Train)': '0.938016', 'Correlation Image(Train)': '0.035682', 'MAE Loss': '0.000000'}
+{'Epoch': 239, 'Generation Loss (Eval)': '0.159221'}
+EarlyStopping counter: 13 out of 40
+{'epoch': 240, 'Geneartion Loss stamina (Train)': '0.938362', 'Correlation Image(Train)': '0.035670', 'MAE Loss': '0.000000'}
+{'Epoch': 240, 'Generation Loss (Eval)': '0.161917'}
+EarlyStopping counter: 14 out of 40
+{'epoch': 241, 'Geneartion Loss stamina (Train)': '0.936789', 'Correlation Image(Train)': '0.035672', 'MAE Loss': '0.000000'}
+{'Epoch': 241, 'Generation Loss (Eval)': '0.160605'}
+EarlyStopping counter: 15 out of 40
+{'epoch': 242, 'Geneartion Loss stamina (Train)': '0.937032', 'Correlation Image(Train)': '0.035664', 'MAE Loss': '0.000000'}
+{'Epoch': 242, 'Generation Loss (Eval)': '0.161988'}
+EarlyStopping counter: 16 out of 40
+{'epoch': 243, 'Geneartion Loss stamina (Train)': '0.936667', 'Correlation Image(Train)': '0.035659', 'MAE Loss': '0.000000'}
+{'Epoch': 243, 'Generation Loss (Eval)': '0.160944'}
+EarlyStopping counter: 17 out of 40
+{'epoch': 244, 'Geneartion Loss stamina (Train)': '0.935440', 'Correlation Image(Train)': '0.035669', 'MAE Loss': '0.000000'}
+{'Epoch': 244, 'Generation Loss (Eval)': '0.159459'}
+EarlyStopping counter: 18 out of 40
+{'epoch': 245, 'Geneartion Loss stamina (Train)': '0.935422', 'Correlation Image(Train)': '0.035663', 'MAE Loss': '0.000000'}
+{'Epoch': 245, 'Generation Loss (Eval)': '0.158994'}
+EarlyStopping counter: 19 out of 40
+{'epoch': 246, 'Geneartion Loss stamina (Train)': '0.937218', 'Correlation Image(Train)': '0.035672', 'MAE Loss': '0.000000'}
+{'Epoch': 246, 'Generation Loss (Eval)': '0.160044'}
+EarlyStopping counter: 20 out of 40
+{'epoch': 247, 'Geneartion Loss stamina (Train)': '0.937949', 'Correlation Image(Train)': '0.035661', 'MAE Loss': '0.000000'}
+{'Epoch': 247, 'Generation Loss (Eval)': '0.160212'}
+EarlyStopping counter: 21 out of 40
+{'epoch': 248, 'Geneartion Loss stamina (Train)': '0.935335', 'Correlation Image(Train)': '0.035660', 'MAE Loss': '0.000000'}
+{'Epoch': 248, 'Generation Loss (Eval)': '0.159981'}
+EarlyStopping counter: 22 out of 40
+{'epoch': 249, 'Geneartion Loss stamina (Train)': '0.934805', 'Correlation Image(Train)': '0.035669', 'MAE Loss': '0.000000'}
+{'Epoch': 249, 'Generation Loss (Eval)': '0.159864'}
+EarlyStopping counter: 23 out of 40
+{'epoch': 250, 'Geneartion Loss stamina (Train)': '0.935164', 'Correlation Image(Train)': '0.035664', 'MAE Loss': '0.000000'}
+{'Epoch': 250, 'Generation Loss (Eval)': '0.159754'}
+EarlyStopping counter: 24 out of 40
+{'epoch': 251, 'Geneartion Loss stamina (Train)': '0.935096', 'Correlation Image(Train)': '0.035668', 'MAE Loss': '0.000000'}
+{'Epoch': 251, 'Generation Loss (Eval)': '0.160300'}
+EarlyStopping counter: 25 out of 40
+{'epoch': 252, 'Geneartion Loss stamina (Train)': '0.936309', 'Correlation Image(Train)': '0.035667', 'MAE Loss': '0.000000'}
+{'Epoch': 252, 'Generation Loss (Eval)': '0.159312'}
+EarlyStopping counter: 26 out of 40
+{'epoch': 253, 'Geneartion Loss stamina (Train)': '0.938277', 'Correlation Image(Train)': '0.035667', 'MAE Loss': '0.000000'}
+{'Epoch': 253, 'Generation Loss (Eval)': '0.158389'}
+{'epoch': 254, 'Geneartion Loss stamina (Train)': '0.935382', 'Correlation Image(Train)': '0.035665', 'MAE Loss': '0.000000'}
+{'Epoch': 254, 'Generation Loss (Eval)': '0.159295'}
+EarlyStopping counter: 1 out of 40
+{'epoch': 255, 'Geneartion Loss stamina (Train)': '0.934100', 'Correlation Image(Train)': '0.035667', 'MAE Loss': '0.000000'}
+{'Epoch': 255, 'Generation Loss (Eval)': '0.159214'}
+EarlyStopping counter: 2 out of 40
+{'epoch': 256, 'Geneartion Loss stamina (Train)': '0.933503', 'Correlation Image(Train)': '0.035667', 'MAE Loss': '0.000000'}
+{'Epoch': 256, 'Generation Loss (Eval)': '0.159992'}
+EarlyStopping counter: 3 out of 40
+{'epoch': 257, 'Geneartion Loss stamina (Train)': '0.933594', 'Correlation Image(Train)': '0.035666', 'MAE Loss': '0.000000'}
+{'Epoch': 257, 'Generation Loss (Eval)': '0.159504'}
+EarlyStopping counter: 4 out of 40
+{'epoch': 258, 'Geneartion Loss stamina (Train)': '0.933777', 'Correlation Image(Train)': '0.035668', 'MAE Loss': '0.000000'}
+{'Epoch': 258, 'Generation Loss (Eval)': '0.158489'}
+EarlyStopping counter: 5 out of 40
+{'epoch': 259, 'Geneartion Loss stamina (Train)': '0.933462', 'Correlation Image(Train)': '0.035674', 'MAE Loss': '0.000000'}
+{'Epoch': 259, 'Generation Loss (Eval)': '0.158862'}
+EarlyStopping counter: 6 out of 40
+{'epoch': 260, 'Geneartion Loss stamina (Train)': '0.932589', 'Correlation Image(Train)': '0.035670', 'MAE Loss': '0.000000'}
+{'Epoch': 260, 'Generation Loss (Eval)': '0.159745'}
+EarlyStopping counter: 7 out of 40
+{'epoch': 261, 'Geneartion Loss stamina (Train)': '0.932880', 'Correlation Image(Train)': '0.035670', 'MAE Loss': '0.000000'}
+{'Epoch': 261, 'Generation Loss (Eval)': '0.159254'}
+EarlyStopping counter: 8 out of 40
+{'epoch': 262, 'Geneartion Loss stamina (Train)': '0.932162', 'Correlation Image(Train)': '0.035669', 'MAE Loss': '0.000000'}
+{'Epoch': 262, 'Generation Loss (Eval)': '0.159401'}
+EarlyStopping counter: 9 out of 40
+{'epoch': 263, 'Geneartion Loss stamina (Train)': '0.932959', 'Correlation Image(Train)': '0.035674', 'MAE Loss': '0.000000'}
+{'Epoch': 263, 'Generation Loss (Eval)': '0.158876'}
+EarlyStopping counter: 10 out of 40
+{'epoch': 264, 'Geneartion Loss stamina (Train)': '0.932598', 'Correlation Image(Train)': '0.035678', 'MAE Loss': '0.000000'}
+{'Epoch': 264, 'Generation Loss (Eval)': '0.158856'}
+EarlyStopping counter: 11 out of 40
+{'epoch': 265, 'Geneartion Loss stamina (Train)': '0.932274', 'Correlation Image(Train)': '0.035676', 'MAE Loss': '0.000000'}
+{'Epoch': 265, 'Generation Loss (Eval)': '0.158774'}
+EarlyStopping counter: 12 out of 40
+{'epoch': 266, 'Geneartion Loss stamina (Train)': '0.933030', 'Correlation Image(Train)': '0.035686', 'MAE Loss': '0.000000'}
+{'Epoch': 266, 'Generation Loss (Eval)': '0.159086'}
+EarlyStopping counter: 13 out of 40
+{'epoch': 267, 'Geneartion Loss stamina (Train)': '0.934447', 'Correlation Image(Train)': '0.035686', 'MAE Loss': '0.000000'}
+{'Epoch': 267, 'Generation Loss (Eval)': '0.158929'}
+EarlyStopping counter: 14 out of 40
+{'epoch': 268, 'Geneartion Loss stamina (Train)': '0.931776', 'Correlation Image(Train)': '0.035678', 'MAE Loss': '0.000000'}
+{'Epoch': 268, 'Generation Loss (Eval)': '0.159566'}
+EarlyStopping counter: 15 out of 40
+{'epoch': 269, 'Geneartion Loss stamina (Train)': '0.931483', 'Correlation Image(Train)': '0.035678', 'MAE Loss': '0.000000'}
+{'Epoch': 269, 'Generation Loss (Eval)': '0.159113'}
+EarlyStopping counter: 16 out of 40
+{'epoch': 270, 'Geneartion Loss stamina (Train)': '0.931543', 'Correlation Image(Train)': '0.035683', 'MAE Loss': '0.000000'}
+{'Epoch': 270, 'Generation Loss (Eval)': '0.158994'}
+EarlyStopping counter: 17 out of 40
+{'epoch': 271, 'Geneartion Loss stamina (Train)': '0.931455', 'Correlation Image(Train)': '0.035687', 'MAE Loss': '0.000000'}
+{'Epoch': 271, 'Generation Loss (Eval)': '0.159422'}
+EarlyStopping counter: 18 out of 40
+{'epoch': 272, 'Geneartion Loss stamina (Train)': '0.931836', 'Correlation Image(Train)': '0.035675', 'MAE Loss': '0.000000'}
+{'Epoch': 272, 'Generation Loss (Eval)': '0.160547'}
+EarlyStopping counter: 19 out of 40
+{'epoch': 273, 'Geneartion Loss stamina (Train)': '0.931495', 'Correlation Image(Train)': '0.035685', 'MAE Loss': '0.000000'}
+{'Epoch': 273, 'Generation Loss (Eval)': '0.160131'}
+EarlyStopping counter: 20 out of 40
+{'epoch': 274, 'Geneartion Loss stamina (Train)': '0.930694', 'Correlation Image(Train)': '0.035679', 'MAE Loss': '0.000000'}
+{'Epoch': 274, 'Generation Loss (Eval)': '0.159025'}
+EarlyStopping counter: 21 out of 40
+{'epoch': 275, 'Geneartion Loss stamina (Train)': '0.930973', 'Correlation Image(Train)': '0.035683', 'MAE Loss': '0.000000'}
+{'Epoch': 275, 'Generation Loss (Eval)': '0.159247'}
+EarlyStopping counter: 22 out of 40
+{'epoch': 276, 'Geneartion Loss stamina (Train)': '0.931452', 'Correlation Image(Train)': '0.035682', 'MAE Loss': '0.000000'}
+{'Epoch': 276, 'Generation Loss (Eval)': '0.159460'}
+EarlyStopping counter: 23 out of 40
+{'epoch': 277, 'Geneartion Loss stamina (Train)': '0.932233', 'Correlation Image(Train)': '0.035683', 'MAE Loss': '0.000000'}
+{'Epoch': 277, 'Generation Loss (Eval)': '0.160173'}
+EarlyStopping counter: 24 out of 40
+{'epoch': 278, 'Geneartion Loss stamina (Train)': '0.930719', 'Correlation Image(Train)': '0.035679', 'MAE Loss': '0.000000'}
+{'Epoch': 278, 'Generation Loss (Eval)': '0.160315'}
+EarlyStopping counter: 25 out of 40
+{'epoch': 279, 'Geneartion Loss stamina (Train)': '0.929727', 'Correlation Image(Train)': '0.035680', 'MAE Loss': '0.000000'}
+{'Epoch': 279, 'Generation Loss (Eval)': '0.159521'}
+EarlyStopping counter: 26 out of 40
+{'epoch': 280, 'Geneartion Loss stamina (Train)': '0.930317', 'Correlation Image(Train)': '0.035687', 'MAE Loss': '0.000000'}
+{'Epoch': 280, 'Generation Loss (Eval)': '0.159672'}
+EarlyStopping counter: 27 out of 40
+{'epoch': 281, 'Geneartion Loss stamina (Train)': '0.929477', 'Correlation Image(Train)': '0.035680', 'MAE Loss': '0.000000'}
+{'Epoch': 281, 'Generation Loss (Eval)': '0.159660'}
+EarlyStopping counter: 28 out of 40
+{'epoch': 282, 'Geneartion Loss stamina (Train)': '0.930253', 'Correlation Image(Train)': '0.035677', 'MAE Loss': '0.000000'}
+{'Epoch': 282, 'Generation Loss (Eval)': '0.161863'}
+EarlyStopping counter: 29 out of 40
+{'epoch': 283, 'Geneartion Loss stamina (Train)': '0.929893', 'Correlation Image(Train)': '0.035679', 'MAE Loss': '0.000000'}
+{'Epoch': 283, 'Generation Loss (Eval)': '0.159591'}
+EarlyStopping counter: 30 out of 40
+{'epoch': 284, 'Geneartion Loss stamina (Train)': '0.929604', 'Correlation Image(Train)': '0.035674', 'MAE Loss': '0.000000'}
+{'Epoch': 284, 'Generation Loss (Eval)': '0.161250'}
+EarlyStopping counter: 31 out of 40
+{'epoch': 285, 'Geneartion Loss stamina (Train)': '0.929760', 'Correlation Image(Train)': '0.035683', 'MAE Loss': '0.000000'}
+{'Epoch': 285, 'Generation Loss (Eval)': '0.160416'}
+EarlyStopping counter: 32 out of 40
+{'epoch': 286, 'Geneartion Loss stamina (Train)': '0.929689', 'Correlation Image(Train)': '0.035673', 'MAE Loss': '0.000000'}
+{'Epoch': 286, 'Generation Loss (Eval)': '0.161619'}
+EarlyStopping counter: 33 out of 40
+{'epoch': 287, 'Geneartion Loss stamina (Train)': '0.929215', 'Correlation Image(Train)': '0.035676', 'MAE Loss': '0.000000'}
+{'Epoch': 287, 'Generation Loss (Eval)': '0.160888'}
+EarlyStopping counter: 34 out of 40
+{'epoch': 288, 'Geneartion Loss stamina (Train)': '0.928747', 'Correlation Image(Train)': '0.035666', 'MAE Loss': '0.000000'}
+{'Epoch': 288, 'Generation Loss (Eval)': '0.160324'}
+EarlyStopping counter: 35 out of 40
+{'epoch': 289, 'Geneartion Loss stamina (Train)': '0.929046', 'Correlation Image(Train)': '0.035669', 'MAE Loss': '0.000000'}
+{'Epoch': 289, 'Generation Loss (Eval)': '0.159788'}
+EarlyStopping counter: 36 out of 40
+{'epoch': 290, 'Geneartion Loss stamina (Train)': '0.930918', 'Correlation Image(Train)': '0.035658', 'MAE Loss': '0.000000'}
+{'Epoch': 290, 'Generation Loss (Eval)': '0.160287'}
+EarlyStopping counter: 37 out of 40
+{'epoch': 291, 'Geneartion Loss stamina (Train)': '0.931847', 'Correlation Image(Train)': '0.035673', 'MAE Loss': '0.000000'}
+{'Epoch': 291, 'Generation Loss (Eval)': '0.159804'}
+EarlyStopping counter: 38 out of 40
+{'epoch': 292, 'Geneartion Loss stamina (Train)': '0.931551', 'Correlation Image(Train)': '0.035673', 'MAE Loss': '0.000000'}
+{'Epoch': 292, 'Generation Loss (Eval)': '0.159141'}
+EarlyStopping counter: 39 out of 40
+{'epoch': 293, 'Geneartion Loss stamina (Train)': '0.930291', 'Correlation Image(Train)': '0.035663', 'MAE Loss': '0.000000'}
+{'Epoch': 293, 'Generation Loss (Eval)': '0.159082'}
+EarlyStopping counter: 40 out of 40

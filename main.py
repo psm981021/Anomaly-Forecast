@@ -169,9 +169,10 @@ def main():
         if os.path.exists(args.checkpoint_path):
             print("Continue Pre-Training")
 
+            
+            
             map_location = args.device
-            trainer.model.load_state_dict(torch.load(args.checkpoint_path, map_location=map_location))
-
+            trainer.model.load_state_dict(torch.load(args.checkpoint_path, map_location=map_location)['model_state_dict'])
             with open(args.log_file, "a") as f:
                 f.write("------------------------------ Continue Training ------------------------------ \n")
                 f.write("Load pt for Pre-training")
@@ -186,7 +187,7 @@ def main():
 
         print(f"Start Fine-Tuning from {args.checkpoint_path}!")
         map_location = args.device
-        trainer.model.load_state_dict(torch.load(args.checkpoint_path, map_location=map_location))
+        trainer.model.load_state_dict(torch.load(args.checkpoint_path, map_location=map_location)['model_state_dict'])
         
 
         # Regression 
@@ -196,7 +197,7 @@ def main():
 
         if os.path.exists(args.checkpoint_path):
 
-            trainer.model.load_state_dict(torch.load(args.checkpoint_path, map_location=map_location))
+            trainer.model.load_state_dict(torch.load(args.checkpoint_path, map_location=map_location)['model_state_dict'])
 
             print("Continue Finetune-Training")
             with open(args.log_file, "a") as f:
@@ -267,7 +268,7 @@ def main():
         # load the best model
 
         map_location = args.device
-        trainer.model.load_state_dict(torch.load(args.checkpoint_path, map_location=map_location))
+        trainer.model.load_state_dict(torch.load(args.checkpoint_path, map_location=map_location)['model_state_dict'])
 
         print(f"Load model from {args.checkpoint_path} for test!")
 
