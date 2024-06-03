@@ -44,6 +44,8 @@ class Trainer:
         # self.Linear_layer = nn.Linear(self.args.batch, self.args.batch)
         # self.regression_layer =nn.Linear(100, 1)
 
+
+
         if self.cuda_condition:
             self.model.cuda()
             self.projection.cuda()
@@ -317,16 +319,14 @@ class FourTrainer(Trainer):
                 if self.args.pre_train == False:
                     
                     # total_predict_gap[:,:,71,86] 관악
-                    # total_predict_gap[:,:,58,44] 철원
-                    # total_predict_gap[:,:,70:90, 55:85], seoul
+                    # total_predict_gap[:,:,58,44] 철원 
+
+                    # total_predict_gap[:,:,70:90, 55:86], seoul
                     
                     if self.args.regression == 'gap':
 
                         crop_predict_gap = (total_predict_gap[:,:,71,86] * 255).clamp(0,255)
-
-                        import IPython; IPython.embed(colors="Linux");exit(1);
-                        predict=inference_jw(self.classifier, crop_predict_gap)
-
+                        # predict = inferecne_jw(self.classifier, crop_predict_gap)
                         reg = abs(self.model.regression_layer(crop_predict_gap)).view(self.args.batch)
                         
                         loss_mae = self.mae_criterion(reg, abs(gap))
