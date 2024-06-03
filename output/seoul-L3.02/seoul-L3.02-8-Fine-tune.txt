@@ -3996,3 +3996,5 @@ EarlyStopping counter: 1 out of 40
 {'epoch': 1695, 'Geneartion Loss ed_image (Train)': '0.000000', 'Correlation Image(Train)': '0.033777', 'MAE Loss': '1.628737'}
 {'Epoch': 1695, 'MAE Loss (Eval)': '2.038674'}
 EarlyStopping counter: 1 out of 40
+------------------------------ Continue Training ------------------------------ 
+Load pt for Finetune-training{'Epoch': 3000, 'MAE Loss (Eval)': '4.874541'}
