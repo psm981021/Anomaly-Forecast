@@ -14,8 +14,8 @@ from classification_gpu import *
 from efficientnet_pytorch import EfficientNet
 
 class Trainer:
-    def __init__(self, model, train_dataloader, valid_dataloader, test_dataloader, args):
 
+    def __init__(self, model, train_dataloader, valid_dataloader, test_dataloader, args):
         self.args = args
         self.cuda_condition = torch.cuda.is_available() and not self.args.no_cuda
         self.device = args.device
@@ -64,6 +64,9 @@ class Trainer:
             # Assuming the regression model is meant to be trained
             for param in self.model.regression_layer.parameters():
                 param.requires_grad = True
+
+            for param in self.model.moe.parameters():
+                param.requires_grad = True
             
         # Setting the train and test data loader
         self.train_dataloader = train_dataloader
@@ -74,7 +77,8 @@ class Trainer:
         betas = (self.args.adam_beta1, self.args.adam_beta2)
         self.optim = Adam(self.model.parameters(), lr=1e-5, betas=betas, weight_decay=self.args.weight_decay)
         self.reg_optim = Adam(filter(lambda p: p.requires_grad, self.model.regression_layer.parameters()), lr=1e-5, betas=betas, weight_decay=self.args.weight_decay)
-
+        self.moe_optim = Adam(filter(lambda p: p.requires_grad, self.model.moe.parameters()), lr=1e-5, betas=betas, weight_decay=self.args.weight_decay)
+        
         print("Total Parameters:", sum([p.nelement() for p in self.model.parameters()]))
 
         self.ce_criterion = torch.nn.CrossEntropyLoss().to(self.args.device)
@@ -261,7 +265,7 @@ class FourTrainer(Trainer):
                         generation_loss =  self.ce_criterion(generated_image.mean(dim=-1), image_batch[i+1])
 
                     elif self.args.loss_type == 'mae_image':
-
+                        import IPython; IPython.embed(colors='Linux');exit(1);
                         generation_loss = self.mae_criterion(generated_image.mean(dim=-1), image_batch[i+1])
 
                     elif self.args.loss_type == 'ed_image':
@@ -324,12 +328,38 @@ class FourTrainer(Trainer):
                     # total_predict_gap[:,:,70:90, 55:86], seoul
                     
                     if self.args.regression == 'gap':
-
-                        crop_predict_gap = (total_predict_gap[:,:,71,86] * 255).clamp(0,255)
-                        # predict = inferecne_jw(self.classifier, crop_predict_gap)
-                        reg = abs(self.model.regression_layer(crop_predict_gap)).view(self.args.batch)
                         
-                        loss_mae = self.mae_criterion(reg, abs(gap))
+                        if self.args.classification:
+                            
+                            # [B 100 2 2 ]
+                            crop_predict_gap = (total_predict_gap[:,:,70:72,85:87] * 255).clamp(0,255)
+
+                            conv1x1 = nn.Conv2d(100, 3, kernel_size=1).to(self.device)
+                            padding_needed = (1, 1, 1, 1)
+                            crop_predict_gap = F.pad(crop_predict_gap, padding_needed, "constant", 0)
+                            
+                            # [B 3 4 4]
+                            crop_predict_gap = conv1x1(crop_predict_gap)
+
+                            resize = transforms.Resize((40, 40))
+                            # [B 3 40 40]
+                            crop_predict_gap = resize(crop_predict_gap)
+
+                            # B 3 
+                            predict = inference_jw(self.classifier,crop_predict_gap)
+
+                            reg = torch.zeros(self.args.batch).to(self.args.device)
+                            for i, model_index in enumerate(predict):
+                                selected_model = self.model.moe[model_index]  # Select model based on prediction
+                                reg[i] = abs(selected_model(total_predict_gap[:,:,71,86][i]))
+
+                            loss_mae = self.mae_criterion(abs(reg), abs(gap))
+
+
+                        else:
+                            crop_predict_gap = (total_predict_gap[:,:,71,86] * 255).clamp(0,255)
+                            reg = abs(self.model.regression_layer(crop_predict_gap)).view(self.args.batch)
+                            loss_mae = self.mae_criterion(reg, abs(gap))
                         
 
                     elif self.args.regression == 'label':
@@ -362,8 +392,12 @@ class FourTrainer(Trainer):
                     self.optim.zero_grad()
 
                 elif self.args.pre_train == False: #fine-tuning 
-                    self.reg_optim.step()
-                    self.reg_optim.zero_grad()
+                    if self.args.classification: # MoE 
+                        self.moe_optim.step()
+                        self.moe_optim.zero_grad()
+                    else: # Regression Model
+                        self.reg_optim.step()
+                        self.reg_optim.zero_grad()
 
                 del batch, generation_loss, loss_mae, joint_loss  # After backward pass
             torch.cuda.empty_cache()
@@ -413,21 +447,20 @@ class FourTrainer(Trainer):
                     total_mae =0.0
 
                     image_batch = torch.stack(image_batch).permute(1,0,2,3,4).contiguous()
-
+                    test_datetime = ['2022-08-08 13:00', '2022-08-11 05:00', '2023-07-04 20:00',
+                                      '2023-07-14 01:00','2023-07-18 07:00','2023-08-29 13:00','2023-09-17 00:00']
                     for i in range(len(image_batch)-1):
                     
                         # image_batch[i] [B x 3 x R x R]
                         generated_image = self.model(image_batch[i],self.args)
                         # generated_image [B 3 R R ], Regression_logits [B x 1 x 150 x 150]
 
-                        # if self.args.grey_scale:
-                        #     correlation_image += torch.abs(self.correlation_image(generated_image.mean(dim=-1), image_batch[i+1])) / self.args.batch
-                        # else:
-                        #     correlation_image += torch.abs(self.correlation_image(generated_image.mean(dim=-1), image_batch[i+1].mean(dim=1))) / self.args.batch
-
-                        # regression_logits = regression_logits.reshape(self.args.batch, -1)
                         precipitation.append(generated_image) 
-                        
+                        if self.args.location == "seoul" and self.args.do_eval:
+                            for j in range(len(datetime)-1):
+                                if datetime[j] in test_datetime:
+                                    self.plot_images(generated_image[j].mean(dim=-1),epoch, self.args.model_idx, datetime[j], 'G')
+
                         if self.args.loss_type == 'ce_image':
                             generation_loss =  self.ce_criterion(generated_image.mean(dim=-1), image_batch[i+1])
 
@@ -479,19 +512,46 @@ class FourTrainer(Trainer):
                     
                     total_predict_gap=total_predict_gap.permute(0,3,1,2).contiguous()
 
-                    # reg = self.regression_layer(image_batch[i+1]).view(self.args.batch) # [B] 
-
+                    # reg = self.regression_layer(image_batch[i+1]).view(self.args.batch) # [B]
                     # reg = self.regression_layer(total_predict_gap).view(self.args.batch) # [B] 
-
                     # last_reg = self.regression_layer(last_precipitation.permute(0,3,1,2).contiguous()).view(self.args.batch) # [B] 
                     
                        
                     if self.args.pre_train == False:
                         if self.args.regression == 'gap':
-                            crop_predict_gap = (total_predict_gap[:,:,71,86] * 255).clamp(0,255)
-                            reg = abs(self.model.regression_layer(crop_predict_gap)).view(self.args.batch)
                             
-                            loss_mae = self.mae_criterion(reg, abs(gap))
+                            if self.args.classification:
+                                
+                                # [B 100 2 2 ]
+                                crop_predict_gap = (total_predict_gap[:,:,70:72,85:87] * 255).clamp(0,255)
+
+                                conv1x1 = nn.Conv2d(100, 3, kernel_size=1).to(self.device)
+                                padding_needed = (1, 1, 1, 1)
+                                crop_predict_gap = F.pad(crop_predict_gap, padding_needed, "constant", 0)
+                                
+                                # [B 3 4 4]
+                                crop_predict_gap = conv1x1(crop_predict_gap)
+
+                                resize = transforms.Resize((40, 40))
+                                # [B 3 40 40]
+                                crop_predict_gap = resize(crop_predict_gap)
+
+                                # B 3 
+                                predict = inference_jw(self.classifier,crop_predict_gap)
+
+                                reg = torch.zeros(self.args.batch).to(self.args.device)
+                                for i, model_index in enumerate(predict):
+                                    selected_model = self.model.moe[model_index]  # Select model based on prediction
+                                    reg[i] = abs(selected_model(total_predict_gap[:,:,71,86][i]))
+
+                                loss_mae = self.mae_criterion(abs(reg), abs(gap))
+
+
+                            else:
+                                crop_predict_gap = (total_predict_gap[:,:,71,86] * 255).clamp(0,255)
+                                reg = abs(self.model.regression_layer(crop_predict_gap)).view(self.args.batch)
+                                loss_mae = self.mae_criterion(reg, abs(gap))
+                        
 
                         elif self.args.regression == 'label':
                             last_precipitation = (last_precipitation[:,:,71,86] * 255).clamp(0,255)
@@ -511,9 +571,33 @@ class FourTrainer(Trainer):
 
 
                     if test:
-                        last_precipitation = (last_precipitation[:,:,71,86] * 255).clamp(0,255)
-                        reg = abs(self.model.regression_layer(last_precipitation)).view(self.args.batch)
-                        
+                        if self.args.classification:
+                            crop_predict_gap = (last_precipitation[:,:,70:72,85:87] * 255).clamp(0,255)
+
+                            conv1x1 = nn.Conv2d(100, 3, kernel_size=1).to(self.device)
+                            padding_needed = (1, 1, 1, 1)
+                            crop_predict_gap = F.pad(crop_predict_gap, padding_needed, "constant", 0)
+                            
+                            # [B 3 4 4]
+                            crop_predict_gap = conv1x1(crop_predict_gap)
+
+                            resize = transforms.Resize((40, 40))
+                            # [B 3 40 40]
+                            crop_predict_gap = resize(crop_predict_gap)
+
+                            # B 3 
+                            predict = inference_jw(self.classifier,crop_predict_gap)
+
+                            reg = torch.zeros(self.args.batch).to(self.args.device)
+                            for i, model_index in enumerate(predict):
+                                selected_model = self.model.moe[model_index]  # Select model based on prediction
+                                reg[i] = abs(selected_model(last_precipitation[:,:,71,86][i]))
+
+                            
+                        else:
+                            last_precipitation = (last_precipitation[:,:,71,86] * 255).clamp(0,255)
+                            reg = abs(self.model.regression_layer(last_precipitation)).view(self.args.batch)
+                            
                         self.args.test_list.append([datetime, reg, label])
                         
                 del batch
@@ -524,115 +608,3 @@ class FourTrainer(Trainer):
             elif self.args.pre_train == False:
                 return self.get_score(epoch, total_mae_loss/len(batch_iter))
             
-            
-    
-class SianetTrainer(Trainer):
-    def __init__(self,model,train_dataloader, valid_dataloader,test_dataloader, args):
-        super(SianetTrainer, self).__init__(
-            model,train_dataloader, valid_dataloader, test_dataloader,args)
-        
-    def iteration(self, epoch, dataloader, train=True, test=False):
-        
-        if train:
-            print("Train Sianet")            
-            self.model.train()
-            
-            batch_iter = tqdm(enumerate(dataloader), total= len(dataloader))
-            total_l2, total_mae = torch.tensor(0.0, device=self.args.device), torch.tensor(0.0, device=self.args.device)
-            
-            for i, batch in batch_iter:
-                # image, label, gap, datetime, class_label = batch 
-                image, label, gap, datetime = batch
-                
-                image_batch = [t.to(self.args.device) for t in image] # 7
-                label = label.to(self.args.device) #answer, B
-                gap = gap.to(self.args.device) #diff between t-1 t, B
-                # class_label = class_label.to(self.args.device)
-                
-                set_generation_loss = 0.0
-                precipitation = []   
-
-                image_batch_tensor=torch.stack(image_batch[:6]) # [6,8,3,150,150]
-                target=image_batch[6]
-
-                image_batch_tensor=image_batch_tensor.permute(1,2,0,3,4) # [8,3,6,150,150]
-                
-                generated_image=self.model(image_batch_tensor)
-                
-                generated_image=generated_image.expand(-1,3,-1,-1,-1).squeeze(2)
-
-
-                loss_l2 =  self.l2_criterion(generated_image, target)                
-
-                self.optim.zero_grad()
-                loss_l2.backward()
-                self.optim.step()
-
-                total_l2 += loss_l2.item()
-            
-
-                # del batch, generation_loss, loss_mae, joint_loss  # After backward pass
-                # torch.cuda.empty_cache()
-            
-
-            if self.args.wandb == True:
-                wandb.log({'Generation Loss (CE)': total_l2 / len(batch_iter)}, step=epoch)
-                wandb.log({'MAE Train Loss': total_mae / len(batch_iter)}, step=epoch)
-
-            post_fix = {
-                "epoch":epoch,
-                "Generation Loss (L2)": "{:.6f}".format(total_l2/len(batch_iter)),
-                "MAE Loss":"{:.6f}".format(total_mae/len(batch_iter)),
-            }
-            if (epoch+1) % self.args.log_freq ==0:
-                print(str(post_fix))
-            
-            with open(self.args.log_file, "a") as f:
-                f.write(str(post_fix) + "\n")
-
-        # end of train
-
-### 수정 중 ###
-        else:
-            #valid and test
-            print("Eval Fourcaster")
-            self.model.eval()
-
-            with torch.no_grad():
-                total_l2 = torch.tensor(0.0, device=self.args.device)
-                batch_iter = tqdm(enumerate(dataloader), total= len(dataloader))
-                for i, batch in batch_iter:
-                    image, label, gap, datetime = batch
-                    # image, label, gap, datetime, class_label = batch
-                    image_batch = [t.to(self.args.device) for t in image]
-                    label = label.to(self.args.device)
-                    gap = gap.to(self.args.device)
-                    # class_label = class_label.to(self.args.device)
-                
-                    precipitation =[]
-
-                    image_batch_tensor=torch.stack(image_batch[:6]) # [6,8,3,150,150]
-                    target=image_batch[6]
-
-                    image_batch_tensor=image_batch_tensor.permute(1,2,0,3,4) # [8,3,6,150,150]
-
-                    generated_image=self.model(image_batch_tensor)
-                
-                    generated_image=generated_image.expand(-1,3,-1,-1,-1).squeeze(2)
-
-                    # self.plot_images(generated_image[0],self.args.model_idx,datetime[6])
-                    
-                    loss_l2 =  self.l2_criterion(generated_image, target)                
-
-                    total_l2 += loss_l2.item()
-
-
-
-
-                    # if test:
-                    #     self.args.test_list.append([datetime, last_elements, label])
-                        
-                #     del batch
-                # torch.cuda.empty_cache() 
-            return self.get_score(epoch, total_l2/len(batch_iter))
-

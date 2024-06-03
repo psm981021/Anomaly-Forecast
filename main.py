@@ -70,6 +70,7 @@ def main():
     parser.add_argument("--batch", type=int,default=4, help="batch size")
     parser.add_argument("--n_classes", type=int,default=100, help="batch size")
     parser.add_argument("--sianet",action="store_true")
+    parser.add_argument("--classification",action="store_true")
 
     # train args
     parser.add_argument("--epochs", type=int, default=50, help="number of epochs" )
