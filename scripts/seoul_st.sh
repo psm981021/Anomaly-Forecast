@@ -1,16 +1,16 @@
 python main.py \
-    --data_dir "/dev/shm/data_seoul_only_v2" \
-    --image_csv_dir "data/seoul_v2.csv" \
+    --data_dir "/dev/shm/data_Seoul" \
+    --image_csv_dir "data/Seoul.csv" \
     --batch 8 \
     --epochs 3000 \
     --patience 40 \
-    --model_idx "seoul-L4.03" \
-    --output_dir "output/seoul-L4.03/" \
+    --model_idx "seoul-L4.04" \
+    --output_dir "output/seoul-L4.04" \
     --test_list=[] \
     --gpu_id 1 \
     --device cuda:1 \
     --seed 0 \
-    --lr 0.01 \
+    --lr 0.001 \
     --loss_type "stamina" \
     --location "seoul" \
     --regression "gap" \
@@ -18,23 +18,21 @@ python main.py \
 
 
 python main.py \
-    --data_dir "/dev/shm/data_seoul_only_v2" \
-    --image_csv_dir "data/seoul_v2.csv" \
+    --data_dir "/dev/shm/data_Seoul" \
+    --image_csv_dir "data/Seoul.csv" \
     --batch 8 \
     --epochs 3000 \
     --patience 40 \
-    --model_idx "seoul-L4.03" \
-    --output_dir "output/seoul-L4.03/" \
+    --model_idx "seoul-L4.04" \
+    --output_dir "output/seoul-L4.04" \
     --test_list=[] \
     --gpu_id 1 \
     --device cuda:1 \
     --seed 0 \
-    --lr 0.01 \
+    --lr 0.02 \
     --loss_type "stamina" \
     --location "seoul" \
     --regression "gap" \
-
-
 
 
 # scripts/seoul_st.sh
