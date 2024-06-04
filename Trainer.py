@@ -285,19 +285,24 @@ class FourTrainer(Trainer):
                             generation_loss = torch.sum((preds * err),dim=-1).mean()
 
                     elif self.args.loss_type == 'stamina':
-                            epsilon = 1e-6
-                            
-                            if self.args.grey_scale:
-                                absolute_error = torch.abs(generated_image - image_batch[i+1].permute(0,2,3,1)) # [B W H C]
-                            else:
-                                absolute_error = torch.abs(generated_image.mean(dim=-1).unsqueeze(dim=-1) - image_batch[i+1].permute(0,2,3,1)) # [B W H C]
+                            if self.args.balancing:
+                                epsilon = 1e-6
 
-                            event_weight = torch.clamp(image_batch[i] + 1, max=6).permute(0,2,3,1) # [B W H 1]
-                            penalty = torch.pow(1 - torch.exp(-absolute_error) + epsilon , 0.5) #  [B W H C]
-                            
-                            result = absolute_error * event_weight * penalty
-                            
-                            generation_loss = result.mean()
+
+                            else:
+                                epsilon = 1e-6
+                                
+                                if self.args.grey_scale:
+                                    absolute_error = torch.abs(generated_image - image_batch[i+1].permute(0,2,3,1)) # [B W H C]
+                                else:
+                                    absolute_error = torch.abs(generated_image.mean(dim=-1).unsqueeze(dim=-1) - image_batch[i+1].permute(0,2,3,1)) # [B W H C]
+
+                                event_weight = torch.clamp(image_batch[i] + 1, max=6).permute(0,2,3,1) # [B W H 1]
+                                penalty = torch.pow(1 - torch.exp(-absolute_error) + epsilon , 0.5) #  [B W H C]
+                                
+                                result = absolute_error * event_weight * penalty
+                                
+                                generation_loss = result.mean()
                             
                     else:
                         generation_loss =  self.ce_criterion(generated_image.flatten(1), class_label)
@@ -450,7 +455,15 @@ class FourTrainer(Trainer):
                     total_mae =0.0
 
                     image_batch = torch.stack(image_batch).permute(1,0,2,3,4).contiguous()
-                    test_datetime = ['2022-06-30 18:00','2022-08-08 23:00', '2023-08-29 13:00','2023-09-17 00:00']
+                    test_datetime = ['2022-08-08 13:00', '2022-08-11 05:00', '2023-07-04 20:00',
+                                      '2023-07-14 01:00','2023-07-18 07:00','2023-08-29 13:00','2023-09-17 00:00',
+                                      '2021-07-03 18:00', '2021-07-03 21:00', '2022-06-23 20:00', '2022-06-23 19:00',
+                                      '2022-06-23 22:00', '2022-06-24 01:00', '2022-06-30 04:00', '2022-06-30 05:00',
+                                      '2022-06-30 06:00', '2022-06-30 08:00', '2022-06-30 09:00', '2022-06-30 10:00',
+                                      '2022-06-30 18:00', '2022-06-30 19:00', '2022-07-13 11:00', '2022-07-13 16:00',
+                                      '2022-07-13 17:00', '2022-08-08 21:00', '2022-08-08 22:00', '2022-08-08 23:00',
+                                      '2022-08-09 00:00', '2022-08-09 03:00']
+                    
                     for i in range(len(image_batch)-1):
                     
                         # image_batch[i] [B x 3 x R x R]
@@ -468,7 +481,9 @@ class FourTrainer(Trainer):
                             generation_loss =  self.ce_criterion(generated_image.mean(dim=-1), image_batch[i+1].mean(dim=1))
 
                         elif self.args.loss_type == 'mae_image':
-                            generation_loss = self.mae_criterion(generated_image.mean(dim=-1), image_batch[i+1])
+
+                            loss_r, loss_g, loss_b = self.mae_criterion(generated_image.permute(0,3,1,2),image_batch[i+1][:,0,:,:].unsqueeze(1)),self.mae_criterion(generated_image.permute(0,3,1,2),image_batch[i+1][:,1,:,:].unsqueeze(1)),self.mae_criterion(generated_image.permute(0,3,1,2),image_batch[i+1][:,2,:,:].unsqueeze(1))
+                            generation_loss = (loss_r +  loss_g + loss_b) / 3
 
                         elif self.args.loss_type == 'ed_image':
                             preds = torch.softmax(generated_image,dim=-1)

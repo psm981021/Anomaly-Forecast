@@ -14,6 +14,7 @@ python main.py \
     --loss_type "stamina" \
     --location "seoul" \
     --regression "gap" \
+    --balancing \
     --pre_train
 
 
@@ -32,8 +33,8 @@ python main.py \
     --lr 0.02 \
     --loss_type "stamina" \
     --location "seoul" \
-    --regression "gap" \
-
+    --regression "gap"
+    
 
 # scripts/seoul_st.sh
 
