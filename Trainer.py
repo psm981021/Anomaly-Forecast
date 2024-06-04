@@ -232,7 +232,7 @@ class FourTrainer(Trainer):
                         correlation_image += torch.abs(self.correlation_image(generated_image.mean(dim=-1), image_batch[i+1].mean(dim=1))) #/ self.args.batch
                     
                     if epoch == 0:
-                        for j in range(len(datetime)-1):
+                        for j in range(len(datetime)):
                             if datetime[j] in plot_list_seoul:
                                 
                                 self.plot_images(image_batch[-1][j].permute(1,2,0),epoch, self.args.model_idx, datetime[j], 'R')
@@ -450,8 +450,7 @@ class FourTrainer(Trainer):
                     total_mae =0.0
 
                     image_batch = torch.stack(image_batch).permute(1,0,2,3,4).contiguous()
-                    test_datetime = ['2022-08-08 13:00', '2022-08-11 05:00', '2023-07-04 20:00',
-                                      '2023-07-14 01:00','2023-07-18 07:00','2023-08-29 13:00','2023-09-17 00:00']
+                    test_datetime = ['2022-06-30 18:00','2022-08-08 23:00', '2023-08-29 13:00','2023-09-17 00:00']
                     for i in range(len(image_batch)-1):
                     
                         # image_batch[i] [B x 3 x R x R]
@@ -460,12 +459,13 @@ class FourTrainer(Trainer):
 
                         precipitation.append(generated_image) 
                         if self.args.location == "seoul" and self.args.do_eval:
-                            for j in range(len(datetime)-1):
+                            for j in range(len(datetime)):
                                 if datetime[j] in test_datetime:
                                     self.plot_images(generated_image[j].mean(dim=-1),epoch, self.args.model_idx, datetime[j], 'G')
+                                    self.plot_images(image_batch[-1][j].permute(1,2,0),epoch, self.args.model_idx, datetime[j], 'R')
 
                         if self.args.loss_type == 'ce_image':
-                            generation_loss =  self.ce_criterion(generated_image.mean(dim=-1), image_batch[i+1])
+                            generation_loss =  self.ce_criterion(generated_image.mean(dim=-1), image_batch[i+1].mean(dim=1))
 
                         elif self.args.loss_type == 'mae_image':
                             generation_loss = self.mae_criterion(generated_image.mean(dim=-1), image_batch[i+1])
