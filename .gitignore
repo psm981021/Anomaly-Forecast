@@ -36,7 +36,6 @@ test.py
 
 #cb
 /data/images_classification/
-classification_model/
 classification/log/
 /data/*csv
 __pycache__/
