@@ -1,5 +1,8 @@
 /root/.vscode-server
 
+#classficiation
+/classification/model/Seoul_b7_epoch_7.pth
+
 #data
 data/*.zip
 /data/radar_sample_images/
@@ -10,6 +13,8 @@ data/*.ipynb
 /data/data_radar
 data/*.png
 /data/images_classification
+/data/data_Seoul
+/data/data_Gangwon
 
 
 # clone models
