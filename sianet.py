@@ -735,6 +735,7 @@ class sianet(nn.Module):
         # print("reduce channels shape",xs)
         x = torch.reshape(x, (xs[0], 1, 1, xs[3], xs[4])) # (xs[0], 3, 6, xs[3], xs[4])
         return x
+    
     @torch.jit.unused
     def forward_gradcp(self, x):
         """``forward()`` implementation with gradient checkpointing enabled.
