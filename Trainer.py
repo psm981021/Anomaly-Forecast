@@ -36,8 +36,8 @@ class Trainer:
         #     device=self.device
         # )
 
-        # self.classifier = load_model("cf_models\Seoul_V1_epoch_2.pth", self.device)
-        self.classifier = EfficientNet.from_pretrained('efficientnet-b0', num_classes=3)
+        self.classifier = load_model("classification/model/Seoul_b7_epoch_7.pth", self.device, 'b7')
+        # self.classifier = EfficientNet.from_pretrained('efficientnet-b0', num_classes=3)
 
         # self.regression_layer = RainfallPredictor().to(self.args.device)
         # self.regression_model = RainNet().to(self.args.device)

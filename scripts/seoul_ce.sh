@@ -32,7 +32,7 @@ python main.py \
     --loss_type "ce_image" \
     --location "seoul" \
     --regression "gap" \
-    --do_eval
+    --classification
 
 
 

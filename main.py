@@ -191,20 +191,37 @@ def main():
         map_location = args.device
         trainer.model.load_state_dict(torch.load(args.checkpoint_path, map_location=map_location)['model_state_dict'])
         
+        # classification
+        if args.classification:
+            args.log_file = os.path.join(args.output_dir,args.str + "-Fine-tune+moe.txt" )
+            checkpoint_finetune = args.str + "_finetune+moe.pt" 
+            args.dataframe_path = os.path.join(args.output_dir,args.str + "-Fine-tune+moe.csv")
+            args.checkpoint_path =  os.path.join(args.output_dir, checkpoint_finetune)
 
+            if os.path.exists(args.checkpoint_path):
+
+                trainer.model.load_state_dict(torch.load(args.checkpoint_path, map_location=map_location)['model_state_dict'])
+
+                print("Continue Finetune-Training")
+                with open(args.log_file, "a") as f:
+                    f.write("------------------------------ Continue Training ------------------------------ \n")
+                    f.write("Load pt for Finetune-training")
+        
         # Regression 
-        args.log_file = os.path.join(args.output_dir,args.str + "-Fine-tune.txt" )
-        checkpoint_finetune = args.str + "_finetune.pt" 
-        args.checkpoint_path =  os.path.join(args.output_dir, checkpoint_finetune)
+        else:
+            args.log_file = os.path.join(args.output_dir,args.str + "-Fine-tune.txt" )
+            checkpoint_finetune = args.str + "_finetune.pt" 
+            args.dataframe_path = os.path.join(args.output_dir,args.str + "-Fine-tune.csv")
+            args.checkpoint_path =  os.path.join(args.output_dir, checkpoint_finetune)
 
-        if os.path.exists(args.checkpoint_path):
+            if os.path.exists(args.checkpoint_path):
 
-            trainer.model.load_state_dict(torch.load(args.checkpoint_path, map_location=map_location)['model_state_dict'])
+                trainer.model.load_state_dict(torch.load(args.checkpoint_path, map_location=map_location)['model_state_dict'])
 
-            print("Continue Finetune-Training")
-            with open(args.log_file, "a") as f:
-                f.write("------------------------------ Continue Training ------------------------------ \n")
-                f.write("Load pt for Finetune-training")
+                print("Continue Finetune-Training")
+                with open(args.log_file, "a") as f:
+                    f.write("------------------------------ Continue Training ------------------------------ \n")
+                    f.write("Load pt for Finetune-training")
 
 
     
