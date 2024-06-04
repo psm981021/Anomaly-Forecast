@@ -1,4 +1,5 @@
 import os
+import logging
 import torch
 import torch.nn as nn
 import torch.optim as optim
@@ -6,9 +7,10 @@ from torch.utils.data import DataLoader, Dataset, Subset
 import pandas as pd
 from PIL import Image
 from torchvision import transforms
-from sklearn.metrics import f1_score, accuracy_score, confusion_matrix
+from sklearn.metrics import confusion_matrix, precision_score, recall_score, f1_score
 import numpy as np
 from efficientnet_pytorch import EfficientNet
+from tqdm import tqdm
 
 # Focal Loss
 class FocalLoss(nn.Module):
@@ -46,13 +48,13 @@ def make_image_dataframe(csv_file):
     label_list = []
 
     for i in range(len(data)):
-        if data.loc[i]['Class_label'] == 0:
-            idx_list.append(data.loc[i]['t'])
-            label_list.append(data.loc[i]['Class_label'])
-        else:
-            for j in range(2, 8):
+        if data.loc[i]['Class_label'] == 2:
+            for j in range(4, 8):
                 idx_list.append(data.iloc[i][j])
                 label_list.append(data.loc[i]['Class_label'])
+        else:
+            idx_list.append(data.loc[i]['t'])
+            label_list.append(data.loc[i]['Class_label'])
                 
     df = pd.DataFrame({"Timestamp": idx_list, "Class_label": label_list})
     df.drop_duplicates(keep='first', inplace=True)
@@ -72,7 +74,7 @@ class ImageDataset(Dataset):
     def __getitem__(self, idx):
         img_name = self.data.iloc[idx]['Timestamp']
         img_path = f"{self.img_dir}/{img_name}"
-        image = Image.open(img_path).convert("L")
+        image = Image.open(img_path).convert("RGB")
         if self.transform:
             image = self.transform(image)
         label = self.data.iloc[idx]['Class_label']
@@ -102,11 +104,12 @@ def load_data(csv_file, img_dir, batch_size, transform, test_size=0.1, valid_siz
     return train_loader, val_loader, test_loader
 
 # 모델 초기화
-def initialize_model(learning_rate, loss_type, device):
-    model = EfficientNet.from_pretrained('efficientnet-b0', num_classes=2)
+def initialize_model(learning_rate, loss_type, device, mode):
+    name = 'efficientnet-' + mode
+    model = EfficientNet.from_pretrained(name, num_classes=3) #분류 라벨 : 0, 1, 2
     
-    # 첫 번째 레이어 수정 (1 채널을 받을 수 있도록) - grayscale로 돌릴려고
-    #model._conv_stem = nn.Conv2d(1, 32, kernel_size=(3, 3), stride=(2, 2), bias=False)
+    # 첫 번째 레이어 수정 (3 채널을 받을 수 있도록) - RGB로 돌릴려고
+    model._conv_stem = nn.Conv2d(3, 64, kernel_size=(3, 3), stride=(2, 2), bias=False)
     
     if loss_type == 'focal':
         criterion = FocalLoss()
@@ -119,15 +122,41 @@ def initialize_model(learning_rate, loss_type, device):
     
     return model, criterion, optimizer
 
+def setup_logger(log_path): #로그 기록용 함수
+    logger = logging.getLogger()
+    logger.setLevel(logging.INFO)
+    
+    # 콘솔 핸들러
+    ch = logging.StreamHandler()
+    ch.setLevel(logging.INFO)
+    
+    # 파일 핸들러
+    fh = logging.FileHandler(log_path)
+    fh.setLevel(logging.INFO)
+    
+    # 포맷 설정
+    formatter = logging.Formatter('%(asctime)s - %(levelname)s - %(message)s')
+    ch.setFormatter(formatter)
+    fh.setFormatter(formatter)
+    
+    # 핸들러 추가
+    logger.addHandler(ch)
+    logger.addHandler(fh)
+    return logger
+
 # 모델 학습
-def train_model(model, train_loader, val_loader, criterion, optimizer, num_epochs, save_path, device):
+def train_model(model, train_loader, val_loader, criterion, optimizer, num_epochs, save_path, device, logger, mode):
+    global best_model_path
+    
     best_loss = 10e9
     best_epoch = 0
     patience = 0
     
-    for epoch in range(num_epochs):
-        model.train()
-        running_loss = 0.0
+    for epoch in range(num_epochs): #한 에폭당 거의 2분 걸림
+        model.train() #train
+        train_loss = 0.0
+        #train_iter = tqdm(train_loader, desc=f"Train Epoch {epoch + 1}/{num_epochs}")
+        
         for inputs, labels in train_loader:
             inputs, labels = inputs.to(device), labels.to(device)
             optimizer.zero_grad()
@@ -135,69 +164,109 @@ def train_model(model, train_loader, val_loader, criterion, optimizer, num_epoch
             loss = criterion(outputs, labels)
             loss.backward()
             optimizer.step()
-            running_loss += loss.item()
+            train_loss += loss.item()
         
-        print(f"Epoch {epoch + 1}/{num_epochs}, Loss: {running_loss / len(train_loader)}")
+        logger.info(f"Epoch {epoch + 1}/{num_epochs}, Train Loss: {train_loss / len(train_loader)}")
 
-        if running_loss < best_loss:
-            best_loss = running_loss
+        model.eval() #valid
+        valid_loss = 0
+        
+        with torch.no_grad():
+            for inputs, labels in val_loader:
+                inputs, labels = inputs.to(device), labels.to(device)
+                outputs = model(inputs)
+            
+                loss = criterion(outputs, labels)
+            
+                valid_loss += loss.item()
+        
+        logger.info(f"Epoch {epoch + 1}/{num_epochs}, Valid Loss: {valid_loss / len(val_loader)}")
+                
+        if valid_loss < best_loss: #renew best model
+            best_loss = valid_loss
             best_epoch = epoch
-            print("New Best Loss!")
-            save_model(model, f"{save_path}_epoch_{epoch + 1}.pth")
-            print("--" * 30)
+            best_model_path = save_path + f'_{mode}' + '_epoch_' + str(epoch + 1) + '.pth'
+            
+            logger.info("New Best Valid Loss!")
+            save_model(model, best_model_path)
+            evaluate_model(model, val_loader, device, logger)
             patience = 0
         else:
             patience += 1
         
-        if patience >= 20: #early stopping
-            print(f"Early Stopped at epoch {epoch + 1}")
-            print("Best Loss : ", best_loss)
-            print("Best epoch :", best_epoch)
+        if patience >= 30: #early stopping
+            logger.info(f"Early Stopped at epoch {epoch + 1}")
+            logger.info(f"Best Loss : {best_loss / len(val_loader)}")
+            logger.info(f"Best epoch : {best_epoch}")
             break
-        
-        # 10 epoch마다 모델 검증
-        if (epoch + 1) % 10 == 0:
-            print(f"Check validation at every 10 epochs : {epoch + 1}")
-            evaluate_model(model, val_loader, device)
-            save_model(model, f"{save_path}_epoch_{epoch + 1}.pth")
-            print("--" * 30)
 
 # 모델 평가
-def evaluate_model(model, data_loader, device):
+def evaluate_model(model, data_loader, device, logger, predict = False):
     model.eval()
     correct = 0
     total = 0
     label_list = []
     pred_list = []
+    
     with torch.no_grad():
         for inputs, labels in data_loader:
             inputs, labels = inputs.to(device), labels.to(device)
             outputs = model(inputs)
+            
             _, predicted = torch.max(outputs.data, 1)
             total += labels.size(0)
             correct += (predicted == labels).sum().item()
             label_list.extend(labels.cpu().numpy())
             pred_list.extend(predicted.cpu().numpy())
 
-    accuracy = accuracy_score(label_list, pred_list) * 100
-    f1 = f1_score(label_list, pred_list, average='weighted')
-    
-    tn, fp, fn, tp = confusion_matrix(label_list, pred_list).ravel()
-    
-    csi = tp / (tp + fn + fp) if (tp + fn + fp) > 0 else 0
-    pod = tp / (tp + fn) if (tp + fn) > 0 else 0
-    far = fp / (tp + fp) if (tp + fp) > 0 else 0
-    # TN FP
-    # FN TP
-    
-    print(f"Accuracy: {accuracy}%")
-    print(f"F1 Score: {f1}")
-    print(f"CSI: {csi}")
-    print(f"POD: {pod}")
-    print(f"FAR: {far}")
-    print(f"Confusion Matrix: \n{confusion_matrix(label_list, pred_list)}")
+    if predict:
+        logger.info("--" * 10 + "Test Stage" + "--" * 10)
 
-    return accuracy, f1, csi, pod, far
+    # Confusion Matrix를 계산합니다.
+    cm = confusion_matrix(label_list, pred_list, labels=[0, 1, 2])
+    logger.info("--" * 30)
+    logger.info(f"Confusion Matrix: \n{cm}")
+
+    # Accuracy 계산
+    accuracy = np.trace(cm) / np.sum(cm)
+
+    # Precision, Recall, F1 Score 계산
+    precision = precision_score(label_list, pred_list, average=None, labels=[0, 1, 2], zero_division=0)
+    recall = recall_score(label_list, pred_list, average=None, labels=[0, 1, 2], zero_division=0)
+    f1 = f1_score(label_list, pred_list, average=None, labels=[0, 1, 2], zero_division=0)
+
+    # Average F1 Score
+    avg_f1 = np.mean(f1)
+
+    # CSI (Critical Success Index) 계산
+    csi = []
+    for i in range(len(cm)):
+        tp = cm[i, i]
+        fn = np.sum(cm[i, :]) - tp
+        fp = np.sum(cm[:, i]) - tp
+        csi.append(tp / (tp + fn + fp) if (tp + fn + fp) != 0 else 0)
+    avg_csi = np.mean(csi)
+
+    # POD (Probability of Detection) 계산
+    pod = recall  # recall과 동일
+    avg_pod = np.mean(pod)
+
+    # FAR (False Alarm Ratio) 계산
+    far = []
+    for i in range(len(cm)):
+        tp = cm[i, i]
+        fp = np.sum(cm[:, i]) - tp
+        far.append(fp / (tp + fp) if (tp + fp) != 0 else 0)
+    avg_far = np.mean(far)
+    
+    logger.info(f"Accuracy: {accuracy * 100}%")
+    logger.info(f"F1 Score: {avg_f1}")
+    logger.info(f"CSI: {avg_csi}")
+    logger.info(f"POD: {avg_pod}")
+    logger.info(f"FAR: {avg_far}")
+    logger.info("--" * 30)
+
+    return accuracy, avg_f1, avg_csi, avg_pod, avg_far
 
 # 모델 저장
 def save_model(model, path):
@@ -210,51 +279,21 @@ def save_model(model, path):
     print(f"Model saved to {path}")
     
 # 모델 로드
-def load_model(filepath, device):
-    model = EfficientNet.from_pretrained('efficientnet-b0', num_classes=2)
+def load_model(filepath, device, mode):
+    name = 'efficientnet-' + mode
+    model = EfficientNet.from_pretrained(name, num_classes=3) #분류 라벨 : 0, 1, 2
     
-    # 첫 번째 레이어 수정 (1 채널을 받을 수 있도록)
-    #model._conv_stem = nn.Conv2d(1, 32, kernel_size=(3, 3), stride=(2, 2), bias=False)
+    # 첫 번째 레이어 수정 (3 채널을 받을 수 있도록)
+    model._conv_stem = nn.Conv2d(3, 64, kernel_size=(3, 3), stride=(2, 2), bias=False)
     
     model.load_state_dict(torch.load(filepath, map_location=device))
     model.to(device)
     model.eval()
     return model
 
-# 모델 테스트
-def predict(model, data_loader, device):
-    model.eval()
-    label_list = []
-    pred_list = []
-    with torch.no_grad():
-        for inputs, labels in data_loader:
-            inputs, labels = inputs.to(device), labels.to(device)
-            outputs = model(inputs)
-            _, predicted = torch.max(outputs.data, 1)
-            label_list.extend(labels.cpu().numpy())
-            pred_list.extend(predicted.cpu().numpy())
-
-    accuracy = accuracy_score(label_list, pred_list) * 100
-    f1 = f1_score(label_list, pred_list, average='weighted')
-
-    tn, fp, fn, tp = confusion_matrix(label_list, pred_list).ravel()
-    
-    csi = tp / (tp + fn + fp) if (tp + fn + fp) > 0 else 0
-    pod = tp / (tp + fn) if (tp + fn) > 0 else 0
-    far = fp / (tp + fp) if (tp + fp) > 0 else 0
-
-    print(f"Test Accuracy: {accuracy}%")
-    print(f"Test F1 Score: {f1}")
-    print(f"Test CSI: {csi}")
-    print(f"Test POD: {pod}")
-    print(f"Test FAR: {far}")
-    print(f"Confusion Matrix: \n{confusion_matrix(label_list, pred_list)}")
-
-    return accuracy, f1, csi, pod, far
-
 # 이미지 추론
 def inference(model, image_path, transform, device):
-    image = Image.open(image_path).convert("L")
+    image = Image.open(image_path).convert("RGB")
     image = transform(image).unsqueeze(0)  # Add batch dimension
     image = image.to(device)
     model.eval()
@@ -270,18 +309,25 @@ def inference_jw(model, image):
         _, predicted = torch.max(outputs.data, 1)
         return predicted
     
+
 if __name__ == "__main__":
-    csv_dict = {'급격' : 'Seoul_V1', '완만' : 'Seoul_V2'}
-    version = '급격'
-    csv_file = 'root/data/' + csv_dict[version] + '.csv'
-    img_dir = '/root/data/images_classification/' 
+    csv_dict = {'서울' : 'Seoul', '강원' : 'Gangwon'}
+    version = '서울' #data version
+    mode = 'b7' #efficientnet version
+    csv_file = '/workspace/chanbeen/Anomaly-Forecast/data/' + csv_dict[version] + '.csv' 
+    img_dir = '/workspace/chanbeen/Anomaly-Forecast/data/images_classification' 
+    log_path = '/workspace/chanbeen/Anomaly-Forecast/classification/log/' + mode + '.log'
+    
+    
     batch_size = 32
-    learning_rate = 0.001
-    num_epochs = 500
+    learning_rate = 0.003
+    num_epochs = 500 #500
     loss_type = 'focal'  # 'focal' 또는 'evl'
     
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     print("device : ", device)
+    
+    #import IPython; IPython.embed(colors='Linux');exit(1);
     
     # 서울 crop 150x150
     left = 240  
@@ -301,49 +347,11 @@ if __name__ == "__main__":
         transforms.ToTensor()
     ])
 
+    logger = setup_logger(log_path)
+
     train_loader, val_loader, test_loader = load_data(csv_file, img_dir, batch_size, transform)
-    model, criterion, optimizer = initialize_model(learning_rate, loss_type, device)
-    train_model(model, train_loader, val_loader, criterion, optimizer, num_epochs, f'classification_model/{csv_dict[version]}', device)
-    evaluate_model(model, val_loader, device)
+    model, criterion, optimizer = initialize_model(learning_rate, loss_type, device, mode = mode)
+    train_model(model, train_loader, val_loader, criterion, optimizer, num_epochs, f'classification/model/{csv_dict[version]}', device, logger, mode)
 
-    loaded_model = load_model('cf_models/classification_model_seoul1.pth', device) #수정 필요
-    predict(loaded_model, test_loader, device)
-
-    # # 예측 수행
-    # image_path = 'radar_total/202105302300.png'
-    # prediction = inference(loaded_model, image_path, transform, device)
-    # print(f"Predicted class: {prediction}")
-
-# # inference 확인할 때 코드
-# if __name__ == "__main__":
-#     csv_file = 'data/서울_2021_2023_강수량 0.1 미만 제거_상위 10% test.csv'
-#     img_dir = 'radar_total' 
-#     batch_size = 32
-#     learning_rate = 0.001
-#     num_epochs = 100
-#     loss_type = 'focal'  # 'focal' 또는 'evl'
-    
-#     left = 240  
-#     top = 120   
-#     right = 390
-#     bottom = 270
-    
-#     transform = transforms.Compose([
-#         #transforms.Lambda(lambda x: x.crop((left, top, right, bottom))), # crop
-#         transforms.Grayscale(num_output_channels=1), # grayscale
-#         transforms.ToTensor()
-#     ])    
-
-#     train_loader, val_loader, test_loader = load_data(csv_file, img_dir, batch_size, transform)
-#     model, criterion, optimizer = initialize_model(learning_rate, loss_type, device)
-#     # train_model(model, train_loader, val_loader, criterion, optimizer, num_epochs, 'cf_models/classification_model_seoul1')
-#     # evaluate_model(model, val_loader)
-#     # save_model(model, 'cf_models/classification_model_seoul1.pth')
-
-#     loaded_model = load_model('cf_models/classification_model_seoul1.pth', device)
-#     # predict(loaded_model, test_loader, device)
-
-#     # 예측 수행
-#     image_path = 'radar_total/202105302300.png'
-#     prediction = inference(loaded_model, image_path, transform, device)
-#     print(f"Predicted class: {prediction}")
+    loaded_model = load_model(best_model_path, device, mode = mode) #수정 필요
+    evaluate_model(loaded_model, test_loader, device, logger = logger, predict=True)

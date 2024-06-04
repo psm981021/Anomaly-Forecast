@@ -10,8 +10,6 @@ data/*.ipynb
 /data/data_radar
 data/*.png
 /data/images_classification
-/data/data_seoul_only_V2/
-/data/data_seoul_only_V2/
 
 
 # clone models
@@ -39,6 +37,7 @@ test.py
 #cb
 /data/images_classification/
 classification_model/
+classification/log/
 /data/*csv
 __pycache__/
 /.vscode-server/
