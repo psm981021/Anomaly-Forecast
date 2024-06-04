@@ -37,7 +37,8 @@ data/Seoul/
 /test.py
 
 #cb
-/data/images_classification/
+/data/seoul_images/
+/data/gangwon_images/
 classification/log/
 /data/*csv
 __pycache__/
