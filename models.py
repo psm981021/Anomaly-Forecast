@@ -3,6 +3,8 @@ from layers import *
 from PIL import Image
 import matplotlib.pyplot as plt
 
+
+
 class Fourcaster(nn.Module):
     def __init__(
             self,
@@ -10,6 +12,7 @@ class Fourcaster(nn.Module):
             n_classes,
             kernels_per_layer,
             args,
+            balencer=False,
             bilinear = True
 
     ):
@@ -21,6 +24,7 @@ class Fourcaster(nn.Module):
         reduction_ratio = 16
         self.args = args
         self.inner_size = 12
+        self.balance = balencer
 
 
         self.inc = DoubleConvDS(self.n_channels, 64, kernels_per_layer=kernels_per_layer)
@@ -39,6 +43,11 @@ class Fourcaster(nn.Module):
         self.up3 = UpDS(256, 128 // factor, self.bilinear, kernels_per_layer=kernels_per_layer)
         self.up4 = UpDS(128, 64, self.bilinear, kernels_per_layer=kernels_per_layer)
         self.outc = OutConv(64, self.n_classes)
+        
+        
+
+
+
         self.apply(self.init_weights)
 
         self.regression_model = nn.Sequential(
@@ -57,6 +66,10 @@ class Fourcaster(nn.Module):
             nn.AdaptiveAvgPool2d((50, 50))
         )
         self.moe = nn.ModuleList([nn.Linear(100,1) for i in range(3)])
+
+        if self.balance:
+            self.lka = Attention()
+            self.filter = Learnable_Filter()
         
     @staticmethod
     def plot_image(image, flag=None):
@@ -77,7 +90,7 @@ class Fourcaster(nn.Module):
                 nn.init.constant_(module.bias, 0)
 
         elif isinstance(module, nn.Linear):
-            module.weight.data.normal_(mean=3.0, std=self.args.initializer_range)
+            module.weight.data.normal_(mean=2.5, std=3.6)
 
 
     def forward(self, x, args):
@@ -100,11 +113,23 @@ class Fourcaster(nn.Module):
 
         # shape 확인 - reconstruction image?
         x = self.up4(x, x1Att)
-        
 
         generated_image = self.outc(x)
         generated_image = generated_image.permute(0,2,3,1)
 
+        if self.balance:
+            if self.args.location == 'seoul':
+                crop_x = x[:,:,65:95,60:90]
+            else:
+                crop_x = x[:,:,30:60,45:75]
+            crop_x = self.lka(crop_x)
+            
+            crop_x = self.filter(crop_x)
+
+
+            crop_generated_image = self.outc(crop_x).permute(0,2,3,1)
+            return generated_image, crop_generated_image
+    
         
         # regression_logits = self.regression_model(x)
         # generated_image = self.projection(x)

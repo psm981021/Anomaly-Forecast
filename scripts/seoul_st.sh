@@ -1,40 +1,41 @@
-# python main.py \
-#     --data_dir "/dev/shm/data_Seoul" \
-#     --image_csv_dir "data/Seoul.csv" \
-#     --batch 8 \
-#     --epochs 3000 \
-#     --patience 40 \
-#     --model_idx "seoul-L4.04" \
-#     --output_dir "output/seoul-L4.04" \
-#     --test_list=[] \
-#     --gpu_id 1 \
-#     --device cuda:1 \
-#     --seed 0 \
-#     --lr 0.001 \
-#     --loss_type "stamina" \
-#     --location "seoul" \
-#     --regression "gap" \
-#     --balancing \
-#     --pre_train
-
-
 python main.py \
-    --data_dir "/dev/shm/data_Seoul" \
+    --data_dir "data/Seoul" \
     --image_csv_dir "data/Seoul.csv" \
     --batch 8 \
     --epochs 3000 \
     --patience 40 \
-    --model_idx "seoul-L4.04" \
-    --output_dir "output/seoul-L4.04" \
+    --model_idx "seoul-L4.05" \
+    --output_dir "output/seoul-L4.05" \
     --test_list=[] \
-    --gpu_id 1 \
-    --device cuda:1 \
+    --gpu_id 0 \
+    --device cuda:0 \
+    --seed 0 \
+    --lr 0.001 \
+    --loss_type "stamina" \
+    --location "seoul" \
+    --regression "gap" \
+    --balancing \
+    --pre_train \
+    --balancing 
+
+
+python main.py \
+    --data_dir "data/Seoul" \
+    --image_csv_dir "data/Seoul.csv" \
+    --batch 8 \
+    --epochs 3000 \
+    --patience 40 \
+    --model_idx "seoul-L4.05" \
+    --output_dir "output/seoul-L4.05" \
+    --test_list=[] \
+    --gpu_id 0 \
+    --device cuda:0 \
     --seed 0 \
     --lr 0.02 \
     --loss_type "stamina" \
     --location "seoul" \
     --regression "gap"\
-    --classification
+    --balancing 
     
 
 # scripts/seoul_st.sh

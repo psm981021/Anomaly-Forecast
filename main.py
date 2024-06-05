@@ -28,7 +28,10 @@ def get_model(args):
     if args.sianet:
         return sianet()  # Assuming sianet is a function or constructor available in scope
     model_cls = Fourcaster  # Default model class
-    return model_cls(n_channels=1 if args.grey_scale else 3, n_classes=100, kernels_per_layer=1, args=args)
+    if args.balancing:
+        return model_cls(n_channels=1 if args.grey_scale else 3, n_classes=100, kernels_per_layer=1, args=args,balencer=True)
+    else:
+        return model_cls(n_channels=1 if args.grey_scale else 3, n_classes=100, kernels_per_layer=1, args=args)
 
 def load_models(checkpoint_path, model, device):
     # Load the checkpoint

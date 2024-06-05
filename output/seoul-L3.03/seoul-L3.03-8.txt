@@ -1,0 +1,851 @@
+---------------------- Configure Info: ----------------------
+data_dir                       : data/Seoul
+image_csv_dir                  : data/Seoul.csv
+output_dir                     : output/seoul-L3.03/
+gpu_id                         : 1
+device                         : cuda:1
+seed                           : 0
+no_cuda                        : False
+use_multi_gpu                  : False
+multi_devices                  : 0,1
+wandb                          : False
+pre_train                      : True
+do_eval                        : False
+test_list                      : ['[]']
+grey_scale                     : False
+location                       : seoul
+model_idx                      : seoul-L3.03
+batch                          : 8
+n_classes                      : 100
+sianet                         : False
+classification                 : False
+balancing                      : False
+epochs                         : 4000
+log_freq                       : 1
+patience                       : 40
+loss_type                      : ed_image
+regression                     : gap
+lr                             : 0.001
+adam_beta1                     : 0.9
+adam_beta2                     : 0.999
+weight_decay                   : 0.0
+initializer_range              : 0.01
+str                            : seoul-L3.03-8
+dataframe_path                 : output/seoul-L3.03/seoul-L3.03-8.csv
+log_file                       : output/seoul-L3.03/seoul-L3.03-8.txt
+checkpoint_path                : output/seoul-L3.03/seoul-L3.03-8.pt
+---------------------- Configure Info: ----------------------
+---------------------- Configure Info: ----------------------
+data_dir                       : data/Seoul
+image_csv_dir                  : data/Seoul.csv
+output_dir                     : output/seoul-L3.03/
+gpu_id                         : 1
+device                         : cuda:1
+seed                           : 0
+no_cuda                        : False
+use_multi_gpu                  : False
+multi_devices                  : 0,1
+wandb                          : False
+pre_train                      : True
+do_eval                        : False
+test_list                      : ['[]']
+grey_scale                     : False
+location                       : seoul
+model_idx                      : seoul-L3.03
+batch                          : 8
+n_classes                      : 100
+sianet                         : False
+classification                 : False
+balancing                      : False
+epochs                         : 4000
+log_freq                       : 1
+patience                       : 40
+loss_type                      : ed_image
+regression                     : gap
+lr                             : 0.001
+adam_beta1                     : 0.9
+adam_beta2                     : 0.999
+weight_decay                   : 0.0
+initializer_range              : 0.01
+str                            : seoul-L3.03-8
+dataframe_path                 : output/seoul-L3.03/seoul-L3.03-8.csv
+log_file                       : output/seoul-L3.03/seoul-L3.03-8.txt
+checkpoint_path                : output/seoul-L3.03/seoul-L3.03-8.pt
+---------------------- Configure Info: ----------------------
+---------------------- Configure Info: ----------------------
+data_dir                       : data/Seoul
+image_csv_dir                  : data/Seoul.csv
+output_dir                     : output/seoul-L3.03/
+gpu_id                         : 1
+device                         : cuda:1
+seed                           : 0
+no_cuda                        : False
+use_multi_gpu                  : False
+multi_devices                  : 0,1
+wandb                          : False
+pre_train                      : True
+do_eval                        : False
+test_list                      : ['[]']
+grey_scale                     : False
+location                       : seoul
+model_idx                      : seoul-L3.03
+batch                          : 8
+n_classes                      : 100
+sianet                         : False
+classification                 : False
+balancing                      : False
+epochs                         : 4000
+log_freq                       : 1
+patience                       : 40
+loss_type                      : ed_image
+regression                     : gap
+lr                             : 0.001
+adam_beta1                     : 0.9
+adam_beta2                     : 0.999
+weight_decay                   : 0.0
+initializer_range              : 0.01
+str                            : seoul-L3.03-8
+dataframe_path                 : output/seoul-L3.03/seoul-L3.03-8.csv
+log_file                       : output/seoul-L3.03/seoul-L3.03-8.txt
+checkpoint_path                : output/seoul-L3.03/seoul-L3.03-8.pt
+---------------------- Configure Info: ----------------------
+---------------------- Configure Info: ----------------------
+data_dir                       : data/Seoul
+image_csv_dir                  : data/Seoul.csv
+output_dir                     : output/seoul-L3.03/
+gpu_id                         : 1
+device                         : cuda:1
+seed                           : 0
+no_cuda                        : False
+use_multi_gpu                  : False
+multi_devices                  : 0,1
+wandb                          : False
+pre_train                      : True
+do_eval                        : False
+test_list                      : ['[]']
+grey_scale                     : False
+location                       : seoul
+model_idx                      : seoul-L3.03
+batch                          : 8
+n_classes                      : 100
+sianet                         : False
+classification                 : False
+balancing                      : False
+epochs                         : 4000
+log_freq                       : 1
+patience                       : 40
+loss_type                      : ed_image
+regression                     : gap
+lr                             : 0.001
+adam_beta1                     : 0.9
+adam_beta2                     : 0.999
+weight_decay                   : 0.0
+initializer_range              : 0.01
+str                            : seoul-L3.03-8
+dataframe_path                 : output/seoul-L3.03/seoul-L3.03-8.csv
+log_file                       : output/seoul-L3.03/seoul-L3.03-8.txt
+checkpoint_path                : output/seoul-L3.03/seoul-L3.03-8.pt
+---------------------- Configure Info: ----------------------
+{'epoch': 0, 'Geneartion Loss ed_image (Train)': '291.279114', 'Correlation Image(Train)': '0.011833', 'MAE Loss': '0.000000'}
+{'Epoch': 0, 'Generation Loss (Eval)': '47.358551'}
+{'epoch': 1, 'Geneartion Loss ed_image (Train)': '282.577393', 'Correlation Image(Train)': '0.006469', 'MAE Loss': '0.000000'}
+{'Epoch': 1, 'Generation Loss (Eval)': '45.692940'}
+{'epoch': 2, 'Geneartion Loss ed_image (Train)': '274.709503', 'Correlation Image(Train)': '0.000338', 'MAE Loss': '0.000000'}
+{'Epoch': 2, 'Generation Loss (Eval)': '44.219086'}
+{'epoch': 3, 'Geneartion Loss ed_image (Train)': '267.311005', 'Correlation Image(Train)': '0.004331', 'MAE Loss': '0.000000'}
+{'Epoch': 3, 'Generation Loss (Eval)': '43.031258'}
+{'epoch': 4, 'Geneartion Loss ed_image (Train)': '259.947357', 'Correlation Image(Train)': '0.007896', 'MAE Loss': '0.000000'}
+{'Epoch': 4, 'Generation Loss (Eval)': '41.814159'}
+{'epoch': 5, 'Geneartion Loss ed_image (Train)': '252.600952', 'Correlation Image(Train)': '0.010156', 'MAE Loss': '0.000000'}
+{'Epoch': 5, 'Generation Loss (Eval)': '40.704292'}
+{'epoch': 6, 'Geneartion Loss ed_image (Train)': '245.342148', 'Correlation Image(Train)': '0.011925', 'MAE Loss': '0.000000'}
+{'Epoch': 6, 'Generation Loss (Eval)': '39.438229'}
+{'epoch': 7, 'Geneartion Loss ed_image (Train)': '237.769135', 'Correlation Image(Train)': '0.015540', 'MAE Loss': '0.000000'}
+{'Epoch': 7, 'Generation Loss (Eval)': '37.844540'}
+{'epoch': 8, 'Geneartion Loss ed_image (Train)': '229.244751', 'Correlation Image(Train)': '0.021262', 'MAE Loss': '0.000000'}
+{'Epoch': 8, 'Generation Loss (Eval)': '36.444447'}
+{'epoch': 9, 'Geneartion Loss ed_image (Train)': '221.208771', 'Correlation Image(Train)': '0.028875', 'MAE Loss': '0.000000'}
+{'Epoch': 9, 'Generation Loss (Eval)': '35.367805'}
+{'epoch': 10, 'Geneartion Loss ed_image (Train)': '214.034943', 'Correlation Image(Train)': '0.031050', 'MAE Loss': '0.000000'}
+{'Epoch': 10, 'Generation Loss (Eval)': '34.308430'}
+{'epoch': 11, 'Geneartion Loss ed_image (Train)': '207.547653', 'Correlation Image(Train)': '0.030446', 'MAE Loss': '0.000000'}
+{'Epoch': 11, 'Generation Loss (Eval)': '33.344738'}
+{'epoch': 12, 'Geneartion Loss ed_image (Train)': '201.499863', 'Correlation Image(Train)': '0.029781', 'MAE Loss': '0.000000'}
+{'Epoch': 12, 'Generation Loss (Eval)': '32.418190'}
+{'epoch': 13, 'Geneartion Loss ed_image (Train)': '195.816467', 'Correlation Image(Train)': '0.029252', 'MAE Loss': '0.000000'}
+{'Epoch': 13, 'Generation Loss (Eval)': '31.594902'}
+{'epoch': 14, 'Geneartion Loss ed_image (Train)': '190.381302', 'Correlation Image(Train)': '0.029264', 'MAE Loss': '0.000000'}
+{'Epoch': 14, 'Generation Loss (Eval)': '30.791500'}
+{'epoch': 15, 'Geneartion Loss ed_image (Train)': '185.337463', 'Correlation Image(Train)': '0.029574', 'MAE Loss': '0.000000'}
+{'Epoch': 15, 'Generation Loss (Eval)': '30.080021'}
+{'epoch': 16, 'Geneartion Loss ed_image (Train)': '180.528870', 'Correlation Image(Train)': '0.030067', 'MAE Loss': '0.000000'}
+{'Epoch': 16, 'Generation Loss (Eval)': '29.491888'}
+{'epoch': 17, 'Geneartion Loss ed_image (Train)': '175.896347', 'Correlation Image(Train)': '0.030503', 'MAE Loss': '0.000000'}
+{'Epoch': 17, 'Generation Loss (Eval)': '28.888903'}
+{'epoch': 18, 'Geneartion Loss ed_image (Train)': '171.410995', 'Correlation Image(Train)': '0.031572', 'MAE Loss': '0.000000'}
+{'Epoch': 18, 'Generation Loss (Eval)': '28.386497'}
+{'epoch': 19, 'Geneartion Loss ed_image (Train)': '167.022186', 'Correlation Image(Train)': '0.032221', 'MAE Loss': '0.000000'}
+{'Epoch': 19, 'Generation Loss (Eval)': '27.706957'}
+{'epoch': 20, 'Geneartion Loss ed_image (Train)': '162.733917', 'Correlation Image(Train)': '0.032774', 'MAE Loss': '0.000000'}
+{'Epoch': 20, 'Generation Loss (Eval)': '27.024687'}
+{'epoch': 21, 'Geneartion Loss ed_image (Train)': '158.527634', 'Correlation Image(Train)': '0.033184', 'MAE Loss': '0.000000'}
+{'Epoch': 21, 'Generation Loss (Eval)': '26.315540'}
+{'epoch': 22, 'Geneartion Loss ed_image (Train)': '154.390656', 'Correlation Image(Train)': '0.033419', 'MAE Loss': '0.000000'}
+{'Epoch': 22, 'Generation Loss (Eval)': '25.608871'}
+{'epoch': 23, 'Geneartion Loss ed_image (Train)': '150.306946', 'Correlation Image(Train)': '0.033592', 'MAE Loss': '0.000000'}
+{'Epoch': 23, 'Generation Loss (Eval)': '24.922752'}
+{'epoch': 24, 'Geneartion Loss ed_image (Train)': '146.199265', 'Correlation Image(Train)': '0.033744', 'MAE Loss': '0.000000'}
+{'Epoch': 24, 'Generation Loss (Eval)': '24.219288'}
+{'epoch': 25, 'Geneartion Loss ed_image (Train)': '142.118362', 'Correlation Image(Train)': '0.033871', 'MAE Loss': '0.000000'}
+{'Epoch': 25, 'Generation Loss (Eval)': '23.539337'}
+{'epoch': 26, 'Geneartion Loss ed_image (Train)': '138.093323', 'Correlation Image(Train)': '0.034009', 'MAE Loss': '0.000000'}
+{'Epoch': 26, 'Generation Loss (Eval)': '22.830688'}
+{'epoch': 27, 'Geneartion Loss ed_image (Train)': '134.075867', 'Correlation Image(Train)': '0.034085', 'MAE Loss': '0.000000'}
+{'Epoch': 27, 'Generation Loss (Eval)': '22.104149'}
+{'epoch': 28, 'Geneartion Loss ed_image (Train)': '130.026154', 'Correlation Image(Train)': '0.034118', 'MAE Loss': '0.000000'}
+{'Epoch': 28, 'Generation Loss (Eval)': '21.395411'}
+{'epoch': 29, 'Geneartion Loss ed_image (Train)': '126.016914', 'Correlation Image(Train)': '0.034139', 'MAE Loss': '0.000000'}
+{'Epoch': 29, 'Generation Loss (Eval)': '20.730640'}
+{'epoch': 30, 'Geneartion Loss ed_image (Train)': '122.145264', 'Correlation Image(Train)': '0.034159', 'MAE Loss': '0.000000'}
+{'Epoch': 30, 'Generation Loss (Eval)': '20.078278'}
+{'epoch': 31, 'Geneartion Loss ed_image (Train)': '118.334221', 'Correlation Image(Train)': '0.034174', 'MAE Loss': '0.000000'}
+{'Epoch': 31, 'Generation Loss (Eval)': '19.437508'}
+{'epoch': 32, 'Geneartion Loss ed_image (Train)': '114.534912', 'Correlation Image(Train)': '0.034185', 'MAE Loss': '0.000000'}
+{'Epoch': 32, 'Generation Loss (Eval)': '18.775030'}
+{'epoch': 33, 'Geneartion Loss ed_image (Train)': '110.697113', 'Correlation Image(Train)': '0.034192', 'MAE Loss': '0.000000'}
+{'Epoch': 33, 'Generation Loss (Eval)': '18.147581'}
+{'epoch': 34, 'Geneartion Loss ed_image (Train)': '107.007980', 'Correlation Image(Train)': '0.034197', 'MAE Loss': '0.000000'}
+{'Epoch': 34, 'Generation Loss (Eval)': '17.539490'}
+{'epoch': 35, 'Geneartion Loss ed_image (Train)': '103.431038', 'Correlation Image(Train)': '0.034201', 'MAE Loss': '0.000000'}
+{'Epoch': 35, 'Generation Loss (Eval)': '16.947044'}
+{'epoch': 36, 'Geneartion Loss ed_image (Train)': '99.961517', 'Correlation Image(Train)': '0.034205', 'MAE Loss': '0.000000'}
+{'Epoch': 36, 'Generation Loss (Eval)': '16.374638'}
+{'epoch': 37, 'Geneartion Loss ed_image (Train)': '96.597855', 'Correlation Image(Train)': '0.034208', 'MAE Loss': '0.000000'}
+{'Epoch': 37, 'Generation Loss (Eval)': '15.819690'}
+{'epoch': 38, 'Geneartion Loss ed_image (Train)': '93.340073', 'Correlation Image(Train)': '0.034210', 'MAE Loss': '0.000000'}
+{'Epoch': 38, 'Generation Loss (Eval)': '15.279020'}
+{'epoch': 39, 'Geneartion Loss ed_image (Train)': '90.184601', 'Correlation Image(Train)': '0.034212', 'MAE Loss': '0.000000'}
+{'Epoch': 39, 'Generation Loss (Eval)': '14.760804'}
+{'epoch': 40, 'Geneartion Loss ed_image (Train)': '87.130318', 'Correlation Image(Train)': '0.034213', 'MAE Loss': '0.000000'}
+{'Epoch': 40, 'Generation Loss (Eval)': '14.258430'}
+{'epoch': 41, 'Geneartion Loss ed_image (Train)': '84.171631', 'Correlation Image(Train)': '0.034213', 'MAE Loss': '0.000000'}
+{'Epoch': 41, 'Generation Loss (Eval)': '13.770384'}
+{'epoch': 42, 'Geneartion Loss ed_image (Train)': '81.307144', 'Correlation Image(Train)': '0.034213', 'MAE Loss': '0.000000'}
+{'Epoch': 42, 'Generation Loss (Eval)': '13.302194'}
+{'epoch': 43, 'Geneartion Loss ed_image (Train)': '78.483665', 'Correlation Image(Train)': '0.034214', 'MAE Loss': '0.000000'}
+{'Epoch': 43, 'Generation Loss (Eval)': '12.809112'}
+{'epoch': 44, 'Geneartion Loss ed_image (Train)': '75.526352', 'Correlation Image(Train)': '0.034214', 'MAE Loss': '0.000000'}
+{'Epoch': 44, 'Generation Loss (Eval)': '12.338382'}
+{'epoch': 45, 'Geneartion Loss ed_image (Train)': '72.805748', 'Correlation Image(Train)': '0.034215', 'MAE Loss': '0.000000'}
+{'Epoch': 45, 'Generation Loss (Eval)': '11.901812'}
+{'epoch': 46, 'Geneartion Loss ed_image (Train)': '70.287979', 'Correlation Image(Train)': '0.034215', 'MAE Loss': '0.000000'}
+{'Epoch': 46, 'Generation Loss (Eval)': '11.494712'}
+{'epoch': 47, 'Geneartion Loss ed_image (Train)': '67.868034', 'Correlation Image(Train)': '0.034216', 'MAE Loss': '0.000000'}
+{'Epoch': 47, 'Generation Loss (Eval)': '11.094604'}
+{'epoch': 48, 'Geneartion Loss ed_image (Train)': '65.574898', 'Correlation Image(Train)': '0.034216', 'MAE Loss': '0.000000'}
+{'Epoch': 48, 'Generation Loss (Eval)': '10.730384'}
+{'epoch': 49, 'Geneartion Loss ed_image (Train)': '63.415428', 'Correlation Image(Train)': '0.034216', 'MAE Loss': '0.000000'}
+{'Epoch': 49, 'Generation Loss (Eval)': '10.381297'}
+{'epoch': 50, 'Geneartion Loss ed_image (Train)': '61.350212', 'Correlation Image(Train)': '0.034216', 'MAE Loss': '0.000000'}
+{'Epoch': 50, 'Generation Loss (Eval)': '10.047523'}
+{'epoch': 51, 'Geneartion Loss ed_image (Train)': '59.368408', 'Correlation Image(Train)': '0.034216', 'MAE Loss': '0.000000'}
+{'Epoch': 51, 'Generation Loss (Eval)': '9.729065'}
+{'epoch': 52, 'Geneartion Loss ed_image (Train)': '57.477928', 'Correlation Image(Train)': '0.034216', 'MAE Loss': '0.000000'}
+{'Epoch': 52, 'Generation Loss (Eval)': '9.422640'}
+{'epoch': 53, 'Geneartion Loss ed_image (Train)': '55.654465', 'Correlation Image(Train)': '0.034215', 'MAE Loss': '0.000000'}
+{'Epoch': 53, 'Generation Loss (Eval)': '9.121569'}
+{'epoch': 54, 'Geneartion Loss ed_image (Train)': '53.847973', 'Correlation Image(Train)': '0.034215', 'MAE Loss': '0.000000'}
+{'Epoch': 54, 'Generation Loss (Eval)': '8.801878'}
+{'epoch': 55, 'Geneartion Loss ed_image (Train)': '51.657818', 'Correlation Image(Train)': '0.034214', 'MAE Loss': '0.000000'}
+{'Epoch': 55, 'Generation Loss (Eval)': '8.426492'}
+{'epoch': 56, 'Geneartion Loss ed_image (Train)': '49.583916', 'Correlation Image(Train)': '0.034215', 'MAE Loss': '0.000000'}
+{'Epoch': 56, 'Generation Loss (Eval)': '8.089639'}
+{'epoch': 57, 'Geneartion Loss ed_image (Train)': '47.526005', 'Correlation Image(Train)': '0.034212', 'MAE Loss': '0.000000'}
+{'Epoch': 57, 'Generation Loss (Eval)': '7.695911'}
+{'epoch': 58, 'Geneartion Loss ed_image (Train)': '44.954914', 'Correlation Image(Train)': '0.034213', 'MAE Loss': '0.000000'}
+{'Epoch': 58, 'Generation Loss (Eval)': '7.252117'}
+{'epoch': 59, 'Geneartion Loss ed_image (Train)': '42.399914', 'Correlation Image(Train)': '0.034211', 'MAE Loss': '0.000000'}
+{'Epoch': 59, 'Generation Loss (Eval)': '6.871914'}
+{'epoch': 60, 'Geneartion Loss ed_image (Train)': '40.197002', 'Correlation Image(Train)': '0.034212', 'MAE Loss': '0.000000'}
+{'Epoch': 60, 'Generation Loss (Eval)': '6.533455'}
+{'epoch': 61, 'Geneartion Loss ed_image (Train)': '38.335339', 'Correlation Image(Train)': '0.034213', 'MAE Loss': '0.000000'}
+{'Epoch': 61, 'Generation Loss (Eval)': '6.255177'}
+{'epoch': 62, 'Geneartion Loss ed_image (Train)': '36.793262', 'Correlation Image(Train)': '0.034213', 'MAE Loss': '0.000000'}
+{'Epoch': 62, 'Generation Loss (Eval)': '6.003385'}
+{'epoch': 63, 'Geneartion Loss ed_image (Train)': '35.333344', 'Correlation Image(Train)': '0.034213', 'MAE Loss': '0.000000'}
+{'Epoch': 63, 'Generation Loss (Eval)': '5.761031'}
+{'epoch': 64, 'Geneartion Loss ed_image (Train)': '33.963543', 'Correlation Image(Train)': '0.034214', 'MAE Loss': '0.000000'}
+{'Epoch': 64, 'Generation Loss (Eval)': '5.545767'}
+{'epoch': 65, 'Geneartion Loss ed_image (Train)': '32.739395', 'Correlation Image(Train)': '0.034214', 'MAE Loss': '0.000000'}
+{'Epoch': 65, 'Generation Loss (Eval)': '5.349380'}
+{'epoch': 66, 'Geneartion Loss ed_image (Train)': '31.361506', 'Correlation Image(Train)': '0.034215', 'MAE Loss': '0.000000'}
+{'Epoch': 66, 'Generation Loss (Eval)': '5.069942'}
+{'epoch': 67, 'Geneartion Loss ed_image (Train)': '29.902105', 'Correlation Image(Train)': '0.034215', 'MAE Loss': '0.000000'}
+{'Epoch': 67, 'Generation Loss (Eval)': '4.876364'}
+{'epoch': 68, 'Geneartion Loss ed_image (Train)': '28.833643', 'Correlation Image(Train)': '0.034215', 'MAE Loss': '0.000000'}
+{'Epoch': 68, 'Generation Loss (Eval)': '4.704128'}
+{'epoch': 69, 'Geneartion Loss ed_image (Train)': '27.650618', 'Correlation Image(Train)': '0.034215', 'MAE Loss': '0.000000'}
+{'Epoch': 69, 'Generation Loss (Eval)': '4.470542'}
+{'epoch': 70, 'Geneartion Loss ed_image (Train)': '26.422386', 'Correlation Image(Train)': '0.034214', 'MAE Loss': '0.000000'}
+{'Epoch': 70, 'Generation Loss (Eval)': '4.301272'}
+{'epoch': 71, 'Geneartion Loss ed_image (Train)': '25.467005', 'Correlation Image(Train)': '0.034215', 'MAE Loss': '0.000000'}
+{'Epoch': 71, 'Generation Loss (Eval)': '4.155514'}
+{'epoch': 72, 'Geneartion Loss ed_image (Train)': '24.499920', 'Correlation Image(Train)': '0.034215', 'MAE Loss': '0.000000'}
+{'Epoch': 72, 'Generation Loss (Eval)': '3.986504'}
+{'epoch': 73, 'Geneartion Loss ed_image (Train)': '23.320107', 'Correlation Image(Train)': '0.034215', 'MAE Loss': '0.000000'}
+{'Epoch': 73, 'Generation Loss (Eval)': '3.760817'}
+{'epoch': 74, 'Geneartion Loss ed_image (Train)': '22.099733', 'Correlation Image(Train)': '0.034214', 'MAE Loss': '0.000000'}
+{'Epoch': 74, 'Generation Loss (Eval)': '3.601975'}
+{'epoch': 75, 'Geneartion Loss ed_image (Train)': '21.272478', 'Correlation Image(Train)': '0.034215', 'MAE Loss': '0.000000'}
+{'Epoch': 75, 'Generation Loss (Eval)': '3.473441'}
+{'epoch': 76, 'Geneartion Loss ed_image (Train)': '20.381783', 'Correlation Image(Train)': '0.034214', 'MAE Loss': '0.000000'}
+{'Epoch': 76, 'Generation Loss (Eval)': '3.308800'}
+{'epoch': 77, 'Geneartion Loss ed_image (Train)': '19.227354', 'Correlation Image(Train)': '0.034213', 'MAE Loss': '0.000000'}
+{'Epoch': 77, 'Generation Loss (Eval)': '3.103929'}
+{'epoch': 78, 'Geneartion Loss ed_image (Train)': '18.243265', 'Correlation Image(Train)': '0.034213', 'MAE Loss': '0.000000'}
+{'Epoch': 78, 'Generation Loss (Eval)': '2.963249'}
+{'epoch': 79, 'Geneartion Loss ed_image (Train)': '17.474524', 'Correlation Image(Train)': '0.034215', 'MAE Loss': '0.000000'}
+{'Epoch': 79, 'Generation Loss (Eval)': '2.845394'}
+{'epoch': 80, 'Geneartion Loss ed_image (Train)': '16.807302', 'Correlation Image(Train)': '0.034216', 'MAE Loss': '0.000000'}
+{'Epoch': 80, 'Generation Loss (Eval)': '2.737038'}
+{'epoch': 81, 'Geneartion Loss ed_image (Train)': '16.193523', 'Correlation Image(Train)': '0.034217', 'MAE Loss': '0.000000'}
+{'Epoch': 81, 'Generation Loss (Eval)': '2.642760'}
+{'epoch': 82, 'Geneartion Loss ed_image (Train)': '15.644309', 'Correlation Image(Train)': '0.034216', 'MAE Loss': '0.000000'}
+{'Epoch': 82, 'Generation Loss (Eval)': '2.554418'}
+{'epoch': 83, 'Geneartion Loss ed_image (Train)': '15.118989', 'Correlation Image(Train)': '0.034216', 'MAE Loss': '0.000000'}
+{'Epoch': 83, 'Generation Loss (Eval)': '2.461980'}
+{'epoch': 84, 'Geneartion Loss ed_image (Train)': '14.391226', 'Correlation Image(Train)': '0.034215', 'MAE Loss': '0.000000'}
+{'Epoch': 84, 'Generation Loss (Eval)': '2.305425'}
+{'epoch': 85, 'Geneartion Loss ed_image (Train)': '13.379435', 'Correlation Image(Train)': '0.034220', 'MAE Loss': '0.000000'}
+{'Epoch': 85, 'Generation Loss (Eval)': '2.129833'}
+{'epoch': 86, 'Geneartion Loss ed_image (Train)': '12.431262', 'Correlation Image(Train)': '0.034222', 'MAE Loss': '0.000000'}
+{'Epoch': 86, 'Generation Loss (Eval)': '2.003441'}
+{'epoch': 87, 'Geneartion Loss ed_image (Train)': '11.717964', 'Correlation Image(Train)': '0.034217', 'MAE Loss': '0.000000'}
+{'Epoch': 87, 'Generation Loss (Eval)': '1.885072'}
+{'epoch': 88, 'Geneartion Loss ed_image (Train)': '10.999760', 'Correlation Image(Train)': '0.034217', 'MAE Loss': '0.000000'}
+{'Epoch': 88, 'Generation Loss (Eval)': '1.779379'}
+{'epoch': 89, 'Geneartion Loss ed_image (Train)': '10.450537', 'Correlation Image(Train)': '0.034216', 'MAE Loss': '0.000000'}
+{'Epoch': 89, 'Generation Loss (Eval)': '1.696458'}
+{'epoch': 90, 'Geneartion Loss ed_image (Train)': '9.984398', 'Correlation Image(Train)': '0.034216', 'MAE Loss': '0.000000'}
+{'Epoch': 90, 'Generation Loss (Eval)': '1.618089'}
+{'epoch': 91, 'Geneartion Loss ed_image (Train)': '9.532102', 'Correlation Image(Train)': '0.034217', 'MAE Loss': '0.000000'}
+{'Epoch': 91, 'Generation Loss (Eval)': '1.545362'}
+{'epoch': 92, 'Geneartion Loss ed_image (Train)': '9.129537', 'Correlation Image(Train)': '0.034215', 'MAE Loss': '0.000000'}
+{'Epoch': 92, 'Generation Loss (Eval)': '1.484185'}
+{'epoch': 93, 'Geneartion Loss ed_image (Train)': '8.779649', 'Correlation Image(Train)': '0.034215', 'MAE Loss': '0.000000'}
+{'Epoch': 93, 'Generation Loss (Eval)': '1.428554'}
+{'epoch': 94, 'Geneartion Loss ed_image (Train)': '8.473558', 'Correlation Image(Train)': '0.034216', 'MAE Loss': '0.000000'}
+{'Epoch': 94, 'Generation Loss (Eval)': '1.382313'}
+{'epoch': 95, 'Geneartion Loss ed_image (Train)': '8.213910', 'Correlation Image(Train)': '0.034217', 'MAE Loss': '0.000000'}
+{'Epoch': 95, 'Generation Loss (Eval)': '1.339897'}
+{'epoch': 96, 'Geneartion Loss ed_image (Train)': '7.951293', 'Correlation Image(Train)': '0.034217', 'MAE Loss': '0.000000'}
+{'Epoch': 96, 'Generation Loss (Eval)': '1.298596'}
+{'epoch': 97, 'Geneartion Loss ed_image (Train)': '7.712448', 'Correlation Image(Train)': '0.034216', 'MAE Loss': '0.000000'}
+{'Epoch': 97, 'Generation Loss (Eval)': '1.260674'}
+{'epoch': 98, 'Geneartion Loss ed_image (Train)': '7.494002', 'Correlation Image(Train)': '0.034217', 'MAE Loss': '0.000000'}
+{'Epoch': 98, 'Generation Loss (Eval)': '1.227518'}
+{'epoch': 99, 'Geneartion Loss ed_image (Train)': '7.296075', 'Correlation Image(Train)': '0.034219', 'MAE Loss': '0.000000'}
+{'Epoch': 99, 'Generation Loss (Eval)': '1.194771'}
+{'epoch': 100, 'Geneartion Loss ed_image (Train)': '7.110566', 'Correlation Image(Train)': '0.034218', 'MAE Loss': '0.000000'}
+{'Epoch': 100, 'Generation Loss (Eval)': '1.165867'}
+{'epoch': 101, 'Geneartion Loss ed_image (Train)': '6.940421', 'Correlation Image(Train)': '0.034220', 'MAE Loss': '0.000000'}
+{'Epoch': 101, 'Generation Loss (Eval)': '1.138043'}
+{'epoch': 102, 'Geneartion Loss ed_image (Train)': '6.785002', 'Correlation Image(Train)': '0.034219', 'MAE Loss': '0.000000'}
+{'Epoch': 102, 'Generation Loss (Eval)': '1.112583'}
+{'epoch': 103, 'Geneartion Loss ed_image (Train)': '6.625708', 'Correlation Image(Train)': '0.034216', 'MAE Loss': '0.000000'}
+{'Epoch': 103, 'Generation Loss (Eval)': '1.080142'}
+{'epoch': 104, 'Geneartion Loss ed_image (Train)': '6.361927', 'Correlation Image(Train)': '0.034220', 'MAE Loss': '0.000000'}
+{'Epoch': 104, 'Generation Loss (Eval)': '1.026242'}
+{'epoch': 105, 'Geneartion Loss ed_image (Train)': '6.104527', 'Correlation Image(Train)': '0.034216', 'MAE Loss': '0.000000'}
+{'Epoch': 105, 'Generation Loss (Eval)': '0.994114'}
+{'epoch': 106, 'Geneartion Loss ed_image (Train)': '5.927989', 'Correlation Image(Train)': '0.034215', 'MAE Loss': '0.000000'}
+{'Epoch': 106, 'Generation Loss (Eval)': '0.971309'}
+{'epoch': 107, 'Geneartion Loss ed_image (Train)': '5.811135', 'Correlation Image(Train)': '0.034216', 'MAE Loss': '0.000000'}
+{'Epoch': 107, 'Generation Loss (Eval)': '0.952925'}
+{'epoch': 108, 'Geneartion Loss ed_image (Train)': '5.706743', 'Correlation Image(Train)': '0.034215', 'MAE Loss': '0.000000'}
+{'Epoch': 108, 'Generation Loss (Eval)': '0.936505'}
+{'epoch': 109, 'Geneartion Loss ed_image (Train)': '5.576486', 'Correlation Image(Train)': '0.034214', 'MAE Loss': '0.000000'}
+{'Epoch': 109, 'Generation Loss (Eval)': '0.913520'}
+{'epoch': 110, 'Geneartion Loss ed_image (Train)': '5.474333', 'Correlation Image(Train)': '0.034214', 'MAE Loss': '0.000000'}
+{'Epoch': 110, 'Generation Loss (Eval)': '0.898067'}
+{'epoch': 111, 'Geneartion Loss ed_image (Train)': '5.369516', 'Correlation Image(Train)': '0.034215', 'MAE Loss': '0.000000'}
+{'Epoch': 111, 'Generation Loss (Eval)': '0.877716'}
+{'epoch': 112, 'Geneartion Loss ed_image (Train)': '5.205261', 'Correlation Image(Train)': '0.034227', 'MAE Loss': '0.000000'}
+{'Epoch': 112, 'Generation Loss (Eval)': '0.834772'}
+{'epoch': 113, 'Geneartion Loss ed_image (Train)': '4.925711', 'Correlation Image(Train)': '0.034207', 'MAE Loss': '0.000000'}
+{'Epoch': 113, 'Generation Loss (Eval)': '0.771682'}
+{'epoch': 114, 'Geneartion Loss ed_image (Train)': '4.632493', 'Correlation Image(Train)': '0.034188', 'MAE Loss': '0.000000'}
+{'Epoch': 114, 'Generation Loss (Eval)': '0.734437'}
+{'epoch': 115, 'Geneartion Loss ed_image (Train)': '4.419056', 'Correlation Image(Train)': '0.034212', 'MAE Loss': '0.000000'}
+{'Epoch': 115, 'Generation Loss (Eval)': '0.703734'}
+{'epoch': 116, 'Geneartion Loss ed_image (Train)': '4.232801', 'Correlation Image(Train)': '0.034233', 'MAE Loss': '0.000000'}
+{'Epoch': 116, 'Generation Loss (Eval)': '0.675522'}
+{'epoch': 117, 'Geneartion Loss ed_image (Train)': '4.071839', 'Correlation Image(Train)': '0.034241', 'MAE Loss': '0.000000'}
+{'Epoch': 117, 'Generation Loss (Eval)': '0.650507'}
+{'epoch': 118, 'Geneartion Loss ed_image (Train)': '3.927691', 'Correlation Image(Train)': '0.034250', 'MAE Loss': '0.000000'}
+{'Epoch': 118, 'Generation Loss (Eval)': '0.624405'}
+{'epoch': 119, 'Geneartion Loss ed_image (Train)': '3.778820', 'Correlation Image(Train)': '0.034260', 'MAE Loss': '0.000000'}
+{'Epoch': 119, 'Generation Loss (Eval)': '0.594604'}
+{'epoch': 120, 'Geneartion Loss ed_image (Train)': '3.629555', 'Correlation Image(Train)': '0.034285', 'MAE Loss': '0.000000'}
+{'Epoch': 120, 'Generation Loss (Eval)': '0.565743'}
+{'epoch': 121, 'Geneartion Loss ed_image (Train)': '3.480604', 'Correlation Image(Train)': '0.034326', 'MAE Loss': '0.000000'}
+{'Epoch': 121, 'Generation Loss (Eval)': '0.532930'}
+{'epoch': 122, 'Geneartion Loss ed_image (Train)': '3.332170', 'Correlation Image(Train)': '0.034348', 'MAE Loss': '0.000000'}
+{'Epoch': 122, 'Generation Loss (Eval)': '0.506244'}
+{'epoch': 123, 'Geneartion Loss ed_image (Train)': '3.194583', 'Correlation Image(Train)': '0.034353', 'MAE Loss': '0.000000'}
+{'Epoch': 123, 'Generation Loss (Eval)': '0.481806'}
+{'epoch': 124, 'Geneartion Loss ed_image (Train)': '3.058559', 'Correlation Image(Train)': '0.034398', 'MAE Loss': '0.000000'}
+{'Epoch': 124, 'Generation Loss (Eval)': '0.458462'}
+{'epoch': 125, 'Geneartion Loss ed_image (Train)': '2.930632', 'Correlation Image(Train)': '0.034428', 'MAE Loss': '0.000000'}
+{'Epoch': 125, 'Generation Loss (Eval)': '0.437692'}
+{'epoch': 126, 'Geneartion Loss ed_image (Train)': '2.810015', 'Correlation Image(Train)': '0.034466', 'MAE Loss': '0.000000'}
+{'Epoch': 126, 'Generation Loss (Eval)': '0.418145'}
+{'epoch': 127, 'Geneartion Loss ed_image (Train)': '2.699501', 'Correlation Image(Train)': '0.034481', 'MAE Loss': '0.000000'}
+{'Epoch': 127, 'Generation Loss (Eval)': '0.400409'}
+{'epoch': 128, 'Geneartion Loss ed_image (Train)': '2.600429', 'Correlation Image(Train)': '0.034504', 'MAE Loss': '0.000000'}
+{'Epoch': 128, 'Generation Loss (Eval)': '0.384778'}
+{'epoch': 129, 'Geneartion Loss ed_image (Train)': '2.511323', 'Correlation Image(Train)': '0.034521', 'MAE Loss': '0.000000'}
+{'Epoch': 129, 'Generation Loss (Eval)': '0.371250'}
+{'epoch': 130, 'Geneartion Loss ed_image (Train)': '2.430470', 'Correlation Image(Train)': '0.034532', 'MAE Loss': '0.000000'}
+{'Epoch': 130, 'Generation Loss (Eval)': '0.359034'}
+{'epoch': 131, 'Geneartion Loss ed_image (Train)': '2.355073', 'Correlation Image(Train)': '0.034534', 'MAE Loss': '0.000000'}
+{'Epoch': 131, 'Generation Loss (Eval)': '0.348669'}
+{'epoch': 132, 'Geneartion Loss ed_image (Train)': '2.290421', 'Correlation Image(Train)': '0.034550', 'MAE Loss': '0.000000'}
+{'Epoch': 132, 'Generation Loss (Eval)': '0.340225'}
+{'epoch': 133, 'Geneartion Loss ed_image (Train)': '2.234788', 'Correlation Image(Train)': '0.034561', 'MAE Loss': '0.000000'}
+{'Epoch': 133, 'Generation Loss (Eval)': '0.332266'}
+{'epoch': 134, 'Geneartion Loss ed_image (Train)': '2.185673', 'Correlation Image(Train)': '0.034555', 'MAE Loss': '0.000000'}
+{'Epoch': 134, 'Generation Loss (Eval)': '0.325043'}
+{'epoch': 135, 'Geneartion Loss ed_image (Train)': '2.141335', 'Correlation Image(Train)': '0.034539', 'MAE Loss': '0.000000'}
+{'Epoch': 135, 'Generation Loss (Eval)': '0.318583'}
+{'epoch': 136, 'Geneartion Loss ed_image (Train)': '2.101048', 'Correlation Image(Train)': '0.034523', 'MAE Loss': '0.000000'}
+{'Epoch': 136, 'Generation Loss (Eval)': '0.312878'}
+{'epoch': 137, 'Geneartion Loss ed_image (Train)': '2.064439', 'Correlation Image(Train)': '0.034512', 'MAE Loss': '0.000000'}
+{'Epoch': 137, 'Generation Loss (Eval)': '0.307664'}
+{'epoch': 138, 'Geneartion Loss ed_image (Train)': '2.031400', 'Correlation Image(Train)': '0.034507', 'MAE Loss': '0.000000'}
+{'Epoch': 138, 'Generation Loss (Eval)': '0.303314'}
+{'epoch': 139, 'Geneartion Loss ed_image (Train)': '2.001245', 'Correlation Image(Train)': '0.034492', 'MAE Loss': '0.000000'}
+{'Epoch': 139, 'Generation Loss (Eval)': '0.299204'}
+{'epoch': 140, 'Geneartion Loss ed_image (Train)': '1.973309', 'Correlation Image(Train)': '0.034489', 'MAE Loss': '0.000000'}
+{'Epoch': 140, 'Generation Loss (Eval)': '0.295352'}
+{'epoch': 141, 'Geneartion Loss ed_image (Train)': '1.947150', 'Correlation Image(Train)': '0.034482', 'MAE Loss': '0.000000'}
+{'Epoch': 141, 'Generation Loss (Eval)': '0.291854'}
+{'epoch': 142, 'Geneartion Loss ed_image (Train)': '1.922204', 'Correlation Image(Train)': '0.034502', 'MAE Loss': '0.000000'}
+{'Epoch': 142, 'Generation Loss (Eval)': '0.288573'}
+{'epoch': 143, 'Geneartion Loss ed_image (Train)': '1.897336', 'Correlation Image(Train)': '0.034491', 'MAE Loss': '0.000000'}
+{'Epoch': 143, 'Generation Loss (Eval)': '0.285072'}
+{'epoch': 144, 'Geneartion Loss ed_image (Train)': '1.872153', 'Correlation Image(Train)': '0.034480', 'MAE Loss': '0.000000'}
+{'Epoch': 144, 'Generation Loss (Eval)': '0.281620'}
+{'epoch': 145, 'Geneartion Loss ed_image (Train)': '1.847136', 'Correlation Image(Train)': '0.034474', 'MAE Loss': '0.000000'}
+{'Epoch': 145, 'Generation Loss (Eval)': '0.277897'}
+{'epoch': 146, 'Geneartion Loss ed_image (Train)': '1.821681', 'Correlation Image(Train)': '0.034479', 'MAE Loss': '0.000000'}
+{'Epoch': 146, 'Generation Loss (Eval)': '0.273868'}
+{'epoch': 147, 'Geneartion Loss ed_image (Train)': '1.796051', 'Correlation Image(Train)': '0.034490', 'MAE Loss': '0.000000'}
+{'Epoch': 147, 'Generation Loss (Eval)': '0.269928'}
+{'epoch': 148, 'Geneartion Loss ed_image (Train)': '1.770409', 'Correlation Image(Train)': '0.034488', 'MAE Loss': '0.000000'}
+{'Epoch': 148, 'Generation Loss (Eval)': '0.265361'}
+{'epoch': 149, 'Geneartion Loss ed_image (Train)': '1.744437', 'Correlation Image(Train)': '0.034482', 'MAE Loss': '0.000000'}
+{'Epoch': 149, 'Generation Loss (Eval)': '0.260210'}
+{'epoch': 150, 'Geneartion Loss ed_image (Train)': '1.717929', 'Correlation Image(Train)': '0.034476', 'MAE Loss': '0.000000'}
+{'Epoch': 150, 'Generation Loss (Eval)': '0.255199'}
+{'epoch': 151, 'Geneartion Loss ed_image (Train)': '1.690609', 'Correlation Image(Train)': '0.034465', 'MAE Loss': '0.000000'}
+{'Epoch': 151, 'Generation Loss (Eval)': '0.250036'}
+{'epoch': 152, 'Geneartion Loss ed_image (Train)': '1.663553', 'Correlation Image(Train)': '0.034459', 'MAE Loss': '0.000000'}
+{'Epoch': 152, 'Generation Loss (Eval)': '0.245058'}
+{'epoch': 153, 'Geneartion Loss ed_image (Train)': '1.638526', 'Correlation Image(Train)': '0.034456', 'MAE Loss': '0.000000'}
+{'Epoch': 153, 'Generation Loss (Eval)': '0.241172'}
+{'epoch': 154, 'Geneartion Loss ed_image (Train)': '1.616446', 'Correlation Image(Train)': '0.034456', 'MAE Loss': '0.000000'}
+{'Epoch': 154, 'Generation Loss (Eval)': '0.237930'}
+{'epoch': 155, 'Geneartion Loss ed_image (Train)': '1.596775', 'Correlation Image(Train)': '0.034455', 'MAE Loss': '0.000000'}
+{'Epoch': 155, 'Generation Loss (Eval)': '0.235226'}
+{'epoch': 156, 'Geneartion Loss ed_image (Train)': '1.578943', 'Correlation Image(Train)': '0.034451', 'MAE Loss': '0.000000'}
+{'Epoch': 156, 'Generation Loss (Eval)': '0.232847'}
+{'epoch': 157, 'Geneartion Loss ed_image (Train)': '1.562371', 'Correlation Image(Train)': '0.034428', 'MAE Loss': '0.000000'}
+{'Epoch': 157, 'Generation Loss (Eval)': '0.230555'}
+{'epoch': 158, 'Geneartion Loss ed_image (Train)': '1.547176', 'Correlation Image(Train)': '0.034410', 'MAE Loss': '0.000000'}
+{'Epoch': 158, 'Generation Loss (Eval)': '0.228569'}
+{'epoch': 159, 'Geneartion Loss ed_image (Train)': '1.533344', 'Correlation Image(Train)': '0.034399', 'MAE Loss': '0.000000'}
+{'Epoch': 159, 'Generation Loss (Eval)': '0.226866'}
+{'epoch': 160, 'Geneartion Loss ed_image (Train)': '1.520493', 'Correlation Image(Train)': '0.034392', 'MAE Loss': '0.000000'}
+{'Epoch': 160, 'Generation Loss (Eval)': '0.225317'}
+{'epoch': 161, 'Geneartion Loss ed_image (Train)': '1.508368', 'Correlation Image(Train)': '0.034386', 'MAE Loss': '0.000000'}
+{'Epoch': 161, 'Generation Loss (Eval)': '0.223906'}
+{'epoch': 162, 'Geneartion Loss ed_image (Train)': '1.496747', 'Correlation Image(Train)': '0.034382', 'MAE Loss': '0.000000'}
+{'Epoch': 162, 'Generation Loss (Eval)': '0.222537'}
+{'epoch': 163, 'Geneartion Loss ed_image (Train)': '1.484914', 'Correlation Image(Train)': '0.034378', 'MAE Loss': '0.000000'}
+{'Epoch': 163, 'Generation Loss (Eval)': '0.220904'}
+{'epoch': 164, 'Geneartion Loss ed_image (Train)': '1.471367', 'Correlation Image(Train)': '0.034372', 'MAE Loss': '0.000000'}
+{'Epoch': 164, 'Generation Loss (Eval)': '0.219092'}
+{'epoch': 165, 'Geneartion Loss ed_image (Train)': '1.457973', 'Correlation Image(Train)': '0.034367', 'MAE Loss': '0.000000'}
+{'Epoch': 165, 'Generation Loss (Eval)': '0.217086'}
+{'epoch': 166, 'Geneartion Loss ed_image (Train)': '1.441038', 'Correlation Image(Train)': '0.034369', 'MAE Loss': '0.000000'}
+{'Epoch': 166, 'Generation Loss (Eval)': '0.210569'}
+{'epoch': 167, 'Geneartion Loss ed_image (Train)': '1.399216', 'Correlation Image(Train)': '0.034350', 'MAE Loss': '0.000000'}
+{'Epoch': 167, 'Generation Loss (Eval)': '0.205408'}
+{'epoch': 168, 'Geneartion Loss ed_image (Train)': '1.379084', 'Correlation Image(Train)': '0.034341', 'MAE Loss': '0.000000'}
+{'Epoch': 168, 'Generation Loss (Eval)': '0.204075'}
+{'epoch': 169, 'Geneartion Loss ed_image (Train)': '1.367230', 'Correlation Image(Train)': '0.034341', 'MAE Loss': '0.000000'}
+{'Epoch': 169, 'Generation Loss (Eval)': '0.203128'}
+{'epoch': 170, 'Geneartion Loss ed_image (Train)': '1.357450', 'Correlation Image(Train)': '0.034340', 'MAE Loss': '0.000000'}
+{'Epoch': 170, 'Generation Loss (Eval)': '0.202363'}
+{'epoch': 171, 'Geneartion Loss ed_image (Train)': '1.348598', 'Correlation Image(Train)': '0.034342', 'MAE Loss': '0.000000'}
+{'Epoch': 171, 'Generation Loss (Eval)': '0.201731'}
+{'epoch': 172, 'Geneartion Loss ed_image (Train)': '1.340150', 'Correlation Image(Train)': '0.034337', 'MAE Loss': '0.000000'}
+{'Epoch': 172, 'Generation Loss (Eval)': '0.201200'}
+{'epoch': 173, 'Geneartion Loss ed_image (Train)': '1.331931', 'Correlation Image(Train)': '0.034337', 'MAE Loss': '0.000000'}
+{'Epoch': 173, 'Generation Loss (Eval)': '0.200661'}
+{'epoch': 174, 'Geneartion Loss ed_image (Train)': '1.324468', 'Correlation Image(Train)': '0.034344', 'MAE Loss': '0.000000'}
+{'Epoch': 174, 'Generation Loss (Eval)': '0.200173'}
+{'epoch': 175, 'Geneartion Loss ed_image (Train)': '1.317527', 'Correlation Image(Train)': '0.034354', 'MAE Loss': '0.000000'}
+{'Epoch': 175, 'Generation Loss (Eval)': '0.199713'}
+{'epoch': 176, 'Geneartion Loss ed_image (Train)': '1.310951', 'Correlation Image(Train)': '0.034363', 'MAE Loss': '0.000000'}
+{'Epoch': 176, 'Generation Loss (Eval)': '0.199287'}
+{'epoch': 177, 'Geneartion Loss ed_image (Train)': '1.304708', 'Correlation Image(Train)': '0.034372', 'MAE Loss': '0.000000'}
+{'Epoch': 177, 'Generation Loss (Eval)': '0.198814'}
+{'epoch': 178, 'Geneartion Loss ed_image (Train)': '1.298188', 'Correlation Image(Train)': '0.034387', 'MAE Loss': '0.000000'}
+{'Epoch': 178, 'Generation Loss (Eval)': '0.197845'}
+{'epoch': 179, 'Geneartion Loss ed_image (Train)': '1.287108', 'Correlation Image(Train)': '0.034396', 'MAE Loss': '0.000000'}
+{'Epoch': 179, 'Generation Loss (Eval)': '0.195860'}
+{'epoch': 180, 'Geneartion Loss ed_image (Train)': '1.276195', 'Correlation Image(Train)': '0.034391', 'MAE Loss': '0.000000'}
+{'Epoch': 180, 'Generation Loss (Eval)': '0.195162'}
+{'epoch': 181, 'Geneartion Loss ed_image (Train)': '1.269304', 'Correlation Image(Train)': '0.034388', 'MAE Loss': '0.000000'}
+{'Epoch': 181, 'Generation Loss (Eval)': '0.194748'}
+{'epoch': 182, 'Geneartion Loss ed_image (Train)': '1.263598', 'Correlation Image(Train)': '0.034385', 'MAE Loss': '0.000000'}
+{'Epoch': 182, 'Generation Loss (Eval)': '0.194386'}
+{'epoch': 183, 'Geneartion Loss ed_image (Train)': '1.258462', 'Correlation Image(Train)': '0.034382', 'MAE Loss': '0.000000'}
+{'Epoch': 183, 'Generation Loss (Eval)': '0.194063'}
+{'epoch': 184, 'Geneartion Loss ed_image (Train)': '1.253694', 'Correlation Image(Train)': '0.034380', 'MAE Loss': '0.000000'}
+{'Epoch': 184, 'Generation Loss (Eval)': '0.193767'}
+{'epoch': 185, 'Geneartion Loss ed_image (Train)': '1.249214', 'Correlation Image(Train)': '0.034380', 'MAE Loss': '0.000000'}
+{'Epoch': 185, 'Generation Loss (Eval)': '0.193496'}
+{'epoch': 186, 'Geneartion Loss ed_image (Train)': '1.245010', 'Correlation Image(Train)': '0.034379', 'MAE Loss': '0.000000'}
+{'Epoch': 186, 'Generation Loss (Eval)': '0.193222'}
+{'epoch': 187, 'Geneartion Loss ed_image (Train)': '1.241066', 'Correlation Image(Train)': '0.034378', 'MAE Loss': '0.000000'}
+{'Epoch': 187, 'Generation Loss (Eval)': '0.192994'}
+{'epoch': 188, 'Geneartion Loss ed_image (Train)': '1.237307', 'Correlation Image(Train)': '0.034375', 'MAE Loss': '0.000000'}
+{'Epoch': 188, 'Generation Loss (Eval)': '0.192765'}
+{'epoch': 189, 'Geneartion Loss ed_image (Train)': '1.233802', 'Correlation Image(Train)': '0.034373', 'MAE Loss': '0.000000'}
+{'Epoch': 189, 'Generation Loss (Eval)': '0.192572'}
+{'epoch': 190, 'Geneartion Loss ed_image (Train)': '1.230351', 'Correlation Image(Train)': '0.034371', 'MAE Loss': '0.000000'}
+{'Epoch': 190, 'Generation Loss (Eval)': '0.192367'}
+{'epoch': 191, 'Geneartion Loss ed_image (Train)': '1.227162', 'Correlation Image(Train)': '0.034369', 'MAE Loss': '0.000000'}
+{'Epoch': 191, 'Generation Loss (Eval)': '0.192188'}
+{'epoch': 192, 'Geneartion Loss ed_image (Train)': '1.224075', 'Correlation Image(Train)': '0.034365', 'MAE Loss': '0.000000'}
+{'Epoch': 192, 'Generation Loss (Eval)': '0.191998'}
+{'epoch': 193, 'Geneartion Loss ed_image (Train)': '1.221085', 'Correlation Image(Train)': '0.034364', 'MAE Loss': '0.000000'}
+{'Epoch': 193, 'Generation Loss (Eval)': '0.191834'}
+{'epoch': 194, 'Geneartion Loss ed_image (Train)': '1.218262', 'Correlation Image(Train)': '0.034360', 'MAE Loss': '0.000000'}
+{'Epoch': 194, 'Generation Loss (Eval)': '0.191670'}
+{'epoch': 195, 'Geneartion Loss ed_image (Train)': '1.215537', 'Correlation Image(Train)': '0.034356', 'MAE Loss': '0.000000'}
+{'Epoch': 195, 'Generation Loss (Eval)': '0.191534'}
+{'epoch': 196, 'Geneartion Loss ed_image (Train)': '1.213002', 'Correlation Image(Train)': '0.034349', 'MAE Loss': '0.000000'}
+{'Epoch': 196, 'Generation Loss (Eval)': '0.191399'}
+{'epoch': 197, 'Geneartion Loss ed_image (Train)': '1.210438', 'Correlation Image(Train)': '0.034347', 'MAE Loss': '0.000000'}
+{'Epoch': 197, 'Generation Loss (Eval)': '0.191252'}
+{'epoch': 198, 'Geneartion Loss ed_image (Train)': '1.207986', 'Correlation Image(Train)': '0.034339', 'MAE Loss': '0.000000'}
+{'Epoch': 198, 'Generation Loss (Eval)': '0.191137'}
+{'epoch': 199, 'Geneartion Loss ed_image (Train)': '1.205589', 'Correlation Image(Train)': '0.034335', 'MAE Loss': '0.000000'}
+{'Epoch': 199, 'Generation Loss (Eval)': '0.191002'}
+{'epoch': 200, 'Geneartion Loss ed_image (Train)': '1.203310', 'Correlation Image(Train)': '0.034330', 'MAE Loss': '0.000000'}
+{'Epoch': 200, 'Generation Loss (Eval)': '0.190885'}
+{'epoch': 201, 'Geneartion Loss ed_image (Train)': '1.201056', 'Correlation Image(Train)': '0.034323', 'MAE Loss': '0.000000'}
+{'Epoch': 201, 'Generation Loss (Eval)': '0.190751'}
+{'epoch': 202, 'Geneartion Loss ed_image (Train)': '1.198951', 'Correlation Image(Train)': '0.034316', 'MAE Loss': '0.000000'}
+{'Epoch': 202, 'Generation Loss (Eval)': '0.190648'}
+{'epoch': 203, 'Geneartion Loss ed_image (Train)': '1.196845', 'Correlation Image(Train)': '0.034307', 'MAE Loss': '0.000000'}
+{'Epoch': 203, 'Generation Loss (Eval)': '0.190531'}
+{'epoch': 204, 'Geneartion Loss ed_image (Train)': '1.194834', 'Correlation Image(Train)': '0.034298', 'MAE Loss': '0.000000'}
+{'Epoch': 204, 'Generation Loss (Eval)': '0.190426'}
+{'epoch': 205, 'Geneartion Loss ed_image (Train)': '1.192925', 'Correlation Image(Train)': '0.034292', 'MAE Loss': '0.000000'}
+{'Epoch': 205, 'Generation Loss (Eval)': '0.190340'}
+{'epoch': 206, 'Geneartion Loss ed_image (Train)': '1.191013', 'Correlation Image(Train)': '0.034287', 'MAE Loss': '0.000000'}
+{'Epoch': 206, 'Generation Loss (Eval)': '0.190246'}
+{'epoch': 207, 'Geneartion Loss ed_image (Train)': '1.189286', 'Correlation Image(Train)': '0.034283', 'MAE Loss': '0.000000'}
+{'Epoch': 207, 'Generation Loss (Eval)': '0.190164'}
+{'epoch': 208, 'Geneartion Loss ed_image (Train)': '1.187469', 'Correlation Image(Train)': '0.034280', 'MAE Loss': '0.000000'}
+{'Epoch': 208, 'Generation Loss (Eval)': '0.190076'}
+{'epoch': 209, 'Geneartion Loss ed_image (Train)': '1.185800', 'Correlation Image(Train)': '0.034277', 'MAE Loss': '0.000000'}
+{'Epoch': 209, 'Generation Loss (Eval)': '0.189991'}
+{'epoch': 210, 'Geneartion Loss ed_image (Train)': '1.184155', 'Correlation Image(Train)': '0.034274', 'MAE Loss': '0.000000'}
+{'Epoch': 210, 'Generation Loss (Eval)': '0.189891'}
+{'epoch': 211, 'Geneartion Loss ed_image (Train)': '1.182597', 'Correlation Image(Train)': '0.034271', 'MAE Loss': '0.000000'}
+{'Epoch': 211, 'Generation Loss (Eval)': '0.189807'}
+{'epoch': 212, 'Geneartion Loss ed_image (Train)': '1.181055', 'Correlation Image(Train)': '0.034268', 'MAE Loss': '0.000000'}
+{'Epoch': 212, 'Generation Loss (Eval)': '0.189724'}
+{'epoch': 213, 'Geneartion Loss ed_image (Train)': '1.179563', 'Correlation Image(Train)': '0.034265', 'MAE Loss': '0.000000'}
+{'Epoch': 213, 'Generation Loss (Eval)': '0.189649'}
+{'epoch': 214, 'Geneartion Loss ed_image (Train)': '1.178130', 'Correlation Image(Train)': '0.034264', 'MAE Loss': '0.000000'}
+{'Epoch': 214, 'Generation Loss (Eval)': '0.189579'}
+{'epoch': 215, 'Geneartion Loss ed_image (Train)': '1.176755', 'Correlation Image(Train)': '0.034264', 'MAE Loss': '0.000000'}
+{'Epoch': 215, 'Generation Loss (Eval)': '0.189491'}
+{'epoch': 216, 'Geneartion Loss ed_image (Train)': '1.175446', 'Correlation Image(Train)': '0.034260', 'MAE Loss': '0.000000'}
+{'Epoch': 216, 'Generation Loss (Eval)': '0.189424'}
+{'epoch': 217, 'Geneartion Loss ed_image (Train)': '1.174149', 'Correlation Image(Train)': '0.034258', 'MAE Loss': '0.000000'}
+{'Epoch': 217, 'Generation Loss (Eval)': '0.189360'}
+{'epoch': 218, 'Geneartion Loss ed_image (Train)': '1.172879', 'Correlation Image(Train)': '0.034258', 'MAE Loss': '0.000000'}
+{'Epoch': 218, 'Generation Loss (Eval)': '0.189271'}
+{'epoch': 219, 'Geneartion Loss ed_image (Train)': '1.171707', 'Correlation Image(Train)': '0.034256', 'MAE Loss': '0.000000'}
+{'Epoch': 219, 'Generation Loss (Eval)': '0.189226'}
+{'epoch': 220, 'Geneartion Loss ed_image (Train)': '1.170563', 'Correlation Image(Train)': '0.034257', 'MAE Loss': '0.000000'}
+{'Epoch': 220, 'Generation Loss (Eval)': '0.189170'}
+{'epoch': 221, 'Geneartion Loss ed_image (Train)': '1.169442', 'Correlation Image(Train)': '0.034256', 'MAE Loss': '0.000000'}
+{'Epoch': 221, 'Generation Loss (Eval)': '0.189118'}
+{'epoch': 222, 'Geneartion Loss ed_image (Train)': '1.168333', 'Correlation Image(Train)': '0.034251', 'MAE Loss': '0.000000'}
+{'Epoch': 222, 'Generation Loss (Eval)': '0.189047'}
+{'epoch': 223, 'Geneartion Loss ed_image (Train)': '1.167240', 'Correlation Image(Train)': '0.034250', 'MAE Loss': '0.000000'}
+{'Epoch': 223, 'Generation Loss (Eval)': '0.188978'}
+{'epoch': 224, 'Geneartion Loss ed_image (Train)': '1.166180', 'Correlation Image(Train)': '0.034249', 'MAE Loss': '0.000000'}
+{'Epoch': 224, 'Generation Loss (Eval)': '0.188938'}
+{'epoch': 225, 'Geneartion Loss ed_image (Train)': '1.165294', 'Correlation Image(Train)': '0.034244', 'MAE Loss': '0.000000'}
+{'Epoch': 225, 'Generation Loss (Eval)': '0.188898'}
+{'epoch': 226, 'Geneartion Loss ed_image (Train)': '1.164233', 'Correlation Image(Train)': '0.034239', 'MAE Loss': '0.000000'}
+{'Epoch': 226, 'Generation Loss (Eval)': '0.188856'}
+{'epoch': 227, 'Geneartion Loss ed_image (Train)': '1.163370', 'Correlation Image(Train)': '0.034231', 'MAE Loss': '0.000000'}
+{'Epoch': 227, 'Generation Loss (Eval)': '0.188785'}
+{'epoch': 228, 'Geneartion Loss ed_image (Train)': '1.162419', 'Correlation Image(Train)': '0.034225', 'MAE Loss': '0.000000'}
+{'Epoch': 228, 'Generation Loss (Eval)': '0.188685'}
+{'epoch': 229, 'Geneartion Loss ed_image (Train)': '1.161626', 'Correlation Image(Train)': '0.034220', 'MAE Loss': '0.000000'}
+{'Epoch': 229, 'Generation Loss (Eval)': '0.188616'}
+{'epoch': 230, 'Geneartion Loss ed_image (Train)': '1.160902', 'Correlation Image(Train)': '0.034215', 'MAE Loss': '0.000000'}
+{'Epoch': 230, 'Generation Loss (Eval)': '0.188552'}
+{'epoch': 231, 'Geneartion Loss ed_image (Train)': '1.160116', 'Correlation Image(Train)': '0.034220', 'MAE Loss': '0.000000'}
+{'Epoch': 231, 'Generation Loss (Eval)': '0.188585'}
+EarlyStopping counter: 1 out of 40
+{'epoch': 232, 'Geneartion Loss ed_image (Train)': '1.159163', 'Correlation Image(Train)': '0.034228', 'MAE Loss': '0.000000'}
+{'Epoch': 232, 'Generation Loss (Eval)': '0.188590'}
+EarlyStopping counter: 2 out of 40
+{'epoch': 233, 'Geneartion Loss ed_image (Train)': '1.158251', 'Correlation Image(Train)': '0.034230', 'MAE Loss': '0.000000'}
+{'Epoch': 233, 'Generation Loss (Eval)': '0.188536'}
+{'epoch': 234, 'Geneartion Loss ed_image (Train)': '1.157313', 'Correlation Image(Train)': '0.034228', 'MAE Loss': '0.000000'}
+{'Epoch': 234, 'Generation Loss (Eval)': '0.188480'}
+{'epoch': 235, 'Geneartion Loss ed_image (Train)': '1.156470', 'Correlation Image(Train)': '0.034229', 'MAE Loss': '0.000000'}
+{'Epoch': 235, 'Generation Loss (Eval)': '0.188451'}
+{'epoch': 236, 'Geneartion Loss ed_image (Train)': '1.155665', 'Correlation Image(Train)': '0.034225', 'MAE Loss': '0.000000'}
+{'Epoch': 236, 'Generation Loss (Eval)': '0.188399'}
+{'epoch': 237, 'Geneartion Loss ed_image (Train)': '1.154912', 'Correlation Image(Train)': '0.034222', 'MAE Loss': '0.000000'}
+{'Epoch': 237, 'Generation Loss (Eval)': '0.188346'}
+{'epoch': 238, 'Geneartion Loss ed_image (Train)': '1.154211', 'Correlation Image(Train)': '0.034218', 'MAE Loss': '0.000000'}
+{'Epoch': 238, 'Generation Loss (Eval)': '0.188312'}
+{'epoch': 239, 'Geneartion Loss ed_image (Train)': '1.153548', 'Correlation Image(Train)': '0.034210', 'MAE Loss': '0.000000'}
+{'Epoch': 239, 'Generation Loss (Eval)': '0.188272'}
+{'epoch': 240, 'Geneartion Loss ed_image (Train)': '1.153006', 'Correlation Image(Train)': '0.034205', 'MAE Loss': '0.000000'}
+{'Epoch': 240, 'Generation Loss (Eval)': '0.188268'}
+{'epoch': 241, 'Geneartion Loss ed_image (Train)': '1.152446', 'Correlation Image(Train)': '0.034202', 'MAE Loss': '0.000000'}
+{'Epoch': 241, 'Generation Loss (Eval)': '0.188234'}
+{'epoch': 242, 'Geneartion Loss ed_image (Train)': '1.151967', 'Correlation Image(Train)': '0.034199', 'MAE Loss': '0.000000'}
+{'Epoch': 242, 'Generation Loss (Eval)': '0.188169'}
+{'epoch': 243, 'Geneartion Loss ed_image (Train)': '1.151270', 'Correlation Image(Train)': '0.034200', 'MAE Loss': '0.000000'}
+{'Epoch': 243, 'Generation Loss (Eval)': '0.188159'}
+{'epoch': 244, 'Geneartion Loss ed_image (Train)': '1.150562', 'Correlation Image(Train)': '0.034205', 'MAE Loss': '0.000000'}
+{'Epoch': 244, 'Generation Loss (Eval)': '0.188200'}
+EarlyStopping counter: 1 out of 40
+{'epoch': 245, 'Geneartion Loss ed_image (Train)': '1.149992', 'Correlation Image(Train)': '0.034209', 'MAE Loss': '0.000000'}
+{'Epoch': 245, 'Generation Loss (Eval)': '0.188275'}
+EarlyStopping counter: 2 out of 40
+{'epoch': 246, 'Geneartion Loss ed_image (Train)': '1.149434', 'Correlation Image(Train)': '0.034211', 'MAE Loss': '0.000000'}
+{'Epoch': 246, 'Generation Loss (Eval)': '0.188266'}
+EarlyStopping counter: 3 out of 40
+{'epoch': 247, 'Geneartion Loss ed_image (Train)': '1.148746', 'Correlation Image(Train)': '0.034208', 'MAE Loss': '0.000000'}
+{'Epoch': 247, 'Generation Loss (Eval)': '0.188232'}
+EarlyStopping counter: 4 out of 40
+{'epoch': 248, 'Geneartion Loss ed_image (Train)': '1.148124', 'Correlation Image(Train)': '0.034206', 'MAE Loss': '0.000000'}
+{'Epoch': 248, 'Generation Loss (Eval)': '0.188259'}
+EarlyStopping counter: 5 out of 40
+{'epoch': 249, 'Geneartion Loss ed_image (Train)': '1.147618', 'Correlation Image(Train)': '0.034202', 'MAE Loss': '0.000000'}
+{'Epoch': 249, 'Generation Loss (Eval)': '0.188252'}
+EarlyStopping counter: 6 out of 40
+{'epoch': 250, 'Geneartion Loss ed_image (Train)': '1.147099', 'Correlation Image(Train)': '0.034196', 'MAE Loss': '0.000000'}
+{'Epoch': 250, 'Generation Loss (Eval)': '0.188236'}
+EarlyStopping counter: 7 out of 40
+{'epoch': 251, 'Geneartion Loss ed_image (Train)': '1.146566', 'Correlation Image(Train)': '0.034197', 'MAE Loss': '0.000000'}
+{'Epoch': 251, 'Generation Loss (Eval)': '0.188304'}
+EarlyStopping counter: 8 out of 40
+{'epoch': 252, 'Geneartion Loss ed_image (Train)': '1.146065', 'Correlation Image(Train)': '0.034203', 'MAE Loss': '0.000000'}
+{'Epoch': 252, 'Generation Loss (Eval)': '0.188366'}
+EarlyStopping counter: 9 out of 40
+{'epoch': 253, 'Geneartion Loss ed_image (Train)': '1.145629', 'Correlation Image(Train)': '0.034204', 'MAE Loss': '0.000000'}
+{'Epoch': 253, 'Generation Loss (Eval)': '0.188379'}
+EarlyStopping counter: 10 out of 40
+{'epoch': 254, 'Geneartion Loss ed_image (Train)': '1.145291', 'Correlation Image(Train)': '0.034208', 'MAE Loss': '0.000000'}
+{'Epoch': 254, 'Generation Loss (Eval)': '0.188497'}
+EarlyStopping counter: 11 out of 40
+{'epoch': 255, 'Geneartion Loss ed_image (Train)': '1.145096', 'Correlation Image(Train)': '0.034210', 'MAE Loss': '0.000000'}
+{'Epoch': 255, 'Generation Loss (Eval)': '0.188520'}
+EarlyStopping counter: 12 out of 40
+{'epoch': 256, 'Geneartion Loss ed_image (Train)': '1.145030', 'Correlation Image(Train)': '0.034218', 'MAE Loss': '0.000000'}
+{'Epoch': 256, 'Generation Loss (Eval)': '0.188410'}
+EarlyStopping counter: 13 out of 40
+{'epoch': 257, 'Geneartion Loss ed_image (Train)': '1.144713', 'Correlation Image(Train)': '0.034212', 'MAE Loss': '0.000000'}
+{'Epoch': 257, 'Generation Loss (Eval)': '0.188166'}
+EarlyStopping counter: 14 out of 40
+{'epoch': 258, 'Geneartion Loss ed_image (Train)': '1.144093', 'Correlation Image(Train)': '0.034204', 'MAE Loss': '0.000000'}
+{'Epoch': 258, 'Generation Loss (Eval)': '0.188025'}
+{'epoch': 259, 'Geneartion Loss ed_image (Train)': '1.143433', 'Correlation Image(Train)': '0.034198', 'MAE Loss': '0.000000'}
+{'Epoch': 259, 'Generation Loss (Eval)': '0.187963'}
+{'epoch': 260, 'Geneartion Loss ed_image (Train)': '1.142698', 'Correlation Image(Train)': '0.034190', 'MAE Loss': '0.000000'}
+{'Epoch': 260, 'Generation Loss (Eval)': '0.187916'}
+{'epoch': 261, 'Geneartion Loss ed_image (Train)': '1.142085', 'Correlation Image(Train)': '0.034182', 'MAE Loss': '0.000000'}
+{'Epoch': 261, 'Generation Loss (Eval)': '0.187900'}
+{'epoch': 262, 'Geneartion Loss ed_image (Train)': '1.141571', 'Correlation Image(Train)': '0.034177', 'MAE Loss': '0.000000'}
+{'Epoch': 262, 'Generation Loss (Eval)': '0.187923'}
+EarlyStopping counter: 1 out of 40
+{'epoch': 263, 'Geneartion Loss ed_image (Train)': '1.141095', 'Correlation Image(Train)': '0.034175', 'MAE Loss': '0.000000'}
+{'Epoch': 263, 'Generation Loss (Eval)': '0.187941'}
+EarlyStopping counter: 2 out of 40
+{'epoch': 264, 'Geneartion Loss ed_image (Train)': '1.140645', 'Correlation Image(Train)': '0.034171', 'MAE Loss': '0.000000'}
+{'Epoch': 264, 'Generation Loss (Eval)': '0.187921'}
+EarlyStopping counter: 3 out of 40
+{'epoch': 265, 'Geneartion Loss ed_image (Train)': '1.140229', 'Correlation Image(Train)': '0.034173', 'MAE Loss': '0.000000'}
+{'Epoch': 265, 'Generation Loss (Eval)': '0.187947'}
+EarlyStopping counter: 4 out of 40
+{'epoch': 266, 'Geneartion Loss ed_image (Train)': '1.139852', 'Correlation Image(Train)': '0.034181', 'MAE Loss': '0.000000'}
+{'Epoch': 266, 'Generation Loss (Eval)': '0.187966'}
+EarlyStopping counter: 5 out of 40
+{'epoch': 267, 'Geneartion Loss ed_image (Train)': '1.139600', 'Correlation Image(Train)': '0.034185', 'MAE Loss': '0.000000'}
+{'Epoch': 267, 'Generation Loss (Eval)': '0.187974'}
+EarlyStopping counter: 6 out of 40
+{'epoch': 268, 'Geneartion Loss ed_image (Train)': '1.139481', 'Correlation Image(Train)': '0.034192', 'MAE Loss': '0.000000'}
+{'Epoch': 268, 'Generation Loss (Eval)': '0.188081'}
+EarlyStopping counter: 7 out of 40
+{'epoch': 269, 'Geneartion Loss ed_image (Train)': '1.139261', 'Correlation Image(Train)': '0.034193', 'MAE Loss': '0.000000'}
+{'Epoch': 269, 'Generation Loss (Eval)': '0.188022'}
+EarlyStopping counter: 8 out of 40
+{'epoch': 270, 'Geneartion Loss ed_image (Train)': '1.138930', 'Correlation Image(Train)': '0.034190', 'MAE Loss': '0.000000'}
+{'Epoch': 270, 'Generation Loss (Eval)': '0.187950'}
+EarlyStopping counter: 9 out of 40
+{'epoch': 271, 'Geneartion Loss ed_image (Train)': '1.138483', 'Correlation Image(Train)': '0.034188', 'MAE Loss': '0.000000'}
+{'Epoch': 271, 'Generation Loss (Eval)': '0.187785'}
+{'epoch': 272, 'Geneartion Loss ed_image (Train)': '1.138488', 'Correlation Image(Train)': '0.034183', 'MAE Loss': '0.000000'}
+{'Epoch': 272, 'Generation Loss (Eval)': '0.187581'}
+{'epoch': 273, 'Geneartion Loss ed_image (Train)': '1.138566', 'Correlation Image(Train)': '0.034175', 'MAE Loss': '0.000000'}
+{'Epoch': 273, 'Generation Loss (Eval)': '0.187363'}
+{'epoch': 274, 'Geneartion Loss ed_image (Train)': '1.138297', 'Correlation Image(Train)': '0.034163', 'MAE Loss': '0.000000'}
+{'Epoch': 274, 'Generation Loss (Eval)': '0.187304'}
+{'epoch': 275, 'Geneartion Loss ed_image (Train)': '1.137729', 'Correlation Image(Train)': '0.034153', 'MAE Loss': '0.000000'}
+{'Epoch': 275, 'Generation Loss (Eval)': '0.187251'}
+{'epoch': 276, 'Geneartion Loss ed_image (Train)': '1.137199', 'Correlation Image(Train)': '0.034149', 'MAE Loss': '0.000000'}
+{'Epoch': 276, 'Generation Loss (Eval)': '0.187239'}
+{'epoch': 277, 'Geneartion Loss ed_image (Train)': '1.136785', 'Correlation Image(Train)': '0.034144', 'MAE Loss': '0.000000'}
+{'Epoch': 277, 'Generation Loss (Eval)': '0.187220'}
+{'epoch': 278, 'Geneartion Loss ed_image (Train)': '1.136423', 'Correlation Image(Train)': '0.034142', 'MAE Loss': '0.000000'}
+{'Epoch': 278, 'Generation Loss (Eval)': '0.187222'}
+EarlyStopping counter: 1 out of 40
+{'epoch': 279, 'Geneartion Loss ed_image (Train)': '1.136145', 'Correlation Image(Train)': '0.034140', 'MAE Loss': '0.000000'}
+{'Epoch': 279, 'Generation Loss (Eval)': '0.187232'}
+EarlyStopping counter: 2 out of 40
+{'epoch': 280, 'Geneartion Loss ed_image (Train)': '1.136028', 'Correlation Image(Train)': '0.034136', 'MAE Loss': '0.000000'}
+{'Epoch': 280, 'Generation Loss (Eval)': '0.187244'}
+EarlyStopping counter: 3 out of 40
+{'epoch': 281, 'Geneartion Loss ed_image (Train)': '1.135818', 'Correlation Image(Train)': '0.034127', 'MAE Loss': '0.000000'}
+{'Epoch': 281, 'Generation Loss (Eval)': '0.187287'}
+EarlyStopping counter: 4 out of 40
+{'epoch': 282, 'Geneartion Loss ed_image (Train)': '1.135339', 'Correlation Image(Train)': '0.034122', 'MAE Loss': '0.000000'}
+{'Epoch': 282, 'Generation Loss (Eval)': '0.187299'}
+EarlyStopping counter: 5 out of 40
+{'epoch': 283, 'Geneartion Loss ed_image (Train)': '1.134930', 'Correlation Image(Train)': '0.034122', 'MAE Loss': '0.000000'}
+{'Epoch': 283, 'Generation Loss (Eval)': '0.187308'}
+EarlyStopping counter: 6 out of 40
+{'epoch': 284, 'Geneartion Loss ed_image (Train)': '1.134589', 'Correlation Image(Train)': '0.034121', 'MAE Loss': '0.000000'}
+{'Epoch': 284, 'Generation Loss (Eval)': '0.187308'}
+EarlyStopping counter: 7 out of 40
+{'epoch': 285, 'Geneartion Loss ed_image (Train)': '1.134304', 'Correlation Image(Train)': '0.034127', 'MAE Loss': '0.000000'}
+{'Epoch': 285, 'Generation Loss (Eval)': '0.187364'}
+EarlyStopping counter: 8 out of 40
+{'epoch': 286, 'Geneartion Loss ed_image (Train)': '1.134060', 'Correlation Image(Train)': '0.034130', 'MAE Loss': '0.000000'}
+{'Epoch': 286, 'Generation Loss (Eval)': '0.187414'}
+EarlyStopping counter: 9 out of 40
+{'epoch': 287, 'Geneartion Loss ed_image (Train)': '1.133906', 'Correlation Image(Train)': '0.034132', 'MAE Loss': '0.000000'}
+{'Epoch': 287, 'Generation Loss (Eval)': '0.187467'}
+EarlyStopping counter: 10 out of 40
+{'epoch': 288, 'Geneartion Loss ed_image (Train)': '1.134064', 'Correlation Image(Train)': '0.034131', 'MAE Loss': '0.000000'}
+{'Epoch': 288, 'Generation Loss (Eval)': '0.187583'}
+EarlyStopping counter: 11 out of 40
+{'epoch': 289, 'Geneartion Loss ed_image (Train)': '1.134069', 'Correlation Image(Train)': '0.034133', 'MAE Loss': '0.000000'}
+{'Epoch': 289, 'Generation Loss (Eval)': '0.187610'}
+EarlyStopping counter: 12 out of 40
+{'epoch': 290, 'Geneartion Loss ed_image (Train)': '1.134186', 'Correlation Image(Train)': '0.034128', 'MAE Loss': '0.000000'}
+{'Epoch': 290, 'Generation Loss (Eval)': '0.187440'}
+EarlyStopping counter: 13 out of 40
+{'epoch': 291, 'Geneartion Loss ed_image (Train)': '1.133960', 'Correlation Image(Train)': '0.034122', 'MAE Loss': '0.000000'}
+{'Epoch': 291, 'Generation Loss (Eval)': '0.187315'}
+EarlyStopping counter: 14 out of 40
+{'epoch': 292, 'Geneartion Loss ed_image (Train)': '1.133096', 'Correlation Image(Train)': '0.034118', 'MAE Loss': '0.000000'}
+{'Epoch': 292, 'Generation Loss (Eval)': '0.187337'}
+EarlyStopping counter: 15 out of 40
+{'epoch': 293, 'Geneartion Loss ed_image (Train)': '1.132325', 'Correlation Image(Train)': '0.034113', 'MAE Loss': '0.000000'}
+{'Epoch': 293, 'Generation Loss (Eval)': '0.187369'}
+EarlyStopping counter: 16 out of 40
+{'epoch': 294, 'Geneartion Loss ed_image (Train)': '1.131748', 'Correlation Image(Train)': '0.034111', 'MAE Loss': '0.000000'}
+{'Epoch': 294, 'Generation Loss (Eval)': '0.187401'}
+EarlyStopping counter: 17 out of 40
+{'epoch': 295, 'Geneartion Loss ed_image (Train)': '1.131303', 'Correlation Image(Train)': '0.034111', 'MAE Loss': '0.000000'}
+{'Epoch': 295, 'Generation Loss (Eval)': '0.187428'}
+EarlyStopping counter: 18 out of 40
+{'epoch': 296, 'Geneartion Loss ed_image (Train)': '1.130894', 'Correlation Image(Train)': '0.034109', 'MAE Loss': '0.000000'}
+{'Epoch': 296, 'Generation Loss (Eval)': '0.187426'}
+EarlyStopping counter: 19 out of 40
+{'epoch': 297, 'Geneartion Loss ed_image (Train)': '1.130554', 'Correlation Image(Train)': '0.034107', 'MAE Loss': '0.000000'}
+{'Epoch': 297, 'Generation Loss (Eval)': '0.187408'}
+EarlyStopping counter: 20 out of 40
+{'epoch': 298, 'Geneartion Loss ed_image (Train)': '1.130260', 'Correlation Image(Train)': '0.034108', 'MAE Loss': '0.000000'}
+{'Epoch': 298, 'Generation Loss (Eval)': '0.187482'}
+EarlyStopping counter: 21 out of 40
+{'epoch': 299, 'Geneartion Loss ed_image (Train)': '1.129936', 'Correlation Image(Train)': '0.034110', 'MAE Loss': '0.000000'}
+{'Epoch': 299, 'Generation Loss (Eval)': '0.187495'}
+EarlyStopping counter: 22 out of 40
+{'epoch': 300, 'Geneartion Loss ed_image (Train)': '1.129742', 'Correlation Image(Train)': '0.034114', 'MAE Loss': '0.000000'}
+{'Epoch': 300, 'Generation Loss (Eval)': '0.187496'}
+EarlyStopping counter: 23 out of 40
+{'epoch': 301, 'Geneartion Loss ed_image (Train)': '1.129529', 'Correlation Image(Train)': '0.034107', 'MAE Loss': '0.000000'}
+{'Epoch': 301, 'Generation Loss (Eval)': '0.187537'}
+EarlyStopping counter: 24 out of 40
+{'epoch': 302, 'Geneartion Loss ed_image (Train)': '1.129433', 'Correlation Image(Train)': '0.034101', 'MAE Loss': '0.000000'}
+{'Epoch': 302, 'Generation Loss (Eval)': '0.187511'}
+EarlyStopping counter: 25 out of 40
+{'epoch': 303, 'Geneartion Loss ed_image (Train)': '1.129349', 'Correlation Image(Train)': '0.034112', 'MAE Loss': '0.000000'}
+{'Epoch': 303, 'Generation Loss (Eval)': '0.187537'}
+EarlyStopping counter: 26 out of 40
+{'epoch': 304, 'Geneartion Loss ed_image (Train)': '1.129066', 'Correlation Image(Train)': '0.034113', 'MAE Loss': '0.000000'}
+{'Epoch': 304, 'Generation Loss (Eval)': '0.187517'}
+EarlyStopping counter: 27 out of 40
+{'epoch': 305, 'Geneartion Loss ed_image (Train)': '1.129080', 'Correlation Image(Train)': '0.034117', 'MAE Loss': '0.000000'}
+{'Epoch': 305, 'Generation Loss (Eval)': '0.187630'}
+EarlyStopping counter: 28 out of 40
+{'epoch': 306, 'Geneartion Loss ed_image (Train)': '1.129517', 'Correlation Image(Train)': '0.034112', 'MAE Loss': '0.000000'}
+{'Epoch': 306, 'Generation Loss (Eval)': '0.187457'}
+EarlyStopping counter: 29 out of 40
+{'epoch': 307, 'Geneartion Loss ed_image (Train)': '1.129666', 'Correlation Image(Train)': '0.034106', 'MAE Loss': '0.000000'}
+{'Epoch': 307, 'Generation Loss (Eval)': '0.187524'}
+EarlyStopping counter: 30 out of 40
+{'epoch': 308, 'Geneartion Loss ed_image (Train)': '1.129439', 'Correlation Image(Train)': '0.034110', 'MAE Loss': '0.000000'}
+{'Epoch': 308, 'Generation Loss (Eval)': '0.187634'}
+EarlyStopping counter: 31 out of 40
+{'epoch': 309, 'Geneartion Loss ed_image (Train)': '1.129268', 'Correlation Image(Train)': '0.034113', 'MAE Loss': '0.000000'}
+{'Epoch': 309, 'Generation Loss (Eval)': '0.187895'}
+EarlyStopping counter: 32 out of 40
+{'epoch': 310, 'Geneartion Loss ed_image (Train)': '1.129131', 'Correlation Image(Train)': '0.034110', 'MAE Loss': '0.000000'}
+{'Epoch': 310, 'Generation Loss (Eval)': '0.188087'}
+EarlyStopping counter: 33 out of 40
+{'epoch': 311, 'Geneartion Loss ed_image (Train)': '1.129041', 'Correlation Image(Train)': '0.034111', 'MAE Loss': '0.000000'}
+{'Epoch': 311, 'Generation Loss (Eval)': '0.188150'}
+EarlyStopping counter: 34 out of 40
+{'epoch': 312, 'Geneartion Loss ed_image (Train)': '1.129063', 'Correlation Image(Train)': '0.034115', 'MAE Loss': '0.000000'}
+{'Epoch': 312, 'Generation Loss (Eval)': '0.188158'}
+EarlyStopping counter: 35 out of 40
+{'epoch': 313, 'Geneartion Loss ed_image (Train)': '1.128898', 'Correlation Image(Train)': '0.034112', 'MAE Loss': '0.000000'}
+{'Epoch': 313, 'Generation Loss (Eval)': '0.188019'}
+EarlyStopping counter: 36 out of 40
+{'epoch': 314, 'Geneartion Loss ed_image (Train)': '1.128553', 'Correlation Image(Train)': '0.034108', 'MAE Loss': '0.000000'}
+{'Epoch': 314, 'Generation Loss (Eval)': '0.187952'}
+EarlyStopping counter: 37 out of 40
+{'epoch': 315, 'Geneartion Loss ed_image (Train)': '1.128215', 'Correlation Image(Train)': '0.034105', 'MAE Loss': '0.000000'}
+{'Epoch': 315, 'Generation Loss (Eval)': '0.187850'}
+EarlyStopping counter: 38 out of 40
+{'epoch': 316, 'Geneartion Loss ed_image (Train)': '1.128056', 'Correlation Image(Train)': '0.034089', 'MAE Loss': '0.000000'}
+{'Epoch': 316, 'Generation Loss (Eval)': '0.187672'}
+EarlyStopping counter: 39 out of 40
+{'epoch': 317, 'Geneartion Loss ed_image (Train)': '1.127803', 'Correlation Image(Train)': '0.034086', 'MAE Loss': '0.000000'}
+{'Epoch': 317, 'Generation Loss (Eval)': '0.187542'}
+EarlyStopping counter: 40 out of 40
+{'Epoch': 4000, 'Generation Loss (Eval)': '0.215744'}
+To run Epoch:4000 , It took 6 hours, 41 minutes, 1 seconds
