@@ -17,8 +17,8 @@
 #     --pre_train
 
 python main.py \
-    --data_dir "/dev/shm/data_Seoul" \
-    --image_csv_dir "data/Seoul.csv" \
+    --data_dir "/workspace/sojeong/Anomaly-Forecast/data/seoul_images_0.55_0.9" \
+    --image_csv_dir "/workspace/sojeong/Anomaly-Forecast/data/Seoul_0.55_0.9.csv" \
     --batch 8 \
     --epochs 3000 \
     --patience 40 \
@@ -32,8 +32,10 @@ python main.py \
     --loss_type "ce_image" \
     --location "seoul" \
     --regression "gap" \
-    --classification
+    --do_eval
+    
 
 
 
 # scripts/seoul_ce.sh
+#--classification \
