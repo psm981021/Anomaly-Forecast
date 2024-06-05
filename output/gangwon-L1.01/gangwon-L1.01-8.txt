@@ -1,0 +1,57 @@
+---------------------- Configure Info: ----------------------
+data_dir                       : data/data_Gangwon
+image_csv_dir                  : data/Gangwon.csv
+output_dir                     : output/gangwon-L1.01/
+gpu_id                         : 0
+device                         : cuda:0
+seed                           : 0
+no_cuda                        : False
+use_multi_gpu                  : False
+multi_devices                  : 0,1
+wandb                          : False
+pre_train                      : True
+do_eval                        : False
+test_list                      : ['[]']
+grey_scale                     : False
+location                       : gangwon
+model_idx                      : gangwon-L1.01
+batch                          : 8
+n_classes                      : 100
+sianet                         : False
+classification                 : False
+balancing                      : False
+epochs                         : 3000
+log_freq                       : 1
+patience                       : 40
+loss_type                      : ce_image
+regression                     : gap
+lr                             : 0.001
+adam_beta1                     : 0.9
+adam_beta2                     : 0.999
+weight_decay                   : 0.0
+initializer_range              : 0.01
+str                            : gangwon-L1.01-8
+dataframe_path                 : output/gangwon-L1.01/gangwon-L1.01-8.csv
+log_file                       : output/gangwon-L1.01/gangwon-L1.01-8.txt
+checkpoint_path                : output/gangwon-L1.01/gangwon-L1.01-8.pt
+---------------------- Configure Info: ----------------------
+{'epoch': 0, 'Geneartion Loss ce_image (Train)': '3128.487793', 'Correlation Image(Train)': '0.009230', 'MAE Loss': '0.000000'}
+{'Epoch': 0, 'Generation Loss (Eval)': '522.792114'}
+{'epoch': 1, 'Geneartion Loss ce_image (Train)': '3121.790283', 'Correlation Image(Train)': '0.010059', 'MAE Loss': '0.000000'}
+{'Epoch': 1, 'Generation Loss (Eval)': '521.765076'}
+{'epoch': 2, 'Geneartion Loss ce_image (Train)': '3116.342529', 'Correlation Image(Train)': '0.010777', 'MAE Loss': '0.000000'}
+{'Epoch': 2, 'Generation Loss (Eval)': '520.899719'}
+{'epoch': 3, 'Geneartion Loss ce_image (Train)': '3111.754639', 'Correlation Image(Train)': '0.011304', 'MAE Loss': '0.000000'}
+{'Epoch': 3, 'Generation Loss (Eval)': '520.170410'}
+{'epoch': 4, 'Geneartion Loss ce_image (Train)': '3107.912842', 'Correlation Image(Train)': '0.011819', 'MAE Loss': '0.000000'}
+{'Epoch': 4, 'Generation Loss (Eval)': '519.570312'}
+{'epoch': 5, 'Geneartion Loss ce_image (Train)': '3104.667236', 'Correlation Image(Train)': '0.012338', 'MAE Loss': '0.000000'}
+{'Epoch': 5, 'Generation Loss (Eval)': '519.066895'}
+{'epoch': 6, 'Geneartion Loss ce_image (Train)': '3101.858643', 'Correlation Image(Train)': '0.012846', 'MAE Loss': '0.000000'}
+{'Epoch': 6, 'Generation Loss (Eval)': '518.631165'}
+{'epoch': 7, 'Geneartion Loss ce_image (Train)': '3099.376709', 'Correlation Image(Train)': '0.013328', 'MAE Loss': '0.000000'}
+{'Epoch': 7, 'Generation Loss (Eval)': '518.250183'}
+{'epoch': 8, 'Geneartion Loss ce_image (Train)': '3097.169434', 'Correlation Image(Train)': '0.013779', 'MAE Loss': '0.000000'}
+{'Epoch': 8, 'Generation Loss (Eval)': '517.916870'}
+{'epoch': 9, 'Geneartion Loss ce_image (Train)': '3095.205566', 'Correlation Image(Train)': '0.014210', 'MAE Loss': '0.000000'}
+{'Epoch': 9, 'Generation Loss (Eval)': '517.622925'}

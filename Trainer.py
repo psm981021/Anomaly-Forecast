@@ -213,13 +213,13 @@ class FourTrainer(Trainer):
             total_generation_loss, total_mae_loss, total_correlation = torch.tensor(0.0, device=self.device), torch.tensor(0.0, device=self.device) , torch.tensor(0.0, device=self.device)
         
             for i, batch in batch_iter:
-                # image, label, gap, datetime, class_label = batch
-                image, label, gap, datetime = batch
+                image, label, gap, datetime, class_label = batch
+                # image, label, gap, datetime = batch
 
                 image_batch = [t.to(self.args.device) for t in image] # 7
                 label = label.to(self.args.device) #answer, B
                 gap = gap.to(self.args.device) #diff between t-1 t, B
-                # #class_label = class_label.to(self.args.device)
+                class_label = class_label.to(self.args.device)
                 set_generation_loss = 0.0
                 correlation_image = 0.0
                 total_mae = 0.0
@@ -380,12 +380,11 @@ class FourTrainer(Trainer):
                     if self.args.regression == 'gap':
                         
                         if self.args.classification:
-                            
-                            # [B 100 2 2 ]
-                            if self.args.location == 'seoul':
+                            if self.args.location == "seoul":
+                                # [B 100 2 2 ]
                                 crop_predict_gap = (total_predict_gap[:,:,70:72,85:87] * 255).clamp(0,255)
-                            elif self.args.location == "gangwon":
-                                crop_predict_gap = (total_predict_gap[:,:,30:60,45:75] * 255).clamp(0,255)
+                            else: # gangwon
+                                crop_predict_gap = (total_predict_gap[:,:,57:59,43:45] * 255).clamp(0,255)
 
                             conv1x1 = nn.Conv2d(100, 3, kernel_size=1).to(self.device)
                             padding_needed = (1, 1, 1, 1)
@@ -402,7 +401,9 @@ class FourTrainer(Trainer):
                             predict = inference_jw(self.classifier,crop_predict_gap)
 
                             reg = torch.zeros(self.args.batch).to(self.args.device)
-                            for i, model_index in enumerate(predict):
+                            # for i, model_index in enumerate(predict):
+                            # import IPython; IPython.embed(colors='Linux'); exit(1)
+                            for i, model_index in enumerate(class_label): # 라벨값을 직접 주기
                                 selected_model = self.model.moe[model_index]  # Select model based on prediction
                                 if self.args.location == 'seoul':
                                     reg[i] = abs(selected_model(total_predict_gap[:,:,71,86][i]))
@@ -496,12 +497,12 @@ class FourTrainer(Trainer):
                 for i, batch in batch_iter:
 
                     # image, label, gap, datetime= batch
-                    image, label, gap, datetime = batch # image = [8, 7, 3, 150, 150]
+                    image, label, gap, datetime, class_label = batch # image = [8, 7, 3, 150, 150]
                     
                     image_batch = [t.to(self.args.device) for t in image]
                     label = label.to(self.args.device)
                     gap = gap.to(self.args.device)
-                    # class_label = class_label.to(self.args.device)
+                    class_label = class_label.to(self.args.device)
                 
                     precipitation =[]
                     set_generation_loss =0.0
@@ -509,17 +510,17 @@ class FourTrainer(Trainer):
                     total_mae =0.0
 
                     image_batch = torch.stack(image_batch).permute(1,0,2,3,4).contiguous()
-                    test_datetime_seoul = ['2022-08-08 13:00', '2022-08-11 05:00', '2023-07-04 20:00',
-                                      '2023-07-14 01:00','2023-07-18 07:00','2023-08-29 13:00','2023-09-17 00:00',
-                                      '2021-07-03 18:00', '2021-07-03 21:00', '2022-06-23 20:00', '2022-06-23 19:00',
-                                      '2022-06-23 22:00', '2022-06-24 01:00', '2022-06-30 04:00', '2022-06-30 05:00',
-                                      '2022-06-30 06:00', '2022-06-30 08:00', '2022-06-30 09:00', '2022-06-30 10:00',
-                                      '2022-06-30 18:00', '2022-06-30 19:00', '2022-07-13 11:00', '2022-07-13 16:00',
-                                      '2022-07-13 17:00', '2022-08-08 21:00', '2022-08-08 22:00', '2022-08-08 23:00',
-                                      '2022-08-09 00:00', '2022-08-09 03:00']
-                    test_datetime_gangwon = ['']
-
-
+                    test_datetime = ['2022-06-30 03:00']
+                                    
+                                    # ['2022-08-08 13:00', '2022-08-11 05:00', '2023-07-04 20:00',
+                                    #   '2023-07-14 01:00','2023-07-18 07:00','2023-08-29 13:00','2023-09-17 00:00',
+                                    #   '2021-07-03 18:00', '2021-07-03 21:00', '2022-06-23 20:00', '2022-06-23 19:00',
+                                    #   '2022-06-23 22:00', '2022-06-24 01:00', '2022-06-30 03:00', '2022-06-30 05:00',
+                                    #   '2022-06-30 06:00', '2022-06-30 08:00', '2022-06-30 09:00', '2022-06-30 10:00',
+                                    #   '2022-06-30 18:00', '2022-06-30 19:00', '2022-07-13 11:00', '2022-07-13 16:00',
+                                    #   '2022-07-13 17:00', '2022-08-08 21:00', '2022-08-08 22:00', '2022-08-08 23:00',
+                                    #   '2022-08-09 00:00', '2022-08-09 03:00']
+                    
                     for i in range(len(image_batch)-1):
                     
                         # image_batch[i] [B x 3 x R x R]
@@ -542,11 +543,18 @@ class FourTrainer(Trainer):
                                     self.plot_images(generated_image[j].mean(dim=-1),epoch, self.args.model_idx, datetime[j], 'G')
                                     self.plot_images(image_batch[-1][j].permute(1,2,0),epoch, self.args.model_idx, datetime[j], 'R')
 
+                        if self.args.location == "gangwon" and self.args.do_eval:
+                            for j in range(len(datetime)):
+                                if datetime[j] in test_datetime:
+                                    self.plot_images(generated_image[j].mean(dim=-1),epoch, self.args.model_idx, datetime[j], 'G')
+                                    self.plot_images(image_batch[-1][j].permute(1,2,0),epoch, self.args.model_idx, datetime[j], 'R')
+
+
                         if self.args.loss_type == 'ce_image':
                             generation_loss =  self.ce_criterion(generated_image.mean(dim=-1), image_batch[i+1].mean(dim=1))
 
                         elif self.args.loss_type == 'mae_image':
-
+                            import IPython; IPython.embed(colors='Linux'); exit(1)
                             loss_r, loss_g, loss_b = self.mae_criterion(generated_image.permute(0,3,1,2),image_batch[i+1][:,0,:,:].unsqueeze(1)),self.mae_criterion(generated_image.permute(0,3,1,2),image_batch[i+1][:,1,:,:].unsqueeze(1)),self.mae_criterion(generated_image.permute(0,3,1,2),image_batch[i+1][:,2,:,:].unsqueeze(1))
                             generation_loss = (loss_r +  loss_g + loss_b) / 3
 
@@ -608,8 +616,8 @@ class FourTrainer(Trainer):
                         else:
                             generation_loss =  self.ce_criterion(generated_image.flatten(1), class_label)
                         
-                    set_generation_loss += generation_loss
-                    # total_correlation += correlation_image
+                        set_generation_loss += generation_loss
+                        # total_correlation += correlation_image
                     
                     # set이여서 6으로 나눔
                     # set_generation_loss /= 6
@@ -633,12 +641,11 @@ class FourTrainer(Trainer):
                         if self.args.regression == 'gap':
                             
                             if self.args.classification:
-                                
-                                # [B 100 2 2 ]
-                                if self.args.location == 'seoul':
+                                if self.args.location == "seoul":
+                                    # [B 100 2 2 ]
                                     crop_predict_gap = (total_predict_gap[:,:,70:72,85:87] * 255).clamp(0,255)
-                                elif self.args.location == "gangwon":
-                                    crop_predict_gap = (total_predict_gap[:,:,30:60,45:75] * 255).clamp(0,255)
+                                else: # gangwon
+                                    crop_predict_gap = (total_predict_gap[:,:,57:59,43:45] * 255).clamp(0,255)
 
                                 conv1x1 = nn.Conv2d(100, 3, kernel_size=1).to(self.device)
                                 padding_needed = (1, 1, 1, 1)
@@ -655,8 +662,8 @@ class FourTrainer(Trainer):
                                 predict = inference_jw(self.classifier,crop_predict_gap)
 
                                 reg = torch.zeros(self.args.batch).to(self.args.device)
-                                for i, model_index in enumerate(predict):
-
+                                # for i, model_index in enumerate(predict):
+                                for i, model_index in enumerate(class_label):
                                     selected_model = self.model.moe[model_index]  # Select model based on prediction
 
                                     if self.args.location == 'seoul':
@@ -701,7 +708,11 @@ class FourTrainer(Trainer):
 
                     if test:
                         if self.args.classification:
-                            crop_predict_gap = (last_precipitation[:,:,70:72,85:87] * 255).clamp(0,255)
+                            if self.args.location == "seoul":
+                                crop_predict_gap = (last_precipitation[:,:,70:72,85:87] * 255).clamp(0,255)
+                            else:
+                                crop_predict_gap = (last_precipitation[:,:,57:59,43:45] * 255).clamp(0,255)
+                            
 
                             conv1x1 = nn.Conv2d(100, 3, kernel_size=1).to(self.device)
                             padding_needed = (1, 1, 1, 1)
@@ -718,16 +729,22 @@ class FourTrainer(Trainer):
                             predict = inference_jw(self.classifier,crop_predict_gap)
 
                             reg = torch.zeros(self.args.batch).to(self.args.device)
-                            for i, model_index in enumerate(predict):
+                            # for i, model_index in enumerate(predict):
+                            for i, model_index in enumerate(class_label):
                                 selected_model = self.model.moe[model_index]  # Select model based on prediction
                                 reg[i] = abs(selected_model(last_precipitation[:,:,71,86][i]))
 
-                            
+                            # self.args.test_list.append([datetime, reg, label, predict])
+                            self.args.test_list.append([datetime, reg, label, class_label])
                         else:
-                            last_precipitation = (last_precipitation[:,:,71,86] * 255).clamp(0,255)
-                            reg = abs(self.model.regression_layer(last_precipitation)).view(self.args.batch)
+                            if self.args.location == "seoul":
+                                last_precipitation = (last_precipitation[:,:,71,86] * 255).clamp(0,255)
+                            else:
+                                last_precipitation = (last_precipitation[:,:,58,44] * 255).clamp(0,255)
                             
-                        self.args.test_list.append([datetime, reg, label])
+                            reg = abs(self.model.regression_layer(last_precipitation)).view(self.args.batch)
+                            self.args.test_list.append([datetime, reg, label])
+                        
                         
                 del batch
                 torch.cuda.empty_cache() 

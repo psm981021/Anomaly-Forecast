@@ -17,7 +17,7 @@
 #     --pre_train
 
 python main.py \
-    --data_dir "/dev/shm/data_Seoul" \
+    --data_dir "data/data_Seoul" \
     --image_csv_dir "data/Seoul.csv" \
     --batch 8 \
     --epochs 3000 \
