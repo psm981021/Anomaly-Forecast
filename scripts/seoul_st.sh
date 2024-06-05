@@ -1,22 +1,21 @@
-python main.py \
-    --data_dir "data/Seoul" \
-    --image_csv_dir "data/Seoul.csv" \
-    --batch 8 \
-    --epochs 3000 \
-    --patience 40 \
-    --model_idx "seoul-L4.05" \
-    --output_dir "output/seoul-L4.05" \
-    --test_list=[] \
-    --gpu_id 0 \
-    --device cuda:0 \
-    --seed 0 \
-    --lr 0.001 \
-    --loss_type "stamina" \
-    --location "seoul" \
-    --regression "gap" \
-    --balancing \
-    --pre_train \
-    --balancing 
+# python main.py \
+#     --data_dir "data/Seoul" \
+#     --image_csv_dir "data/Seoul.csv" \
+#     --batch 8 \
+#     --epochs 3000 \
+#     --patience 40 \
+#     --model_idx "seoul-L4.05" \
+#     --output_dir "output/seoul-L4.05" \
+#     --test_list=[] \
+#     --gpu_id 0 \
+#     --device cuda:0 \
+#     --seed 0 \
+#     --lr 0.001 \
+#     --loss_type "stamina" \
+#     --location "seoul" \
+#     --regression "gap" \
+#     --balancing \
+#     --pre_train \
 
 
 python main.py \
@@ -31,12 +30,11 @@ python main.py \
     --gpu_id 0 \
     --device cuda:0 \
     --seed 0 \
-    --lr 0.02 \
+    --lr 0.06 \
     --loss_type "stamina" \
     --location "seoul" \
     --regression "gap"\
-    --classification\
-    --do_eval\
+    --classification \
     --balancing 
     
 

@@ -261,13 +261,13 @@ class FourTrainer(Trainer):
                 
                     if epoch % 10 == 0 and self.args.pre_train:
                         if self.args.location == "seoul":
-                            for j in range(len(datetime)-1):
+                            for j in range(len(datetime)):
                                 if datetime[j] in plot_list_seoul:
                                     self.plot_images(generated_image[j].mean(dim=-1),epoch, self.args.model_idx, datetime[j], 'G')
                                     self.plot_images(crop_generated_image[j].mean(dim=-1),epoch, self.args.model_idx, datetime[j], 'G', 'crop')
 
                         elif self.args.location == "gangwon":
-                            for j in range(len(datetime)-1):
+                            for j in range(len(datetime)):
                                 if datetime[j] in plot_list_gangwon:
                                     self.plot_images(generated_image[j].mean(dim=-1),epoch, self.args.model_idx, datetime[j], 'G')
                                     self.plot_images(crop_generated_image[j].mean(dim=-1),epoch, self.args.model_idx, datetime[j], 'G', 'crop')
@@ -510,8 +510,7 @@ class FourTrainer(Trainer):
                     total_mae =0.0
 
                     image_batch = torch.stack(image_batch).permute(1,0,2,3,4).contiguous()
-                    test_datetime = ['2022-06-30 03:00']
-                                    
+                    
                                     # ['2022-08-08 13:00', '2022-08-11 05:00', '2023-07-04 20:00',
                                     #   '2023-07-14 01:00','2023-07-18 07:00','2023-08-29 13:00','2023-09-17 00:00',
                                     #   '2021-07-03 18:00', '2021-07-03 21:00', '2022-06-23 20:00', '2022-06-23 19:00',
@@ -520,6 +519,9 @@ class FourTrainer(Trainer):
                                     #   '2022-06-30 18:00', '2022-06-30 19:00', '2022-07-13 11:00', '2022-07-13 16:00',
                                     #   '2022-07-13 17:00', '2022-08-08 21:00', '2022-08-08 22:00', '2022-08-08 23:00',
                                     #   '2022-08-09 00:00', '2022-08-09 03:00']
+                    
+                    test_datetime_seoul = ['2022-06-30 03:00']
+                    test_datetime_gangwon = []
                     
                     for i in range(len(image_batch)-1):
                     
@@ -543,18 +545,12 @@ class FourTrainer(Trainer):
                                     self.plot_images(generated_image[j].mean(dim=-1),epoch, self.args.model_idx, datetime[j], 'G')
                                     self.plot_images(image_batch[-1][j].permute(1,2,0),epoch, self.args.model_idx, datetime[j], 'R')
 
-                        if self.args.location == "gangwon" and self.args.do_eval:
-                            for j in range(len(datetime)):
-                                if datetime[j] in test_datetime:
-                                    self.plot_images(generated_image[j].mean(dim=-1),epoch, self.args.model_idx, datetime[j], 'G')
-                                    self.plot_images(image_batch[-1][j].permute(1,2,0),epoch, self.args.model_idx, datetime[j], 'R')
-
 
                         if self.args.loss_type == 'ce_image':
                             generation_loss =  self.ce_criterion(generated_image.mean(dim=-1), image_batch[i+1].mean(dim=1))
 
                         elif self.args.loss_type == 'mae_image':
-                            import IPython; IPython.embed(colors='Linux'); exit(1)
+                            # import IPython; IPython.embed(colors='Linux'); exit(1)
                             loss_r, loss_g, loss_b = self.mae_criterion(generated_image.permute(0,3,1,2),image_batch[i+1][:,0,:,:].unsqueeze(1)),self.mae_criterion(generated_image.permute(0,3,1,2),image_batch[i+1][:,1,:,:].unsqueeze(1)),self.mae_criterion(generated_image.permute(0,3,1,2),image_batch[i+1][:,2,:,:].unsqueeze(1))
                             generation_loss = (loss_r +  loss_g + loss_b) / 3
 
