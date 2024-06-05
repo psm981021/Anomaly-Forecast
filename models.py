@@ -61,7 +61,6 @@ class Fourcaster(nn.Module):
             nn.ReLU(),
             nn.AdaptiveAvgPool2d((50, 50))
         )
-
         
         if self.balance:
             self.lka = Attention()
