@@ -45,10 +45,8 @@ class Fourcaster(nn.Module):
         self.outc = OutConv(64, self.n_classes)
         
         
-
-
-
         self.apply(self.init_weights)
+        self.init_custom_weights(self.args) 
 
         self.regression_model = nn.Sequential(
             nn.Conv2d(64, 32, kernel_size=3, padding=1),
@@ -66,6 +64,8 @@ class Fourcaster(nn.Module):
             nn.AdaptiveAvgPool2d((50, 50))
         )
         self.moe = nn.ModuleList([nn.Linear(100,1) for i in range(3)])
+    
+
 
         if self.balance:
             self.lka = Attention()
@@ -81,6 +81,22 @@ class Fourcaster(nn.Module):
         else:
             plt.savefig('Generated Image')
         #Fourcaster.plot_image(x[0])
+    
+    def init_custom_weights(self):
+        # Custom initialization for each Linear layer in self.moe
+        
+        if self.args.location == 'seoul':
+            means = [0.6, 3.0, 14.7]  # Different means for each layer
+            stds = [0.3, 1.5, 10.2]  # Different standard deviations for each layer
+
+        elif self.args.location == 'gangwon':
+            means = [0.5, 2.0, 8.6]  # Different means for each layer
+            stds = [0.1, 1.0, 4.5]  # Different standard deviations for each layer
+
+        for layer, mean, std in zip(self.moe, means, stds):
+            layer.weight.data.normal_(mean, std)
+            if layer.bias is not None:
+                nn.init.constant_(layer.bias, 0)
 
     def init_weights(self, module):
         """ Initialize the weights more appropriately based on layer type. """
