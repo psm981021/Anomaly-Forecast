@@ -19,7 +19,7 @@
 
 
 python main.py \
-    --data_dir "/dev/shm/data_Seoul" \
+    --data_dir "data/data_Seoul" \
     --image_csv_dir "data/Seoul.csv" \
     --batch 8 \
     --epochs 3000 \
@@ -34,7 +34,8 @@ python main.py \
     --loss_type "stamina" \
     --location "seoul" \
     --regression "gap"\
-    --classification
+    --classification\
+    --do_eval
     
 
 # scripts/seoul_st.sh

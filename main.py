@@ -244,16 +244,32 @@ def main():
 
         args.test_list.pop(0)
         formatted_data = []
-        for record in args.test_list:
-            for i in range(args.batch):  # Assuming record[0] contains a list of timestamps
-                datetime = record[0][i]
-                predicted_precipitation = f"{record[1][i].item():.6f}" if record[1].dim() != 0 else f"{record[1].item():.6f}"
-                ground_truth = record[2][i].item() if record[2].dim() != 0 else record[2].item()
-                formatted_data.append({
-                    'datetime': datetime,
-                    'predicted precipitation': predicted_precipitation,
-                    'ground_truth': ground_truth
-        })
+
+        if args.classification:
+
+            for record in args.test_list:
+                for i in range(args.batch):  # Assuming record[0] contains a list of timestamps
+                    datetime = record[0][i]
+                    predicted_precipitation = f"{record[1][i].item():.6f}" if record[1].dim() != 0 else f"{record[1].item():.6f}"
+                    ground_truth = record[2][i].item() if record[2].dim() != 0 else record[2].item()
+                    predict = record[3][i]
+                    formatted_data.append({
+                        'datetime': datetime,
+                        'predicted precipitation': predicted_precipitation,
+                        'ground_truth': ground_truth,
+                        'predict' : predict
+            })
+        else:
+            for record in args.test_list:
+                for i in range(args.batch):  # Assuming record[0] contains a list of timestamps
+                    datetime = record[0][i]
+                    predicted_precipitation = f"{record[1][i].item():.6f}" if record[1].dim() != 0 else f"{record[1].item():.6f}"
+                    ground_truth = record[2][i].item() if record[2].dim() != 0 else record[2].item()
+                    formatted_data.append({
+                        'datetime': datetime,
+                        'predicted precipitation': predicted_precipitation,
+                        'ground_truth': ground_truth
+            })
         dataframe = pd.DataFrame(formatted_data)
         dataframe.to_csv(args.dataframe_path,index=False)
 
@@ -297,16 +313,31 @@ def main():
         try:
             args.test_list.pop(0)
             formatted_data = []
-            for record in args.test_list:
-                for i in range(args.batch):  # Assuming record[0] contains a list of timestamps
-                    datetime = record[0][i]
-                    predicted_precipitation = f"{record[1][i].item():.6f}" if record[1].dim() != 0 else f"{record[1].item():.6f}"
-                    ground_truth = record[2][i].item() if record[2].dim() != 0 else record[2].item()
-                    formatted_data.append({
-                        'datetime': datetime,
-                        'predicted precipitation': predicted_precipitation,
-                        'ground_truth': ground_truth
-            })
+            if args.classification:
+
+                for record in args.test_list:
+                    for i in range(args.batch):  # Assuming record[0] contains a list of timestamps
+                        datetime = record[0][i]
+                        predicted_precipitation = f"{record[1][i].item():.6f}" if record[1].dim() != 0 else f"{record[1].item():.6f}"
+                        ground_truth = record[2][i].item() if record[2].dim() != 0 else record[2].item()
+                        predict = record[3][i]
+                        formatted_data.append({
+                            'datetime': datetime,
+                            'predicted precipitation': predicted_precipitation,
+                            'ground_truth': ground_truth,
+                            'predict' : predict
+                })
+            else:
+                for record in args.test_list:
+                    for i in range(args.batch):  # Assuming record[0] contains a list of timestamps
+                        datetime = record[0][i]
+                        predicted_precipitation = f"{record[1][i].item():.6f}" if record[1].dim() != 0 else f"{record[1].item():.6f}"
+                        ground_truth = record[2][i].item() if record[2].dim() != 0 else record[2].item()
+                        formatted_data.append({
+                            'datetime': datetime,
+                            'predicted precipitation': predicted_precipitation,
+                            'ground_truth': ground_truth
+                })
             dataframe = pd.DataFrame(formatted_data)
             dataframe.to_csv(args.dataframe_path,index=False)
         except:

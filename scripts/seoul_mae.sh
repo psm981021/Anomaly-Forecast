@@ -18,7 +18,7 @@
 
 
 python main.py \
-    --data_dir "data/Seoul" \
+    --data_dir "data/data_Seoul" \
     --image_csv_dir "data/Seoul.csv" \
     --batch 8 \
     --epochs 4000 \
