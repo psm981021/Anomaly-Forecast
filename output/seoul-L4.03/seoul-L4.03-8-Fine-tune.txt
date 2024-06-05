@@ -4778,3 +4778,5 @@ dataframe_path                 : output/seoul-L4.03/seoul-L4.03-8.csv
 checkpoint_path                : output/seoul-L4.03/seoul-L4.03-8_finetune.pt
 log_file                       : output/seoul-L4.03/seoul-L4.03-8-Fine-tune.txt
 ---------------------- Configure Info: ----------------------
+------------------------------ Continue Training ------------------------------ 
+Load pt for Finetune-training{'Epoch': 3000, 'MAE Loss (Eval)': '5.431445'}

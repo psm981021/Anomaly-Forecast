@@ -3998,3 +3998,5 @@ EarlyStopping counter: 1 out of 40
 EarlyStopping counter: 1 out of 40
 ------------------------------ Continue Training ------------------------------ 
 Load pt for Finetune-training{'Epoch': 3000, 'MAE Loss (Eval)': '4.874541'}
+------------------------------ Continue Training ------------------------------ 
+Load pt for Finetune-training{'Epoch': 3000, 'MAE Loss (Eval)': '5.464316'}

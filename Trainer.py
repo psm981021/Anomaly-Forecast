@@ -36,7 +36,7 @@ class Trainer:
         #     device=self.device
         # )
 
-        self.classifier = load_model("/workspace/sojeong/Anomaly-Forecast/cf_models/Seoul_V1_epoch_2.pth", self.device, 'b7')
+        # self.classifier = load_model("/workspace/sojeong/Anomaly-Forecast/cf_models/Seoul_V1_epoch_2.pth", self.device, 'b7')
         # self.classifier = EfficientNet.from_pretrained('efficientnet-b0', num_classes=3)
 
         # self.regression_layer = RainfallPredictor().to(self.args.device)
@@ -49,13 +49,13 @@ class Trainer:
         if self.cuda_condition:
             self.model.cuda()
             self.projection.cuda()
-            self.classifier.cuda()
+            #self.classifier.cuda()
             #self.regression_model.cuda()
             # self.Linear_layer.cuda()
             # self.regression_layer.cuda()
         
-        for param in self.classifier.parameters():
-            param.requires_grad = False
+        # for param in self.classifier.parameters():
+        #     param.requires_grad = False
 
         if not self.args.pre_train:
             for param in self.model.parameters():
@@ -455,14 +455,15 @@ class FourTrainer(Trainer):
                     total_mae =0.0
 
                     image_batch = torch.stack(image_batch).permute(1,0,2,3,4).contiguous()
-                    test_datetime = ['2021-07-03 18:00', '2021-07-03 19:00', '2021-07-03 21:00',
-                                      '2021-07-03 23:00','2022-06-23 20:00','2022-06-23 22:00','2022-06-24 00:00',
-                                      '2022-06-24 01:00', '2022-06-24 02:00','2022-06-30 01:00', '2022-06-30 02:00', '2022-06-30 04:00', '2022-06-30 05:00', 
-                                      '2022-06-30 06:00', '2022-06-30 08:00', '2022-06-30 13:00', '2022-06-30 15:00', '2022-06-30 16:00', '2022-06-30 21:00',
-                                      '2022-06-30 22:00', '2022-07-13 08:00', '2022-07-13 11:00', '2022-07-13 12:00', '2022-07-13 16:00','2022-07-13 17:00',
-                                      '2022-08-08 19:00', '2022-08-08 20:00', '2022-08-08 21:00', '2022-08-08 22:00', '2022-08-08 23:00','2022-08-09 03:00',
-                                      '2022-09-05 11:00', '2022-09-05 13:00', '2022-09-05 14:00']
-                    
+                    # test_datetime = ['2021-07-03 18:00', '2021-07-03 19:00', '2021-07-03 21:00',
+                    #                   '2021-07-03 23:00','2022-06-23 20:00','2022-06-23 22:00','2022-06-24 00:00',
+                    #                   '2022-06-24 01:00', '2022-06-24 02:00','2022-06-30 01:00', '2022-06-30 02:00', '2022-06-30 04:00', '2022-06-30 05:00', 
+                    #                   '2022-06-30 06:00', '2022-06-30 08:00', '2022-06-30 13:00', '2022-06-30 15:00', '2022-06-30 16:00', '2022-06-30 21:00',
+                    #                   '2022-06-30 22:00', '2022-07-13 08:00', '2022-07-13 11:00', '2022-07-13 12:00', '2022-07-13 16:00','2022-07-13 17:00',
+                    #                   '2022-08-08 19:00', '2022-08-08 20:00', '2022-08-08 21:00', '2022-08-08 22:00', '2022-08-08 23:00','2022-08-09 03:00',
+                    #                   '2022-09-05 11:00', '2022-09-05 13:00', '2022-09-05 14:00']
+                    #test_datetime = ['2021-07-03 15:00', '2021-07-03 16:00', '2021-07-03 17:00', '2021-07-03 18:00', '2021-07-03 19:00', '2021-07-03 20:00', '2021-07-03 21:00', '2021-07-03 22:00', '2021-07-03 23:00']
+                    test_datetime = ['2022-06-23 17:00', '2022-06-23 18:00', '2022-06-23 19:00', '2022-06-23 20:00', '2022-06-23 21:00', '2022-06-23 22:00', '2022-06-23 23:00', '2022-06-24 00:00', '2022-06-24 01:00', '2022-06-24 02:00', '2022-06-24 03:00']
                     for i in range(len(image_batch)-1):
                     
                         # image_batch[i] [B x 3 x R x R]

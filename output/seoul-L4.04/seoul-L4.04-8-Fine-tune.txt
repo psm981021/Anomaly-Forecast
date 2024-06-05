@@ -3404,3 +3404,5 @@ EarlyStopping counter: 39 out of 40
 EarlyStopping counter: 40 out of 40
 {'Epoch': 3000, 'MAE Loss (Eval)': '5.275773'}
 To run Epoch:3000 , It took 5 hours, 39 minutes, 24 seconds
+------------------------------ Continue Training ------------------------------ 
+Load pt for Finetune-training{'Epoch': 3000, 'MAE Loss (Eval)': '5.543777'}

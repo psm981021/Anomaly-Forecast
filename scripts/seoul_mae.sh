@@ -18,8 +18,8 @@
 
 
 python main.py \
-    --data_dir "data/Seoul" \
-    --image_csv_dir "data/Seoul.csv" \
+    --data_dir "/workspace/sojeong/Anomaly-Forecast/data/seoul_images_0.55_0.9" \
+    --image_csv_dir "/workspace/sojeong/Anomaly-Forecast/data/Seoul_0.55_0.9.csv" \
     --batch 8 \
     --epochs 4000 \
     --patience 40 \

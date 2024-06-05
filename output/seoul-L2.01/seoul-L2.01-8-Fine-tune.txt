@@ -1775,3 +1775,5 @@ To run Epoch:4000 , It took 5 hours, 14 minutes, 42 seconds
 Load pt for Finetune-training{'Epoch': 4000, 'MAE Loss (Eval)': '5.562997'}
 ------------------------------ Continue Training ------------------------------ 
 Load pt for Finetune-training{'Epoch': 4000, 'MAE Loss (Eval)': '5.562997'}
+------------------------------ Continue Training ------------------------------ 
+Load pt for Finetune-training{'Epoch': 4000, 'MAE Loss (Eval)': '5.637124'}
