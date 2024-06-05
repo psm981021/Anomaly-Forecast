@@ -50,3 +50,6 @@ __pycache__/
 /.vscode-server/
 /root/.vscode-server
 images
+
+# sj
+/data/seoul_images_0.55_0.9
