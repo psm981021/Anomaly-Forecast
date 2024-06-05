@@ -1,45 +1,61 @@
 python main.py \
-    --data_dir "data/Seoul" \
-    --image_csv_dir "data/Seoul.csv" \
+    --data_dir "data/Gangwon" \
+    --image_csv_dir "data/Gangwon.csv" \
     --batch 8 \
-    --epochs 3000 \
+    --epochs 5000 \
     --patience 40 \
-    --model_idx "seoul-L4.05" \
-    --output_dir "output/seoul-L4.05" \
+    --model_idx "gangwon-L5.01" \
+    --output_dir "output/gangwon-L5.01" \
     --test_list=[] \
     --gpu_id 0 \
     --device cuda:0 \
     --seed 0 \
     --lr 0.001 \
     --loss_type "stamina" \
-    --location "seoul" \
+    --location "gangwon" \
     --regression "gap" \
-    --balancing \
     --pre_train \
     --balancing 
 
 
 python main.py \
-    --data_dir "data/data_Seoul" \
-    --image_csv_dir "data/Seoul.csv" \
+    --data_dir "data/Gangwon" \
+    --image_csv_dir "data/Gangwon.csv" \
     --batch 8 \
-    --epochs 3000 \
+    --epochs 5000 \
     --patience 40 \
-    --model_idx "seoul-L4.05" \
-    --output_dir "output/seoul-L4.05" \
+    --model_idx "gangwon-L5.01" \
+    --output_dir "output/gangwon-L5.01" \
     --test_list=[] \
     --gpu_id 0 \
     --device cuda:0 \
     --seed 0 \
-    --lr 0.02 \
+    --lr 0.06 \
     --loss_type "stamina" \
-    --location "seoul" \
-    --regression "gap"\
-    --classification\
-    --do_eval\
-    --balancing 
+    --location "gangwon" \
+    --regression "gap" \
+    --balancing \
     
+python main.py \
+    --data_dir "data/Gangwon" \
+    --image_csv_dir "data/Gangwon.csv" \
+    --batch 8 \
+    --epochs 5000 \
+    --patience 40 \
+    --model_idx "gangwon-L5.01" \
+    --output_dir "output/gangwon-L5.01" \
+    --test_list=[] \
+    --gpu_id 0 \
+    --device cuda:0 \
+    --seed 0 \
+    --lr 0.06 \
+    --loss_type "stamina" \
+    --location "gangwon" \
+    --regression "gap" \
+    --balancing \
+    --classification
 
+    
 # scripts/seoul_st.sh
 
 #jiwon computer 

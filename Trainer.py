@@ -36,7 +36,7 @@ class Trainer:
         #     device=self.device
         # )
 
-        self.classifier = load_model("classification/model/Seoul_b7_epoch_7.pth", self.device, 'b7')
+        # self.classifier = load_model("classification/model/Seoul_b7_epoch_7.pth", self.device, 'b7')
         # self.classifier = EfficientNet.from_pretrained('efficientnet-b0', num_classes=3)
 
         # self.regression_layer = RainfallPredictor().to(self.args.device)
@@ -49,13 +49,13 @@ class Trainer:
         if self.cuda_condition:
             self.model.cuda()
             self.projection.cuda()
-            self.classifier.cuda()
+            # self.classifier.cuda()
             #self.regression_model.cuda()
             # self.Linear_layer.cuda()
             # self.regression_layer.cuda()
         
-        for param in self.classifier.parameters():
-            param.requires_grad = False
+        # for param in self.classifier.parameters():
+        #     param.requires_grad = False
 
         if not self.args.pre_train:
             for param in self.model.parameters():
@@ -398,7 +398,7 @@ class FourTrainer(Trainer):
                             crop_predict_gap = resize(crop_predict_gap)
 
                             # B 3 
-                            predict = inference_jw(self.classifier,crop_predict_gap)
+                            # predict = inference_jw(self.classifier,crop_predict_gap)
 
                             reg = torch.zeros(self.args.batch).to(self.args.device)
                             # for i, model_index in enumerate(predict):
@@ -659,7 +659,7 @@ class FourTrainer(Trainer):
                                 crop_predict_gap = resize(crop_predict_gap)
 
                                 # B 3 
-                                predict = inference_jw(self.classifier,crop_predict_gap)
+                                # predict = inference_jw(self.classifier,crop_predict_gap)
 
                                 reg = torch.zeros(self.args.batch).to(self.args.device)
                                 # for i, model_index in enumerate(predict):
@@ -726,7 +726,7 @@ class FourTrainer(Trainer):
                             crop_predict_gap = resize(crop_predict_gap)
 
                             # B 3 
-                            predict = inference_jw(self.classifier,crop_predict_gap)
+                            # predict = inference_jw(self.classifier,crop_predict_gap)
 
                             reg = torch.zeros(self.args.batch).to(self.args.device)
                             # for i, model_index in enumerate(predict):
