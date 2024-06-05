@@ -1,20 +1,21 @@
 python main.py \
-    --data_dir "data/data_seoul_only_v2" \
-    --image_csv_dir "data/seoul_v2.csv" \
+    --data_dir "data/Seoul" \
+    --image_csv_dir "data/Seoul.csv" \
     --batch 8 \
     --epochs 3000 \
     --patience 40 \
     --model_idx "seoul-tsts" \
     --output_dir "output/seoul-tst/" \
     --test_list=[] \
-    --gpu_id 1 \
-    --device cuda:1 \
+    --gpu_id 0 \
+    --device cuda:0 \
     --seed 0 \
     --lr 0.001 \
-    --loss_type "mae_image" \
+    --loss_type "stamina" \
     --location "seoul" \
     --regression "gap" \
-    --pre_train
+    --pre_train \
+    --balancing 
 
 
 #scripts/Version1.sh

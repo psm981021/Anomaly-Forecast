@@ -149,7 +149,7 @@ class Trainer:
         self.model.to(self.device)
 
     
-    def plot_images(self, image ,epoch, model_idx, datetime, flag=None):
+    def plot_images(self, image ,epoch, model_idx, datetime, flag=None, crop =None):
         # image = image.cpu().detach().permute(1,2,0).numpy()
         # image = image.cpu().detach().permute(2,0,1).numpy()
         
@@ -164,13 +164,19 @@ class Trainer:
             check_path(path)
 
             if flag == 'R':
-                plt.savefig(f'{self.args.output_dir}/{self.args.pre_train}/{datetime}/{model_idx}_{datetime}_{epoch}_Real Image')
+                if crop == 'crop':
+                    plt.savefig(f'{self.args.output_dir}/{self.args.pre_train}/{datetime}/{model_idx}_{datetime}_{epoch} crop Real Image')
+                else:
+                    plt.savefig(f'{self.args.output_dir}/{self.args.pre_train}/{datetime}/{model_idx}_{datetime}_{epoch} Real Image')
             else:
-                plt.savefig(f'{self.args.output_dir}/{self.args.pre_train}/{datetime}/{model_idx}_{datetime}_{epoch}_Generated Image')
+                if crop == 'crop':
+                    plt.savefig(f'{self.args.output_dir}/{self.args.pre_train}/{datetime}/{model_idx}_{datetime}_{epoch}  crop Generated Image')
+                else:
+                    plt.savefig(f'{self.args.output_dir}/{self.args.pre_train}/{datetime}/{model_idx}_{datetime}_{epoch}  Generated Image')
         else:
             print("Error: Non-tensor input received")
 
-    def plot_images_test(self, image ,epoch, model_idx, i, flag=None):
+    def plot_images_test(self, image ,epoch, model_idx, i, flag=None, crop=None):
 
         
         if isinstance(image, torch.Tensor):
@@ -180,9 +186,15 @@ class Trainer:
             model_idx=model_idx.replace('.','-')
 
             if flag == 'R':
-                plt.savefig(f'{self.args.output_dir}/{model_idx}_{i}_{epoch}_Real Image')
+                if crop == 'crop':
+                    plt.savefig(f'{self.args.output_dir}/{model_idx}_{epoch} crop Real Image')
+                else:
+                    plt.savefig(f'{self.args.output_dir}/{model_idx}_{epoch} Real Image')
             else:
-                plt.savefig(f'{self.args.output_dir}/{model_idx}_{i}_{epoch}_Generated Image')
+                if crop == 'crop':
+                    plt.savefig(f'{self.args.output_dir}/{model_idx}_{epoch} crop Generated Image')
+                else:
+                    plt.savefig(f'{self.args.output_dir}/{model_idx}_{epoch} Generated Image')
         else:
             print("Error: Non-tensor input received")
 
@@ -224,7 +236,10 @@ class FourTrainer(Trainer):
                     generation_loss = 0.0
                     # image_batch[i] [B x R x R]
                     
-                    generated_image = self.model(image_batch[i],self.args)
+                    if self.args.balancing:
+                        generated_image, crop_generated_image = self.model(image_batch[i],self.args)
+                    else:
+                        generated_image = self.model(image_batch[i],self.args)
                     
                     if self.args.grey_scale:
                         correlation_image += torch.abs(self.correlation_image(generated_image.mean(dim=-1), image_batch[i+1])) #/ self.args.batch
@@ -232,27 +247,30 @@ class FourTrainer(Trainer):
                         correlation_image += torch.abs(self.correlation_image(generated_image.mean(dim=-1), image_batch[i+1].mean(dim=1))) #/ self.args.batch
                     
                     if epoch == 0:
-                        for j in range(len(datetime)):
-                            if datetime[j] in plot_list_seoul:
-                                
-                                self.plot_images(image_batch[-1][j].permute(1,2,0),epoch, self.args.model_idx, datetime[j], 'R')
-                    
-                    
+                        if self.args.location == 'seoul':
+                            for j in range(len(datetime)):
+                                if datetime[j] in plot_list_seoul:
+                                    self.plot_images(image_batch[-1][j].permute(1,2,0),epoch, self.args.model_idx, datetime[j], 'R')
+                                    self.plot_images(image_batch[-1][j][:,65:95,60:90].permute(1,2,0),epoch, self.args.model_idx, datetime[j], 'R' ,'crop')
+                        elif self.args.location == "gangwon":
+
+                            for j in range(len(datetime)):
+                                if datetime[j] in plot_list_seoul:
+                                    self.plot_images(image_batch[-1][j].permute(1,2,0),epoch, self.args.model_idx, datetime[j], 'R')
+                                    self.plot_images(image_batch[-1][j][:,30:60,45:75].permute(1,2,0),epoch, self.args.model_idx, datetime[j], 'R' ,'crop')
+                
                     if epoch % 10 == 0 and self.args.pre_train:
                         if self.args.location == "seoul":
                             for j in range(len(datetime)-1):
                                 if datetime[j] in plot_list_seoul:
                                     self.plot_images(generated_image[j].mean(dim=-1),epoch, self.args.model_idx, datetime[j], 'G')
+                                    self.plot_images(crop_generated_image[j].mean(dim=-1),epoch, self.args.model_idx, datetime[j], 'G', 'crop')
 
                         elif self.args.location == "gangwon":
-                            if epoch == 0:
-                                for j in range(len(datetime)):
-                                    if datetime[j] in plot_list_gangwon:
-                                        self.plot_images(image_batch[j+1][0].permute(1,2,0),epoch, self.args.model_idx, datetime[j], 'R')
-                            elif datetime[j] in plot_list_gangwon:
-                                for i in range(len(datetime)):
-                                    if datetime[j] in plot_list_gangwon:
-                                        self.plot_images(generated_image[j].mean(dim=-1),epoch, self.args.model_idx, datetime[j], 'G')
+                            for j in range(len(datetime)-1):
+                                if datetime[j] in plot_list_gangwon:
+                                    self.plot_images(generated_image[j].mean(dim=-1),epoch, self.args.model_idx, datetime[j], 'G')
+                                    self.plot_images(crop_generated_image[j].mean(dim=-1),epoch, self.args.model_idx, datetime[j], 'G', 'crop')
 
 
                     # generated_image [B, W, H, C], 
@@ -277,32 +295,55 @@ class FourTrainer(Trainer):
                         
                         if self.args.grey_scale == False:
                             label_tensor = torch.arange(100).to(self.device).float()
-                            err_r, err_g, err_b = (label_tensor - image_batch[i+1][:,0,:,:].unsqueeze(-1)).abs(), (label_tensor - image_batch[i+1][:,1,:,:].unsqueeze(-1)).abs(), (label_tensor - image_batch[i+1][:,2,:,:].unsqueeze(-1)).abs()
-                            generation_loss = torch.sum( (preds * err_r) + (preds * err_g) + (preds * err_b) ,dim=-1).mean()
+                            
+                            err = (torch.arange(100).to(self.device).float() - image_batch[i+1].permute(0,2,3,1).mean(dim=-1).unsqueeze(-1)).abs()
+                            generation_loss = torch.sum((preds * err),dim=-1).mean()
+                            #err_r, err_g, err_b = (label_tensor - image_batch[i+1][:,0,:,:].unsqueeze(-1)).abs(), (label_tensor - image_batch[i+1][:,1,:,:].unsqueeze(-1)).abs(), (label_tensor - image_batch[i+1][:,2,:,:].unsqueeze(-1)).abs()
+                            #generation_loss = torch.sum( (preds * err_r) + (preds * err_g) + (preds * err_b) ,dim=-1).mean()
 
                         else:
                             err = (torch.arange(100).to(self.device).float() - image_batch[i+1].permute(0,2,3,1)).abs()
                             generation_loss = torch.sum((preds * err),dim=-1).mean()
 
                     elif self.args.loss_type == 'stamina':
-                            if self.args.balancing:
-                                epsilon = 1e-6
+                        if self.args.balancing:
+                            
+                            epsilon = 1e-6
 
+                            absolute_error_full = torch.abs(generated_image.mean(dim=-1).unsqueeze(dim=-1) - image_batch[i+1].permute(0,2,3,1))
+                            if self.args.location == 'seoul':
+                                absolute_error_crop = torch.abs(crop_generated_image.mean(dim=-1).unsqueeze(dim=-1) - image_batch[i+1][:,:,65:95,60:90].permute(0,2,3,1))
+                            elif self.args.location == "gangwon":
+                                absolute_error_crop = torch.abs(crop_generated_image.mean(dim=-1).unsqueeze(dim=-1) - image_batch[i+1][:,:,30:60,45:75].permute(0,2,3,1))
 
+                            event_weight_full = torch.clamp(image_batch[i] + 1, max=6).permute(0,2,3,1) # [B W H 1]
+                            penalty_full = torch.pow(1 - torch.exp(-absolute_error_full) + epsilon , 0.5) #  [B W H C]
+
+                            if self.args.location == 'seoul':
+                                event_weight_crop = torch.clamp(image_batch[i][:,:,65:95,60:90] + 1, max=6).permute(0,2,3,1) # [B W H 1]
+                            elif self.args.location == "gangwon":
+                                event_weight_crop = torch.clamp(image_batch[i][:,:,30:60,45:75] + 1, max=6).permute(0,2,3,1) # [B W H 1]
+                            penalty_crop = torch.pow(1 - torch.exp(-absolute_error_crop) + epsilon , 0.5) #  [B W H C]
+
+                            result_full = absolute_error_full * event_weight_full * penalty_full
+                            result_crop = absolute_error_crop * event_weight_crop * penalty_crop
+
+                            generation_loss = result_full.mean() * 0.4 + result_crop.mean() * 0.6
+
+                        else:
+                            epsilon = 1e-6
+                            
+                            if self.args.grey_scale:
+                                absolute_error = torch.abs(generated_image - image_batch[i+1].permute(0,2,3,1)) # [B W H C]
                             else:
-                                epsilon = 1e-6
-                                
-                                if self.args.grey_scale:
-                                    absolute_error = torch.abs(generated_image - image_batch[i+1].permute(0,2,3,1)) # [B W H C]
-                                else:
-                                    absolute_error = torch.abs(generated_image.mean(dim=-1).unsqueeze(dim=-1) - image_batch[i+1].permute(0,2,3,1)) # [B W H C]
+                                absolute_error = torch.abs(generated_image.mean(dim=-1).unsqueeze(dim=-1) - image_batch[i+1].permute(0,2,3,1)) # [B W H C]
 
-                                event_weight = torch.clamp(image_batch[i] + 1, max=6).permute(0,2,3,1) # [B W H 1]
-                                penalty = torch.pow(1 - torch.exp(-absolute_error) + epsilon , 0.5) #  [B W H C]
-                                
-                                result = absolute_error * event_weight * penalty
-                                
-                                generation_loss = result.mean()
+                            event_weight = torch.clamp(image_batch[i] + 1, max=6).permute(0,2,3,1) # [B W H 1]
+                            penalty = torch.pow(1 - torch.exp(-absolute_error) + epsilon , 0.5) #  [B W H C]
+                            
+                            result = absolute_error * event_weight * penalty
+                            
+                            generation_loss = result.mean()
                             
                     else:
                         generation_loss =  self.ce_criterion(generated_image.flatten(1), class_label)
@@ -334,13 +375,17 @@ class FourTrainer(Trainer):
                     # total_predict_gap[:,:,58,44] 철원 
 
                     # total_predict_gap[:,:,70:90, 55:86], seoul
+                    # total_predict_gap[:,:,30:60, 45:75], gangwon
                     
                     if self.args.regression == 'gap':
                         
                         if self.args.classification:
                             
                             # [B 100 2 2 ]
-                            crop_predict_gap = (total_predict_gap[:,:,70:72,85:87] * 255).clamp(0,255)
+                            if self.args.location == 'seoul':
+                                crop_predict_gap = (total_predict_gap[:,:,70:72,85:87] * 255).clamp(0,255)
+                            elif self.args.location == "gangwon":
+                                crop_predict_gap = (total_predict_gap[:,:,30:60,45:75] * 255).clamp(0,255)
 
                             conv1x1 = nn.Conv2d(100, 3, kernel_size=1).to(self.device)
                             padding_needed = (1, 1, 1, 1)
@@ -359,21 +404,30 @@ class FourTrainer(Trainer):
                             reg = torch.zeros(self.args.batch).to(self.args.device)
                             for i, model_index in enumerate(predict):
                                 selected_model = self.model.moe[model_index]  # Select model based on prediction
-                                reg[i] = abs(selected_model(total_predict_gap[:,:,71,86][i]))
+                                if self.args.location == 'seoul':
+                                    reg[i] = abs(selected_model(total_predict_gap[:,:,71,86][i]))
+                                elif self.args.location == "gangwon":
+                                    reg[i] = abs(selected_model(total_predict_gap[:,:,58,44][i])) 
 
                             loss_mae = self.mae_criterion(abs(reg), abs(gap))
 
 
                         else:
-                            crop_predict_gap = (total_predict_gap[:,:,71,86] * 255).clamp(0,255)
+                            if self.args.location == 'seoul':
+                                crop_predict_gap = (total_predict_gap[:,:,71,86] * 255).clamp(0,255)
+                            elif self.args.location == "gangwon":
+                                crop_predict_gap = (total_predict_gap[:,:,58,44] * 255).clamp(0,255)
                             reg = abs(self.model.regression_layer(crop_predict_gap)).view(self.args.batch)
                             loss_mae = self.mae_criterion(reg, abs(gap))
                         
 
                     elif self.args.regression == 'label':
-                        last_precipitation = (last_precipitation[:,71,86,:] * 255).clamp(0,255)
+                        if self.args.location == 'seoul':
+                            last_precipitation = (last_precipitation[:,71,86,:] * 255).clamp(0,255)
+                        elif self.args.location == "gangwon":
+                            last_precipitation = (last_precipitation[:,58,44,:] * 255).clamp(0,255)
+
                         reg = abs(self.model.regression_layer(last_precipitation)).view(self.args.batch)
-                        
                         loss_mae = self.mae_criterion(reg, abs(label))
                     
                     total_mae += loss_mae
@@ -455,7 +509,7 @@ class FourTrainer(Trainer):
                     total_mae =0.0
 
                     image_batch = torch.stack(image_batch).permute(1,0,2,3,4).contiguous()
-                    test_datetime = ['2022-08-08 13:00', '2022-08-11 05:00', '2023-07-04 20:00',
+                    test_datetime_seoul = ['2022-08-08 13:00', '2022-08-11 05:00', '2023-07-04 20:00',
                                       '2023-07-14 01:00','2023-07-18 07:00','2023-08-29 13:00','2023-09-17 00:00',
                                       '2021-07-03 18:00', '2021-07-03 21:00', '2022-06-23 20:00', '2022-06-23 19:00',
                                       '2022-06-23 22:00', '2022-06-24 01:00', '2022-06-30 04:00', '2022-06-30 05:00',
@@ -463,17 +517,28 @@ class FourTrainer(Trainer):
                                       '2022-06-30 18:00', '2022-06-30 19:00', '2022-07-13 11:00', '2022-07-13 16:00',
                                       '2022-07-13 17:00', '2022-08-08 21:00', '2022-08-08 22:00', '2022-08-08 23:00',
                                       '2022-08-09 00:00', '2022-08-09 03:00']
-                    
+                    test_datetime_gangwon = ['']
+
+
                     for i in range(len(image_batch)-1):
                     
                         # image_batch[i] [B x 3 x R x R]
-                        generated_image = self.model(image_batch[i],self.args)
+                        if self.args.balancing:
+                            generated_image, crop_generated_image = self.model(image_batch[i],self.args)
+                        else:
+                            generated_image = self.model(image_batch[i],self.args)
                         # generated_image [B 3 R R ], Regression_logits [B x 1 x 150 x 150]
 
                         precipitation.append(generated_image) 
                         if self.args.location == "seoul" and self.args.do_eval:
                             for j in range(len(datetime)):
-                                if datetime[j] in test_datetime:
+                                if datetime[j] in test_datetime_seoul:
+                                    self.plot_images(generated_image[j].mean(dim=-1),epoch, self.args.model_idx, datetime[j], 'G')
+                                    self.plot_images(image_batch[-1][j].permute(1,2,0),epoch, self.args.model_idx, datetime[j], 'R')
+
+                        elif self.args.location == "gangwon" and self.args.do_eval:
+                            for j in range(len(datetime)):
+                                if datetime[j] in test_datetime_gangwon:
                                     self.plot_images(generated_image[j].mean(dim=-1),epoch, self.args.model_idx, datetime[j], 'G')
                                     self.plot_images(image_batch[-1][j].permute(1,2,0),epoch, self.args.model_idx, datetime[j], 'R')
 
@@ -490,26 +555,55 @@ class FourTrainer(Trainer):
 
                             if self.args.grey_scale == False:
                                 label_tensor = torch.arange(100).to(self.device).float()
-                                err_r, err_g, err_b = (label_tensor - image_batch[i+1][:,0,:,:].unsqueeze(-1)).abs(), (label_tensor - image_batch[i+1][:,1,:,:].unsqueeze(-1)).abs(), (label_tensor - image_batch[i+1][:,2,:,:].unsqueeze(-1)).abs()
-                                generation_loss = torch.sum( (preds * err_r) + (preds * err_g) + (preds * err_b) ,dim=-1).mean()
+                                
+                                err = (torch.arange(100).to(self.device).float() - image_batch[i+1].permute(0,2,3,1).mean(dim=-1).unsqueeze(-1)).abs()
+                                generation_loss = torch.sum((preds * err),dim=-1).mean()
+                            
                             else:
                                 err = (torch.arange(100).to(self.device).float() - image_batch[i+1].permute(0,2,3,1)).abs()
                                 generation_loss = torch.sum((preds * err),dim=-1).mean()
 
                         elif self.args.loss_type == 'stamina':
                             
-                            epsilon = 1e-6 
-                            if self.args.grey_scale:
-                                absolute_error = torch.abs(generated_image - image_batch[i+1].permute(0,2,3,1)) # [B W H C]
+                            if self.args.balancing:
+                                
+                                epsilon = 1e-6
+
+                                absolute_error_full = torch.abs(generated_image.mean(dim=-1).unsqueeze(dim=-1) - image_batch[i+1].permute(0,2,3,1))
+                                if self.args.location == 'seoul':
+                                    absolute_error_crop = torch.abs(crop_generated_image.mean(dim=-1).unsqueeze(dim=-1) - image_batch[i+1][:,:,65:95,60:90].permute(0,2,3,1))
+                                elif self.args.location == "gangwon":
+                                    absolute_error_crop = torch.abs(crop_generated_image.mean(dim=-1).unsqueeze(dim=-1) - image_batch[i+1][:,:,30:60,45:75].permute(0,2,3,1))
+
+                                event_weight_full = torch.clamp(image_batch[i] + 1, max=6).permute(0,2,3,1) # [B W H 1]
+                                penalty_full = torch.pow(1 - torch.exp(-absolute_error_full) + epsilon , 0.5) #  [B W H C]
+
+                                if self.args.location == 'seoul':
+                                    event_weight_crop = torch.clamp(image_batch[i][:,:,65:95,60:90] + 1, max=6).permute(0,2,3,1) # [B W H 1]
+                                elif self.args.location == "gangwon":
+                                    event_weight_crop = torch.clamp(image_batch[i][:,:,30:60,45:75] + 1, max=6).permute(0,2,3,1) # [B W H 1]
+                                    
+                                penalty_crop = torch.pow(1 - torch.exp(-absolute_error_crop) + epsilon , 0.5) #  [B W H C]
+
+                                result_full = absolute_error_full * event_weight_full * penalty_full
+                                result_crop = absolute_error_crop * event_weight_crop * penalty_crop
+
+                                generation_loss = result_full.mean() * 0.4 + result_crop.mean() * 0.6
+
                             else:
-                                absolute_error = torch.abs(generated_image.mean(dim=-1).unsqueeze(dim=-1) - image_batch[i+1].permute(0,2,3,1)) # [B W H C]
+                                epsilon = 1e-6
+                                
+                                if self.args.grey_scale:
+                                    absolute_error = torch.abs(generated_image - image_batch[i+1].permute(0,2,3,1)) # [B W H C]
+                                else:
+                                    absolute_error = torch.abs(generated_image.mean(dim=-1).unsqueeze(dim=-1) - image_batch[i+1].permute(0,2,3,1)) # [B W H C]
 
-                            event_weight = torch.clamp(image_batch[i] + 1, max=6).permute(0,2,3,1) # [B W H 1]
-                            penalty = torch.pow(1 - torch.exp(-absolute_error) + epsilon , 0.5) #  [B W H C]
-                            
-                            result = absolute_error * event_weight * penalty
-
-                            generation_loss = result.mean()
+                                event_weight = torch.clamp(image_batch[i] + 1, max=6).permute(0,2,3,1) # [B W H 1]
+                                penalty = torch.pow(1 - torch.exp(-absolute_error) + epsilon , 0.5) #  [B W H C]
+                                
+                                result = absolute_error * event_weight * penalty
+                                
+                                generation_loss = result.mean()
                                 
                         else:
                             generation_loss =  self.ce_criterion(generated_image.flatten(1), class_label)
@@ -541,7 +635,10 @@ class FourTrainer(Trainer):
                             if self.args.classification:
                                 
                                 # [B 100 2 2 ]
-                                crop_predict_gap = (total_predict_gap[:,:,70:72,85:87] * 255).clamp(0,255)
+                                if self.args.location == 'seoul':
+                                    crop_predict_gap = (total_predict_gap[:,:,70:72,85:87] * 255).clamp(0,255)
+                                elif self.args.location == "gangwon":
+                                    crop_predict_gap = (total_predict_gap[:,:,30:60,45:75] * 255).clamp(0,255)
 
                                 conv1x1 = nn.Conv2d(100, 3, kernel_size=1).to(self.device)
                                 padding_needed = (1, 1, 1, 1)
@@ -559,20 +656,34 @@ class FourTrainer(Trainer):
 
                                 reg = torch.zeros(self.args.batch).to(self.args.device)
                                 for i, model_index in enumerate(predict):
+
                                     selected_model = self.model.moe[model_index]  # Select model based on prediction
-                                    reg[i] = abs(selected_model(total_predict_gap[:,:,71,86][i]))
+
+                                    if self.args.location == 'seoul':
+                                        reg[i] = abs(selected_model(total_predict_gap[:,:,71,86][i]))
+
+                                    elif self.args.location == "gangwon":
+                                        reg[i] = abs(selected_model(total_predict_gap[:,:,58,44][i])) 
 
                                 loss_mae = self.mae_criterion(abs(reg), abs(gap))
 
 
                             else:
-                                crop_predict_gap = (total_predict_gap[:,:,71,86] * 255).clamp(0,255)
+                                if self.args.location == 'seoul':
+                                    crop_predict_gap = (total_predict_gap[:,:,71,86] * 255).clamp(0,255)
+                                elif self.args.location == "gangwon":
+                                    crop_predict_gap = (total_predict_gap[:,:,58,44] * 255).clamp(0,255)
                                 reg = abs(self.model.regression_layer(crop_predict_gap)).view(self.args.batch)
                                 loss_mae = self.mae_criterion(reg, abs(gap))
                         
 
                         elif self.args.regression == 'label':
-                            last_precipitation = (last_precipitation[:,:,71,86] * 255).clamp(0,255)
+
+                            if self.args.location == 'seoul':
+                                last_precipitation = (last_precipitation[:,71,86,:] * 255).clamp(0,255)
+                            elif self.args.location == "gangwon":
+                                last_precipitation = (last_precipitation[:,58,44,:] * 255).clamp(0,255)
+
                             reg = abs(self.model.regression_layer(last_precipitation)).view(self.args.batch)
 
                             loss_mae = self.mae_criterion(reg, abs(label))
