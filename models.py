@@ -44,9 +44,6 @@ class Fourcaster(nn.Module):
         self.up4 = UpDS(128, 64, self.bilinear, kernels_per_layer=kernels_per_layer)
         self.outc = OutConv(64, self.n_classes)
         
-        
-        self.apply(self.init_weights)
-        self.init_custom_weights(self.args) 
 
         self.regression_model = nn.Sequential(
             nn.Conv2d(64, 32, kernel_size=3, padding=1),
@@ -65,7 +62,8 @@ class Fourcaster(nn.Module):
         )
         self.moe = nn.ModuleList([nn.Linear(100,1) for i in range(3)])
     
-
+        self.apply(self.init_weights)
+        self.init_custom_weights() 
 
         if self.balance:
             self.lka = Attention()
