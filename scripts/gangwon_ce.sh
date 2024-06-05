@@ -32,6 +32,7 @@ python main.py \
     --loss_type "ce_image" \
     --location "gangwon" \
     --regression "gap" \
+    --classification
 
 
 
