@@ -408,9 +408,9 @@ class FourTrainer(Trainer):
                             for i, model_index in enumerate(class_label): # 라벨값을 직접 주기
                                 selected_model = self.model.moe[model_index]  # Select model based on prediction
                                 if self.args.location == 'seoul':
-                                    reg[i] = abs(selected_model(total_predict_gap[:,:,71,86][i]))
+                                    reg[i] = abs(selected_model(abs(total_predict_gap[:,:,71,86][i])))
                                 elif self.args.location == "gangwon":
-                                    reg[i] = abs(selected_model(total_predict_gap[:,:,58,44][i])) 
+                                    reg[i] = abs(selected_model(abs(total_predict_gap[:,:,58,44][i]))) 
 
                             loss_mae = self.mae_criterion(abs(reg), abs(gap))
 
@@ -420,7 +420,7 @@ class FourTrainer(Trainer):
                                 crop_predict_gap = (total_predict_gap[:,:,71,86] * 255).clamp(0,255)
                             elif self.args.location == "gangwon":
                                 crop_predict_gap = (total_predict_gap[:,:,58,44] * 255).clamp(0,255)
-                            reg = abs(self.model.regression_layer(crop_predict_gap)).view(self.args.batch)
+                            reg = abs(self.model.regression_layer(abs(crop_predict_gap))).view(self.args.batch)
                             # import IPython; IPython.embed(colors='Linux'); exit(1)
                             loss_mae = self.mae_criterion(reg, abs(gap))
                         
@@ -431,7 +431,7 @@ class FourTrainer(Trainer):
                         elif self.args.location == "gangwon":
                             last_precipitation = (last_precipitation[:,58,44,:] * 255).clamp(0,255)
 
-                        reg = abs(self.model.regression_layer(last_precipitation)).view(self.args.batch)
+                        reg = abs(self.model.regression_layer(abs(last_precipitation))).view(self.args.batch)
                         loss_mae = self.mae_criterion(reg, abs(label))
                     
                     total_mae += loss_mae
@@ -666,10 +666,10 @@ class FourTrainer(Trainer):
                                     selected_model = self.model.moe[model_index]  # Select model based on prediction
 
                                     if self.args.location == 'seoul':
-                                        reg[i] = abs(selected_model(total_predict_gap[:,:,71,86][i]))
+                                        reg[i] = abs(selected_model(abs(total_predict_gap[:,:,71,86][i])))
 
                                     elif self.args.location == "gangwon":
-                                        reg[i] = abs(selected_model(total_predict_gap[:,:,58,44][ㅑ])) 
+                                        reg[i] = abs(selected_model(abs(total_predict_gap[:,:,58,44][i]))) 
 
                                 loss_mae = self.mae_criterion(abs(reg), abs(gap))
 
@@ -679,7 +679,7 @@ class FourTrainer(Trainer):
                                     crop_predict_gap = (total_predict_gap[:,:,71,86] * 255).clamp(0,255)
                                 elif self.args.location == "gangwon":
                                     crop_predict_gap = (total_predict_gap[:,:,58,44] * 255).clamp(0,255)
-                                reg = abs(self.model.regression_layer(crop_predict_gap)).view(self.args.batch)
+                                reg = abs(self.model.regression_layer(abs(crop_predict_gap))).view(self.args.batch)
                                 loss_mae = self.mae_criterion(reg, abs(gap))
                         
 
@@ -690,7 +690,7 @@ class FourTrainer(Trainer):
                             elif self.args.location == "gangwon":
                                 last_precipitation = (last_precipitation[:,58,44,:] * 255).clamp(0,255)
 
-                            reg = abs(self.model.regression_layer(last_precipitation)).view(self.args.batch)
+                            reg = abs(self.model.regression_layer(abs(last_precipitation))).view(self.args.batch)
 
                             loss_mae = self.mae_criterion(reg, abs(label))
                         total_mae += loss_mae
@@ -733,9 +733,9 @@ class FourTrainer(Trainer):
                             for i, model_index in enumerate(class_label):
                                 selected_model = self.model.moe[model_index]  # Select model based on prediction
                                 if self.args.location == 'seoul':
-                                    reg[i] = abs(selected_model(last_precipitation[:,:,71,86]))
+                                    reg[i] = abs(selected_model(abs(last_precipitation[:,:,71,86][i])))
                                 else:
-                                    reg[i] = abs(selected_model(last_precipitation[:,:,58,44]))
+                                    reg[i] = abs(selected_model(abs(last_precipitation[:,:,58,44][i])))
 
                             # self.args.test_list.append([datetime, reg, label, predict])
                             self.args.test_list.append([datetime, reg, label, class_label,last_precipitation[:,:,71,86]])
@@ -745,7 +745,7 @@ class FourTrainer(Trainer):
                             else:
                                 last_precipitation = (last_precipitation[:,:,58,44] * 255).clamp(0,255)
                             
-                            reg = abs(self.model.regression_layer(last_precipitation)).view(self.args.batch)
+                            reg = abs(self.model.regression_layer(abs(last_precipitation))).view(self.args.batch)
                             self.args.test_list.append([datetime, reg, label])
                         
                         

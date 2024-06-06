@@ -102,7 +102,7 @@ def main():
     for idx, layer in enumerate(model.moe):
         print(f"Layer {idx} weights mean: {layer.weight.mean().item()}, std: {layer.weight.std().item()}")
 
-    import IPython; IPython.embed(colors='Linux');exit(1);
+    # import IPython; IPython.embed(colors='Linux');exit(1);
 
     # Create instances of Radar class for train, valid, and test datasets
 
