@@ -73,7 +73,8 @@ def main():
     parser.add_argument("--batch", type=int,default=4, help="batch size")
     parser.add_argument("--n_classes", type=int,default=100, help="batch size")
     parser.add_argument("--sianet",action="store_true")
-    parser.add_argument("--classification",action="store_true")
+    parser.add_argument("--classification",action="store_true", help ="Moe with Real Labels")
+    parser.add_argument("--classifier",action="store_true", help ="Moe with Trained Classifier")
     parser.add_argument("--balancing",action="store_true")
 
     # train args
@@ -99,11 +100,6 @@ def main():
     check_path(args.output_dir)
 
     model = get_model(args).to(args.device)
-    for idx, layer in enumerate(model.moe):
-        print(f"Layer {idx} weights mean: {layer.weight.mean().item()}, std: {layer.weight.std().item()}")
-
-    # import IPython; IPython.embed(colors='Linux');exit(1);
-
     # Create instances of Radar class for train, valid, and test datasets
 
     print("Train Dataset Load")

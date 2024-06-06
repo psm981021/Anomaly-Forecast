@@ -42,7 +42,9 @@ class Fourcaster(nn.Module):
         self.up3 = UpDS(256, 128 // factor, self.bilinear, kernels_per_layer=kernels_per_layer)
         self.up4 = UpDS(128, 64, self.bilinear, kernels_per_layer=kernels_per_layer)
         self.outc = OutConv(64, self.n_classes)
-        
+
+        self.classifier = nn.Linear(100, 3) 
+
         self.moe = nn.ModuleList([nn.Linear(100,1) for i in range(3)])
 
         self.regression_model = nn.Sequential(

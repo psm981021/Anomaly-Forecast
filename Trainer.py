@@ -11,7 +11,7 @@ from rainnet import *
 import numpy as np
 from utils import *
 from classification_gpu import *
-from efficientnet_pytorch import EfficientNet
+
 
 class Trainer:
 
@@ -210,7 +210,7 @@ class FourTrainer(Trainer):
             self.model.train()
             
             batch_iter = tqdm(enumerate(dataloader), total= len(dataloader))
-            total_generation_loss, total_mae_loss, total_correlation = torch.tensor(0.0, device=self.device), torch.tensor(0.0, device=self.device) , torch.tensor(0.0, device=self.device)
+            total_generation_loss, total_mae_loss, total_correlation, total_classifier_loss = torch.tensor(0.0, device=self.device), torch.tensor(0.0, device=self.device) , torch.tensor(0.0, device=self.device) , torch.tensor(0.0, device=self.device)
         
             for i, batch in batch_iter:
                 image, label, gap, datetime, class_label = batch
@@ -223,6 +223,7 @@ class FourTrainer(Trainer):
                 set_generation_loss = 0.0
                 correlation_image = 0.0
                 total_mae = 0.0
+                classifier_loss = 0.0
                 
                 precipitation = []       
                 plot_list_seoul = ['2022-07-06 22:00', '2022-07-13 17:00', '2022-07-13 18:00', '2022-07-13 19:00', '2022-09-05 14:00', '2022-07-11 16:00']
@@ -380,6 +381,31 @@ class FourTrainer(Trainer):
                     # total_predict_gap[:,:,30:60, 45:75], gangwon
                     
                     if self.args.regression == 'gap':
+                        if self.args.classifier:
+                            if self.args.location == "seoul":
+                                # [B 100 2 2 ]
+                                crop_predict_gap = (total_predict_gap[:,:,71,86] * 255).clamp(0,255)
+                            else: # gangwon
+                                crop_predict_gap = (total_predict_gap[:,:,58,44] * 255).clamp(0,255)
+
+
+                            logits = self.model.classifier(crop_predict_gap)
+                            logits = logits.float()
+                            classifier_loss += self.ce_criterion(logits, class_label)
+
+                            logits = torch.argmax(F.softmax(logits, dim=-1),dim=-1)
+                            reg = torch.zeros(self.args.batch).to(self.args.device)
+
+                            
+                            for i, model_index in enumerate(logits):
+                                selected_model = self.model.moe[model_index]  
+                                if self.args.location == 'seoul':
+                                    reg[i] = abs(selected_model(total_predict_gap[:,:,71,86][i]))
+                                elif self.args.location == "gangwon":
+                                    reg[i] = abs(selected_model(total_predict_gap[:,:,58,44][i])) 
+
+                            loss_mae = self.mae_criterion(abs(reg), abs(gap))
+
                         
                         if self.args.classification:
                             if self.args.location == "seoul":
@@ -388,22 +414,9 @@ class FourTrainer(Trainer):
                             else: # gangwon
                                 crop_predict_gap = (total_predict_gap[:,:,57:59,43:45] * 255).clamp(0,255)
 
-                            conv1x1 = nn.Conv2d(100, 3, kernel_size=1).to(self.device)
-                            padding_needed = (1, 1, 1, 1)
-                            crop_predict_gap = F.pad(crop_predict_gap, padding_needed, "constant", 0)
-                            
-                            # [B 3 4 4]
-                            crop_predict_gap = conv1x1(crop_predict_gap)
-
-                            resize = transforms.Resize((40, 40))
-                            # [B 3 40 40]
-                            crop_predict_gap = resize(crop_predict_gap)
-
-                            # B 3 
-                            # predict = inference_jw(self.classifier,crop_predict_gap)
 
                             reg = torch.zeros(self.args.batch).to(self.args.device)
-                            # for i, model_index in enumerate(predict):
+
                             # import IPython; IPython.embed(colors='Linux'); exit(1)
                             for i, model_index in enumerate(class_label): # 라벨값을 직접 주기
                                 selected_model = self.model.moe[model_index]  # Select model based on prediction
@@ -445,7 +458,8 @@ class FourTrainer(Trainer):
 
                 
                 elif self.args.pre_train == False: #fine-tuning
-                    joint_loss = total_mae
+                    joint_loss = total_mae + classifier_loss
+                    total_classifier_loss += classifier_loss.item()
                     total_mae_loss += total_mae.item()
 
             
@@ -478,6 +492,7 @@ class FourTrainer(Trainer):
                 "epoch":epoch,
                 f"Geneartion Loss {self.args.loss_type} (Train)": "{:.6f}".format(total_generation_loss/len(batch_iter)),
                 "Correlation Image(Train)": "{:.6f}".format(total_correlation/len(batch_iter)),
+                "Classifier Loss":"{:.6f}".format(total_classifier_loss/len(batch_iter)),
                 "MAE Loss":"{:.6f}".format(total_mae_loss/len(batch_iter)),
             }
             if (epoch+1) % self.args.log_freq ==0:
@@ -495,7 +510,7 @@ class FourTrainer(Trainer):
             self.model.eval()
 
             with torch.no_grad():
-                total_generation_loss,total_mae_loss = torch.tensor(0.0, device=self.args.device),torch.tensor(0.0, device=self.args.device)
+                total_generation_loss,total_mae_loss,total_classifier_loss = torch.tensor(0.0, device=self.args.device), torch.tensor(0.0, device=self.args.device),torch.tensor(0.0, device=self.args.device)
                 batch_iter = tqdm(enumerate(dataloader), total= len(dataloader))
                 for i, batch in batch_iter:
 
@@ -511,6 +526,7 @@ class FourTrainer(Trainer):
                     set_generation_loss =0.0
                     correlation_image =0.0
                     total_mae =0.0
+                    classifier_loss = 0.0
 
                     image_batch = torch.stack(image_batch).permute(1,0,2,3,4).contiguous()
                     
@@ -638,6 +654,31 @@ class FourTrainer(Trainer):
                        
                     if self.args.pre_train == False:
                         if self.args.regression == 'gap':
+
+                            if self.args.classifier:
+                                if self.args.location == "seoul":
+                                    # [B 100 2 2 ]
+                                    crop_predict_gap = (total_predict_gap[:,:,71,86] * 255).clamp(0,255)
+                                else: # gangwon
+                                    crop_predict_gap = (total_predict_gap[:,:,58,44] * 255).clamp(0,255)
+
+
+                                logits = self.model.classifier(crop_predict_gap)
+                                logits = logits.float()
+                                classifier_loss += self.ce_criterion(logits, class_label)
+
+                                logits = torch.argmax(F.softmax(logits, dim=-1),dim=-1)
+                                reg = torch.zeros(self.args.batch).to(self.args.device)
+
+                                
+                                for i, model_index in enumerate(logits):
+                                    selected_model = self.model.moe[model_index]  
+                                    if self.args.location == 'seoul':
+                                        reg[i] = abs(selected_model(total_predict_gap[:,:,71,86][i]))
+                                    elif self.args.location == "gangwon":
+                                        reg[i] = abs(selected_model(total_predict_gap[:,:,58,44][i])) 
+
+                                loss_mae = self.mae_criterion(abs(reg), abs(gap))
                             
                             if self.args.classification:
                                 if self.args.location == "seoul":
@@ -645,20 +686,6 @@ class FourTrainer(Trainer):
                                     crop_predict_gap = (total_predict_gap[:,:,70:72,85:87] * 255).clamp(0,255)
                                 else: # gangwon
                                     crop_predict_gap = (total_predict_gap[:,:,57:59,43:45] * 255).clamp(0,255)
-
-                                conv1x1 = nn.Conv2d(100, 3, kernel_size=1).to(self.device)
-                                padding_needed = (1, 1, 1, 1)
-                                crop_predict_gap = F.pad(crop_predict_gap, padding_needed, "constant", 0)
-                                
-                                # [B 3 4 4]
-                                crop_predict_gap = conv1x1(crop_predict_gap)
-
-                                resize = transforms.Resize((40, 40))
-                                # [B 3 40 40]
-                                crop_predict_gap = resize(crop_predict_gap)
-
-                                # B 3 
-                                # predict = inference_jw(self.classifier,crop_predict_gap)
 
                                 reg = torch.zeros(self.args.batch).to(self.args.device)
                                 # for i, model_index in enumerate(predict):
@@ -701,7 +728,8 @@ class FourTrainer(Trainer):
                         total_generation_loss += set_generation_loss.item()
                     
                     elif self.args.pre_train == False: #fine-tuning
-                        joint_loss = total_mae
+                        joint_loss = total_mae + classifier_loss
+                        total_classifier_loss += classifier_loss.item()
                         total_mae_loss += total_mae.item()
 
 
@@ -711,21 +739,6 @@ class FourTrainer(Trainer):
                                 crop_predict_gap = (last_precipitation[:,:,70:72,85:87] * 255).clamp(0,255)
                             else:
                                 crop_predict_gap = (last_precipitation[:,:,57:59,43:45] * 255).clamp(0,255)
-                            
-
-                            conv1x1 = nn.Conv2d(100, 3, kernel_size=1).to(self.device)
-                            padding_needed = (1, 1, 1, 1)
-                            crop_predict_gap = F.pad(crop_predict_gap, padding_needed, "constant", 0)
-                            
-                            # [B 3 4 4]
-                            crop_predict_gap = conv1x1(crop_predict_gap)
-
-                            resize = transforms.Resize((40, 40))
-                            # [B 3 40 40]
-                            crop_predict_gap = resize(crop_predict_gap)
-
-                            # B 3 
-                            # predict = inference_jw(self.classifier,crop_predict_gap)
 
                             reg = torch.zeros(self.args.batch).to(self.args.device)
                             # for i, model_index in enumerate(predict):
@@ -738,7 +751,30 @@ class FourTrainer(Trainer):
                                     reg[i] = abs(selected_model(abs(last_precipitation[:,:,58,44][i])))
 
                             # self.args.test_list.append([datetime, reg, label, predict])
-                            self.args.test_list.append([datetime, reg, label, class_label,last_precipitation[:,:,71,86]])
+                            self.args.test_list.append([datetime, reg, label, class_label])
+
+                        elif self.args.classifier:
+                            if self.args.location == "seoul":
+                                crop_predict_gap = (last_precipitation[:,:,70:72,85:87] * 255).clamp(0,255)
+                            else:
+                                crop_predict_gap = (last_precipitation[:,:,57:59,43:45] * 255).clamp(0,255)
+
+                            logits = self.model.classifier(crop_predict_gap)
+                            logits = logits.float()
+                            classifier_loss += self.ce_criterion(logits, class_label)
+
+                            logits = torch.argmax(F.softmax(logits, dim=-1),dim=-1)
+                            reg = torch.zeros(self.args.batch).to(self.args.device)
+
+                            for i, model_index in enumerate(logits):
+                                selected_model = self.model.moe[model_index]  
+                                if self.args.location == 'seoul':
+                                    reg[i] = abs(selected_model(total_predict_gap[:,:,71,86][i]))
+                                elif self.args.location == "gangwon":
+                                    reg[i] = abs(selected_model(total_predict_gap[:,:,58,44][i])) 
+                            self.args.test_list.append([datetime, reg, label, logits])
+
+
                         else:
                             if self.args.location == "seoul":
                                 last_precipitation = (last_precipitation[:,:,71,86] * 255).clamp(0,255)
