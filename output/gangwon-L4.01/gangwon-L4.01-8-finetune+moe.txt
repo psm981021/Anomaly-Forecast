@@ -1,0 +1,105 @@
+---------------------- Configure Info: ----------------------
+data_dir                       : data/data_Gangwon
+image_csv_dir                  : data/Gangwon.csv
+output_dir                     : output/gangwon-L4.01/
+gpu_id                         : 0
+device                         : cuda:0
+seed                           : 0
+no_cuda                        : False
+use_multi_gpu                  : False
+multi_devices                  : 0,1
+wandb                          : False
+pre_train                      : False
+do_eval                        : False
+test_list                      : ['[]']
+grey_scale                     : False
+location                       : gangwon
+model_idx                      : gangwon-L4.01
+batch                          : 8
+n_classes                      : 100
+sianet                         : False
+classification                 : True
+balancing                      : False
+epochs                         : 5000
+log_freq                       : 1
+patience                       : 40
+loss_type                      : stamina
+regression                     : gap
+lr                             : 0.06
+adam_beta1                     : 0.9
+adam_beta2                     : 0.999
+weight_decay                   : 0.0
+initializer_range              : 0.01
+str                            : gangwon-L4.01-8
+dataframe_path                 : output/gangwon-L4.01/gangwon-L4.01-8-finetune+moe.csv
+checkpoint_path                : output/gangwon-L4.01/gangwon-L4.01-8_finetune+moe.pt
+log_file                       : output/gangwon-L4.01/gangwon-L4.01-8-finetune+moe.txt
+---------------------- Configure Info: ----------------------
+{'epoch': 0, 'Geneartion Loss stamina (Train)': '0.000000', 'Correlation Image(Train)': '0.030612', 'MAE Loss': '26.881620'}
+{'Epoch': 0, 'MAE Loss (Eval)': '30.282631'}
+{'epoch': 1, 'Geneartion Loss stamina (Train)': '0.000000', 'Correlation Image(Train)': '0.030612', 'MAE Loss': '26.870550'}
+{'Epoch': 1, 'MAE Loss (Eval)': '30.270937'}
+{'epoch': 2, 'Geneartion Loss stamina (Train)': '0.000000', 'Correlation Image(Train)': '0.030612', 'MAE Loss': '26.859430'}
+{'Epoch': 2, 'MAE Loss (Eval)': '30.259211'}
+{'epoch': 3, 'Geneartion Loss stamina (Train)': '0.000000', 'Correlation Image(Train)': '0.030612', 'MAE Loss': '26.848301'}
+{'Epoch': 3, 'MAE Loss (Eval)': '30.247484'}
+{'epoch': 4, 'Geneartion Loss stamina (Train)': '0.000000', 'Correlation Image(Train)': '0.030612', 'MAE Loss': '26.837185'}
+{'Epoch': 4, 'MAE Loss (Eval)': '30.235771'}
+{'epoch': 5, 'Geneartion Loss stamina (Train)': '0.000000', 'Correlation Image(Train)': '0.030612', 'MAE Loss': '26.826073'}
+{'Epoch': 5, 'MAE Loss (Eval)': '30.224058'}
+{'epoch': 6, 'Geneartion Loss stamina (Train)': '0.000000', 'Correlation Image(Train)': '0.030612', 'MAE Loss': '26.814976'}
+{'Epoch': 6, 'MAE Loss (Eval)': '30.212360'}
+{'epoch': 7, 'Geneartion Loss stamina (Train)': '0.000000', 'Correlation Image(Train)': '0.030612', 'MAE Loss': '26.803919'}
+{'Epoch': 7, 'MAE Loss (Eval)': '30.200689'}
+{'epoch': 8, 'Geneartion Loss stamina (Train)': '0.000000', 'Correlation Image(Train)': '0.030612', 'MAE Loss': '26.792883'}
+{'Epoch': 8, 'MAE Loss (Eval)': '30.189011'}
+{'epoch': 9, 'Geneartion Loss stamina (Train)': '0.000000', 'Correlation Image(Train)': '0.030612', 'MAE Loss': '26.781855'}
+{'Epoch': 9, 'MAE Loss (Eval)': '30.177332'}
+{'epoch': 10, 'Geneartion Loss stamina (Train)': '0.000000', 'Correlation Image(Train)': '0.030612', 'MAE Loss': '26.770815'}
+{'Epoch': 10, 'MAE Loss (Eval)': '30.165651'}
+{'epoch': 11, 'Geneartion Loss stamina (Train)': '0.000000', 'Correlation Image(Train)': '0.030612', 'MAE Loss': '26.759789'}
+{'Epoch': 11, 'MAE Loss (Eval)': '30.153975'}
+{'epoch': 12, 'Geneartion Loss stamina (Train)': '0.000000', 'Correlation Image(Train)': '0.030612', 'MAE Loss': '26.748758'}
+{'Epoch': 12, 'MAE Loss (Eval)': '30.142296'}
+{'epoch': 13, 'Geneartion Loss stamina (Train)': '0.000000', 'Correlation Image(Train)': '0.030612', 'MAE Loss': '26.737736'}
+{'Epoch': 13, 'MAE Loss (Eval)': '30.130613'}
+{'epoch': 14, 'Geneartion Loss stamina (Train)': '0.000000', 'Correlation Image(Train)': '0.030612', 'MAE Loss': '26.726704'}
+{'Epoch': 14, 'MAE Loss (Eval)': '30.118938'}
+{'epoch': 15, 'Geneartion Loss stamina (Train)': '0.000000', 'Correlation Image(Train)': '0.030612', 'MAE Loss': '26.715660'}
+{'Epoch': 15, 'MAE Loss (Eval)': '30.107256'}
+{'epoch': 16, 'Geneartion Loss stamina (Train)': '0.000000', 'Correlation Image(Train)': '0.030612', 'MAE Loss': '26.704636'}
+{'Epoch': 16, 'MAE Loss (Eval)': '30.095579'}
+{'epoch': 17, 'Geneartion Loss stamina (Train)': '0.000000', 'Correlation Image(Train)': '0.030612', 'MAE Loss': '26.693602'}
+{'Epoch': 17, 'MAE Loss (Eval)': '30.083897'}
+{'epoch': 18, 'Geneartion Loss stamina (Train)': '0.000000', 'Correlation Image(Train)': '0.030612', 'MAE Loss': '26.682585'}
+{'Epoch': 18, 'MAE Loss (Eval)': '30.072222'}
+{'epoch': 19, 'Geneartion Loss stamina (Train)': '0.000000', 'Correlation Image(Train)': '0.030612', 'MAE Loss': '26.671562'}
+{'Epoch': 19, 'MAE Loss (Eval)': '30.060543'}
+{'epoch': 20, 'Geneartion Loss stamina (Train)': '0.000000', 'Correlation Image(Train)': '0.030612', 'MAE Loss': '26.660551'}
+{'Epoch': 20, 'MAE Loss (Eval)': '30.048862'}
+{'epoch': 21, 'Geneartion Loss stamina (Train)': '0.000000', 'Correlation Image(Train)': '0.030612', 'MAE Loss': '26.649546'}
+{'Epoch': 21, 'MAE Loss (Eval)': '30.037197'}
+{'epoch': 22, 'Geneartion Loss stamina (Train)': '0.000000', 'Correlation Image(Train)': '0.030612', 'MAE Loss': '26.638565'}
+{'Epoch': 22, 'MAE Loss (Eval)': '30.025530'}
+{'epoch': 23, 'Geneartion Loss stamina (Train)': '0.000000', 'Correlation Image(Train)': '0.030612', 'MAE Loss': '26.627575'}
+{'Epoch': 23, 'MAE Loss (Eval)': '30.013863'}
+{'epoch': 24, 'Geneartion Loss stamina (Train)': '0.000000', 'Correlation Image(Train)': '0.030612', 'MAE Loss': '26.616573'}
+{'Epoch': 24, 'MAE Loss (Eval)': '30.002201'}
+{'epoch': 25, 'Geneartion Loss stamina (Train)': '0.000000', 'Correlation Image(Train)': '0.030612', 'MAE Loss': '26.605602'}
+{'Epoch': 25, 'MAE Loss (Eval)': '29.990530'}
+{'epoch': 26, 'Geneartion Loss stamina (Train)': '0.000000', 'Correlation Image(Train)': '0.030612', 'MAE Loss': '26.594599'}
+{'Epoch': 26, 'MAE Loss (Eval)': '29.978861'}
+{'epoch': 27, 'Geneartion Loss stamina (Train)': '0.000000', 'Correlation Image(Train)': '0.030612', 'MAE Loss': '26.583611'}
+{'Epoch': 27, 'MAE Loss (Eval)': '29.967194'}
+{'epoch': 28, 'Geneartion Loss stamina (Train)': '0.000000', 'Correlation Image(Train)': '0.030612', 'MAE Loss': '26.572630'}
+{'Epoch': 28, 'MAE Loss (Eval)': '29.955532'}
+{'epoch': 29, 'Geneartion Loss stamina (Train)': '0.000000', 'Correlation Image(Train)': '0.030612', 'MAE Loss': '26.561646'}
+{'Epoch': 29, 'MAE Loss (Eval)': '29.943859'}
+{'epoch': 30, 'Geneartion Loss stamina (Train)': '0.000000', 'Correlation Image(Train)': '0.030612', 'MAE Loss': '26.550665'}
+{'Epoch': 30, 'MAE Loss (Eval)': '29.932190'}
+{'epoch': 31, 'Geneartion Loss stamina (Train)': '0.000000', 'Correlation Image(Train)': '0.030612', 'MAE Loss': '26.539677'}
+{'Epoch': 31, 'MAE Loss (Eval)': '29.920530'}
+{'epoch': 32, 'Geneartion Loss stamina (Train)': '0.000000', 'Correlation Image(Train)': '0.030612', 'MAE Loss': '26.528770'}
+{'Epoch': 32, 'MAE Loss (Eval)': '29.908958'}
+{'epoch': 33, 'Geneartion Loss stamina (Train)': '0.000000', 'Correlation Image(Train)': '0.030612', 'MAE Loss': '26.517929'}
+{'Epoch': 33, 'MAE Loss (Eval)': '29.897421'}

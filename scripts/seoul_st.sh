@@ -22,10 +22,10 @@ python main.py \
     --data_dir "data/data_Seoul" \
     --image_csv_dir "data/Seoul.csv" \
     --batch 8 \
-    --epochs 3000 \
+    --epochs 5000 \
     --patience 40 \
-    --model_idx "seoul-L4.05" \
-    --output_dir "output/seoul-L4.05" \
+    --model_idx "seoul-L4.04" \
+    --output_dir "output/seoul-L4.04" \
     --test_list=[] \
     --gpu_id 0 \
     --device cuda:0 \
@@ -35,7 +35,7 @@ python main.py \
     --location "seoul" \
     --regression "gap"\
     --classification \
-    --balancing 
+
     
 
 # scripts/seoul_st.sh

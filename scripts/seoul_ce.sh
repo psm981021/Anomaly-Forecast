@@ -20,20 +20,20 @@ python main.py \
     --data_dir "data/data_Seoul" \
     --image_csv_dir "data/Seoul.csv" \
     --batch 8 \
-    --epochs 3000 \
+    --epochs 5000 \
     --patience 40 \
     --model_idx "seoul-L1.01" \
     --output_dir "output/seoul-L1.01/" \
     --test_list=[] \
-    --gpu_id 0 \
-    --device cuda:0 \
+    --gpu_id 1 \
+    --device cuda:1 \
     --seed 0 \
-    --lr 0.02 \
+    --lr 0.06 \
     --loss_type "ce_image" \
     --location "seoul" \
     --regression "gap" \
-    --classification
-
+    --classification\
+    --do_eval
 
 
 # scripts/seoul_ce.sh
