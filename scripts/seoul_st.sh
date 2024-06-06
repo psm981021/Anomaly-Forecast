@@ -23,9 +23,10 @@ python main.py \
     --image_csv_dir "data/Gangwon.csv" \
     --batch 8 \
     --epochs 5000 \
+    --epochs 5000 \
     --patience 40 \
-    --model_idx "gangwon-L5.01" \
-    --output_dir "output/gangwon-L5.01" \
+    --model_idx "seoul-L4.04" \
+    --output_dir "output/seoul-L4.04" \
     --test_list=[] \
     --gpu_id 0 \
     --device cuda:0 \
@@ -35,9 +36,9 @@ python main.py \
     --location "seoul" \
     --regression "gap"\
     --classification \
-    --balancing 
 
     
+
 # scripts/seoul_st.sh
 
 #jiwon computer 

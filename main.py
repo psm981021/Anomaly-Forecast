@@ -200,9 +200,9 @@ def main():
         
         # classification
         if args.classification:
-            args.log_file = os.path.join(args.output_dir,args.str + "-Fine-tune+moe.txt" )
+            args.log_file = os.path.join(args.output_dir,args.str + "-finetune+moe.txt" )
             checkpoint_finetune = args.str + "_finetune+moe.pt" 
-            args.dataframe_path = os.path.join(args.output_dir,args.str + "-Fine-tune+moe.csv")
+            args.dataframe_path = os.path.join(args.output_dir,args.str + "-finetune+moe.csv")
             args.checkpoint_path =  os.path.join(args.output_dir, checkpoint_finetune)
 
             if os.path.exists(args.checkpoint_path):
@@ -216,9 +216,9 @@ def main():
         
         # Regression 
         else:
-            args.log_file = os.path.join(args.output_dir,args.str + "-Fine-tune.txt" )
+            args.log_file = os.path.join(args.output_dir,args.str + "-finetune.txt" )
             checkpoint_finetune = args.str + "_finetune.pt" 
-            args.dataframe_path = os.path.join(args.output_dir,args.str + "-Fine-tune.csv")
+            args.dataframe_path = os.path.join(args.output_dir,args.str + "-finetune.csv")
             args.checkpoint_path =  os.path.join(args.output_dir, checkpoint_finetune)
 
             if os.path.exists(args.checkpoint_path):
@@ -260,11 +260,13 @@ def main():
                     predicted_precipitation = f"{record[1][i].item():.6f}" if record[1].dim() != 0 else f"{record[1].item():.6f}"
                     ground_truth = record[2][i].item() if record[2].dim() != 0 else record[2].item()
                     predict = record[3][i]
+                    precipitation_pixel = record[4][i]
                     formatted_data.append({
                         'datetime': datetime,
                         'predicted precipitation': predicted_precipitation,
                         'ground_truth': ground_truth,
-                        'predict' : predict
+                        'predict' : predict,
+                        'precipitation_pixel' : precipitation_pixel
             })
         else:
             for record in args.test_list:

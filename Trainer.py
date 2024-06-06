@@ -252,10 +252,10 @@ class FourTrainer(Trainer):
                                 if datetime[j] in plot_list_seoul:
                                     self.plot_images(image_batch[-1][j].permute(1,2,0),epoch, self.args.model_idx, datetime[j], 'R')
                                     self.plot_images(image_batch[-1][j][:,65:95,60:90].permute(1,2,0),epoch, self.args.model_idx, datetime[j], 'R' ,'crop')
+                        
                         elif self.args.location == "gangwon":
-
                             for j in range(len(datetime)):
-                                if datetime[j] in plot_list_seoul:
+                                if datetime[j] in plot_list_gangwon:
                                     self.plot_images(image_batch[-1][j].permute(1,2,0),epoch, self.args.model_idx, datetime[j], 'R')
                                     self.plot_images(image_batch[-1][j][:,30:60,45:75].permute(1,2,0),epoch, self.args.model_idx, datetime[j], 'R' ,'crop')
                 
@@ -264,13 +264,15 @@ class FourTrainer(Trainer):
                             for j in range(len(datetime)):
                                 if datetime[j] in plot_list_seoul:
                                     self.plot_images(generated_image[j].mean(dim=-1),epoch, self.args.model_idx, datetime[j], 'G')
-                                    self.plot_images(crop_generated_image[j].mean(dim=-1),epoch, self.args.model_idx, datetime[j], 'G', 'crop')
+                                    if self.args.balancing:
+                                        self.plot_images(crop_generated_image[j].mean(dim=-1),epoch, self.args.model_idx, datetime[j], 'G', 'crop')
 
                         elif self.args.location == "gangwon":
                             for j in range(len(datetime)):
                                 if datetime[j] in plot_list_gangwon:
                                     self.plot_images(generated_image[j].mean(dim=-1),epoch, self.args.model_idx, datetime[j], 'G')
-                                    self.plot_images(crop_generated_image[j].mean(dim=-1),epoch, self.args.model_idx, datetime[j], 'G', 'crop')
+                                    if self.args.balancing:
+                                        self.plot_images(crop_generated_image[j].mean(dim=-1),epoch, self.args.model_idx, datetime[j], 'G', 'crop')
 
 
                     # generated_image [B, W, H, C], 
@@ -419,6 +421,7 @@ class FourTrainer(Trainer):
                             elif self.args.location == "gangwon":
                                 crop_predict_gap = (total_predict_gap[:,:,58,44] * 255).clamp(0,255)
                             reg = abs(self.model.regression_layer(crop_predict_gap)).view(self.args.batch)
+                            # import IPython; IPython.embed(colors='Linux'); exit(1)
                             loss_mae = self.mae_criterion(reg, abs(gap))
                         
 
@@ -735,7 +738,7 @@ class FourTrainer(Trainer):
                                     reg[i] = abs(selected_model(last_precipitation[:,:,58,44]))
 
                             # self.args.test_list.append([datetime, reg, label, predict])
-                            self.args.test_list.append([datetime, reg, label, class_label])
+                            self.args.test_list.append([datetime, reg, label, class_label,last_precipitation[:,:,71,86]])
                         else:
                             if self.args.location == "seoul":
                                 last_precipitation = (last_precipitation[:,:,71,86] * 255).clamp(0,255)

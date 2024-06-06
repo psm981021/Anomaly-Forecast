@@ -4,7 +4,6 @@ from PIL import Image
 import matplotlib.pyplot as plt
 
 
-
 class Fourcaster(nn.Module):
     def __init__(
             self,
