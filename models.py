@@ -68,7 +68,7 @@ class Fourcaster(nn.Module):
             self.filter = Learnable_Filter()
 
         self.apply(self.init_weights)
-        self.init_custom_weights() 
+        # self.init_custom_weights() 
         
     @staticmethod
     def plot_image(image, flag=None):
@@ -81,21 +81,11 @@ class Fourcaster(nn.Module):
             plt.savefig('Generated Image')
         #Fourcaster.plot_image(x[0])
     
-    def init_custom_weights(self):
-        # Custom initialization for each Linear layer in self.moe
-        
-        if self.args.location == 'seoul':
-            means = [0.6, 3.0, 14.7]  # Different means for each layer
-            stds = [0.3, 1.5, 10.2]  # Different standard deviations for each layer
 
-        elif self.args.location == 'gangwon':
-            means = [0.5, 2.0, 8.6]  # Different means for each layer
-            stds = [0.1, 1.0, 4.5]  # Different standard deviations for each layer
-
-        for layer, mean, std in zip(self.moe, means, stds):
-            layer.weight.data.normal_(mean, std)
-            if layer.bias is not None:
-                nn.init.constant_(layer.bias, 0)
+    def init_custom_weights(self, layer, mean, std):
+        layer.weight.data.normal_(mean, std)
+        if layer.bias is not None:
+            nn.init.constant_(layer.bias, 0)
 
     def init_weights(self, module):
         """ Initialize the weights more appropriately based on layer type. """
@@ -105,7 +95,19 @@ class Fourcaster(nn.Module):
                 nn.init.constant_(module.bias, 0)
 
         elif isinstance(module, nn.Linear):
-            module.weight.data.normal_(mean=2.5, std=3.6)
+            if self.args.location == 'seoul':
+                means = [0.6, 3.0, 14.7]  # Different means for each layer
+                stds = [0.3, 1.5, 10.2]  # Different standard deviations for each layer
+            elif self.args.location == 'gangwon':
+                means = [0.5, 2.0, 8.6]  # Different means for each layer
+                stds = [0.1, 1.0, 4.5]  # Different standard deviations for each layer
+            
+            for idx, (mean, std) in enumerate(zip(means, stds)):
+                if module == self.moe[idx]:
+                    
+                    self.init_custom_weights(module, mean, std)
+                        
+
 
 
     def forward(self, x, args):

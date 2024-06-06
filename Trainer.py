@@ -666,7 +666,7 @@ class FourTrainer(Trainer):
                                         reg[i] = abs(selected_model(total_predict_gap[:,:,71,86][i]))
 
                                     elif self.args.location == "gangwon":
-                                        reg[i] = abs(selected_model(total_predict_gap[:,:,58,44][i])) 
+                                        reg[i] = abs(selected_model(total_predict_gap[:,:,58,44][ㅑ])) 
 
                                 loss_mae = self.mae_criterion(abs(reg), abs(gap))
 
@@ -726,9 +726,13 @@ class FourTrainer(Trainer):
 
                             reg = torch.zeros(self.args.batch).to(self.args.device)
                             # for i, model_index in enumerate(predict):
+                            
                             for i, model_index in enumerate(class_label):
                                 selected_model = self.model.moe[model_index]  # Select model based on prediction
-                                reg[i] = abs(selected_model(last_precipitation[:,:,71,86][i]))
+                                if self.args.location == 'seoul':
+                                    reg[i] = abs(selected_model(last_precipitation[:,:,71,86]))
+                                else:
+                                    reg[i] = abs(selected_model(last_precipitation[:,:,58,44]))
 
                             # self.args.test_list.append([datetime, reg, label, predict])
                             self.args.test_list.append([datetime, reg, label, class_label])

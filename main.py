@@ -98,7 +98,11 @@ def main():
     #make path for save
     check_path(args.output_dir)
 
+    model = get_model(args).to(args.device)
+    for idx, layer in enumerate(model.moe):
+        print(f"Layer {idx} weights mean: {layer.weight.mean().item()}, std: {layer.weight.std().item()}")
 
+    import IPython; IPython.embed(colors='Linux');exit(1);
 
     # Create instances of Radar class for train, valid, and test datasets
 
@@ -145,7 +149,7 @@ def main():
     #     else:
     #         model = Fourcaster(n_channels=3,n_classes=100,kernels_per_layer=1, args=args)
     
-    model = get_model(args).to(args.device)
+    
 
 
     if args.use_multi_gpu and torch.cuda.device_count() > 1:
