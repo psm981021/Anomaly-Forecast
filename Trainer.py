@@ -555,7 +555,8 @@ class FourTrainer(Trainer):
                         if self.args.location == "seoul" and self.args.do_eval:
                             for j in range(len(datetime)):
                                 if datetime[j] in test_datetime_seoul:
-                                    self.plot_images(generated_image[j].mean(dim=-1),epoch, self.args.model_idx, datetime[j], 'G')
+                                    # import IPython; IPython.embed(colors='Linux'); exit(1)
+                                    self.plot_images(generated_image[j].mean(dim=-1),epoch, self.args.model_idx, datetime[j]+str(i), 'G')
                                     self.plot_images(image_batch[-1][j].permute(1,2,0),epoch, self.args.model_idx, datetime[j], 'R')
 
                         elif self.args.location == "gangwon" and self.args.do_eval:

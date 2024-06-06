@@ -25,8 +25,8 @@ python main.py \
     --model_idx "seoul-L1.01" \
     --output_dir "output/seoul-L1.01/" \
     --test_list=[] \
-    --gpu_id 1 \
-    --device cuda:1 \
+    --gpu_id 0 \
+    --device cuda:0 \
     --seed 0 \
     --lr 0.06 \
     --loss_type "ce_image" \
