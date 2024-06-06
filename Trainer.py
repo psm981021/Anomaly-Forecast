@@ -11,7 +11,7 @@ from rainnet import *
 import numpy as np
 from utils import *
 from classification_gpu import *
-from efficientnet_pytorch import EfficientNet
+
 
 class Trainer:
 
@@ -378,6 +378,20 @@ class FourTrainer(Trainer):
                     # total_predict_gap[:,:,30:60, 45:75], gangwon
                     
                     if self.args.regression == 'gap':
+                        if self.args.classifier:
+                            if self.args.location == "seoul":
+                                # [B 100 2 2 ]
+                                crop_predict_gap = (total_predict_gap[:,:,71,86] * 255).clamp(0,255)
+                            else: # gangwon
+                                crop_predict_gap = (total_predict_gap[:,:,58,44] * 255).clamp(0,255)
+                            crop_predict_gap = crop_predict_gap.unsqueeze(1).unsqueeze(1).contiguous().permute(0,-1,1,2)
+                            import IPython; IPython.embed(colors='Linux');
+                            label = torch.arange(3).to(self.args.device)
+
+                            label = label.unsqueeze(0).repeat(8, 1).flatten() 
+                            logits = self.model.classifier(crop_predict_gap).permute(0,2,3,1).reshape(self.args.batch,-1).contiguous()
+                            classifier_loss = self.ce_criterion(logits,class_label)
+
                         
                         if self.args.classification:
                             if self.args.location == "seoul":
@@ -397,11 +411,8 @@ class FourTrainer(Trainer):
                             # [B 3 40 40]
                             crop_predict_gap = resize(crop_predict_gap)
 
-                            # B 3 
-                            # predict = inference_jw(self.classifier,crop_predict_gap)
-
                             reg = torch.zeros(self.args.batch).to(self.args.device)
-                            # for i, model_index in enumerate(predict):
+
                             # import IPython; IPython.embed(colors='Linux'); exit(1)
                             for i, model_index in enumerate(class_label): # 라벨값을 직접 주기
                                 selected_model = self.model.moe[model_index]  # Select model based on prediction
