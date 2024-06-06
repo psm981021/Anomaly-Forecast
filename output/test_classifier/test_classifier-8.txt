@@ -19,7 +19,7 @@ batch                          : 8
 n_classes                      : 100
 sianet                         : False
 classification                 : False
-classifier                     : True
+classifier                     : False
 balancing                      : False
 epochs                         : 3000
 log_freq                       : 1
@@ -36,5 +36,5 @@ dataframe_path                 : output/test_classifier/test_classifier-8.csv
 log_file                       : output/test_classifier/test_classifier-8.txt
 checkpoint_path                : output/test_classifier/test_classifier-8.pt
 ---------------------- Configure Info: ----------------------
-{'epoch': 0, 'Geneartion Loss stamina (Train)': '4.771317', 'Correlation Image(Train)': '0.062025', 'MAE Loss': '0.000000'}
-{'Epoch': 0, 'Generation Loss (Eval)': '5.008913'}
+{'epoch': 0, 'Geneartion Loss stamina (Train)': '5.164964', 'Correlation Image(Train)': '0.164926', 'MAE Loss': '0.000000'}
+{'Epoch': 0, 'Generation Loss (Eval)': '5.173737'}
