@@ -1,11 +1,11 @@
 python main.py \
     --data_dir "data/Seoul" \
-    --image_csv_dir "data/Seoul_sample.csv" \
+    --image_csv_dir "data/Seoul.csv" \
     --batch 8 \
     --epochs 3000 \
     --patience 40 \
-    --model_idx "test_classifier" \
-    --output_dir "output/test_classifier/" \
+    --model_idx "seoul-L1.01" \
+    --output_dir "output/seoul-L1.01/" \
     --test_list=[] \
     --gpu_id 0 \
     --device cpu \
@@ -14,8 +14,8 @@ python main.py \
     --loss_type "stamina" \
     --location "seoul" \
     --regression "gap" \
-    --classifier
-
+    --classification \
+    --do_eval
 
 #scripts/Version1.sh
 

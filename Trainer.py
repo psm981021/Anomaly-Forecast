@@ -11,6 +11,20 @@ from rainnet import *
 import numpy as np
 from utils import *
 from classification_gpu import *
+from sklearn.metrics import confusion_matrix, precision_score, recall_score, f1_score
+
+class FocalLoss(nn.Module):
+    def __init__(self, alpha=.5, gamma=2):
+        super(FocalLoss, self).__init__()
+        self.alpha = alpha
+        self.gamma = gamma
+
+    def forward(self, inputs, targets):
+        logpt = -nn.functional.cross_entropy(inputs, targets, reduction='none')
+        pt = torch.exp(logpt)
+        at = self.alpha * targets + (1 - self.alpha) * (1 - targets)
+        F_loss = -at * (1 - pt) ** self.gamma * logpt
+        return F_loss.mean()
 
 
 class Trainer:
@@ -148,8 +162,52 @@ class Trainer:
         self.model.load_state_dict(checkpoint['model_state_dict'])
         self.model.to(self.device)
 
+    def evaluate_model(self, predicted, labels):
+
+        correct = 0
+        total = 0
+        label_list = []
+        pred_list = []
+
+        correct += (predicted == labels).sum().item()
+        label_list.extend(labels.cpu().numpy())
+        pred_list.extend(predicted.cpu().numpy())
+
+        cm = confusion_matrix(label_list, pred_list, labels=[0, 1, 2])
+        accuracy = np.trace(cm) / np.sum(cm)
+        precision = precision_score(label_list, pred_list, average=None, labels=[0, 1, 2], zero_division=0)
+        recall = recall_score(label_list, pred_list, average=None, labels=[0, 1, 2], zero_division=0)
+        f1 = f1_score(label_list, pred_list, average=None, labels=[0, 1, 2], zero_division=0)
+
+        # Average F1 Score
+        avg_f1 = np.mean(f1)
     
-    def plot_images(self, image ,epoch, model_idx, datetime, flag=None, crop =None):
+        # CSI (Critical Success Index) 계산
+        csi = []
+        for i in range(len(cm)):
+            tp = cm[i, i]
+            fn = np.sum(cm[i, :]) - tp
+            fp = np.sum(cm[:, i]) - tp
+            csi.append(tp / (tp + fn + fp) if (tp + fn + fp) != 0 else 0)
+        avg_csi = np.mean(csi)
+        
+
+        # POD (Probability of Detection) 계산
+        pod = recall  # recall과 동일
+        avg_pod = np.mean(pod)
+
+        # FAR (False Alarm Ratio) 계산
+        far = []
+        for i in range(len(cm)):
+            tp = cm[i, i]
+            fp = np.sum(cm[:, i]) - tp
+            far.append(fp / (tp + fp) if (tp + fp) != 0 else 0)
+        avg_far = np.mean(far)
+
+        return accuracy, avg_f1, avg_csi, avg_pod, avg_far
+
+    
+    def plot_images(self, image ,epoch, model_idx, datetime, flag=None, crop =None, test =None):
         # image = image.cpu().detach().permute(1,2,0).numpy()
         # image = image.cpu().detach().permute(2,0,1).numpy()
         
@@ -158,12 +216,13 @@ class Trainer:
             plt.imshow(image)
 
             model_idx=model_idx.replace('.','-')
-            datetime = datetime.replace(':', '-').replace(' ', '_')
+            datetime = datetime.replace('.', '-').replace(' ', '_')
 
             path = os.path.join(self.args.output_dir, str(self.args.pre_train),str(datetime))
             check_path(path)
 
             if flag == 'R':
+
                 if crop == 'crop':
                     plt.savefig(f'{self.args.output_dir}/{self.args.pre_train}/{datetime}/{model_idx}_{datetime}_{epoch} crop Real Image')
                 else:
@@ -176,27 +235,6 @@ class Trainer:
         else:
             print("Error: Non-tensor input received")
 
-    def plot_images_test(self, image ,epoch, model_idx, i, flag=None, crop=None):
-
-        
-        if isinstance(image, torch.Tensor):
-            image = image.cpu().detach().numpy()
-            plt.imshow(image)
-
-            model_idx=model_idx.replace('.','-')
-
-            if flag == 'R':
-                if crop == 'crop':
-                    plt.savefig(f'{self.args.output_dir}/{model_idx}_{epoch} crop Real Image')
-                else:
-                    plt.savefig(f'{self.args.output_dir}/{model_idx}_{epoch} Real Image')
-            else:
-                if crop == 'crop':
-                    plt.savefig(f'{self.args.output_dir}/{model_idx}_{epoch} crop Generated Image')
-                else:
-                    plt.savefig(f'{self.args.output_dir}/{model_idx}_{epoch} Generated Image')
-        else:
-            print("Error: Non-tensor input received")
 
 class FourTrainer(Trainer):
     def __init__(self,model,train_dataloader, valid_dataloader,test_dataloader, args):
@@ -383,17 +421,22 @@ class FourTrainer(Trainer):
                     if self.args.regression == 'gap':
                         if self.args.classifier:
                             if self.args.location == "seoul":
-                                # [B 100 2 2 ]
+                                # [B C ]
                                 crop_predict_gap = (total_predict_gap[:,:,71,86] * 255).clamp(0,255)
                             else: # gangwon
                                 crop_predict_gap = (total_predict_gap[:,:,58,44] * 255).clamp(0,255)
 
 
-                            logits = self.model.classifier(crop_predict_gap)
+                            logits = self.model.classifier(crop_predict_gap) # [B label]
                             logits = logits.float()
+                            
                             classifier_loss += self.ce_criterion(logits, class_label)
 
                             logits = torch.argmax(F.softmax(logits, dim=-1),dim=-1)
+                            if 2 in logits:
+                                index_of_two = torch.where(logits == 2)[0]
+                                for i in index_of_two:
+                                    print(datetime[i])
                             reg = torch.zeros(self.args.batch).to(self.args.device)
 
                             
@@ -459,7 +502,8 @@ class FourTrainer(Trainer):
                 
                 elif self.args.pre_train == False: #fine-tuning
                     joint_loss = total_mae + classifier_loss
-                    total_classifier_loss += classifier_loss.item()
+                    if self.args.classifier:
+                        total_classifier_loss += classifier_loss.item()
                     total_mae_loss += total_mae.item()
 
             
@@ -509,6 +553,11 @@ class FourTrainer(Trainer):
             print("Eval Fourcaster")
             self.model.eval()
 
+            correct = 0
+            total = 0
+            label_list = []
+            pred_list = []
+
             with torch.no_grad():
                 total_generation_loss,total_mae_loss,total_classifier_loss = torch.tensor(0.0, device=self.args.device), torch.tensor(0.0, device=self.args.device),torch.tensor(0.0, device=self.args.device)
                 batch_iter = tqdm(enumerate(dataloader), total= len(dataloader))
@@ -539,7 +588,10 @@ class FourTrainer(Trainer):
                                     #   '2022-07-13 17:00', '2022-08-08 21:00', '2022-08-08 22:00', '2022-08-08 23:00',
                                     #   '2022-08-09 00:00', '2022-08-09 03:00']
                     
-                    test_datetime_seoul = ['2022-06-30 03:00']
+                    test_datetime_seoul = ['2021.7.3 18:00','2021.7.3 21:00'
+                                           '2022.6.23 19:00', '2022.6.23 22:00','2022.6.24 1:00' '2022.6.30 05:00','2022.7.13 11:00','2022.7.13 12:00',
+                                           '2022.7.13 16:00', '2022.8.8 23:00','2022.8.8 21:00','2022.9.5 14:00','2022.9.5 18:00'
+                                             '2023.11.6 04:00','2023.11.6 4:00','2023.4.5 13:00','2023.7.11 16:00', '2023.8.10 18:00']
                     test_datetime_gangwon = []
                     
                     for i in range(len(image_batch)-1):
@@ -553,10 +605,11 @@ class FourTrainer(Trainer):
 
                         precipitation.append(generated_image) 
                         if self.args.location == "seoul" and self.args.do_eval:
+                            
                             for j in range(len(datetime)):
                                 if datetime[j] in test_datetime_seoul:
-                                    # import IPython; IPython.embed(colors='Linux'); exit(1)
-                                    self.plot_images(generated_image[j].mean(dim=-1),epoch, self.args.model_idx, datetime[j]+str(i), 'G')
+        
+                                    self.plot_images(generated_image[j].mean(dim=-1),epoch, self.args.model_idx, datetime[j], 'G')
                                     self.plot_images(image_batch[-1][j].permute(1,2,0),epoch, self.args.model_idx, datetime[j], 'R')
 
                         elif self.args.location == "gangwon" and self.args.do_eval:
@@ -671,7 +724,45 @@ class FourTrainer(Trainer):
                                 logits = torch.argmax(F.softmax(logits, dim=-1),dim=-1)
                                 reg = torch.zeros(self.args.batch).to(self.args.device)
 
+                                correct += (logits == class_label).sum().item()
+                                label_list.extend(class_label.cpu().numpy())
+                                pred_list.extend(logits.cpu().numpy())
+
+                                cm = confusion_matrix(label_list, pred_list, labels=[0, 1, 2])
+                                accuracy = np.trace(cm) / np.sum(cm)
+                                precision = precision_score(label_list, pred_list, average=None, labels=[0, 1, 2], zero_division=0)
+                                recall = recall_score(label_list, pred_list, average=None, labels=[0, 1, 2], zero_division=0)
+                                f1 = f1_score(label_list, pred_list, average=None, labels=[0, 1, 2], zero_division=0)
+
+                                # Average F1 Score
+                                avg_f1 = np.mean(f1)
+
+                    
+                                csi = []
+                                for i in range(len(cm)):
+                                    tp = cm[i, i]
+                                    fn = np.sum(cm[i, :]) - tp
+                                    fp = np.sum(cm[:, i]) - tp
+                                    csi.append(tp / (tp + fn + fp) if (tp + fn + fp) != 0 else 0)
+                                avg_csi = np.mean(csi)
+
                                 
+                                # POD (Probability of Detection) 계산
+                                pod = recall  # recall과 동일
+                                avg_pod = np.mean(pod)
+
+
+                                # FAR (False Alarm Ratio) 계산
+                                far = []
+                                for i in range(len(cm)):
+                                    tp = cm[i, i]
+                                    fp = np.sum(cm[:, i]) - tp
+                                    far.append(fp / (tp + fp) if (tp + fp) != 0 else 0)
+                                avg_far = np.mean(far)
+
+
+
+
                                 for i, model_index in enumerate(logits):
                                     selected_model = self.model.moe[model_index]  
                                     if self.args.location == 'seoul':
@@ -695,7 +786,9 @@ class FourTrainer(Trainer):
 
                                     if self.args.location == 'seoul':
                                         reg[i] = abs(selected_model(abs(total_predict_gap[:,:,71,86][i])))
-
+                                        for j in range(len(datetime)):
+                                            if '2022.6.23 19:00' in datetime:
+                                                import IPython; IPython.embed(colors='Linux');exit(1);
                                     elif self.args.location == "gangwon":
                                         reg[i] = abs(selected_model(abs(total_predict_gap[:,:,58,44][i]))) 
 
@@ -730,7 +823,8 @@ class FourTrainer(Trainer):
                     
                     elif self.args.pre_train == False: #fine-tuning
                         joint_loss = total_mae + classifier_loss
-                        total_classifier_loss += classifier_loss.item()
+                        if self.args.classifier:
+                            total_classifier_loss += classifier_loss.item()
                         total_mae_loss += total_mae.item()
 
 

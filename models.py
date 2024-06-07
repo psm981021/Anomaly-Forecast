@@ -43,7 +43,8 @@ class Fourcaster(nn.Module):
         self.up4 = UpDS(128, 64, self.bilinear, kernels_per_layer=kernels_per_layer)
         self.outc = OutConv(64, self.n_classes)
 
-        self.classifier = nn.Linear(100, 3) 
+        if self.args.classifier:
+            self.classifier = nn.Linear(100, 3) 
 
         self.moe = nn.ModuleList([nn.Linear(100,1) for i in range(3)])
 
