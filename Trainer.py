@@ -12,6 +12,7 @@ import numpy as np
 from utils import *
 from classification_gpu import *
 from sklearn.metrics import confusion_matrix, precision_score, recall_score, f1_score
+import torch.optim.lr_scheduler as lr_scheduler
 
 class FocalLoss(nn.Module):
     def __init__(self, alpha=.5, gamma=2):
@@ -93,6 +94,11 @@ class Trainer:
         self.reg_optim = Adam(filter(lambda p: p.requires_grad, self.model.regression_layer.parameters()), lr=1e-5, betas=betas, weight_decay=self.args.weight_decay)
         self.moe_optim = Adam(filter(lambda p: p.requires_grad, self.model.moe.parameters()), lr=1e-5, betas=betas, weight_decay=self.args.weight_decay)
         
+
+        self.scheduler = lr_scheduler.StepLR(self.optim, step_size=10, gamma=0.1)
+        self.reg_scheduler = lr_scheduler.StepLR(self.reg_optim, step_size=10, gamma=0.1)
+        self.moe_scheduler = lr_scheduler.StepLR(self.moe_optim, step_size=10, gamma=0.1)
+
         print("Total Parameters:", sum([p.nelement() for p in self.model.parameters()]))
 
         self.ce_criterion = torch.nn.CrossEntropyLoss().to(self.args.device)
@@ -264,7 +270,8 @@ class FourTrainer(Trainer):
                 classifier_loss = 0.0
                 
                 precipitation = []       
-                plot_list_seoul = ['2022-07-06 22:00', '2022-07-13 17:00', '2022-07-13 18:00', '2022-07-13 19:00', '2022-09-05 14:00', '2022-07-11 16:00']
+                plot_list_seoul = ['2022-7-6 22:00', '2022-7-13 19:00', '2022-7-31 22:00', '2022-8-8 13:00', '2022-8-9 23:00', '2022-8-19 18:00',
+                                   '2023-6-29 16:00','2023-7-16 13:00']
                 plot_list_gangwon = ['2021-08-01 19:00','2021-01-15 16:00']
 
                 # image batch [B, 7, C, W, H]
@@ -514,14 +521,18 @@ class FourTrainer(Trainer):
                 if self.args.pre_train:
                     self.optim.step()
                     self.optim.zero_grad()
+                    self.scheduler.step()
 
                 elif self.args.pre_train == False: #fine-tuning 
                     if self.args.classification: # MoE 
                         self.moe_optim.step()
                         self.moe_optim.zero_grad()
+                        self.moe_scheduler.step() 
+
                     else: # Regression Model
                         self.reg_optim.step()
                         self.reg_optim.zero_grad()
+                        self.reg_scheduler.step() 
 
                 del batch, generation_loss, loss_mae, joint_loss  # After backward pass
             torch.cuda.empty_cache()
