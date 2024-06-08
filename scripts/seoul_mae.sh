@@ -33,7 +33,7 @@ python main.py \
     --loss_type "mae_image" \
     --location "seoul" \
     --regression "gap" \
-    --do_eval
+    --classification
 
 
 # scripts/seoul_mae.sh

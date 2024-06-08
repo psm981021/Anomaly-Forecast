@@ -42,7 +42,7 @@ class Fourcaster(nn.Module):
         self.up3 = UpDS(256, 128 // factor, self.bilinear, kernels_per_layer=kernels_per_layer)
         self.up4 = UpDS(128, 64, self.bilinear, kernels_per_layer=kernels_per_layer)
         self.outc = OutConv(64, self.n_classes)
-
+        
         if self.args.classifier:
             self.classifier = nn.Linear(100, 3) 
 
@@ -105,7 +105,6 @@ class Fourcaster(nn.Module):
             
             for idx, (mean, std) in enumerate(zip(means, stds)):
                 if module == self.moe[idx]:
-                    
                     self.init_custom_weights(module, mean, std)
                         
 

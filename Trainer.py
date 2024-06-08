@@ -72,7 +72,15 @@ class Trainer:
         # for param in self.classifier.parameters():
         #     param.requires_grad = False
 
-        if not self.args.pre_train:
+        if self.args.pre_train:
+            for param in self.model.parameters():
+                param.requires_grad = True
+
+            if self.args.classifier:
+                for param in self.model.classifier.parameters():
+                    param.requires_grad = False
+
+        else:
             for param in self.model.parameters():
                 param.requires_grad = False
 
@@ -82,6 +90,10 @@ class Trainer:
 
             for param in self.model.moe.parameters():
                 param.requires_grad = True
+            
+            if self.args.classifier:
+                for param in self.model.classifier.parameters():
+                    param.requires_grad = True
             
         # Setting the train and test data loader
         self.train_dataloader = train_dataloader
@@ -93,12 +105,6 @@ class Trainer:
         self.optim = Adam(self.model.parameters(), lr=1e-5, betas=betas, weight_decay=self.args.weight_decay)
         self.reg_optim = Adam(filter(lambda p: p.requires_grad, self.model.regression_layer.parameters()), lr=1e-5, betas=betas, weight_decay=self.args.weight_decay)
         self.moe_optim = Adam(filter(lambda p: p.requires_grad, self.model.moe.parameters()), lr=1e-5, betas=betas, weight_decay=self.args.weight_decay)
-        
-
-        self.scheduler = lr_scheduler.StepLR(self.optim, step_size=10, gamma=0.1)
-        self.reg_scheduler = lr_scheduler.StepLR(self.reg_optim, step_size=10, gamma=0.1)
-        self.moe_scheduler = lr_scheduler.StepLR(self.moe_optim, step_size=10, gamma=0.1)
-
         print("Total Parameters:", sum([p.nelement() for p in self.model.parameters()]))
 
         self.ce_criterion = torch.nn.CrossEntropyLoss().to(self.args.device)
@@ -513,7 +519,7 @@ class FourTrainer(Trainer):
                         total_classifier_loss += classifier_loss.item()
                     total_mae_loss += total_mae.item()
 
-            
+                # import IPython; IPython.embed(colors='Linux'); exit(1)
                 joint_loss.backward()
                 
                 torch.nn.utils.clip_grad_norm_(self.model.parameters(), max_norm=1.0)
@@ -527,7 +533,14 @@ class FourTrainer(Trainer):
                     if self.args.classification: # MoE 
                         self.moe_optim.step()
                         self.moe_optim.zero_grad()
-                        self.moe_scheduler.step() 
+                    
+                    elif self.args.classifier:
+                        # self.moe_optim.step()
+                        # self.classifier_optim.step()
+                        # self.moe_optim.zero_grad()
+                        # self.classifier_optim.zero_grad()
+                        self.optim.step()
+                        self.optim.zero_grad()
 
                     else: # Regression Model
                         self.reg_optim.step()
@@ -857,13 +870,16 @@ class FourTrainer(Trainer):
                                     reg[i] = abs(selected_model(abs(last_precipitation[:,:,58,44][i])))
 
                             # self.args.test_list.append([datetime, reg, label, predict])
-                            self.args.test_list.append([datetime, reg, label, class_label])
-
+                            if self.args.location == "seoul":
+                                self.args.test_list.append([datetime, reg, label, class_label, last_precipitation[:,:,71,86]])
+                            else:
+                                self.args.test_list.append([datetime, reg, label, class_label, last_precipitation[:,:,58,44]])
+                        
                         elif self.args.classifier:
                             if self.args.location == "seoul":
-                                crop_predict_gap = (last_precipitation[:,:,70:72,85:87] * 255).clamp(0,255)
+                                crop_predict_gap = (last_precipitation[:,:,71,86] * 255).clamp(0,255)
                             else:
-                                crop_predict_gap = (last_precipitation[:,:,57:59,43:45] * 255).clamp(0,255)
+                                crop_predict_gap = (last_precipitation[:,:,58,44] * 255).clamp(0,255)
 
                             logits = self.model.classifier(crop_predict_gap)
                             logits = logits.float()
@@ -878,8 +894,11 @@ class FourTrainer(Trainer):
                                     reg[i] = abs(selected_model(total_predict_gap[:,:,71,86][i]))
                                 elif self.args.location == "gangwon":
                                     reg[i] = abs(selected_model(total_predict_gap[:,:,58,44][i])) 
-                            self.args.test_list.append([datetime, reg, label, logits])
-
+                            
+                            if self.args.location == "seoul":
+                                self.args.test_list.append([datetime, reg, label, logits, last_precipitation[:,:,71,86]])
+                            else:
+                                self.args.test_list.append([datetime, reg, label, logits, last_precipitation[:,:,58,44]])
 
                         else:
                             if self.args.location == "seoul":
@@ -889,7 +908,6 @@ class FourTrainer(Trainer):
                             
                             reg = abs(self.model.regression_layer(abs(last_precipitation))).view(self.args.batch)
                             self.args.test_list.append([datetime, reg, label])
-                        
                         
                 del batch
                 torch.cuda.empty_cache() 

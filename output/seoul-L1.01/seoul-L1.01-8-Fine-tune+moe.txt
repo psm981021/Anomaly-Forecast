@@ -4590,3 +4590,5 @@ EarlyStopping counter: 1 out of 40
 {'epoch': 2233, 'Geneartion Loss ce_image (Train)': '0.000000', 'Correlation Image(Train)': '0.026884', 'MAE Loss': '1.405061'}
 {'Epoch': 2233, 'MAE Loss (Eval)': '1.303241'}
 EarlyStopping counter: 1 out of 40
+
+# pt가 없어서 재훈련을 시킬 수 없음 왜 없는지 모르겠음,,,,,,,

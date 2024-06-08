@@ -1,0 +1,390 @@
+---------------------- Configure Info: ----------------------
+data_dir                       : data/data_Seoul
+image_csv_dir                  : data/Seoul.csv
+output_dir                     : output/seoul-L1.02/
+gpu_id                         : 0
+device                         : cuda:0
+seed                           : 0
+no_cuda                        : False
+use_multi_gpu                  : False
+multi_devices                  : 0,1
+wandb                          : False
+pre_train                      : True
+do_eval                        : False
+test_list                      : ['[]']
+grey_scale                     : False
+location                       : seoul
+model_idx                      : seoul-L1.02
+batch                          : 8
+n_classes                      : 100
+sianet                         : False
+classification                 : False
+classifier                     : False
+balancing                      : False
+epochs                         : 3000
+log_freq                       : 1
+patience                       : 40
+loss_type                      : ce_image
+regression                     : gap
+lr                             : 0.001
+adam_beta1                     : 0.9
+adam_beta2                     : 0.999
+weight_decay                   : 0.0
+initializer_range              : 0.01
+str                            : seoul-L1.02-8
+dataframe_path                 : output/seoul-L1.02/seoul-L1.02-8.csv
+log_file                       : output/seoul-L1.02/seoul-L1.02-8.txt
+checkpoint_path                : output/seoul-L1.02/seoul-L1.02-8.pt
+---------------------- Configure Info: ----------------------
+{'epoch': 0, 'Geneartion Loss ce_image (Train)': '2887.357910', 'Correlation Image(Train)': '0.009015', 'Classifier Loss': '0.000000', 'MAE Loss': '0.000000'}
+{'Epoch': 0, 'Generation Loss (Eval)': '2897.633301'}
+{'epoch': 1, 'Geneartion Loss ce_image (Train)': '2882.008545', 'Correlation Image(Train)': '0.001689', 'Classifier Loss': '0.000000', 'MAE Loss': '0.000000'}
+{'Epoch': 1, 'Generation Loss (Eval)': '2892.017334'}
+{'epoch': 2, 'Geneartion Loss ce_image (Train)': '2876.629395', 'Correlation Image(Train)': '0.004450', 'Classifier Loss': '0.000000', 'MAE Loss': '0.000000'}
+{'Epoch': 2, 'Generation Loss (Eval)': '2886.469238'}
+{'epoch': 3, 'Geneartion Loss ce_image (Train)': '2871.291260', 'Correlation Image(Train)': '0.006017', 'Classifier Loss': '0.000000', 'MAE Loss': '0.000000'}
+{'Epoch': 3, 'Generation Loss (Eval)': '2881.158691'}
+{'epoch': 4, 'Geneartion Loss ce_image (Train)': '2866.246826', 'Correlation Image(Train)': '0.006922', 'Classifier Loss': '0.000000', 'MAE Loss': '0.000000'}
+{'Epoch': 4, 'Generation Loss (Eval)': '2876.274658'}
+{'epoch': 5, 'Geneartion Loss ce_image (Train)': '2861.581543', 'Correlation Image(Train)': '0.007582', 'Classifier Loss': '0.000000', 'MAE Loss': '0.000000'}
+{'Epoch': 5, 'Generation Loss (Eval)': '2871.840820'}
+{'epoch': 6, 'Geneartion Loss ce_image (Train)': '2857.222168', 'Correlation Image(Train)': '0.008142', 'Classifier Loss': '0.000000', 'MAE Loss': '0.000000'}
+{'Epoch': 6, 'Generation Loss (Eval)': '2867.697021'}
+{'epoch': 7, 'Geneartion Loss ce_image (Train)': '2853.108154', 'Correlation Image(Train)': '0.008687', 'Classifier Loss': '0.000000', 'MAE Loss': '0.000000'}
+{'Epoch': 7, 'Generation Loss (Eval)': '2863.816895'}
+{'epoch': 8, 'Geneartion Loss ce_image (Train)': '2849.273682', 'Correlation Image(Train)': '0.009248', 'Classifier Loss': '0.000000', 'MAE Loss': '0.000000'}
+{'Epoch': 8, 'Generation Loss (Eval)': '2860.260254'}
+{'epoch': 9, 'Geneartion Loss ce_image (Train)': '2845.774170', 'Correlation Image(Train)': '0.009842', 'Classifier Loss': '0.000000', 'MAE Loss': '0.000000'}
+{'Epoch': 9, 'Generation Loss (Eval)': '2857.056396'}
+{'epoch': 10, 'Geneartion Loss ce_image (Train)': '2842.641357', 'Correlation Image(Train)': '0.010478', 'Classifier Loss': '0.000000', 'MAE Loss': '0.000000'}
+{'Epoch': 10, 'Generation Loss (Eval)': '2854.222412'}
+{'epoch': 11, 'Geneartion Loss ce_image (Train)': '2839.885254', 'Correlation Image(Train)': '0.011114', 'Classifier Loss': '0.000000', 'MAE Loss': '0.000000'}
+{'Epoch': 11, 'Generation Loss (Eval)': '2851.764648'}
+{'epoch': 12, 'Geneartion Loss ce_image (Train)': '2837.500000', 'Correlation Image(Train)': '0.011717', 'Classifier Loss': '0.000000', 'MAE Loss': '0.000000'}
+{'Epoch': 12, 'Generation Loss (Eval)': '2849.657227'}
+{'epoch': 13, 'Geneartion Loss ce_image (Train)': '2835.445557', 'Correlation Image(Train)': '0.012290', 'Classifier Loss': '0.000000', 'MAE Loss': '0.000000'}
+{'Epoch': 13, 'Generation Loss (Eval)': '2847.845459'}
+{'epoch': 14, 'Geneartion Loss ce_image (Train)': '2833.674316', 'Correlation Image(Train)': '0.012818', 'Classifier Loss': '0.000000', 'MAE Loss': '0.000000'}
+{'Epoch': 14, 'Generation Loss (Eval)': '2846.275635'}
+{'epoch': 15, 'Geneartion Loss ce_image (Train)': '2832.137695', 'Correlation Image(Train)': '0.013310', 'Classifier Loss': '0.000000', 'MAE Loss': '0.000000'}
+{'Epoch': 15, 'Generation Loss (Eval)': '2844.904785'}
+{'epoch': 16, 'Geneartion Loss ce_image (Train)': '2830.792480', 'Correlation Image(Train)': '0.013788', 'Classifier Loss': '0.000000', 'MAE Loss': '0.000000'}
+{'Epoch': 16, 'Generation Loss (Eval)': '2843.693115'}
+{'epoch': 17, 'Geneartion Loss ce_image (Train)': '2829.607666', 'Correlation Image(Train)': '0.014236', 'Classifier Loss': '0.000000', 'MAE Loss': '0.000000'}
+{'Epoch': 17, 'Generation Loss (Eval)': '2842.623047'}
+{'epoch': 18, 'Geneartion Loss ce_image (Train)': '2828.556152', 'Correlation Image(Train)': '0.014667', 'Classifier Loss': '0.000000', 'MAE Loss': '0.000000'}
+{'Epoch': 18, 'Generation Loss (Eval)': '2841.667969'}
+{'epoch': 19, 'Geneartion Loss ce_image (Train)': '2827.614502', 'Correlation Image(Train)': '0.015073', 'Classifier Loss': '0.000000', 'MAE Loss': '0.000000'}
+{'Epoch': 19, 'Generation Loss (Eval)': '2840.809082'}
+{'epoch': 20, 'Geneartion Loss ce_image (Train)': '2826.768799', 'Correlation Image(Train)': '0.015461', 'Classifier Loss': '0.000000', 'MAE Loss': '0.000000'}
+{'Epoch': 20, 'Generation Loss (Eval)': '2840.031250'}
+{'epoch': 21, 'Geneartion Loss ce_image (Train)': '2826.003418', 'Correlation Image(Train)': '0.015834', 'Classifier Loss': '0.000000', 'MAE Loss': '0.000000'}
+{'Epoch': 21, 'Generation Loss (Eval)': '2839.327881'}
+{'epoch': 22, 'Geneartion Loss ce_image (Train)': '2825.309326', 'Correlation Image(Train)': '0.016186', 'Classifier Loss': '0.000000', 'MAE Loss': '0.000000'}
+{'Epoch': 22, 'Generation Loss (Eval)': '2838.688232'}
+{'epoch': 23, 'Geneartion Loss ce_image (Train)': '2824.677002', 'Correlation Image(Train)': '0.016514', 'Classifier Loss': '0.000000', 'MAE Loss': '0.000000'}
+{'Epoch': 23, 'Generation Loss (Eval)': '2838.103516'}
+{'epoch': 24, 'Geneartion Loss ce_image (Train)': '2824.098633', 'Correlation Image(Train)': '0.016815', 'Classifier Loss': '0.000000', 'MAE Loss': '0.000000'}
+{'Epoch': 24, 'Generation Loss (Eval)': '2837.571289'}
+{'epoch': 25, 'Geneartion Loss ce_image (Train)': '2823.569092', 'Correlation Image(Train)': '0.017095', 'Classifier Loss': '0.000000', 'MAE Loss': '0.000000'}
+{'Epoch': 25, 'Generation Loss (Eval)': '2837.085205'}
+{'epoch': 26, 'Geneartion Loss ce_image (Train)': '2823.083740', 'Correlation Image(Train)': '0.017360', 'Classifier Loss': '0.000000', 'MAE Loss': '0.000000'}
+{'Epoch': 26, 'Generation Loss (Eval)': '2836.637695'}
+{'epoch': 27, 'Geneartion Loss ce_image (Train)': '2822.635498', 'Correlation Image(Train)': '0.017610', 'Classifier Loss': '0.000000', 'MAE Loss': '0.000000'}
+{'Epoch': 27, 'Generation Loss (Eval)': '2836.226074'}
+{'epoch': 28, 'Geneartion Loss ce_image (Train)': '2822.221191', 'Correlation Image(Train)': '0.017853', 'Classifier Loss': '0.000000', 'MAE Loss': '0.000000'}
+{'Epoch': 28, 'Generation Loss (Eval)': '2835.847168'}
+{'epoch': 29, 'Geneartion Loss ce_image (Train)': '2821.838135', 'Correlation Image(Train)': '0.018087', 'Classifier Loss': '0.000000', 'MAE Loss': '0.000000'}
+{'Epoch': 29, 'Generation Loss (Eval)': '2835.495361'}
+{'epoch': 30, 'Geneartion Loss ce_image (Train)': '2821.482178', 'Correlation Image(Train)': '0.018307', 'Classifier Loss': '0.000000', 'MAE Loss': '0.000000'}
+{'Epoch': 30, 'Generation Loss (Eval)': '2835.168701'}
+{'epoch': 31, 'Geneartion Loss ce_image (Train)': '2821.151611', 'Correlation Image(Train)': '0.018515', 'Classifier Loss': '0.000000', 'MAE Loss': '0.000000'}
+{'Epoch': 31, 'Generation Loss (Eval)': '2834.867188'}
+{'epoch': 32, 'Geneartion Loss ce_image (Train)': '2820.843506', 'Correlation Image(Train)': '0.018714', 'Classifier Loss': '0.000000', 'MAE Loss': '0.000000'}
+{'Epoch': 32, 'Generation Loss (Eval)': '2834.586426'}
+{'epoch': 33, 'Geneartion Loss ce_image (Train)': '2820.555664', 'Correlation Image(Train)': '0.018900', 'Classifier Loss': '0.000000', 'MAE Loss': '0.000000'}
+{'Epoch': 33, 'Generation Loss (Eval)': '2834.325928'}
+{'epoch': 34, 'Geneartion Loss ce_image (Train)': '2820.287109', 'Correlation Image(Train)': '0.019077', 'Classifier Loss': '0.000000', 'MAE Loss': '0.000000'}
+{'Epoch': 34, 'Generation Loss (Eval)': '2834.081543'}
+{'epoch': 35, 'Geneartion Loss ce_image (Train)': '2820.034668', 'Correlation Image(Train)': '0.019246', 'Classifier Loss': '0.000000', 'MAE Loss': '0.000000'}
+{'Epoch': 35, 'Generation Loss (Eval)': '2833.852539'}
+{'epoch': 36, 'Geneartion Loss ce_image (Train)': '2819.797119', 'Correlation Image(Train)': '0.019401', 'Classifier Loss': '0.000000', 'MAE Loss': '0.000000'}
+{'Epoch': 36, 'Generation Loss (Eval)': '2833.641113'}
+{'epoch': 37, 'Geneartion Loss ce_image (Train)': '2819.574463', 'Correlation Image(Train)': '0.019552', 'Classifier Loss': '0.000000', 'MAE Loss': '0.000000'}
+{'Epoch': 37, 'Generation Loss (Eval)': '2833.439453'}
+{'epoch': 38, 'Geneartion Loss ce_image (Train)': '2819.364502', 'Correlation Image(Train)': '0.019693', 'Classifier Loss': '0.000000', 'MAE Loss': '0.000000'}
+{'Epoch': 38, 'Generation Loss (Eval)': '2833.252197'}
+{'epoch': 39, 'Geneartion Loss ce_image (Train)': '2819.165283', 'Correlation Image(Train)': '0.019824', 'Classifier Loss': '0.000000', 'MAE Loss': '0.000000'}
+{'Epoch': 39, 'Generation Loss (Eval)': '2833.075928'}
+{'epoch': 40, 'Geneartion Loss ce_image (Train)': '2818.977783', 'Correlation Image(Train)': '0.019953', 'Classifier Loss': '0.000000', 'MAE Loss': '0.000000'}
+{'Epoch': 40, 'Generation Loss (Eval)': '2832.909180'}
+{'epoch': 41, 'Geneartion Loss ce_image (Train)': '2818.799805', 'Correlation Image(Train)': '0.020070', 'Classifier Loss': '0.000000', 'MAE Loss': '0.000000'}
+{'Epoch': 41, 'Generation Loss (Eval)': '2832.751221'}
+{'epoch': 42, 'Geneartion Loss ce_image (Train)': '2818.630127', 'Correlation Image(Train)': '0.020180', 'Classifier Loss': '0.000000', 'MAE Loss': '0.000000'}
+{'Epoch': 42, 'Generation Loss (Eval)': '2832.604736'}
+{'epoch': 43, 'Geneartion Loss ce_image (Train)': '2818.468750', 'Correlation Image(Train)': '0.020284', 'Classifier Loss': '0.000000', 'MAE Loss': '0.000000'}
+{'Epoch': 43, 'Generation Loss (Eval)': '2832.464600'}
+{'epoch': 44, 'Geneartion Loss ce_image (Train)': '2818.315674', 'Correlation Image(Train)': '0.020382', 'Classifier Loss': '0.000000', 'MAE Loss': '0.000000'}
+{'Epoch': 44, 'Generation Loss (Eval)': '2832.333984'}
+{'epoch': 45, 'Geneartion Loss ce_image (Train)': '2818.169189', 'Correlation Image(Train)': '0.020475', 'Classifier Loss': '0.000000', 'MAE Loss': '0.000000'}
+{'Epoch': 45, 'Generation Loss (Eval)': '2832.207764'}
+{'epoch': 46, 'Geneartion Loss ce_image (Train)': '2818.029053', 'Correlation Image(Train)': '0.020562', 'Classifier Loss': '0.000000', 'MAE Loss': '0.000000'}
+{'Epoch': 46, 'Generation Loss (Eval)': '2832.090332'}
+{'epoch': 47, 'Geneartion Loss ce_image (Train)': '2817.895996', 'Correlation Image(Train)': '0.020640', 'Classifier Loss': '0.000000', 'MAE Loss': '0.000000'}
+{'Epoch': 47, 'Generation Loss (Eval)': '2831.979004'}
+{'epoch': 48, 'Geneartion Loss ce_image (Train)': '2817.768066', 'Correlation Image(Train)': '0.020715', 'Classifier Loss': '0.000000', 'MAE Loss': '0.000000'}
+{'Epoch': 48, 'Generation Loss (Eval)': '2831.873291'}
+{'epoch': 49, 'Geneartion Loss ce_image (Train)': '2817.645264', 'Correlation Image(Train)': '0.020791', 'Classifier Loss': '0.000000', 'MAE Loss': '0.000000'}
+{'Epoch': 49, 'Generation Loss (Eval)': '2831.771729'}
+{'epoch': 50, 'Geneartion Loss ce_image (Train)': '2817.528564', 'Correlation Image(Train)': '0.020857', 'Classifier Loss': '0.000000', 'MAE Loss': '0.000000'}
+{'Epoch': 50, 'Generation Loss (Eval)': '2831.675049'}
+{'epoch': 51, 'Geneartion Loss ce_image (Train)': '2817.416260', 'Correlation Image(Train)': '0.020918', 'Classifier Loss': '0.000000', 'MAE Loss': '0.000000'}
+{'Epoch': 51, 'Generation Loss (Eval)': '2831.583008'}
+{'epoch': 52, 'Geneartion Loss ce_image (Train)': '2817.307861', 'Correlation Image(Train)': '0.020975', 'Classifier Loss': '0.000000', 'MAE Loss': '0.000000'}
+{'Epoch': 52, 'Generation Loss (Eval)': '2831.495117'}
+{'epoch': 53, 'Geneartion Loss ce_image (Train)': '2817.202148', 'Correlation Image(Train)': '0.021023', 'Classifier Loss': '0.000000', 'MAE Loss': '0.000000'}
+{'Epoch': 53, 'Generation Loss (Eval)': '2831.411133'}
+{'epoch': 54, 'Geneartion Loss ce_image (Train)': '2817.102783', 'Correlation Image(Train)': '0.021072', 'Classifier Loss': '0.000000', 'MAE Loss': '0.000000'}
+{'Epoch': 54, 'Generation Loss (Eval)': '2831.333252'}
+{'epoch': 55, 'Geneartion Loss ce_image (Train)': '2817.005371', 'Correlation Image(Train)': '0.021114', 'Classifier Loss': '0.000000', 'MAE Loss': '0.000000'}
+{'Epoch': 55, 'Generation Loss (Eval)': '2831.256836'}
+{'epoch': 56, 'Geneartion Loss ce_image (Train)': '2816.912109', 'Correlation Image(Train)': '0.021157', 'Classifier Loss': '0.000000', 'MAE Loss': '0.000000'}
+{'Epoch': 56, 'Generation Loss (Eval)': '2831.185791'}
+{'epoch': 57, 'Geneartion Loss ce_image (Train)': '2816.821045', 'Correlation Image(Train)': '0.021190', 'Classifier Loss': '0.000000', 'MAE Loss': '0.000000'}
+{'Epoch': 57, 'Generation Loss (Eval)': '2831.118896'}
+{'epoch': 58, 'Geneartion Loss ce_image (Train)': '2816.733643', 'Correlation Image(Train)': '0.021224', 'Classifier Loss': '0.000000', 'MAE Loss': '0.000000'}
+{'Epoch': 58, 'Generation Loss (Eval)': '2831.053223'}
+{'epoch': 59, 'Geneartion Loss ce_image (Train)': '2816.650146', 'Correlation Image(Train)': '0.021256', 'Classifier Loss': '0.000000', 'MAE Loss': '0.000000'}
+{'Epoch': 59, 'Generation Loss (Eval)': '2830.989502'}
+{'epoch': 60, 'Geneartion Loss ce_image (Train)': '2816.567871', 'Correlation Image(Train)': '0.021276', 'Classifier Loss': '0.000000', 'MAE Loss': '0.000000'}
+{'Epoch': 60, 'Generation Loss (Eval)': '2830.931396'}
+{'epoch': 61, 'Geneartion Loss ce_image (Train)': '2816.489014', 'Correlation Image(Train)': '0.021295', 'Classifier Loss': '0.000000', 'MAE Loss': '0.000000'}
+{'Epoch': 61, 'Generation Loss (Eval)': '2830.874756'}
+{'epoch': 62, 'Geneartion Loss ce_image (Train)': '2816.412842', 'Correlation Image(Train)': '0.021312', 'Classifier Loss': '0.000000', 'MAE Loss': '0.000000'}
+{'Epoch': 62, 'Generation Loss (Eval)': '2830.820068'}
+{'epoch': 63, 'Geneartion Loss ce_image (Train)': '2816.338379', 'Correlation Image(Train)': '0.021324', 'Classifier Loss': '0.000000', 'MAE Loss': '0.000000'}
+{'Epoch': 63, 'Generation Loss (Eval)': '2830.769531'}
+{'epoch': 64, 'Geneartion Loss ce_image (Train)': '2816.266113', 'Correlation Image(Train)': '0.021335', 'Classifier Loss': '0.000000', 'MAE Loss': '0.000000'}
+{'Epoch': 64, 'Generation Loss (Eval)': '2830.721680'}
+{'epoch': 65, 'Geneartion Loss ce_image (Train)': '2816.196045', 'Correlation Image(Train)': '0.021346', 'Classifier Loss': '0.000000', 'MAE Loss': '0.000000'}
+{'Epoch': 65, 'Generation Loss (Eval)': '2830.675293'}
+{'epoch': 66, 'Geneartion Loss ce_image (Train)': '2816.128174', 'Correlation Image(Train)': '0.021352', 'Classifier Loss': '0.000000', 'MAE Loss': '0.000000'}
+{'Epoch': 66, 'Generation Loss (Eval)': '2830.630127'}
+{'epoch': 67, 'Geneartion Loss ce_image (Train)': '2816.062012', 'Correlation Image(Train)': '0.021357', 'Classifier Loss': '0.000000', 'MAE Loss': '0.000000'}
+{'Epoch': 67, 'Generation Loss (Eval)': '2830.586670'}
+{'epoch': 68, 'Geneartion Loss ce_image (Train)': '2815.997314', 'Correlation Image(Train)': '0.021359', 'Classifier Loss': '0.000000', 'MAE Loss': '0.000000'}
+{'Epoch': 68, 'Generation Loss (Eval)': '2830.547363'}
+{'epoch': 69, 'Geneartion Loss ce_image (Train)': '2815.936035', 'Correlation Image(Train)': '0.021361', 'Classifier Loss': '0.000000', 'MAE Loss': '0.000000'}
+{'Epoch': 69, 'Generation Loss (Eval)': '2830.507812'}
+{'epoch': 70, 'Geneartion Loss ce_image (Train)': '2815.875732', 'Correlation Image(Train)': '0.021359', 'Classifier Loss': '0.000000', 'MAE Loss': '0.000000'}
+{'Epoch': 70, 'Generation Loss (Eval)': '2830.472656'}
+{'epoch': 71, 'Geneartion Loss ce_image (Train)': '2815.815674', 'Correlation Image(Train)': '0.021359', 'Classifier Loss': '0.000000', 'MAE Loss': '0.000000'}
+{'Epoch': 71, 'Generation Loss (Eval)': '2830.437256'}
+{'epoch': 72, 'Geneartion Loss ce_image (Train)': '2815.757812', 'Correlation Image(Train)': '0.021352', 'Classifier Loss': '0.000000', 'MAE Loss': '0.000000'}
+{'Epoch': 72, 'Generation Loss (Eval)': '2830.404297'}
+{'epoch': 73, 'Geneartion Loss ce_image (Train)': '2815.702148', 'Correlation Image(Train)': '0.021346', 'Classifier Loss': '0.000000', 'MAE Loss': '0.000000'}
+{'Epoch': 73, 'Generation Loss (Eval)': '2830.372803'}
+{'epoch': 74, 'Geneartion Loss ce_image (Train)': '2815.646484', 'Correlation Image(Train)': '0.021337', 'Classifier Loss': '0.000000', 'MAE Loss': '0.000000'}
+{'Epoch': 74, 'Generation Loss (Eval)': '2830.341064'}
+{'epoch': 75, 'Geneartion Loss ce_image (Train)': '2815.592285', 'Correlation Image(Train)': '0.021328', 'Classifier Loss': '0.000000', 'MAE Loss': '0.000000'}
+{'Epoch': 75, 'Generation Loss (Eval)': '2830.311768'}
+{'epoch': 76, 'Geneartion Loss ce_image (Train)': '2815.540527', 'Correlation Image(Train)': '0.021318', 'Classifier Loss': '0.000000', 'MAE Loss': '0.000000'}
+{'Epoch': 76, 'Generation Loss (Eval)': '2830.284180'}
+{'epoch': 77, 'Geneartion Loss ce_image (Train)': '2815.488281', 'Correlation Image(Train)': '0.021307', 'Classifier Loss': '0.000000', 'MAE Loss': '0.000000'}
+{'Epoch': 77, 'Generation Loss (Eval)': '2830.257080'}
+{'epoch': 78, 'Geneartion Loss ce_image (Train)': '2815.439453', 'Correlation Image(Train)': '0.021295', 'Classifier Loss': '0.000000', 'MAE Loss': '0.000000'}
+{'Epoch': 78, 'Generation Loss (Eval)': '2830.231445'}
+{'epoch': 79, 'Geneartion Loss ce_image (Train)': '2815.389893', 'Correlation Image(Train)': '0.021281', 'Classifier Loss': '0.000000', 'MAE Loss': '0.000000'}
+{'Epoch': 79, 'Generation Loss (Eval)': '2830.208252'}
+{'epoch': 80, 'Geneartion Loss ce_image (Train)': '2815.341553', 'Correlation Image(Train)': '0.021265', 'Classifier Loss': '0.000000', 'MAE Loss': '0.000000'}
+{'Epoch': 80, 'Generation Loss (Eval)': '2830.184814'}
+{'epoch': 81, 'Geneartion Loss ce_image (Train)': '2815.295410', 'Correlation Image(Train)': '0.021249', 'Classifier Loss': '0.000000', 'MAE Loss': '0.000000'}
+{'Epoch': 81, 'Generation Loss (Eval)': '2830.162354'}
+{'epoch': 82, 'Geneartion Loss ce_image (Train)': '2815.248047', 'Correlation Image(Train)': '0.021229', 'Classifier Loss': '0.000000', 'MAE Loss': '0.000000'}
+{'Epoch': 82, 'Generation Loss (Eval)': '2830.142334'}
+{'epoch': 83, 'Geneartion Loss ce_image (Train)': '2815.203857', 'Correlation Image(Train)': '0.021212', 'Classifier Loss': '0.000000', 'MAE Loss': '0.000000'}
+{'Epoch': 83, 'Generation Loss (Eval)': '2830.121582'}
+{'epoch': 84, 'Geneartion Loss ce_image (Train)': '2815.159668', 'Correlation Image(Train)': '0.021195', 'Classifier Loss': '0.000000', 'MAE Loss': '0.000000'}
+{'Epoch': 84, 'Generation Loss (Eval)': '2830.102783'}
+{'epoch': 85, 'Geneartion Loss ce_image (Train)': '2815.116455', 'Correlation Image(Train)': '0.021172', 'Classifier Loss': '0.000000', 'MAE Loss': '0.000000'}
+{'Epoch': 85, 'Generation Loss (Eval)': '2830.084473'}
+{'epoch': 86, 'Geneartion Loss ce_image (Train)': '2815.073242', 'Correlation Image(Train)': '0.021152', 'Classifier Loss': '0.000000', 'MAE Loss': '0.000000'}
+{'Epoch': 86, 'Generation Loss (Eval)': '2830.066162'}
+{'epoch': 87, 'Geneartion Loss ce_image (Train)': '2815.031738', 'Correlation Image(Train)': '0.021133', 'Classifier Loss': '0.000000', 'MAE Loss': '0.000000'}
+{'Epoch': 87, 'Generation Loss (Eval)': '2830.051758'}
+{'epoch': 88, 'Geneartion Loss ce_image (Train)': '2814.990967', 'Correlation Image(Train)': '0.021112', 'Classifier Loss': '0.000000', 'MAE Loss': '0.000000'}
+{'Epoch': 88, 'Generation Loss (Eval)': '2830.034180'}
+{'epoch': 89, 'Geneartion Loss ce_image (Train)': '2814.950195', 'Correlation Image(Train)': '0.021091', 'Classifier Loss': '0.000000', 'MAE Loss': '0.000000'}
+{'Epoch': 89, 'Generation Loss (Eval)': '2830.020264'}
+{'epoch': 90, 'Geneartion Loss ce_image (Train)': '2814.911621', 'Correlation Image(Train)': '0.021065', 'Classifier Loss': '0.000000', 'MAE Loss': '0.000000'}
+{'Epoch': 90, 'Generation Loss (Eval)': '2830.005859'}
+{'epoch': 91, 'Geneartion Loss ce_image (Train)': '2814.872314', 'Correlation Image(Train)': '0.021042', 'Classifier Loss': '0.000000', 'MAE Loss': '0.000000'}
+{'Epoch': 91, 'Generation Loss (Eval)': '2829.992188'}
+{'epoch': 92, 'Geneartion Loss ce_image (Train)': '2814.834229', 'Correlation Image(Train)': '0.021021', 'Classifier Loss': '0.000000', 'MAE Loss': '0.000000'}
+{'Epoch': 92, 'Generation Loss (Eval)': '2829.980469'}
+{'epoch': 93, 'Geneartion Loss ce_image (Train)': '2814.797119', 'Correlation Image(Train)': '0.020999', 'Classifier Loss': '0.000000', 'MAE Loss': '0.000000'}
+{'Epoch': 93, 'Generation Loss (Eval)': '2829.968262'}
+{'epoch': 94, 'Geneartion Loss ce_image (Train)': '2814.761230', 'Correlation Image(Train)': '0.020975', 'Classifier Loss': '0.000000', 'MAE Loss': '0.000000'}
+{'Epoch': 94, 'Generation Loss (Eval)': '2829.957764'}
+{'epoch': 95, 'Geneartion Loss ce_image (Train)': '2814.723633', 'Correlation Image(Train)': '0.020953', 'Classifier Loss': '0.000000', 'MAE Loss': '0.000000'}
+{'Epoch': 95, 'Generation Loss (Eval)': '2829.945801'}
+{'epoch': 96, 'Geneartion Loss ce_image (Train)': '2814.688721', 'Correlation Image(Train)': '0.020928', 'Classifier Loss': '0.000000', 'MAE Loss': '0.000000'}
+{'Epoch': 96, 'Generation Loss (Eval)': '2829.935791'}
+{'epoch': 97, 'Geneartion Loss ce_image (Train)': '2814.653320', 'Correlation Image(Train)': '0.020900', 'Classifier Loss': '0.000000', 'MAE Loss': '0.000000'}
+{'Epoch': 97, 'Generation Loss (Eval)': '2829.927490'}
+{'epoch': 98, 'Geneartion Loss ce_image (Train)': '2814.618896', 'Correlation Image(Train)': '0.020876', 'Classifier Loss': '0.000000', 'MAE Loss': '0.000000'}
+{'Epoch': 98, 'Generation Loss (Eval)': '2829.919678'}
+{'epoch': 99, 'Geneartion Loss ce_image (Train)': '2814.584717', 'Correlation Image(Train)': '0.020851', 'Classifier Loss': '0.000000', 'MAE Loss': '0.000000'}
+{'Epoch': 99, 'Generation Loss (Eval)': '2829.910645'}
+{'epoch': 100, 'Geneartion Loss ce_image (Train)': '2814.550781', 'Correlation Image(Train)': '0.020824', 'Classifier Loss': '0.000000', 'MAE Loss': '0.000000'}
+{'Epoch': 100, 'Generation Loss (Eval)': '2829.902344'}
+{'epoch': 101, 'Geneartion Loss ce_image (Train)': '2814.518066', 'Correlation Image(Train)': '0.020800', 'Classifier Loss': '0.000000', 'MAE Loss': '0.000000'}
+{'Epoch': 101, 'Generation Loss (Eval)': '2829.897461'}
+{'epoch': 102, 'Geneartion Loss ce_image (Train)': '2814.485596', 'Correlation Image(Train)': '0.020773', 'Classifier Loss': '0.000000', 'MAE Loss': '0.000000'}
+{'Epoch': 102, 'Generation Loss (Eval)': '2829.890381'}
+{'epoch': 103, 'Geneartion Loss ce_image (Train)': '2814.453857', 'Correlation Image(Train)': '0.020746', 'Classifier Loss': '0.000000', 'MAE Loss': '0.000000'}
+{'Epoch': 103, 'Generation Loss (Eval)': '2829.884033'}
+{'epoch': 104, 'Geneartion Loss ce_image (Train)': '2814.422363', 'Correlation Image(Train)': '0.020718', 'Classifier Loss': '0.000000', 'MAE Loss': '0.000000'}
+{'Epoch': 104, 'Generation Loss (Eval)': '2829.879395'}
+{'epoch': 105, 'Geneartion Loss ce_image (Train)': '2814.391113', 'Correlation Image(Train)': '0.020690', 'Classifier Loss': '0.000000', 'MAE Loss': '0.000000'}
+{'Epoch': 105, 'Generation Loss (Eval)': '2829.872803'}
+{'epoch': 106, 'Geneartion Loss ce_image (Train)': '2814.360107', 'Correlation Image(Train)': '0.020662', 'Classifier Loss': '0.000000', 'MAE Loss': '0.000000'}
+{'Epoch': 106, 'Generation Loss (Eval)': '2829.868408'}
+{'epoch': 107, 'Geneartion Loss ce_image (Train)': '2814.328857', 'Correlation Image(Train)': '0.020635', 'Classifier Loss': '0.000000', 'MAE Loss': '0.000000'}
+{'Epoch': 107, 'Generation Loss (Eval)': '2829.864990'}
+{'epoch': 108, 'Geneartion Loss ce_image (Train)': '2814.299316', 'Correlation Image(Train)': '0.020609', 'Classifier Loss': '0.000000', 'MAE Loss': '0.000000'}
+{'Epoch': 108, 'Generation Loss (Eval)': '2829.861328'}
+{'epoch': 109, 'Geneartion Loss ce_image (Train)': '2814.269043', 'Correlation Image(Train)': '0.020580', 'Classifier Loss': '0.000000', 'MAE Loss': '0.000000'}
+{'Epoch': 109, 'Generation Loss (Eval)': '2829.858643'}
+{'epoch': 110, 'Geneartion Loss ce_image (Train)': '2814.240234', 'Correlation Image(Train)': '0.020555', 'Classifier Loss': '0.000000', 'MAE Loss': '0.000000'}
+{'Epoch': 110, 'Generation Loss (Eval)': '2829.856689'}
+{'epoch': 111, 'Geneartion Loss ce_image (Train)': '2814.211914', 'Correlation Image(Train)': '0.020528', 'Classifier Loss': '0.000000', 'MAE Loss': '0.000000'}
+{'Epoch': 111, 'Generation Loss (Eval)': '2829.852783'}
+{'epoch': 112, 'Geneartion Loss ce_image (Train)': '2814.183350', 'Correlation Image(Train)': '0.020501', 'Classifier Loss': '0.000000', 'MAE Loss': '0.000000'}
+{'Epoch': 112, 'Generation Loss (Eval)': '2829.850098'}
+{'epoch': 113, 'Geneartion Loss ce_image (Train)': '2814.154541', 'Correlation Image(Train)': '0.020472', 'Classifier Loss': '0.000000', 'MAE Loss': '0.000000'}
+{'Epoch': 113, 'Generation Loss (Eval)': '2829.849609'}
+{'epoch': 114, 'Geneartion Loss ce_image (Train)': '2814.127686', 'Correlation Image(Train)': '0.020441', 'Classifier Loss': '0.000000', 'MAE Loss': '0.000000'}
+{'Epoch': 114, 'Generation Loss (Eval)': '2829.848145'}
+{'epoch': 115, 'Geneartion Loss ce_image (Train)': '2814.098877', 'Correlation Image(Train)': '0.020417', 'Classifier Loss': '0.000000', 'MAE Loss': '0.000000'}
+{'Epoch': 115, 'Generation Loss (Eval)': '2829.848877'}
+EarlyStopping counter: 1 out of 40
+{'epoch': 116, 'Geneartion Loss ce_image (Train)': '2814.072021', 'Correlation Image(Train)': '0.020392', 'Classifier Loss': '0.000000', 'MAE Loss': '0.000000'}
+{'Epoch': 116, 'Generation Loss (Eval)': '2829.848633'}
+EarlyStopping counter: 2 out of 40
+{'epoch': 117, 'Geneartion Loss ce_image (Train)': '2814.046631', 'Correlation Image(Train)': '0.020363', 'Classifier Loss': '0.000000', 'MAE Loss': '0.000000'}
+{'Epoch': 117, 'Generation Loss (Eval)': '2829.849854'}
+EarlyStopping counter: 3 out of 40
+{'epoch': 118, 'Geneartion Loss ce_image (Train)': '2814.018555', 'Correlation Image(Train)': '0.020338', 'Classifier Loss': '0.000000', 'MAE Loss': '0.000000'}
+{'Epoch': 118, 'Generation Loss (Eval)': '2829.851562'}
+EarlyStopping counter: 4 out of 40
+{'epoch': 119, 'Geneartion Loss ce_image (Train)': '2813.992920', 'Correlation Image(Train)': '0.020315', 'Classifier Loss': '0.000000', 'MAE Loss': '0.000000'}
+{'Epoch': 119, 'Generation Loss (Eval)': '2829.852783'}
+EarlyStopping counter: 5 out of 40
+{'epoch': 120, 'Geneartion Loss ce_image (Train)': '2813.966797', 'Correlation Image(Train)': '0.020291', 'Classifier Loss': '0.000000', 'MAE Loss': '0.000000'}
+{'Epoch': 120, 'Generation Loss (Eval)': '2829.852539'}
+EarlyStopping counter: 6 out of 40
+{'epoch': 121, 'Geneartion Loss ce_image (Train)': '2813.941162', 'Correlation Image(Train)': '0.020265', 'Classifier Loss': '0.000000', 'MAE Loss': '0.000000'}
+{'Epoch': 121, 'Generation Loss (Eval)': '2829.852783'}
+EarlyStopping counter: 7 out of 40
+{'epoch': 122, 'Geneartion Loss ce_image (Train)': '2813.917480', 'Correlation Image(Train)': '0.020231', 'Classifier Loss': '0.000000', 'MAE Loss': '0.000000'}
+{'Epoch': 122, 'Generation Loss (Eval)': '2829.856445'}
+EarlyStopping counter: 8 out of 40
+{'epoch': 123, 'Geneartion Loss ce_image (Train)': '2813.892090', 'Correlation Image(Train)': '0.020197', 'Classifier Loss': '0.000000', 'MAE Loss': '0.000000'}
+{'Epoch': 123, 'Generation Loss (Eval)': '2829.863037'}
+EarlyStopping counter: 9 out of 40
+{'epoch': 124, 'Geneartion Loss ce_image (Train)': '2813.868896', 'Correlation Image(Train)': '0.020175', 'Classifier Loss': '0.000000', 'MAE Loss': '0.000000'}
+{'Epoch': 124, 'Generation Loss (Eval)': '2829.869141'}
+EarlyStopping counter: 10 out of 40
+{'epoch': 125, 'Geneartion Loss ce_image (Train)': '2813.844971', 'Correlation Image(Train)': '0.020156', 'Classifier Loss': '0.000000', 'MAE Loss': '0.000000'}
+{'Epoch': 125, 'Generation Loss (Eval)': '2829.870117'}
+EarlyStopping counter: 11 out of 40
+{'epoch': 126, 'Geneartion Loss ce_image (Train)': '2813.824463', 'Correlation Image(Train)': '0.020141', 'Classifier Loss': '0.000000', 'MAE Loss': '0.000000'}
+{'Epoch': 126, 'Generation Loss (Eval)': '2829.860596'}
+EarlyStopping counter: 12 out of 40
+{'epoch': 127, 'Geneartion Loss ce_image (Train)': '2813.800049', 'Correlation Image(Train)': '0.020112', 'Classifier Loss': '0.000000', 'MAE Loss': '0.000000'}
+{'Epoch': 127, 'Generation Loss (Eval)': '2829.862549'}
+EarlyStopping counter: 13 out of 40
+{'epoch': 128, 'Geneartion Loss ce_image (Train)': '2813.774902', 'Correlation Image(Train)': '0.020079', 'Classifier Loss': '0.000000', 'MAE Loss': '0.000000'}
+{'Epoch': 128, 'Generation Loss (Eval)': '2829.863037'}
+EarlyStopping counter: 14 out of 40
+{'epoch': 129, 'Geneartion Loss ce_image (Train)': '2813.752686', 'Correlation Image(Train)': '0.020055', 'Classifier Loss': '0.000000', 'MAE Loss': '0.000000'}
+{'Epoch': 129, 'Generation Loss (Eval)': '2829.867920'}
+EarlyStopping counter: 15 out of 40
+{'epoch': 130, 'Geneartion Loss ce_image (Train)': '2813.729980', 'Correlation Image(Train)': '0.020042', 'Classifier Loss': '0.000000', 'MAE Loss': '0.000000'}
+{'Epoch': 130, 'Generation Loss (Eval)': '2829.869141'}
+EarlyStopping counter: 16 out of 40
+{'epoch': 131, 'Geneartion Loss ce_image (Train)': '2813.707031', 'Correlation Image(Train)': '0.020018', 'Classifier Loss': '0.000000', 'MAE Loss': '0.000000'}
+{'Epoch': 131, 'Generation Loss (Eval)': '2829.868164'}
+EarlyStopping counter: 17 out of 40
+{'epoch': 132, 'Geneartion Loss ce_image (Train)': '2813.684570', 'Correlation Image(Train)': '0.019988', 'Classifier Loss': '0.000000', 'MAE Loss': '0.000000'}
+{'Epoch': 132, 'Generation Loss (Eval)': '2829.871826'}
+EarlyStopping counter: 18 out of 40
+{'epoch': 133, 'Geneartion Loss ce_image (Train)': '2813.661621', 'Correlation Image(Train)': '0.019961', 'Classifier Loss': '0.000000', 'MAE Loss': '0.000000'}
+{'Epoch': 133, 'Generation Loss (Eval)': '2829.875000'}
+EarlyStopping counter: 19 out of 40
+{'epoch': 134, 'Geneartion Loss ce_image (Train)': '2813.639893', 'Correlation Image(Train)': '0.019932', 'Classifier Loss': '0.000000', 'MAE Loss': '0.000000'}
+{'Epoch': 134, 'Generation Loss (Eval)': '2829.878418'}
+EarlyStopping counter: 20 out of 40
+{'epoch': 135, 'Geneartion Loss ce_image (Train)': '2813.619141', 'Correlation Image(Train)': '0.019907', 'Classifier Loss': '0.000000', 'MAE Loss': '0.000000'}
+{'Epoch': 135, 'Generation Loss (Eval)': '2829.887695'}
+EarlyStopping counter: 21 out of 40
+{'epoch': 136, 'Geneartion Loss ce_image (Train)': '2813.596924', 'Correlation Image(Train)': '0.019887', 'Classifier Loss': '0.000000', 'MAE Loss': '0.000000'}
+{'Epoch': 136, 'Generation Loss (Eval)': '2829.890381'}
+EarlyStopping counter: 22 out of 40
+{'epoch': 137, 'Geneartion Loss ce_image (Train)': '2813.575439', 'Correlation Image(Train)': '0.019872', 'Classifier Loss': '0.000000', 'MAE Loss': '0.000000'}
+{'Epoch': 137, 'Generation Loss (Eval)': '2829.899414'}
+EarlyStopping counter: 23 out of 40
+{'epoch': 138, 'Geneartion Loss ce_image (Train)': '2813.555420', 'Correlation Image(Train)': '0.019854', 'Classifier Loss': '0.000000', 'MAE Loss': '0.000000'}
+{'Epoch': 138, 'Generation Loss (Eval)': '2829.910889'}
+EarlyStopping counter: 24 out of 40
+{'epoch': 139, 'Geneartion Loss ce_image (Train)': '2813.537109', 'Correlation Image(Train)': '0.019821', 'Classifier Loss': '0.000000', 'MAE Loss': '0.000000'}
+{'Epoch': 139, 'Generation Loss (Eval)': '2829.916260'}
+EarlyStopping counter: 25 out of 40
+{'epoch': 140, 'Geneartion Loss ce_image (Train)': '2813.519043', 'Correlation Image(Train)': '0.019790', 'Classifier Loss': '0.000000', 'MAE Loss': '0.000000'}
+{'Epoch': 140, 'Generation Loss (Eval)': '2829.920898'}
+EarlyStopping counter: 26 out of 40
+{'epoch': 141, 'Geneartion Loss ce_image (Train)': '2813.498047', 'Correlation Image(Train)': '0.019776', 'Classifier Loss': '0.000000', 'MAE Loss': '0.000000'}
+{'Epoch': 141, 'Generation Loss (Eval)': '2829.928711'}
+EarlyStopping counter: 27 out of 40
+{'epoch': 142, 'Geneartion Loss ce_image (Train)': '2813.477783', 'Correlation Image(Train)': '0.019764', 'Classifier Loss': '0.000000', 'MAE Loss': '0.000000'}
+{'Epoch': 142, 'Generation Loss (Eval)': '2829.940918'}
+EarlyStopping counter: 28 out of 40
+{'epoch': 143, 'Geneartion Loss ce_image (Train)': '2813.460205', 'Correlation Image(Train)': '0.019754', 'Classifier Loss': '0.000000', 'MAE Loss': '0.000000'}
+{'Epoch': 143, 'Generation Loss (Eval)': '2829.945801'}
+EarlyStopping counter: 29 out of 40
+{'epoch': 144, 'Geneartion Loss ce_image (Train)': '2813.443604', 'Correlation Image(Train)': '0.019744', 'Classifier Loss': '0.000000', 'MAE Loss': '0.000000'}
+{'Epoch': 144, 'Generation Loss (Eval)': '2829.936035'}
+EarlyStopping counter: 30 out of 40
+{'epoch': 145, 'Geneartion Loss ce_image (Train)': '2813.429688', 'Correlation Image(Train)': '0.019731', 'Classifier Loss': '0.000000', 'MAE Loss': '0.000000'}
+{'Epoch': 145, 'Generation Loss (Eval)': '2829.917969'}
+EarlyStopping counter: 31 out of 40
+{'epoch': 146, 'Geneartion Loss ce_image (Train)': '2813.408203', 'Correlation Image(Train)': '0.019700', 'Classifier Loss': '0.000000', 'MAE Loss': '0.000000'}
+{'Epoch': 146, 'Generation Loss (Eval)': '2829.919678'}
+EarlyStopping counter: 32 out of 40
+{'epoch': 147, 'Geneartion Loss ce_image (Train)': '2813.386963', 'Correlation Image(Train)': '0.019663', 'Classifier Loss': '0.000000', 'MAE Loss': '0.000000'}
+{'Epoch': 147, 'Generation Loss (Eval)': '2829.931641'}
+EarlyStopping counter: 33 out of 40
+{'epoch': 148, 'Geneartion Loss ce_image (Train)': '2813.367188', 'Correlation Image(Train)': '0.019632', 'Classifier Loss': '0.000000', 'MAE Loss': '0.000000'}
+{'Epoch': 148, 'Generation Loss (Eval)': '2829.945068'}
+EarlyStopping counter: 34 out of 40
+{'epoch': 149, 'Geneartion Loss ce_image (Train)': '2813.349609', 'Correlation Image(Train)': '0.019613', 'Classifier Loss': '0.000000', 'MAE Loss': '0.000000'}
+{'Epoch': 149, 'Generation Loss (Eval)': '2829.960449'}
+EarlyStopping counter: 35 out of 40
+{'epoch': 150, 'Geneartion Loss ce_image (Train)': '2813.334961', 'Correlation Image(Train)': '0.019589', 'Classifier Loss': '0.000000', 'MAE Loss': '0.000000'}
+{'Epoch': 150, 'Generation Loss (Eval)': '2829.978516'}
+EarlyStopping counter: 36 out of 40
+{'epoch': 151, 'Geneartion Loss ce_image (Train)': '2813.316162', 'Correlation Image(Train)': '0.019563', 'Classifier Loss': '0.000000', 'MAE Loss': '0.000000'}
+{'Epoch': 151, 'Generation Loss (Eval)': '2829.986572'}
+EarlyStopping counter: 37 out of 40
+{'epoch': 152, 'Geneartion Loss ce_image (Train)': '2813.299316', 'Correlation Image(Train)': '0.019548', 'Classifier Loss': '0.000000', 'MAE Loss': '0.000000'}
+{'Epoch': 152, 'Generation Loss (Eval)': '2829.986328'}
+EarlyStopping counter: 38 out of 40
+{'epoch': 153, 'Geneartion Loss ce_image (Train)': '2813.286133', 'Correlation Image(Train)': '0.019534', 'Classifier Loss': '0.000000', 'MAE Loss': '0.000000'}
+{'Epoch': 153, 'Generation Loss (Eval)': '2829.971191'}
+EarlyStopping counter: 39 out of 40
+{'epoch': 154, 'Geneartion Loss ce_image (Train)': '2813.272217', 'Correlation Image(Train)': '0.019518', 'Classifier Loss': '0.000000', 'MAE Loss': '0.000000'}
+{'Epoch': 154, 'Generation Loss (Eval)': '2829.962158'}
+EarlyStopping counter: 40 out of 40
+{'Epoch': 3000, 'Generation Loss (Eval)': '2544.249023'}
+To run Epoch:3000 , It took 1 hours, 22 minutes, 3 seconds
