@@ -527,7 +527,6 @@ class FourTrainer(Trainer):
                 if self.args.pre_train:
                     self.optim.step()
                     self.optim.zero_grad()
-                    self.scheduler.step()
 
                 elif self.args.pre_train == False: #fine-tuning 
                     if self.args.classification: # MoE 
@@ -545,7 +544,6 @@ class FourTrainer(Trainer):
                     else: # Regression Model
                         self.reg_optim.step()
                         self.reg_optim.zero_grad()
-                        self.reg_scheduler.step() 
 
                 del batch, generation_loss, loss_mae, joint_loss  # After backward pass
             torch.cuda.empty_cache()

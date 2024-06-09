@@ -34,7 +34,7 @@ python main.py \
     --loss_type "stamina" \
     --location "seoul" \
     --regression "gap" \
-    --classifier \
+    --classification \
     --balancing \
 
 

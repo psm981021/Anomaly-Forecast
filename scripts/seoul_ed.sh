@@ -34,7 +34,5 @@ python main.py \
     --regression "gap" \
     --classification
 
-    
-
 
 # scripts/seoul_ed.sh
