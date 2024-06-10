@@ -192,7 +192,7 @@ def main():
 
         print(f"Start Fine-Tuning from {args.checkpoint_path}!")
         map_location = args.device
-        trainer.model.load_state_dict(torch.load(args.checkpoint_path, map_location=map_location)['model_state_dict'])
+        # trainer.model.load_state_dict(torch.load(args.checkpoint_path, map_location=map_location)['model_state_dict'])
         
         # classification
         if args.classification:
@@ -256,13 +256,13 @@ def main():
                     predicted_precipitation = f"{record[1][i].item():.6f}" if record[1].dim() != 0 else f"{record[1].item():.6f}"
                     ground_truth = record[2][i].item() if record[2].dim() != 0 else record[2].item()
                     predict = record[3][i]
-                    precipitation_pixel = record[4][i]
+                    # precipitation_pixel = record[4][i]
                     formatted_data.append({
                         'datetime': datetime,
                         'predicted precipitation': predicted_precipitation,
                         'ground_truth': ground_truth,
                         'predict' : predict,
-                        'precipitation_pixel' : precipitation_pixel
+                        # 'precipitation_pixel' : precipitation_pixel
             })
         else:
             for record in args.test_list:
