@@ -1,0 +1,2 @@
+{'Epoch': 4000, 'MAE Loss (Eval)': '5.963151'}
+{'Epoch': 4000, 'MAE Loss (Eval)': '5.963151'}

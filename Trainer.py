@@ -12,7 +12,7 @@ import numpy as np
 from utils import *
 from classification_gpu import *
 from sklearn.metrics import confusion_matrix, precision_score, recall_score, f1_score
-import torch.optim.lr_scheduler as lr_scheduler
+
 
 class FocalLoss(nn.Module):
     def __init__(self, alpha=.5, gamma=2):
@@ -102,9 +102,21 @@ class Trainer:
 
         # self.data_name = self.args.data_name
         betas = (self.args.adam_beta1, self.args.adam_beta2)
+<<<<<<< HEAD
         self.optim = Adam(self.model.parameters(), lr=1e-5, betas=betas, weight_decay=self.args.weight_decay)
         self.reg_optim = Adam(filter(lambda p: p.requires_grad, self.model.regression_layer.parameters()), lr=1e-5, betas=betas, weight_decay=self.args.weight_decay)
         self.moe_optim = Adam(filter(lambda p: p.requires_grad, self.model.moe.parameters()), lr=1e-5, betas=betas, weight_decay=self.args.weight_decay)
+=======
+        self.optim = Adam(self.model.parameters(), lr=self.args.lr, betas=betas, weight_decay=self.args.weight_decay)
+        self.reg_optim = Adam(filter(lambda p: p.requires_grad, self.model.regression_layer.parameters()), lr=self.args.lr, betas=betas, weight_decay=self.args.weight_decay)
+        self.moe_optim = Adam(filter(lambda p: p.requires_grad, self.model.moe.parameters()), lr=self.args.lr, betas=betas, weight_decay=self.args.weight_decay)
+        
+
+        # self.scheduler = lr_scheduler.StepLR(self.optim, step_size=10, gamma=0.1)
+        # self.reg_scheduler = lr_scheduler.StepLR(self.reg_optim, step_size=10, gamma=0.1)
+        # self.moe_scheduler = lr_scheduler.StepLR(self.moe_optim, step_size=10, gamma=0.1)
+
+>>>>>>> sb
         print("Total Parameters:", sum([p.nelement() for p in self.model.parameters()]))
 
         self.ce_criterion = torch.nn.CrossEntropyLoss().to(self.args.device)
@@ -236,14 +248,14 @@ class Trainer:
             if flag == 'R':
 
                 if crop == 'crop':
-                    plt.savefig(f'{self.args.output_dir}/{self.args.pre_train}/{datetime}/{model_idx}_{datetime}_{epoch} crop Real Image')
+                    plt.savefig(f'{self.args.output_dir}/{self.args.pre_train}/{datetime}/{model_idx}_{datetime}_{epoch}_crop Real Image')
                 else:
-                    plt.savefig(f'{self.args.output_dir}/{self.args.pre_train}/{datetime}/{model_idx}_{datetime}_{epoch} Real Image')
+                    plt.savefig(f'{self.args.output_dir}/{self.args.pre_train}/{datetime}/{model_idx}_{datetime}_{epoch}_Real Image')
             else:
                 if crop == 'crop':
-                    plt.savefig(f'{self.args.output_dir}/{self.args.pre_train}/{datetime}/{model_idx}_{datetime}_{epoch}  crop Generated Image')
+                    plt.savefig(f'{self.args.output_dir}/{self.args.pre_train}/{datetime}/{model_idx}_{datetime}_{epoch}_crop Generated Image')
                 else:
-                    plt.savefig(f'{self.args.output_dir}/{self.args.pre_train}/{datetime}/{model_idx}_{datetime}_{epoch}  Generated Image')
+                    plt.savefig(f'{self.args.output_dir}/{self.args.pre_train}/{datetime}/{model_idx}_{datetime}_{epoch}_Generated Image')
         else:
             print("Error: Non-tensor input received")
 
@@ -276,8 +288,8 @@ class FourTrainer(Trainer):
                 classifier_loss = 0.0
                 
                 precipitation = []       
-                plot_list_seoul = ['2022-7-6 22:00', '2022-7-13 19:00', '2022-7-31 22:00', '2022-8-8 13:00', '2022-8-9 23:00', '2022-8-19 18:00',
-                                   '2023-6-29 16:00','2023-7-16 13:00']
+                plot_list_seoul = ['2022-07-06 22:00', '2022-07-13 19:00', '2022-07-31 22:00', '2022-08-08 13:00', '2022-08-09 23:00', '2022-08-19 18:00',
+                                   '2023-06-29 16:00','2023-07-16 13:00']
                 plot_list_gangwon = ['2021-08-01 19:00','2021-01-15 16:00']
 
                 # image batch [B, 7, C, W, H]
@@ -446,10 +458,6 @@ class FourTrainer(Trainer):
                             classifier_loss += self.ce_criterion(logits, class_label)
 
                             logits = torch.argmax(F.softmax(logits, dim=-1),dim=-1)
-                            if 2 in logits:
-                                index_of_two = torch.where(logits == 2)[0]
-                                for i in index_of_two:
-                                    print(datetime[i])
                             reg = torch.zeros(self.args.batch).to(self.args.device)
 
                             
@@ -509,7 +517,7 @@ class FourTrainer(Trainer):
                 
                 if self.args.pre_train:
 
-                    joint_loss = set_generation_loss #+ loss_mae
+                    joint_loss = set_generation_loss + loss_mae
                     total_generation_loss += set_generation_loss.item()
 
                 
@@ -527,11 +535,16 @@ class FourTrainer(Trainer):
                 if self.args.pre_train:
                     self.optim.step()
                     self.optim.zero_grad()
+<<<<<<< HEAD
+=======
+                    # self.scheduler.step()
+>>>>>>> sb
 
                 elif self.args.pre_train == False: #fine-tuning 
                     if self.args.classification: # MoE 
                         self.moe_optim.step()
                         self.moe_optim.zero_grad()
+<<<<<<< HEAD
                     
                     elif self.args.classifier:
                         # self.moe_optim.step()
@@ -540,10 +553,17 @@ class FourTrainer(Trainer):
                         # self.classifier_optim.zero_grad()
                         self.optim.step()
                         self.optim.zero_grad()
+=======
+                        # self.moe_scheduler.step() 
+>>>>>>> sb
 
                     else: # Regression Model
                         self.reg_optim.step()
                         self.reg_optim.zero_grad()
+<<<<<<< HEAD
+=======
+                        # self.reg_scheduler.step() 
+>>>>>>> sb
 
                 del batch, generation_loss, loss_mae, joint_loss  # After backward pass
             torch.cuda.empty_cache()
@@ -614,7 +634,26 @@ class FourTrainer(Trainer):
                                            '2022.6.23 19:00', '2022.6.23 22:00','2022.6.24 1:00' '2022.6.30 05:00','2022.7.13 11:00','2022.7.13 12:00',
                                            '2022.7.13 16:00', '2022.8.8 23:00','2022.8.8 21:00','2022.9.5 14:00','2022.9.5 18:00'
                                              '2023.11.6 04:00','2023.11.6 4:00','2023.4.5 13:00','2023.7.11 16:00', '2023.8.10 18:00']
-                    test_datetime_gangwon = []
+                    test_datetime_gangwon = ['2023-09-16 23:00',
+                                                '2022-09-05 23:00',
+                                                '2022-03-13 00:00',
+                                                '2022-08-03 02:00',
+                                                '2022-10-03 00:00',
+                                                '2022-07-31 15:00',
+                                                '2021-04-03 14:00',
+                                                '2021-08-01 17:00',
+                                                '2023-08-24 09:00',
+                                                '2021-10-04 22:00',
+                                                '2022-08-09 15:00',
+                                                '2023-08-10 16:00',
+                                                '2022-08-08 13:00',
+                                                '2022-09-04 22:00',
+                                                '2023-06-09 02:00',
+                                                '2022-06-24 01:00',
+                                                '2022-09-05 02:00',
+                                                '2021-07-04 01:00',
+                                                '2022-10-03 22:00',
+                                                '2022-06-26 09:00']
                     
                     for i in range(len(image_batch)-1):
                     
@@ -878,7 +917,11 @@ class FourTrainer(Trainer):
                                 crop_predict_gap = (last_precipitation[:,:,71,86] * 255).clamp(0,255)
                             else:
                                 crop_predict_gap = (last_precipitation[:,:,58,44] * 255).clamp(0,255)
+<<<<<<< HEAD
 
+=======
+                            
+>>>>>>> sb
                             logits = self.model.classifier(crop_predict_gap)
                             logits = logits.float()
                             classifier_loss += self.ce_criterion(logits, class_label)

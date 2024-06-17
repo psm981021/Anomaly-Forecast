@@ -2,20 +2,21 @@ python main.py \
     --data_dir "data/Seoul" \
     --image_csv_dir "data/Seoul.csv" \
     --batch 8 \
-    --epochs 40000 \
-    --patience 1000 \
+    --epochs 4000 \
+    --patience 100 \
     --model_idx "seoul-L6.Long" \
     --output_dir "output/seoul-L6.Long/" \
     --test_list=[] \
     --gpu_id 1 \
     --device cuda:1 \
     --seed 0 \
-    --lr 0.1 \
+    --lr 0.06 \
     --loss_type "stamina" \
     --location "seoul" \
     --regression "gap" \
     --classifier \
-    --pre_train
+    --balancing \
+    --do_eval
     
 
 #scripts/Version1.sh
