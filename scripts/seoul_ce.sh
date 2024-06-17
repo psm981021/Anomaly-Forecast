@@ -1,11 +1,11 @@
 # python main.py \
-#     --data_dir "/dev/shm/data_Seoul" \
+#     --data_dir "data/data_Seoul" \
 #     --image_csv_dir "data/Seoul.csv" \
 #     --batch 8 \
 #     --epochs 3000 \
 #     --patience 40 \
-#     --model_idx "seoul-L1.01" \
-#     --output_dir "output/seoul-L1.01/" \
+#     --model_idx "seoul-L1.02" \
+#     --output_dir "output/seoul-L1.02/" \
 #     --test_list=[] \
 #     --gpu_id 0 \
 #     --device cuda:0 \
@@ -32,8 +32,6 @@ python main.py \
     --loss_type "ce_image" \
     --location "seoul" \
     --regression "gap" \
-    --classification\
     --do_eval
-
 
 # scripts/seoul_ce.sh

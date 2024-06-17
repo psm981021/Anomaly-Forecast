@@ -1,5 +1,5 @@
 # python main.py \
-#     --data_dir "data/Seoul" \
+#     --data_dir "data/data_Seoul" \
 #     --image_csv_dir "data/Seoul.csv" \
 #     --batch 8 \
 #     --epochs 3000 \
@@ -14,19 +14,19 @@
 #     --loss_type "stamina" \
 #     --location "seoul" \
 #     --regression "gap" \
-#     --balancing \
-#     --pre_train \
+#     --classifier \
+#     --pre_train 
 
 
 python main.py \
-    --data_dir "data/Gangwon" \
-    --image_csv_dir "data/Gangwon.csv" \
+    --data_dir "data/data_Seoul" \
+    --image_csv_dir "data/Seoul.csv" \
     --batch 8 \
     --epochs 5000 \
     --epochs 5000 \
     --patience 40 \
-    --model_idx "seoul-L4.04" \
-    --output_dir "output/seoul-L4.04" \
+    --model_idx "seoul-L4.05" \
+    --output_dir "output/seoul-L4.05" \
     --test_list=[] \
     --gpu_id 0 \
     --device cuda:0 \
@@ -35,7 +35,7 @@ python main.py \
     --loss_type "stamina" \
     --location "seoul" \
     --regression "gap"\
-    --classification \
+    --classification
 
     
 
