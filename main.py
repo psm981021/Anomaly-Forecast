@@ -4,9 +4,9 @@ import torch.nn as nn
 from datasets import Radar
 import argparse
 from utils import *
-from models import *
+from models.Fourcaster import *
 from Trainer import *
-from sianet import *
+from models.sianet import *
 import time
 import wandb
 def show_args_info(args,log_file):
