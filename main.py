@@ -194,8 +194,24 @@ def main():
         map_location = args.device
         trainer.model.load_state_dict(torch.load(args.checkpoint_path, map_location=map_location)['model_state_dict'])
         
-        # classification
-        if args.classification:
+        if args.classifier :
+            args.log_file = os.path.join(args.output_dir,args.str + "-finetune+moe+classifier.txt" )
+            checkpoint_finetune = args.str + "_finetune+moe+classifier.pt" 
+            args.dataframe_path = os.path.join(args.output_dir,args.str + "-finetune+moe+classifier.csv")
+            args.checkpoint_path =  os.path.join(args.output_dir, checkpoint_finetune)
+
+            if os.path.exists(args.checkpoint_path):
+
+                trainer.model.load_state_dict(torch.load(args.checkpoint_path, map_location=map_location)['model_state_dict'])
+
+                print("Continue Finetune-Training")
+                with open(args.log_file, "a") as f:
+                    f.write("------------------------------ Continue Training ------------------------------ \n")
+                    f.write("Load pt for Finetune-training")
+        
+
+        # real label classification
+        elif args.classification:
             args.log_file = os.path.join(args.output_dir,args.str + "-finetune+moe.txt" )
             checkpoint_finetune = args.str + "_finetune+moe.pt" 
             args.dataframe_path = os.path.join(args.output_dir,args.str + "-finetune+moe.csv")
@@ -210,7 +226,7 @@ def main():
                     f.write("------------------------------ Continue Training ------------------------------ \n")
                     f.write("Load pt for Finetune-training")
         
-        # Regression 
+        # single Regression 
         else:
             args.log_file = os.path.join(args.output_dir,args.str + "-finetune.txt" )
             checkpoint_finetune = args.str + "_finetune.pt" 
@@ -250,6 +266,21 @@ def main():
 
         if args.classification:
 
+            for record in args.test_list:
+                for i in range(args.batch):  # Assuming record[0] contains a list of timestamps
+                    datetime = record[0][i]
+                    predicted_precipitation = f"{record[1][i].item():.6f}" if record[1].dim() != 0 else f"{record[1].item():.6f}"
+                    ground_truth = record[2][i].item() if record[2].dim() != 0 else record[2].item()
+                    predict = record[3][i]
+                    precipitation_pixel = record[4][i]
+                    formatted_data.append({
+                        'datetime': datetime,
+                        'predicted precipitation': predicted_precipitation,
+                        'ground_truth': ground_truth,
+                        'predict' : predict,
+                        'precipitation_pixel' : precipitation_pixel
+            })
+        elif args.classifier:
             for record in args.test_list:
                 for i in range(args.batch):  # Assuming record[0] contains a list of timestamps
                     datetime = record[0][i]
