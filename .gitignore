@@ -50,4 +50,3 @@ classification/log/
 __pycache__/
 /.vscode-server/
 /root/.vscode-server
-images
