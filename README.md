@@ -9,15 +9,15 @@
 + 특이한 사례(전례없는 집중호우, 기계의 고장 등)는 많은 피해를 발생시키고 문제가 될 수 있으나, 샘플이 적어 일반적인 인공지능 모델로 다루기 어렵다.
 + 이상치를 예측하거나 다룰 수 있는 방법론을 공부하고 실제 데이터에 적용하여 분석모델의 성능 향상을 증명하거나 활용성을 제시한다.
 
-##### 목표
-특정 지역에서 $${\color{red}집중 호우}$$ 발생 시의 강수량을 예측하여 실제값 과의 차이를 최소화 할 수 있도록 모델을 설계한다.
+### ⛈ [목표]
+특정 지역에서 **집중호우**발생 시의 강수량을 예측하여 실제값 과의 차이를 최소화 할 수 있도록 모델을 설계한다.
 
 ### 👫 [Team]
 
-+ 박성범 
++ [박성범](https://github.com/psm981021)
 + [이찬빈](https://github.com/coldbeeen)
 + [김소정](https://github.com/Soojeoong)
-+ [박지원] (https://github.com/woney23)
++ [박지원](https://github.com/woney23)
 
 ### 📊 [Data]
 
@@ -52,14 +52,14 @@
     </td>
     <td>
       <p>
-        + Timestamp는 1시간의 주기를 가진다.<br>
-        + 각 Timestamp t에 대해 t-1과의 rain값의 차이를 gap에 저장한다.<br>
-        + 각 rain에 대하여 비의 강도에 따라 Light, Normal, Heavy로 label을 할당해준다.<br>
-        + 강수량이 0.1mm 미만인 Timestamp는 비가 오지 않은 것으로 간주, 제외해준다.<br>
-        + 데이터셋을 Train/Valid/Test 로 나눠준다.<br>
-          &nbsp;&nbsp;&nbsp;&nbsp;+ Train : 4개의 연속된 Timestamp<br>
-          &nbsp;&nbsp;&nbsp;&nbsp;+ Valid : Train 뒤에 이어지는 2개의 연속된 Timestamp (2시간)<br>
-          &nbsp;&nbsp;&nbsp;&nbsp;+ Test : Heavy Rain에 속하는 Timestamp 중 랜덤하게 20개 선정<br>
+        Timestamp는 1시간의 주기를 가진다.<br>
+        각 Timestamp t에 대해 t-1과의 rain값의 차이를 gap에 저장한다.<br>
+        각 rain에 대하여 비의 강도에 따라 Light, Normal, Heavy로 label을 할당해준다.<br>
+        강수량이 0.1mm 미만인 Timestamp는 비가 오지 않은 것으로 간주, 제외해준다.<br>
+        데이터셋을 Train/Valid/Test 로 나눠준다.<br>
+          &nbsp;&nbsp;&nbsp;&nbsp; Train : 4개의 연속된 Timestamp<br>
+          &nbsp;&nbsp;&nbsp;&nbsp; Valid : Train 뒤에 이어지는 2개의 연속된 Timestamp (2시간)<br>
+          &nbsp;&nbsp;&nbsp;&nbsp; Test : Heavy Rain에 속하는 Timestamp 중 랜덤하게 20개 선정<br>
       </p>
     </td>
   </tr>
@@ -112,13 +112,15 @@
 + 고품질 데이터셋을 만드는 것에 중점을 두어야 한다.
     + 지형조건, 수증기, 기압, 구름의 분포및 변화과정등 강수 현상에 영향력을 미치는 변수들을 추가해줘야 한다.
 
+
+
 #### FrameWork 2 (Fourcaster Overview)
 
-<p align="center"> <img src = "https://github.com/psm981021/Anomaly-Forecast/blob/main/images/Fourcaster_Overview.png" width = "40%" ></p>
+<p align="center"> <img src = "https://github.com/psm981021/Anomaly-Forecast/blob/main/images/Fourcaster_Overview.png" width = "60%" ></p>
 
 + Autoregressive와 예측 결과가 평균값 근처에 머무는 한계를 극복하기 위한 새로운 FrameWork
 
-<p align="center"> <img src = "https://github.com/psm981021/Anomaly-Forecast/blob/main/images/Fourcaster_Overview2.png" width = "40%" ></p>
+<p align="center"> <img src = "https://github.com/psm981021/Anomaly-Forecast/blob/main/images/Fourcaster_Overview2.png" width = "60%" ></p>
 
 ##### Rainfall Movement Generator
 
@@ -133,28 +135,28 @@
 
 #### 실험 1 (Generation Loss)
 
-<p align="center"> <img src = "https://github.com/psm981021/Anomaly-Forecast/blob/main/images/Generation_Loss_Experiment.png" width = "40%" ></p>
+<p align="center"> <img src = "https://github.com/psm981021/Anomaly-Forecast/blob/main/images/Generation_Loss_Experiment.png" width = "80%" ></p>
 
 + 파란색이 Ground Truth
 + 본 프로젝트에서 설계한 Balancing Loss가 가장 좋은 성능을 보였다.
 
 #### 실험 2 (Regression with MoE)
 
-<p align="center"> <img src = "https://github.com/psm981021/Anomaly-Forecast/blob/main/images/MoE_Experiment.png" width = "40%" ></p>
+<p align="center"> <img src = "https://github.com/psm981021/Anomaly-Forecast/blob/main/images/MoE_Experiment.png" width = "80%" ></p>
 
 + Single Linear 보다 MoE를 사용한 경우 성능이 가장 높음을 확인할 수 있다.
 + MoE 구조를 통해 **Underprediction** 현상을 해결할 수 있음을 보인다.
 
 #### 실험 3 (Forecasting Different Region)
 
-<p align="center"> <img src = "https://github.com/psm981021/Anomaly-Forecast/blob/main/images/Experiment_3.png" width = "40%" ></p>
+<p align="center"> <img src = "https://github.com/psm981021/Anomaly-Forecast/blob/main/images/Experiment_3.png" width = "80%" ></p>
 
 + 강원도 철원 지점에 대한 실험을 통해 모델의 일반화를 보인다.
 + 이전 실험에서의 결과를 바탕으로 Balancing Loss, MoE 구조를 사용하여 실험한다.
 
 ### 🏃 [Conclusion & Insights]
 
-<p align="center"> <img src = "https://github.com/psm981021/Anomaly-Forecast/blob/main/images/Conclusion.png" width = "40%" ></p>
+<p align="center"> <img src = "https://github.com/psm981021/Anomaly-Forecast/blob/main/images/Conclusion.png" width = "80%" ></p>
 
 
 ### 📚 [Stack]
