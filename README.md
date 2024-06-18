@@ -52,14 +52,14 @@
     </td>
     <td>
       <p>
-        Timestamp는 1시간의 주기를 가진다.<br>
-        각 Timestamp t에 대해 t-1과의 rain값의 차이를 gap에 저장한다.<br>
-        각 rain에 대하여 비의 강도에 따라 Light, Normal, Heavy로 label을 할당해준다.<br>
-        강수량이 0.1mm 미만인 Timestamp는 비가 오지 않은 것으로 간주, 제외해준다.<br>
-        데이터셋을 Train/Valid/Test 로 나눠준다.<br>
-          &nbsp;&nbsp;&nbsp;&nbsp; Train : 4개의 연속된 Timestamp<br>
-          &nbsp;&nbsp;&nbsp;&nbsp; Valid : Train 뒤에 이어지는 2개의 연속된 Timestamp (2시간)<br>
-          &nbsp;&nbsp;&nbsp;&nbsp; Test : Heavy Rain에 속하는 Timestamp 중 랜덤하게 20개 선정<br>
+        1. Timestamp는 1시간의 주기를 가진다.<br>
+        2. 각 Timestamp t에 대해 t-1과의 rain값의 차이를 gap에 저장한다.<br>
+        3. 각 rain에 대하여 비의 강도에 따라 Light, Normal, Heavy로 label을 할당해준다.<br>
+        4. 강수량이 0.1mm 미만인 Timestamp는 비가 오지 않은 것으로 간주, 제외해준다.<br>
+        5. 데이터셋을 Train/Valid/Test 로 나눠준다.<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;   Train : 4개의 연속된 Timestamp<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;   Valid : Train 뒤에 이어지는 2개의 연속된 Timestamp (2시간)<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;   Test : Heavy Rain에 속하는 Timestamp 중 랜덤하게 20개 선정<br>
       </p>
     </td>
   </tr>
@@ -85,7 +85,7 @@
 
 ##### 실험 (Baseline) 결과
 
-<p align="center"> <img src = "https://github.com/psm981021/Anomaly-Forecast/blob/main/images/Baseline_Result.png" width = "60%" ></p>
+<p align="center"> <img src = "https://github.com/psm981021/Anomaly-Forecast/blob/main/images/Baseline_Result.png" width = "80%" ></p>
 
 + Autoregressive한 성향이 지배적임을 알 수 있다.
 + 평균에 근접하게 예측하는 현상을 보인다.
@@ -116,11 +116,11 @@
 
 #### FrameWork 2 (Fourcaster Overview)
 
-<p align="center"> <img src = "https://github.com/psm981021/Anomaly-Forecast/blob/main/images/Fourcaster_Overview.png" width = "60%" ></p>
+<p align="center"> <img src = "https://github.com/psm981021/Anomaly-Forecast/blob/main/images/Fourcaster_Overview.png" width = "100%" ></p>
 
 + Autoregressive와 예측 결과가 평균값 근처에 머무는 한계를 극복하기 위한 새로운 FrameWork
 
-<p align="center"> <img src = "https://github.com/psm981021/Anomaly-Forecast/blob/main/images/Fourcaster_Overview2.png" width = "60%" ></p>
+<p align="center"> <img src = "https://github.com/psm981021/Anomaly-Forecast/blob/main/images/Fourcaster_Overview2.png" width = "100%" ></p>
 
 ##### Rainfall Movement Generator
 
@@ -135,7 +135,7 @@
 
 #### 실험 1 (Generation Loss)
 
-<p align="center"> <img src = "https://github.com/psm981021/Anomaly-Forecast/blob/main/images/Generation_Loss_Experiment.png" width = "80%" ></p>
+<p align="center"> <img src = "https://github.com/psm981021/Anomaly-Forecast/blob/main/images/Generation_Loss_Experiment.png" width = "100%" ></p>
 
 + 파란색이 Ground Truth
 + 본 프로젝트에서 설계한 Balancing Loss가 가장 좋은 성능을 보였다.
@@ -149,7 +149,7 @@
 
 #### 실험 3 (Forecasting Different Region)
 
-<p align="center"> <img src = "https://github.com/psm981021/Anomaly-Forecast/blob/main/images/Experiment_3.png" width = "80%" ></p>
+<p align="center"> <img src = "https://github.com/psm981021/Anomaly-Forecast/blob/main/images/Experiment_3.png" width = "100%" ></p>
 
 + 강원도 철원 지점에 대한 실험을 통해 모델의 일반화를 보인다.
 + 이전 실험에서의 결과를 바탕으로 Balancing Loss, MoE 구조를 사용하여 실험한다.
