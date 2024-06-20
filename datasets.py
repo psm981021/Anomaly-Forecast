@@ -51,7 +51,7 @@ class Radar(Dataset):
             # self.data = self.data[self.data['Set'] == self.flag]
             return len(self.data)
         except:
-        # self.data contains all data including train/valid/test
+        
             print("dataset len debug");import IPython; IPython.embed(colors='Linux');exit(1);
     
     def apply_augmentation(self, img):
@@ -90,7 +90,6 @@ class Radar(Dataset):
         dataset_date = data['Timestamp'].values
         class_label = data['Class_label'].values
 
-        # import IPython; IPython.embed(colors='Linux'); exit(1)
         for i in tqdm(idx):
             tmp = data.loc[i]
             batch_images = []

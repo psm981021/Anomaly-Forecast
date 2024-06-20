@@ -2,9 +2,7 @@ import numpy as np
 import random
 import os
 import torch
-import zipfile
 from tqdm import tqdm
-import cv2 
 import pandas as pd
 from PIL import Image
 from torchvision import transforms

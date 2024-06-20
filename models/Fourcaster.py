@@ -69,18 +69,6 @@ class Fourcaster(nn.Module):
             self.filter = Learnable_Filter()
 
         self.apply(self.init_weights)
-        # self.init_custom_weights() 
-        
-    @staticmethod
-    def plot_image(image, flag=None):
-        
-        image = image.cpu().detach().permute(1,2,0).numpy()
-        plt.imshow(image)
-        if flag == 'R':
-            plt.savefig('Real Image')
-        else:
-            plt.savefig('Generated Image')
-        #Fourcaster.plot_image(x[0])
     
 
     def init_custom_weights(self, layer, mean, std):
@@ -109,8 +97,6 @@ class Fourcaster(nn.Module):
                     self.init_custom_weights(module, mean, std)
                         
 
-
-
     def forward(self, x, args):
         
 
@@ -128,8 +114,6 @@ class Fourcaster(nn.Module):
         x = self.up1(x5Att, x4Att)
         x = self.up2(x, x3Att)
         x = self.up3(x, x2Att)
-
-        # shape 확인 - reconstruction image?
         x = self.up4(x, x1Att)
 
         generated_image = self.outc(x)
@@ -147,12 +131,7 @@ class Fourcaster(nn.Module):
 
             crop_generated_image = self.outc(crop_x).permute(0,2,3,1)
             return generated_image, crop_generated_image
-    
-        
-        # regression_logits = self.regression_model(x)
-        # generated_image = self.projection(x)
 
-        # regression logits
 
         return generated_image
     

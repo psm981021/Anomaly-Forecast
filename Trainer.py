@@ -1,32 +1,10 @@
 import torch
 from torch.optim import Adam
 from tqdm import tqdm
-import wandb
 import torch.nn as nn
-from PIL import Image
 import matplotlib.pyplot as plt
-
-from models import RainfallPredictor
-from rainnet import *
-import numpy as np
 from utils import *
-from classification_gpu import *
-from sklearn.metrics import confusion_matrix, precision_score, recall_score, f1_score
-
-
-class FocalLoss(nn.Module):
-    def __init__(self, alpha=.5, gamma=2):
-        super(FocalLoss, self).__init__()
-        self.alpha = alpha
-        self.gamma = gamma
-
-    def forward(self, inputs, targets):
-        logpt = -nn.functional.cross_entropy(inputs, targets, reduction='none')
-        pt = torch.exp(logpt)
-        at = self.alpha * targets + (1 - self.alpha) * (1 - targets)
-        F_loss = -at * (1 - pt) ** self.gamma * logpt
-        return F_loss.mean()
-
+import torch.nn.functional as F
 
 class Trainer:
 
@@ -34,7 +12,6 @@ class Trainer:
         self.args = args
         self.cuda_condition = torch.cuda.is_available() and not self.args.no_cuda
         self.device = args.device
-        # self.device = torch.device("cuda:" + args.gpu_id if torch.cuda.is_available() and not args.no_cuda else "cpu")
         if self.cuda_condition:
             torch.cuda.set_device(self.args.device)
 
@@ -45,33 +22,10 @@ class Trainer:
             nn.AdaptiveAvgPool2d((50, 50))
         )
 
-        # self.classifier, self.class_criterion, self.class_optimizer = initialize_model(
-        #     learning_rate=args.learning_rate,
-        #     loss_type="focal",
-        #     device=self.device
-        # )
-
-        # self.classifier = load_model("classification/model/Seoul_b7_epoch_7.pth", self.device, 'b7')
-        # self.classifier = EfficientNet.from_pretrained('efficientnet-b0', num_classes=3)
-
-        # self.regression_layer = RainfallPredictor().to(self.args.device)
-        # self.regression_model = RainNet().to(self.args.device)
-        # self.Linear_layer = nn.Linear(self.args.batch, self.args.batch)
-        # self.regression_layer =nn.Linear(100, 1)
-
-
-
         if self.cuda_condition:
             self.model.cuda()
             self.projection.cuda()
-            # self.classifier.cuda()
-            #self.regression_model.cuda()
-            # self.Linear_layer.cuda()
-            # self.regression_layer.cuda()
         
-        # for param in self.classifier.parameters():
-        #     param.requires_grad = False
-
         if self.args.pre_train:
             for param in self.model.parameters():
                 param.requires_grad = True
@@ -84,7 +38,6 @@ class Trainer:
             for param in self.model.parameters():
                 param.requires_grad = False
 
-            # Assuming the regression model is meant to be trained
             for param in self.model.regression_layer.parameters():
                 param.requires_grad = True
 
@@ -100,23 +53,10 @@ class Trainer:
         self.valid_dataloader = valid_dataloader
         self.test_dataloader = test_dataloader
 
-        # self.data_name = self.args.data_name
         betas = (self.args.adam_beta1, self.args.adam_beta2)
-<<<<<<< HEAD
         self.optim = Adam(self.model.parameters(), lr=1e-5, betas=betas, weight_decay=self.args.weight_decay)
         self.reg_optim = Adam(filter(lambda p: p.requires_grad, self.model.regression_layer.parameters()), lr=1e-5, betas=betas, weight_decay=self.args.weight_decay)
         self.moe_optim = Adam(filter(lambda p: p.requires_grad, self.model.moe.parameters()), lr=1e-5, betas=betas, weight_decay=self.args.weight_decay)
-=======
-        self.optim = Adam(self.model.parameters(), lr=self.args.lr, betas=betas, weight_decay=self.args.weight_decay)
-        self.reg_optim = Adam(filter(lambda p: p.requires_grad, self.model.regression_layer.parameters()), lr=self.args.lr, betas=betas, weight_decay=self.args.weight_decay)
-        self.moe_optim = Adam(filter(lambda p: p.requires_grad, self.model.moe.parameters()), lr=self.args.lr, betas=betas, weight_decay=self.args.weight_decay)
-        
-
-        # self.scheduler = lr_scheduler.StepLR(self.optim, step_size=10, gamma=0.1)
-        # self.reg_scheduler = lr_scheduler.StepLR(self.reg_optim, step_size=10, gamma=0.1)
-        # self.moe_scheduler = lr_scheduler.StepLR(self.moe_optim, step_size=10, gamma=0.1)
-
->>>>>>> sb
         print("Total Parameters:", sum([p.nelement() for p in self.model.parameters()]))
 
         self.ce_criterion = torch.nn.CrossEntropyLoss().to(self.args.device)
@@ -186,54 +126,7 @@ class Trainer:
         self.model.load_state_dict(checkpoint['model_state_dict'])
         self.model.to(self.device)
 
-    def evaluate_model(self, predicted, labels):
-
-        correct = 0
-        total = 0
-        label_list = []
-        pred_list = []
-
-        correct += (predicted == labels).sum().item()
-        label_list.extend(labels.cpu().numpy())
-        pred_list.extend(predicted.cpu().numpy())
-
-        cm = confusion_matrix(label_list, pred_list, labels=[0, 1, 2])
-        accuracy = np.trace(cm) / np.sum(cm)
-        precision = precision_score(label_list, pred_list, average=None, labels=[0, 1, 2], zero_division=0)
-        recall = recall_score(label_list, pred_list, average=None, labels=[0, 1, 2], zero_division=0)
-        f1 = f1_score(label_list, pred_list, average=None, labels=[0, 1, 2], zero_division=0)
-
-        # Average F1 Score
-        avg_f1 = np.mean(f1)
-    
-        # CSI (Critical Success Index) 계산
-        csi = []
-        for i in range(len(cm)):
-            tp = cm[i, i]
-            fn = np.sum(cm[i, :]) - tp
-            fp = np.sum(cm[:, i]) - tp
-            csi.append(tp / (tp + fn + fp) if (tp + fn + fp) != 0 else 0)
-        avg_csi = np.mean(csi)
-        
-
-        # POD (Probability of Detection) 계산
-        pod = recall  # recall과 동일
-        avg_pod = np.mean(pod)
-
-        # FAR (False Alarm Ratio) 계산
-        far = []
-        for i in range(len(cm)):
-            tp = cm[i, i]
-            fp = np.sum(cm[:, i]) - tp
-            far.append(fp / (tp + fp) if (tp + fp) != 0 else 0)
-        avg_far = np.mean(far)
-
-        return accuracy, avg_f1, avg_csi, avg_pod, avg_far
-
-    
     def plot_images(self, image ,epoch, model_idx, datetime, flag=None, crop =None, test =None):
-        # image = image.cpu().detach().permute(1,2,0).numpy()
-        # image = image.cpu().detach().permute(2,0,1).numpy()
         
         if isinstance(image, torch.Tensor):
             image = image.cpu().detach().numpy()
@@ -288,9 +181,6 @@ class FourTrainer(Trainer):
                 classifier_loss = 0.0
                 
                 precipitation = []       
-                plot_list_seoul = ['2022-07-06 22:00', '2022-07-13 19:00', '2022-07-31 22:00', '2022-08-08 13:00', '2022-08-09 23:00', '2022-08-19 18:00',
-                                   '2023-06-29 16:00','2023-07-16 13:00']
-                plot_list_gangwon = ['2021-08-01 19:00','2021-01-15 16:00']
 
                 # image batch [B, 7, C, W, H]
                 image_batch = torch.stack(image_batch).permute(1,0,2,3,4).contiguous()
@@ -310,62 +200,25 @@ class FourTrainer(Trainer):
                     else:
                         correlation_image += torch.abs(self.correlation_image(generated_image.mean(dim=-1), image_batch[i+1].mean(dim=1))) #/ self.args.batch
                     
-                    if epoch == 0:
-                        if self.args.location == 'seoul':
-                            for j in range(len(datetime)):
-                                if datetime[j] in plot_list_seoul:
-                                    self.plot_images(image_batch[-1][j].permute(1,2,0),epoch, self.args.model_idx, datetime[j], 'R')
-                                    self.plot_images(image_batch[-1][j][:,65:95,60:90].permute(1,2,0),epoch, self.args.model_idx, datetime[j], 'R' ,'crop')
-                        
-                        elif self.args.location == "gangwon":
-                            for j in range(len(datetime)):
-                                if datetime[j] in plot_list_gangwon:
-                                    self.plot_images(image_batch[-1][j].permute(1,2,0),epoch, self.args.model_idx, datetime[j], 'R')
-                                    self.plot_images(image_batch[-1][j][:,30:60,45:75].permute(1,2,0),epoch, self.args.model_idx, datetime[j], 'R' ,'crop')
-                
-                    if epoch % 10 == 0 and self.args.pre_train:
-                        if self.args.location == "seoul":
-                            for j in range(len(datetime)):
-                                if datetime[j] in plot_list_seoul:
-                                    self.plot_images(generated_image[j].mean(dim=-1),epoch, self.args.model_idx, datetime[j], 'G')
-                                    if self.args.balancing:
-                                        self.plot_images(crop_generated_image[j].mean(dim=-1),epoch, self.args.model_idx, datetime[j], 'G', 'crop')
-
-                        elif self.args.location == "gangwon":
-                            for j in range(len(datetime)):
-                                if datetime[j] in plot_list_gangwon:
-                                    self.plot_images(generated_image[j].mean(dim=-1),epoch, self.args.model_idx, datetime[j], 'G')
-                                    if self.args.balancing:
-                                        self.plot_images(crop_generated_image[j].mean(dim=-1),epoch, self.args.model_idx, datetime[j], 'G', 'crop')
-
-
-                    # generated_image [B, W, H, C], 
-                    # regression_logits = regression_logits.reshape(self.args.batch, -1)
                     precipitation.append(generated_image) # [B x 1]
                     
-                    
+                
                     if self.args.loss_type == 'ce_image':
-                        
                         generation_loss =  self.ce_criterion(generated_image.mean(dim=-1), image_batch[i+1].mean(dim=1))
 
                     elif self.args.loss_type == 'mae_image':
-                        
                         loss_r, loss_g, loss_b = self.mae_criterion(generated_image.permute(0,3,1,2),image_batch[i+1][:,0,:,:].unsqueeze(1)),self.mae_criterion(generated_image.permute(0,3,1,2),image_batch[i+1][:,1,:,:].unsqueeze(1)),self.mae_criterion(generated_image.permute(0,3,1,2),image_batch[i+1][:,2,:,:].unsqueeze(1))
                         generation_loss = (loss_r +  loss_g + loss_b) / 3
-                        
-                        #generation_loss = self.mae_criterion(generated_image.mean(dim=-1), image_batch[i+1])
+                    
 
                     elif self.args.loss_type == 'ed_image':
 
                         preds = torch.softmax(generated_image,dim=-1)
                         
                         if self.args.grey_scale == False:
-                            label_tensor = torch.arange(100).to(self.device).float()
                             
                             err = (torch.arange(100).to(self.device).float() - image_batch[i+1].permute(0,2,3,1).mean(dim=-1).unsqueeze(-1)).abs()
                             generation_loss = torch.sum((preds * err),dim=-1).mean()
-                            #err_r, err_g, err_b = (label_tensor - image_batch[i+1][:,0,:,:].unsqueeze(-1)).abs(), (label_tensor - image_batch[i+1][:,1,:,:].unsqueeze(-1)).abs(), (label_tensor - image_batch[i+1][:,2,:,:].unsqueeze(-1)).abs()
-                            #generation_loss = torch.sum( (preds * err_r) + (preds * err_g) + (preds * err_b) ,dim=-1).mean()
 
                         else:
                             err = (torch.arange(100).to(self.device).float() - image_batch[i+1].permute(0,2,3,1)).abs()
@@ -417,8 +270,6 @@ class FourTrainer(Trainer):
                     set_generation_loss += generation_loss
                     total_correlation += correlation_image
 
-                # set이여서 6으로 나눔
-                # set_generation_loss /= 6
                 total_correlation /= 6
                
                 
@@ -429,11 +280,6 @@ class FourTrainer(Trainer):
                 predicted_gaps =  stack_precipitation[1:] - stack_precipitation[:-1] # [5 ,B, 150, 150, 100]
                 total_predict_gap = torch.sum(predicted_gaps, dim=0) # [B, 150, 150, 100] -> [1]
                 total_predict_gap=total_predict_gap.permute(0,3,1,2)
-
-                # reg = self.regression_model(image_batch[i+1]).view(self.args.batch) # [B] 
-                
-                # last_reg = self.regression_model(last_precipitation.permute(0,3,1,2).contiguous()).view(self.args.batch) # [B] 
-
 
                 if self.args.pre_train == False:
                     
@@ -481,7 +327,7 @@ class FourTrainer(Trainer):
 
                             reg = torch.zeros(self.args.batch).to(self.args.device)
 
-                            # import IPython; IPython.embed(colors='Linux'); exit(1)
+
                             for i, model_index in enumerate(class_label): # 라벨값을 직접 주기
                                 selected_model = self.model.moe[model_index]  # Select model based on prediction
                                 if self.args.location == 'seoul':
@@ -512,8 +358,7 @@ class FourTrainer(Trainer):
                         loss_mae = self.mae_criterion(reg, abs(label))
                     
                     total_mae += loss_mae
-            
-                #reg = self.regression_model(total_predict_gap).view(self.args.batch) # [B] 
+        
                 
                 if self.args.pre_train:
 
@@ -527,7 +372,6 @@ class FourTrainer(Trainer):
                         total_classifier_loss += classifier_loss.item()
                     total_mae_loss += total_mae.item()
 
-                # import IPython; IPython.embed(colors='Linux'); exit(1)
                 joint_loss.backward()
                 
                 torch.nn.utils.clip_grad_norm_(self.model.parameters(), max_norm=1.0)
@@ -535,45 +379,24 @@ class FourTrainer(Trainer):
                 if self.args.pre_train:
                     self.optim.step()
                     self.optim.zero_grad()
-<<<<<<< HEAD
-=======
-                    # self.scheduler.step()
->>>>>>> sb
 
                 elif self.args.pre_train == False: #fine-tuning 
                     if self.args.classification: # MoE 
                         self.moe_optim.step()
                         self.moe_optim.zero_grad()
-<<<<<<< HEAD
                     
                     elif self.args.classifier:
-                        # self.moe_optim.step()
-                        # self.classifier_optim.step()
-                        # self.moe_optim.zero_grad()
-                        # self.classifier_optim.zero_grad()
                         self.optim.step()
                         self.optim.zero_grad()
-=======
-                        # self.moe_scheduler.step() 
->>>>>>> sb
 
                     else: # Regression Model
                         self.reg_optim.step()
                         self.reg_optim.zero_grad()
-<<<<<<< HEAD
-=======
-                        # self.reg_scheduler.step() 
->>>>>>> sb
 
                 del batch, generation_loss, loss_mae, joint_loss  # After backward pass
             torch.cuda.empty_cache()
             
-            
-            if self.args.wandb == True:
-                wandb.log({f'Generation Loss {self.args.loss_type} (Train)': total_generation_loss / len(batch_iter)}, step=epoch)
-                wandb.log({'Correlation Image (Train)': total_correlation / len(batch_iter)}, step=epoch)
-                wandb.log({'MAE Train Loss': total_mae_loss / len(batch_iter)}, step=epoch)
-
+        
             post_fix = {
                 "epoch":epoch,
                 f"Geneartion Loss {self.args.loss_type} (Train)": "{:.6f}".format(total_generation_loss/len(batch_iter)),
@@ -589,14 +412,12 @@ class FourTrainer(Trainer):
 
         # end of train
 
-
+        #valid and test
         else:
-            #valid and test
+            
             print("Eval Fourcaster")
             self.model.eval()
 
-            correct = 0
-            total = 0
             label_list = []
             pred_list = []
 
@@ -605,7 +426,7 @@ class FourTrainer(Trainer):
                 batch_iter = tqdm(enumerate(dataloader), total= len(dataloader))
                 for i, batch in batch_iter:
 
-                    # image, label, gap, datetime= batch
+                   
                     image, label, gap, datetime, class_label = batch # image = [8, 7, 3, 150, 150]
                     
                     image_batch = [t.to(self.args.device) for t in image]
@@ -621,39 +442,8 @@ class FourTrainer(Trainer):
 
                     image_batch = torch.stack(image_batch).permute(1,0,2,3,4).contiguous()
                     
-                                    # ['2022-08-08 13:00', '2022-08-11 05:00', '2023-07-04 20:00',
-                                    #   '2023-07-14 01:00','2023-07-18 07:00','2023-08-29 13:00','2023-09-17 00:00',
-                                    #   '2021-07-03 18:00', '2021-07-03 21:00', '2022-06-23 20:00', '2022-06-23 19:00',
-                                    #   '2022-06-23 22:00', '2022-06-24 01:00', '2022-06-30 03:00', '2022-06-30 05:00',
-                                    #   '2022-06-30 06:00', '2022-06-30 08:00', '2022-06-30 09:00', '2022-06-30 10:00',
-                                    #   '2022-06-30 18:00', '2022-06-30 19:00', '2022-07-13 11:00', '2022-07-13 16:00',
-                                    #   '2022-07-13 17:00', '2022-08-08 21:00', '2022-08-08 22:00', '2022-08-08 23:00',
-                                    #   '2022-08-09 00:00', '2022-08-09 03:00']
-                    
-                    test_datetime_seoul = ['2021.7.3 18:00','2021.7.3 21:00'
-                                           '2022.6.23 19:00', '2022.6.23 22:00','2022.6.24 1:00' '2022.6.30 05:00','2022.7.13 11:00','2022.7.13 12:00',
-                                           '2022.7.13 16:00', '2022.8.8 23:00','2022.8.8 21:00','2022.9.5 14:00','2022.9.5 18:00'
-                                             '2023.11.6 04:00','2023.11.6 4:00','2023.4.5 13:00','2023.7.11 16:00', '2023.8.10 18:00']
-                    test_datetime_gangwon = ['2023-09-16 23:00',
-                                                '2022-09-05 23:00',
-                                                '2022-03-13 00:00',
-                                                '2022-08-03 02:00',
-                                                '2022-10-03 00:00',
-                                                '2022-07-31 15:00',
-                                                '2021-04-03 14:00',
-                                                '2021-08-01 17:00',
-                                                '2023-08-24 09:00',
-                                                '2021-10-04 22:00',
-                                                '2022-08-09 15:00',
-                                                '2023-08-10 16:00',
-                                                '2022-08-08 13:00',
-                                                '2022-09-04 22:00',
-                                                '2023-06-09 02:00',
-                                                '2022-06-24 01:00',
-                                                '2022-09-05 02:00',
-                                                '2021-07-04 01:00',
-                                                '2022-10-03 22:00',
-                                                '2022-06-26 09:00']
+                    test_datetime_seoul = ['2021.7.3 18:00']
+                    test_datetime_gangwon = ['2023-09-16 23:00']
                     
                     for i in range(len(image_batch)-1):
                     
@@ -684,16 +474,14 @@ class FourTrainer(Trainer):
                             generation_loss =  self.ce_criterion(generated_image.mean(dim=-1), image_batch[i+1].mean(dim=1))
 
                         elif self.args.loss_type == 'mae_image':
-                            # import IPython; IPython.embed(colors='Linux'); exit(1)
+                           
                             loss_r, loss_g, loss_b = self.mae_criterion(generated_image.permute(0,3,1,2),image_batch[i+1][:,0,:,:].unsqueeze(1)),self.mae_criterion(generated_image.permute(0,3,1,2),image_batch[i+1][:,1,:,:].unsqueeze(1)),self.mae_criterion(generated_image.permute(0,3,1,2),image_batch[i+1][:,2,:,:].unsqueeze(1))
                             generation_loss = (loss_r +  loss_g + loss_b) / 3
 
                         elif self.args.loss_type == 'ed_image':
                             preds = torch.softmax(generated_image,dim=-1)
 
-                            if self.args.grey_scale == False:
-                                label_tensor = torch.arange(100).to(self.device).float()
-                                
+                            if self.args.grey_scale == False:                
                                 err = (torch.arange(100).to(self.device).float() - image_batch[i+1].permute(0,2,3,1).mean(dim=-1).unsqueeze(-1)).abs()
                                 generation_loss = torch.sum((preds * err),dim=-1).mean()
                             
@@ -747,13 +535,7 @@ class FourTrainer(Trainer):
                             generation_loss =  self.ce_criterion(generated_image.flatten(1), class_label)
                         
                         set_generation_loss += generation_loss
-                        # total_correlation += correlation_image
-                    
-                    # set이여서 6으로 나눔
-                    # set_generation_loss /= 6
-                    # correlation_image /= 6
 
-                    # self.plot_images(generated_image[0],self.args.model_idx,datetime[6])
                     last_precipitation = precipitation[-1].permute(0,3,1,2,)
                     stack_precipitation = torch.stack(precipitation) # [6 , B, 150, 150, 100]
                 
@@ -762,10 +544,6 @@ class FourTrainer(Trainer):
                     
                     total_predict_gap=total_predict_gap.permute(0,3,1,2).contiguous()
 
-                    # reg = self.regression_layer(image_batch[i+1]).view(self.args.batch) # [B]
-                    # reg = self.regression_layer(total_predict_gap).view(self.args.batch) # [B] 
-                    # last_reg = self.regression_layer(last_precipitation.permute(0,3,1,2).contiguous()).view(self.args.batch) # [B] 
-                    
                        
                     if self.args.pre_train == False:
                         if self.args.regression == 'gap':
@@ -777,7 +555,6 @@ class FourTrainer(Trainer):
                                 else: # gangwon
                                     crop_predict_gap = (total_predict_gap[:,:,58,44] * 255).clamp(0,255)
 
-
                                 logits = self.model.classifier(crop_predict_gap)
                                 logits = logits.float()
                                 classifier_loss += self.ce_criterion(logits, class_label)
@@ -785,44 +562,8 @@ class FourTrainer(Trainer):
                                 logits = torch.argmax(F.softmax(logits, dim=-1),dim=-1)
                                 reg = torch.zeros(self.args.batch).to(self.args.device)
 
-                                correct += (logits == class_label).sum().item()
                                 label_list.extend(class_label.cpu().numpy())
                                 pred_list.extend(logits.cpu().numpy())
-
-                                cm = confusion_matrix(label_list, pred_list, labels=[0, 1, 2])
-                                accuracy = np.trace(cm) / np.sum(cm)
-                                precision = precision_score(label_list, pred_list, average=None, labels=[0, 1, 2], zero_division=0)
-                                recall = recall_score(label_list, pred_list, average=None, labels=[0, 1, 2], zero_division=0)
-                                f1 = f1_score(label_list, pred_list, average=None, labels=[0, 1, 2], zero_division=0)
-
-                                # Average F1 Score
-                                avg_f1 = np.mean(f1)
-
-                    
-                                csi = []
-                                for i in range(len(cm)):
-                                    tp = cm[i, i]
-                                    fn = np.sum(cm[i, :]) - tp
-                                    fp = np.sum(cm[:, i]) - tp
-                                    csi.append(tp / (tp + fn + fp) if (tp + fn + fp) != 0 else 0)
-                                avg_csi = np.mean(csi)
-
-                                
-                                # POD (Probability of Detection) 계산
-                                pod = recall  # recall과 동일
-                                avg_pod = np.mean(pod)
-
-
-                                # FAR (False Alarm Ratio) 계산
-                                far = []
-                                for i in range(len(cm)):
-                                    tp = cm[i, i]
-                                    fp = np.sum(cm[:, i]) - tp
-                                    far.append(fp / (tp + fp) if (tp + fp) != 0 else 0)
-                                avg_far = np.mean(far)
-
-
-
 
                                 for i, model_index in enumerate(logits):
                                     selected_model = self.model.moe[model_index]  
@@ -841,15 +582,13 @@ class FourTrainer(Trainer):
                                     crop_predict_gap = (total_predict_gap[:,:,57:59,43:45] * 255).clamp(0,255)
 
                                 reg = torch.zeros(self.args.batch).to(self.args.device)
-                                # for i, model_index in enumerate(predict):
+                                
                                 for i, model_index in enumerate(class_label):
                                     selected_model = self.model.moe[model_index]  # Select model based on prediction
 
                                     if self.args.location == 'seoul':
                                         reg[i] = abs(selected_model(abs(total_predict_gap[:,:,71,86][i])))
-                                        for j in range(len(datetime)):
-                                            if '2022.6.23 19:00' in datetime:
-                                                import IPython; IPython.embed(colors='Linux');exit(1);
+
                                     elif self.args.location == "gangwon":
                                         reg[i] = abs(selected_model(abs(total_predict_gap[:,:,58,44][i]))) 
 
@@ -897,7 +636,7 @@ class FourTrainer(Trainer):
                                 crop_predict_gap = (last_precipitation[:,:,57:59,43:45] * 255).clamp(0,255)
 
                             reg = torch.zeros(self.args.batch).to(self.args.device)
-                            # for i, model_index in enumerate(predict):
+                            
                             
                             for i, model_index in enumerate(class_label):
                                 selected_model = self.model.moe[model_index]  # Select model based on prediction
@@ -906,7 +645,6 @@ class FourTrainer(Trainer):
                                 else:
                                     reg[i] = abs(selected_model(abs(last_precipitation[:,:,58,44][i])))
 
-                            # self.args.test_list.append([datetime, reg, label, predict])
                             if self.args.location == "seoul":
                                 self.args.test_list.append([datetime, reg, label, class_label, last_precipitation[:,:,71,86]])
                             else:
@@ -917,11 +655,6 @@ class FourTrainer(Trainer):
                                 crop_predict_gap = (last_precipitation[:,:,71,86] * 255).clamp(0,255)
                             else:
                                 crop_predict_gap = (last_precipitation[:,:,58,44] * 255).clamp(0,255)
-<<<<<<< HEAD
-
-=======
-                            
->>>>>>> sb
                             logits = self.model.classifier(crop_predict_gap)
                             logits = logits.float()
                             classifier_loss += self.ce_criterion(logits, class_label)
