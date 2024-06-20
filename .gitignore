@@ -10,7 +10,8 @@ data/*.ipynb
 /data/data_radar
 data/*.png
 /data/images_classification
-
+/data/data_Gangwon
+/data/data_Seoul
 
 # clone models
 /test.ipynb
