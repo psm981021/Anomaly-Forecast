@@ -21,7 +21,6 @@ class DepthwiseSeparableConv(nn.Module):
         return x
 
 
-
 class DoubleConvDS(nn.Module):
     """(convolution => [BN] => ReLU) * 2"""
 
@@ -211,3 +210,136 @@ class CBAM(nn.Module):
         out = self.channel_att(x)
         out = self.spatial_att(out)
         return out
+    
+
+class LKA(nn.Module):
+    def __init__(self, dim):
+        super().__init__()
+        self.conv0 = nn.Conv2d(dim, dim, 5, padding=2, groups=dim)
+        self.conv_spatial = nn.Conv2d(dim, dim, 7, 1, padding=9, groups=dim, dilation=3)
+        self.conv1 = nn.Conv2d(dim, dim, 1)
+
+
+    def forward(self, x):
+        u = x.clone()
+        attn = self.conv0(x)
+        attn = self.conv_spatial(attn)
+        attn = self.conv1(attn)
+
+        return u * attn
+    
+class Bottleneck(nn.Module):
+    """Bottleneck module
+    Args:
+        inplanes (int): no. input channels
+        planes (int): no. output channels
+        stride (int): stride
+        downsample (nn.Module): downsample module
+    """
+
+    expansion = 4
+
+    def __init__(self, inplanes, planes, stride=1, downsample=None):
+        super(Bottleneck, self).__init__()
+        self.conv1 = nn.Conv2d(inplanes, planes, kernel_size=1, bias=False)
+        self.bn1 = nn.BatchNorm2d(planes, momentum=0.01)
+        self.conv2 = nn.Conv2d(planes, planes, kernel_size=3, stride=stride, padding=1, bias=False)
+        self.bn2 = nn.BatchNorm2d(planes, momentum=0.01)
+        self.conv3 = nn.Conv2d(planes, planes * self.expansion, kernel_size=1, bias=False)
+        self.bn3 = nn.BatchNorm2d(planes * self.expansion, momentum=0.01)
+        self.relu = nn.ReLU(inplace=True)
+        self.downsample = downsample
+        self.stride = stride
+
+    def forward(self, x):
+
+        residual = x
+
+        out = self.conv1(x)
+        out = self.bn1(out)
+        out = self.relu(out)
+
+        out = self.conv2(out)
+        out = self.bn2(out)
+        out = self.relu(out)
+
+        out = self.conv3(out)
+        out = self.bn3(out)
+
+        if self.downsample is not None:
+            residual = self.downsample(x)
+
+        out += residual
+        out = self.relu(out)
+
+        return out
+
+class Attention(nn.Module):
+    def __init__(self, d_model=64, d_model2=64):
+        super().__init__()
+
+        self.proj_1 = nn.Conv2d(d_model, d_model2, 1)
+        self.activation = nn.GELU()
+        self.spatial_gating_unit = LKA(d_model2)
+        self.proj_2 = nn.Conv2d(d_model2, d_model, 1)
+
+    def forward(self, x):
+        shorcut = x.clone()
+        
+        x = self.proj_1(x)
+        x = self.activation(x)
+        x = self.spatial_gating_unit(x)
+        x = self.proj_2(x)
+        x = x + shorcut
+
+        return x
+
+class Learnable_Filter(nn.Module):
+    """Refinement module of MagNet
+    Args:
+        n_classes (int): no. classes
+        use_bn (bool): use batch normalization on the input
+    """
+
+    def __init__(self, n_classes=1):
+        super().__init__()
+        self.conv1 = nn.Conv2d(64, 64, kernel_size=3, stride=1, padding=1, bias=False)
+        self.bn1 = nn.BatchNorm2d(64, momentum=0.01)
+        self.conv2 = nn.Conv2d(64, 64, kernel_size=3, stride=1, padding=1, bias=False)
+        self.bn2 = nn.BatchNorm2d(64, momentum=0.01)
+        self.relu = nn.ReLU(inplace=True)
+
+        # 2 residual blocks
+        self.residual = self._make_layer(Bottleneck, 64, 32, 2)
+        #self.weight_mask_conv = self._make_layer(BasicBlock, 1, 64, 1)
+
+        # Prediction head
+        self.seg_conv = nn.Conv2d(128, 64, kernel_size=1, stride=1, padding=0, bias=False)
+
+    def _make_layer(self, block, inplanes, planes, blocks, stride=1):
+        """Make residual block"""
+        downsample = None
+        if stride != 1 or inplanes != planes * block.expansion:
+            downsample = nn.Sequential(
+                nn.Conv2d(inplanes, planes * block.expansion, kernel_size=1, stride=stride, bias=False),
+                nn.BatchNorm2d(planes * block.expansion, momentum=0.01),
+            )
+
+        layers = []
+        layers.append(block(inplanes, planes, stride, downsample))
+        inplanes = planes * block.expansion
+        for i in range(1, blocks):
+            layers.append(block(inplanes, planes))
+
+        return nn.Sequential(*layers)
+
+    def forward(self, x):
+        x = self.conv1(x)# + self.weight_mask_conv(weight_mask)
+        x = self.bn1(x)
+        x = self.relu(x)
+        x = self.conv2(x)
+        x = self.bn2(x)
+        x = self.relu(x)
+        x = self.residual(x)
+
+        return self.seg_conv(x)

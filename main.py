@@ -4,9 +4,9 @@ import torch.nn as nn
 from datasets import Radar
 import argparse
 from utils import *
-from models import *
+from models.Fourcaster import *
 from Trainer import *
-from sianet import *
+from models.sianet import *
 import time
 import wandb
 def show_args_info(args,log_file):
@@ -28,7 +28,10 @@ def get_model(args):
     if args.sianet:
         return sianet()  # Assuming sianet is a function or constructor available in scope
     model_cls = Fourcaster  # Default model class
-    return model_cls(n_channels=1 if args.grey_scale else 3, n_classes=100, kernels_per_layer=1, args=args)
+    if args.balancing:
+        return model_cls(n_channels=1 if args.grey_scale else 3, n_classes=100, kernels_per_layer=1, args=args,balencer=True)
+    else:
+        return model_cls(n_channels=1 if args.grey_scale else 3, n_classes=100, kernels_per_layer=1, args=args)
 
 def load_models(checkpoint_path, model, device):
     # Load the checkpoint
@@ -70,6 +73,9 @@ def main():
     parser.add_argument("--batch", type=int,default=4, help="batch size")
     parser.add_argument("--n_classes", type=int,default=100, help="batch size")
     parser.add_argument("--sianet",action="store_true")
+    parser.add_argument("--classification",action="store_true", help ="Moe with Real Labels")
+    parser.add_argument("--classifier",action="store_true", help ="Moe with Trained Classifier")
+    parser.add_argument("--balancing",action="store_true")
 
     # train args
     parser.add_argument("--epochs", type=int, default=50, help="number of epochs" )
@@ -77,7 +83,7 @@ def main():
     parser.add_argument("--patience",type=int, default="10")
     parser.add_argument('--loss_type', type=str, default='ce_image', help='ce_image, ce_label')
     parser.add_argument('--regression', type=str, default='gap', help='gap, label')
-
+    
     # learning args
     parser.add_argument("--lr", type=float, default=0.001, help="learning rate")
     parser.add_argument("--adam_beta1", type=float, default=0.9, help="adam first beta value")
@@ -93,8 +99,7 @@ def main():
     #make path for save
     check_path(args.output_dir)
 
-
-
+    model = get_model(args).to(args.device)
     # Create instances of Radar class for train, valid, and test datasets
 
     print("Train Dataset Load")
@@ -140,7 +145,7 @@ def main():
     #     else:
     #         model = Fourcaster(n_channels=3,n_classes=100,kernels_per_layer=1, args=args)
     
-    model = get_model(args).to(args.device)
+    
 
 
     if args.use_multi_gpu and torch.cuda.device_count() > 1:
@@ -187,22 +192,55 @@ def main():
 
         print(f"Start Fine-Tuning from {args.checkpoint_path}!")
         map_location = args.device
-        trainer.model.load_state_dict(torch.load(args.checkpoint_path, map_location=map_location)['model_state_dict'])
+        # trainer.model.load_state_dict(torch.load(args.checkpoint_path, map_location=map_location)['model_state_dict'])
+        
+        if args.classifier :
+            args.log_file = os.path.join(args.output_dir,args.str + "-finetune+moe+classifier.txt" )
+            checkpoint_finetune = args.str + "_finetune+moe+classifier.pt" 
+            args.dataframe_path = os.path.join(args.output_dir,args.str + "-finetune+moe+classifier.csv")
+            args.checkpoint_path =  os.path.join(args.output_dir, checkpoint_finetune)
+
+            if os.path.exists(args.checkpoint_path):
+
+                trainer.model.load_state_dict(torch.load(args.checkpoint_path, map_location=map_location)['model_state_dict'])
+
+                print("Continue Finetune-Training")
+                with open(args.log_file, "a") as f:
+                    f.write("------------------------------ Continue Training ------------------------------ \n")
+                    f.write("Load pt for Finetune-training")
         
 
-        # Regression 
-        args.log_file = os.path.join(args.output_dir,args.str + "-Fine-tune.txt" )
-        checkpoint_finetune = args.str + "_finetune.pt" 
-        args.checkpoint_path =  os.path.join(args.output_dir, checkpoint_finetune)
+        # real label classification
+        elif args.classification:
+            args.log_file = os.path.join(args.output_dir,args.str + "-finetune+moe.txt" )
+            checkpoint_finetune = args.str + "_finetune+moe.pt" 
+            args.dataframe_path = os.path.join(args.output_dir,args.str + "-finetune+moe.csv")
+            args.checkpoint_path =  os.path.join(args.output_dir, checkpoint_finetune)
 
-        if os.path.exists(args.checkpoint_path):
+            if os.path.exists(args.checkpoint_path):
 
-            trainer.model.load_state_dict(torch.load(args.checkpoint_path, map_location=map_location)['model_state_dict'])
+                trainer.model.load_state_dict(torch.load(args.checkpoint_path, map_location=map_location)['model_state_dict'])
 
-            print("Continue Finetune-Training")
-            with open(args.log_file, "a") as f:
-                f.write("------------------------------ Continue Training ------------------------------ \n")
-                f.write("Load pt for Finetune-training")
+                print("Continue Finetune-Training")
+                with open(args.log_file, "a") as f:
+                    f.write("------------------------------ Continue Training ------------------------------ \n")
+                    f.write("Load pt for Finetune-training")
+        
+        # single Regression 
+        else:
+            args.log_file = os.path.join(args.output_dir,args.str + "-finetune.txt" )
+            checkpoint_finetune = args.str + "_finetune.pt" 
+            args.dataframe_path = os.path.join(args.output_dir,args.str + "-finetune.csv")
+            args.checkpoint_path =  os.path.join(args.output_dir, checkpoint_finetune)
+
+            if os.path.exists(args.checkpoint_path):
+
+                trainer.model.load_state_dict(torch.load(args.checkpoint_path, map_location=map_location)['model_state_dict'])
+
+                print("Continue Finetune-Training")
+                with open(args.log_file, "a") as f:
+                    f.write("------------------------------ Continue Training ------------------------------ \n")
+                    f.write("Load pt for Finetune-training")
 
 
     
@@ -225,16 +263,49 @@ def main():
 
         args.test_list.pop(0)
         formatted_data = []
-        for record in args.test_list:
-            for i in range(args.batch):  # Assuming record[0] contains a list of timestamps
-                datetime = record[0][i]
-                predicted_precipitation = f"{record[1][i].item():.6f}" if record[1].dim() != 0 else f"{record[1].item():.6f}"
-                ground_truth = record[2][i].item() if record[2].dim() != 0 else record[2].item()
-                formatted_data.append({
-                    'datetime': datetime,
-                    'predicted precipitation': predicted_precipitation,
-                    'ground_truth': ground_truth
-        })
+
+        if args.classification:
+
+            for record in args.test_list:
+                for i in range(args.batch):  # Assuming record[0] contains a list of timestamps
+                    datetime = record[0][i]
+                    predicted_precipitation = f"{record[1][i].item():.6f}" if record[1].dim() != 0 else f"{record[1].item():.6f}"
+                    ground_truth = record[2][i].item() if record[2].dim() != 0 else record[2].item()
+                    predict = record[3][i]
+                    # precipitation_pixel = record[4][i]
+                    formatted_data.append({
+                        'datetime': datetime,
+                        'predicted precipitation': predicted_precipitation,
+                        'ground_truth': ground_truth,
+                        'predict' : predict,
+                        # 'precipitation_pixel' : precipitation_pixel
+            })
+        elif args.classifier:
+            for record in args.test_list:
+                for i in range(args.batch):  # Assuming record[0] contains a list of timestamps
+                    datetime = record[0][i]
+                    predicted_precipitation = f"{record[1][i].item():.6f}" if record[1].dim() != 0 else f"{record[1].item():.6f}"
+                    ground_truth = record[2][i].item() if record[2].dim() != 0 else record[2].item()
+                    predict = record[3][i]
+                    precipitation_pixel = record[4][i]
+                    formatted_data.append({
+                        'datetime': datetime,
+                        'predicted precipitation': predicted_precipitation,
+                        'ground_truth': ground_truth,
+                        'predict' : predict,
+                        'precipitation_pixel' : precipitation_pixel
+            })
+        else:
+            for record in args.test_list:
+                for i in range(args.batch):  # Assuming record[0] contains a list of timestamps
+                    datetime = record[0][i]
+                    predicted_precipitation = f"{record[1][i].item():.6f}" if record[1].dim() != 0 else f"{record[1].item():.6f}"
+                    ground_truth = record[2][i].item() if record[2].dim() != 0 else record[2].item()
+                    formatted_data.append({
+                        'datetime': datetime,
+                        'predicted precipitation': predicted_precipitation,
+                        'ground_truth': ground_truth
+            })
         dataframe = pd.DataFrame(formatted_data)
         dataframe.to_csv(args.dataframe_path,index=False)
 
@@ -278,16 +349,31 @@ def main():
         try:
             args.test_list.pop(0)
             formatted_data = []
-            for record in args.test_list:
-                for i in range(args.batch):  # Assuming record[0] contains a list of timestamps
-                    datetime = record[0][i]
-                    predicted_precipitation = f"{record[1][i].item():.6f}" if record[1].dim() != 0 else f"{record[1].item():.6f}"
-                    ground_truth = record[2][i].item() if record[2].dim() != 0 else record[2].item()
-                    formatted_data.append({
-                        'datetime': datetime,
-                        'predicted precipitation': predicted_precipitation,
-                        'ground_truth': ground_truth
-            })
+            if args.classification:
+
+                for record in args.test_list:
+                    for i in range(args.batch):  # Assuming record[0] contains a list of timestamps
+                        datetime = record[0][i]
+                        predicted_precipitation = f"{record[1][i].item():.6f}" if record[1].dim() != 0 else f"{record[1].item():.6f}"
+                        ground_truth = record[2][i].item() if record[2].dim() != 0 else record[2].item()
+                        predict = record[3][i]
+                        formatted_data.append({
+                            'datetime': datetime,
+                            'predicted precipitation': predicted_precipitation,
+                            'ground_truth': ground_truth,
+                            'predict' : predict
+                })
+            else:
+                for record in args.test_list:
+                    for i in range(args.batch):  # Assuming record[0] contains a list of timestamps
+                        datetime = record[0][i]
+                        predicted_precipitation = f"{record[1][i].item():.6f}" if record[1].dim() != 0 else f"{record[1].item():.6f}"
+                        ground_truth = record[2][i].item() if record[2].dim() != 0 else record[2].item()
+                        formatted_data.append({
+                            'datetime': datetime,
+                            'predicted precipitation': predicted_precipitation,
+                            'ground_truth': ground_truth
+                })
             dataframe = pd.DataFrame(formatted_data)
             dataframe.to_csv(args.dataframe_path,index=False)
         except:

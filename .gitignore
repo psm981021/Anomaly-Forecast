@@ -1,5 +1,8 @@
 /root/.vscode-server
 
+#classficiation
+/classification/model/Seoul_b7_epoch_7.pth
+
 #data
 data/*.zip
 /data/radar_sample_images/
@@ -10,8 +13,9 @@ data/*.ipynb
 /data/data_radar
 data/*.png
 /data/images_classification
-/data/data_Gangwon
 /data/data_Seoul
+/data/data_Gangwon
+
 
 # clone models
 /test.ipynb
@@ -32,14 +36,17 @@ test.py
 /data/data_seoul_only_v2/
 /data/data_gangwon_only/
 /data/data_gangwon_only_v2/
+/data/Seoul/
 /wandb/
+data/Seoul/
+data/Gangwon/
 /test.py
 
 #cb
-/data/images_classification/
-classification_model/
+/data/seoul_images/
+/data/gangwon_images/
+classification/log/
 /data/*csv
 __pycache__/
 /.vscode-server/
 /root/.vscode-server
-images

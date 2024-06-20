@@ -1,0 +1,469 @@
+---------------------- Configure Info: ----------------------
+data_dir                       : data/data_Seoul
+image_csv_dir                  : data/Seoul.csv
+output_dir                     : output/seoul-L1.01/
+gpu_id                         : 0
+device                         : cuda:0
+seed                           : 0
+no_cuda                        : False
+use_multi_gpu                  : False
+multi_devices                  : 0,1
+wandb                          : False
+pre_train                      : False
+do_eval                        : False
+test_list                      : ['[]']
+grey_scale                     : False
+location                       : seoul
+model_idx                      : seoul-L1.01
+batch                          : 8
+n_classes                      : 100
+sianet                         : False
+classification                 : True
+balancing                      : False
+epochs                         : 3000
+log_freq                       : 1
+patience                       : 40
+loss_type                      : ce_image
+regression                     : gap
+lr                             : 0.02
+adam_beta1                     : 0.9
+adam_beta2                     : 0.999
+weight_decay                   : 0.0
+initializer_range              : 0.01
+str                            : seoul-L1.01-8
+dataframe_path                 : output/seoul-L1.01/seoul-L1.01-8-Fine-tune+moe.csv
+checkpoint_path                : output/seoul-L1.01/seoul-L1.01-8_finetune+moe.pt
+log_file                       : output/seoul-L1.01/seoul-L1.01-8-Fine-tune+moe.txt
+---------------------- Configure Info: ----------------------
+{'epoch': 0, 'Geneartion Loss ce_image (Train)': '0.000000', 'Correlation Image(Train)': '0.026884', 'MAE Loss': '1.809772'}
+{'Epoch': 0, 'MAE Loss (Eval)': '1.692391'}
+{'epoch': 1, 'Geneartion Loss ce_image (Train)': '0.000000', 'Correlation Image(Train)': '0.026884', 'MAE Loss': '1.803982'}
+{'Epoch': 1, 'MAE Loss (Eval)': '1.688424'}
+{'epoch': 2, 'Geneartion Loss ce_image (Train)': '0.000000', 'Correlation Image(Train)': '0.026884', 'MAE Loss': '1.796424'}
+{'Epoch': 2, 'MAE Loss (Eval)': '1.676858'}
+{'epoch': 3, 'Geneartion Loss ce_image (Train)': '0.000000', 'Correlation Image(Train)': '0.026884', 'MAE Loss': '1.789667'}
+{'Epoch': 3, 'MAE Loss (Eval)': '1.672524'}
+{'epoch': 4, 'Geneartion Loss ce_image (Train)': '0.000000', 'Correlation Image(Train)': '0.026884', 'MAE Loss': '1.781814'}
+{'Epoch': 4, 'MAE Loss (Eval)': '1.674072'}
+EarlyStopping counter: 1 out of 40
+{'epoch': 5, 'Geneartion Loss ce_image (Train)': '0.000000', 'Correlation Image(Train)': '0.026884', 'MAE Loss': '1.788249'}
+{'Epoch': 5, 'MAE Loss (Eval)': '1.668691'}
+{'epoch': 6, 'Geneartion Loss ce_image (Train)': '0.000000', 'Correlation Image(Train)': '0.026884', 'MAE Loss': '1.773184'}
+{'Epoch': 6, 'MAE Loss (Eval)': '1.663210'}
+{'epoch': 7, 'Geneartion Loss ce_image (Train)': '0.000000', 'Correlation Image(Train)': '0.026884', 'MAE Loss': '1.774963'}
+{'Epoch': 7, 'MAE Loss (Eval)': '1.662849'}
+{'epoch': 8, 'Geneartion Loss ce_image (Train)': '0.000000', 'Correlation Image(Train)': '0.026884', 'MAE Loss': '1.762804'}
+{'Epoch': 8, 'MAE Loss (Eval)': '1.659356'}
+{'epoch': 9, 'Geneartion Loss ce_image (Train)': '0.000000', 'Correlation Image(Train)': '0.026884', 'MAE Loss': '1.762267'}
+{'Epoch': 9, 'MAE Loss (Eval)': '1.644774'}
+{'epoch': 10, 'Geneartion Loss ce_image (Train)': '0.000000', 'Correlation Image(Train)': '0.026884', 'MAE Loss': '1.755949'}
+{'Epoch': 10, 'MAE Loss (Eval)': '1.660271'}
+EarlyStopping counter: 1 out of 40
+{'epoch': 11, 'Geneartion Loss ce_image (Train)': '0.000000', 'Correlation Image(Train)': '0.026884', 'MAE Loss': '1.758294'}
+{'Epoch': 11, 'MAE Loss (Eval)': '1.646711'}
+EarlyStopping counter: 2 out of 40
+{'epoch': 12, 'Geneartion Loss ce_image (Train)': '0.000000', 'Correlation Image(Train)': '0.026884', 'MAE Loss': '1.758078'}
+{'Epoch': 12, 'MAE Loss (Eval)': '1.642879'}
+{'epoch': 13, 'Geneartion Loss ce_image (Train)': '0.000000', 'Correlation Image(Train)': '0.026884', 'MAE Loss': '1.743613'}
+{'Epoch': 13, 'MAE Loss (Eval)': '1.640038'}
+{'epoch': 14, 'Geneartion Loss ce_image (Train)': '0.000000', 'Correlation Image(Train)': '0.026884', 'MAE Loss': '1.746899'}
+{'Epoch': 14, 'MAE Loss (Eval)': '1.641394'}
+EarlyStopping counter: 1 out of 40
+{'epoch': 15, 'Geneartion Loss ce_image (Train)': '0.000000', 'Correlation Image(Train)': '0.026884', 'MAE Loss': '1.739757'}
+{'Epoch': 15, 'MAE Loss (Eval)': '1.639061'}
+{'epoch': 16, 'Geneartion Loss ce_image (Train)': '0.000000', 'Correlation Image(Train)': '0.026884', 'MAE Loss': '1.735955'}
+{'Epoch': 16, 'MAE Loss (Eval)': '1.636505'}
+{'epoch': 17, 'Geneartion Loss ce_image (Train)': '0.000000', 'Correlation Image(Train)': '0.026884', 'MAE Loss': '1.727391'}
+{'Epoch': 17, 'MAE Loss (Eval)': '1.640000'}
+EarlyStopping counter: 1 out of 40
+{'epoch': 18, 'Geneartion Loss ce_image (Train)': '0.000000', 'Correlation Image(Train)': '0.026884', 'MAE Loss': '1.735115'}
+{'Epoch': 18, 'MAE Loss (Eval)': '1.640827'}
+EarlyStopping counter: 2 out of 40
+{'epoch': 19, 'Geneartion Loss ce_image (Train)': '0.000000', 'Correlation Image(Train)': '0.026884', 'MAE Loss': '1.733729'}
+{'Epoch': 19, 'MAE Loss (Eval)': '1.633423'}
+{'epoch': 20, 'Geneartion Loss ce_image (Train)': '0.000000', 'Correlation Image(Train)': '0.026884', 'MAE Loss': '1.727737'}
+{'Epoch': 20, 'MAE Loss (Eval)': '1.633547'}
+EarlyStopping counter: 1 out of 40
+{'epoch': 21, 'Geneartion Loss ce_image (Train)': '0.000000', 'Correlation Image(Train)': '0.026884', 'MAE Loss': '1.729961'}
+{'Epoch': 21, 'MAE Loss (Eval)': '1.628898'}
+{'epoch': 22, 'Geneartion Loss ce_image (Train)': '0.000000', 'Correlation Image(Train)': '0.026884', 'MAE Loss': '1.732321'}
+{'Epoch': 22, 'MAE Loss (Eval)': '1.630968'}
+EarlyStopping counter: 1 out of 40
+{'epoch': 23, 'Geneartion Loss ce_image (Train)': '0.000000', 'Correlation Image(Train)': '0.026884', 'MAE Loss': '1.725939'}
+{'Epoch': 23, 'MAE Loss (Eval)': '1.627467'}
+{'epoch': 24, 'Geneartion Loss ce_image (Train)': '0.000000', 'Correlation Image(Train)': '0.026884', 'MAE Loss': '1.728491'}
+{'Epoch': 24, 'MAE Loss (Eval)': '1.628753'}
+EarlyStopping counter: 1 out of 40
+{'epoch': 25, 'Geneartion Loss ce_image (Train)': '0.000000', 'Correlation Image(Train)': '0.026884', 'MAE Loss': '1.715395'}
+{'Epoch': 25, 'MAE Loss (Eval)': '1.623318'}
+{'epoch': 26, 'Geneartion Loss ce_image (Train)': '0.000000', 'Correlation Image(Train)': '0.026884', 'MAE Loss': '1.716670'}
+{'Epoch': 26, 'MAE Loss (Eval)': '1.627284'}
+EarlyStopping counter: 1 out of 40
+{'epoch': 27, 'Geneartion Loss ce_image (Train)': '0.000000', 'Correlation Image(Train)': '0.026884', 'MAE Loss': '1.720896'}
+{'Epoch': 27, 'MAE Loss (Eval)': '1.615148'}
+{'epoch': 28, 'Geneartion Loss ce_image (Train)': '0.000000', 'Correlation Image(Train)': '0.026884', 'MAE Loss': '1.720982'}
+{'Epoch': 28, 'MAE Loss (Eval)': '1.615567'}
+EarlyStopping counter: 1 out of 40
+{'epoch': 29, 'Geneartion Loss ce_image (Train)': '0.000000', 'Correlation Image(Train)': '0.026884', 'MAE Loss': '1.713080'}
+{'Epoch': 29, 'MAE Loss (Eval)': '1.612354'}
+{'epoch': 30, 'Geneartion Loss ce_image (Train)': '0.000000', 'Correlation Image(Train)': '0.026884', 'MAE Loss': '1.717261'}
+{'Epoch': 30, 'MAE Loss (Eval)': '1.614423'}
+EarlyStopping counter: 1 out of 40
+{'epoch': 31, 'Geneartion Loss ce_image (Train)': '0.000000', 'Correlation Image(Train)': '0.026884', 'MAE Loss': '1.711623'}
+{'Epoch': 31, 'MAE Loss (Eval)': '1.607156'}
+{'epoch': 32, 'Geneartion Loss ce_image (Train)': '0.000000', 'Correlation Image(Train)': '0.026884', 'MAE Loss': '1.716637'}
+{'Epoch': 32, 'MAE Loss (Eval)': '1.617890'}
+EarlyStopping counter: 1 out of 40
+{'epoch': 33, 'Geneartion Loss ce_image (Train)': '0.000000', 'Correlation Image(Train)': '0.026884', 'MAE Loss': '1.713638'}
+{'Epoch': 33, 'MAE Loss (Eval)': '1.615995'}
+EarlyStopping counter: 2 out of 40
+{'epoch': 34, 'Geneartion Loss ce_image (Train)': '0.000000', 'Correlation Image(Train)': '0.026884', 'MAE Loss': '1.705114'}
+{'Epoch': 34, 'MAE Loss (Eval)': '1.619795'}
+EarlyStopping counter: 3 out of 40
+{'epoch': 35, 'Geneartion Loss ce_image (Train)': '0.000000', 'Correlation Image(Train)': '0.026884', 'MAE Loss': '1.704896'}
+{'Epoch': 35, 'MAE Loss (Eval)': '1.605729'}
+{'epoch': 36, 'Geneartion Loss ce_image (Train)': '0.000000', 'Correlation Image(Train)': '0.026884', 'MAE Loss': '1.711850'}
+{'Epoch': 36, 'MAE Loss (Eval)': '1.616019'}
+EarlyStopping counter: 1 out of 40
+{'epoch': 37, 'Geneartion Loss ce_image (Train)': '0.000000', 'Correlation Image(Train)': '0.026884', 'MAE Loss': '1.712712'}
+{'Epoch': 37, 'MAE Loss (Eval)': '1.612417'}
+EarlyStopping counter: 2 out of 40
+{'epoch': 38, 'Geneartion Loss ce_image (Train)': '0.000000', 'Correlation Image(Train)': '0.026884', 'MAE Loss': '1.710162'}
+{'Epoch': 38, 'MAE Loss (Eval)': '1.621174'}
+EarlyStopping counter: 3 out of 40
+{'epoch': 39, 'Geneartion Loss ce_image (Train)': '0.000000', 'Correlation Image(Train)': '0.026884', 'MAE Loss': '1.715494'}
+{'Epoch': 39, 'MAE Loss (Eval)': '1.615534'}
+EarlyStopping counter: 4 out of 40
+{'epoch': 40, 'Geneartion Loss ce_image (Train)': '0.000000', 'Correlation Image(Train)': '0.026884', 'MAE Loss': '1.711810'}
+{'Epoch': 40, 'MAE Loss (Eval)': '1.626934'}
+EarlyStopping counter: 5 out of 40
+{'epoch': 41, 'Geneartion Loss ce_image (Train)': '0.000000', 'Correlation Image(Train)': '0.026884', 'MAE Loss': '1.717617'}
+{'Epoch': 41, 'MAE Loss (Eval)': '1.606008'}
+EarlyStopping counter: 6 out of 40
+{'epoch': 42, 'Geneartion Loss ce_image (Train)': '0.000000', 'Correlation Image(Train)': '0.026884', 'MAE Loss': '1.719684'}
+{'Epoch': 42, 'MAE Loss (Eval)': '1.615653'}
+EarlyStopping counter: 7 out of 40
+{'epoch': 43, 'Geneartion Loss ce_image (Train)': '0.000000', 'Correlation Image(Train)': '0.026884', 'MAE Loss': '1.716824'}
+{'Epoch': 43, 'MAE Loss (Eval)': '1.608582'}
+EarlyStopping counter: 8 out of 40
+{'epoch': 44, 'Geneartion Loss ce_image (Train)': '0.000000', 'Correlation Image(Train)': '0.026884', 'MAE Loss': '1.710649'}
+{'Epoch': 44, 'MAE Loss (Eval)': '1.610379'}
+EarlyStopping counter: 9 out of 40
+{'epoch': 45, 'Geneartion Loss ce_image (Train)': '0.000000', 'Correlation Image(Train)': '0.026884', 'MAE Loss': '1.708719'}
+{'Epoch': 45, 'MAE Loss (Eval)': '1.618516'}
+EarlyStopping counter: 10 out of 40
+{'epoch': 46, 'Geneartion Loss ce_image (Train)': '0.000000', 'Correlation Image(Train)': '0.026884', 'MAE Loss': '1.714151'}
+{'Epoch': 46, 'MAE Loss (Eval)': '1.615040'}
+EarlyStopping counter: 11 out of 40
+{'epoch': 47, 'Geneartion Loss ce_image (Train)': '0.000000', 'Correlation Image(Train)': '0.026884', 'MAE Loss': '1.706924'}
+{'Epoch': 47, 'MAE Loss (Eval)': '1.615174'}
+EarlyStopping counter: 12 out of 40
+{'epoch': 48, 'Geneartion Loss ce_image (Train)': '0.000000', 'Correlation Image(Train)': '0.026884', 'MAE Loss': '1.713641'}
+{'Epoch': 48, 'MAE Loss (Eval)': '1.608476'}
+EarlyStopping counter: 13 out of 40
+{'epoch': 49, 'Geneartion Loss ce_image (Train)': '0.000000', 'Correlation Image(Train)': '0.026884', 'MAE Loss': '1.712697'}
+{'Epoch': 49, 'MAE Loss (Eval)': '1.614247'}
+EarlyStopping counter: 14 out of 40
+{'epoch': 50, 'Geneartion Loss ce_image (Train)': '0.000000', 'Correlation Image(Train)': '0.026884', 'MAE Loss': '1.704946'}
+{'Epoch': 50, 'MAE Loss (Eval)': '1.606635'}
+EarlyStopping counter: 15 out of 40
+{'epoch': 51, 'Geneartion Loss ce_image (Train)': '0.000000', 'Correlation Image(Train)': '0.026884', 'MAE Loss': '1.713677'}
+{'Epoch': 51, 'MAE Loss (Eval)': '1.602281'}
+{'epoch': 52, 'Geneartion Loss ce_image (Train)': '0.000000', 'Correlation Image(Train)': '0.026884', 'MAE Loss': '1.701901'}
+{'Epoch': 52, 'MAE Loss (Eval)': '1.603627'}
+EarlyStopping counter: 1 out of 40
+{'epoch': 53, 'Geneartion Loss ce_image (Train)': '0.000000', 'Correlation Image(Train)': '0.026884', 'MAE Loss': '1.704476'}
+{'Epoch': 53, 'MAE Loss (Eval)': '1.613930'}
+EarlyStopping counter: 2 out of 40
+{'epoch': 54, 'Geneartion Loss ce_image (Train)': '0.000000', 'Correlation Image(Train)': '0.026884', 'MAE Loss': '1.707325'}
+{'Epoch': 54, 'MAE Loss (Eval)': '1.618791'}
+EarlyStopping counter: 3 out of 40
+{'epoch': 55, 'Geneartion Loss ce_image (Train)': '0.000000', 'Correlation Image(Train)': '0.026884', 'MAE Loss': '1.711811'}
+{'Epoch': 55, 'MAE Loss (Eval)': '1.608578'}
+EarlyStopping counter: 4 out of 40
+{'epoch': 56, 'Geneartion Loss ce_image (Train)': '0.000000', 'Correlation Image(Train)': '0.026884', 'MAE Loss': '1.712170'}
+{'Epoch': 56, 'MAE Loss (Eval)': '1.612517'}
+EarlyStopping counter: 5 out of 40
+{'epoch': 57, 'Geneartion Loss ce_image (Train)': '0.000000', 'Correlation Image(Train)': '0.026884', 'MAE Loss': '1.707289'}
+{'Epoch': 57, 'MAE Loss (Eval)': '1.609582'}
+EarlyStopping counter: 6 out of 40
+{'epoch': 58, 'Geneartion Loss ce_image (Train)': '0.000000', 'Correlation Image(Train)': '0.026884', 'MAE Loss': '1.705693'}
+{'Epoch': 58, 'MAE Loss (Eval)': '1.612354'}
+EarlyStopping counter: 7 out of 40
+{'epoch': 59, 'Geneartion Loss ce_image (Train)': '0.000000', 'Correlation Image(Train)': '0.026884', 'MAE Loss': '1.711052'}
+{'Epoch': 59, 'MAE Loss (Eval)': '1.619589'}
+EarlyStopping counter: 8 out of 40
+{'epoch': 60, 'Geneartion Loss ce_image (Train)': '0.000000', 'Correlation Image(Train)': '0.026884', 'MAE Loss': '1.703382'}
+{'Epoch': 60, 'MAE Loss (Eval)': '1.612299'}
+EarlyStopping counter: 9 out of 40
+{'epoch': 61, 'Geneartion Loss ce_image (Train)': '0.000000', 'Correlation Image(Train)': '0.026884', 'MAE Loss': '1.702320'}
+{'Epoch': 61, 'MAE Loss (Eval)': '1.614251'}
+EarlyStopping counter: 10 out of 40
+{'epoch': 62, 'Geneartion Loss ce_image (Train)': '0.000000', 'Correlation Image(Train)': '0.026884', 'MAE Loss': '1.704734'}
+{'Epoch': 62, 'MAE Loss (Eval)': '1.600362'}
+{'epoch': 63, 'Geneartion Loss ce_image (Train)': '0.000000', 'Correlation Image(Train)': '0.026884', 'MAE Loss': '1.702753'}
+{'Epoch': 63, 'MAE Loss (Eval)': '1.597366'}
+{'epoch': 64, 'Geneartion Loss ce_image (Train)': '0.000000', 'Correlation Image(Train)': '0.026884', 'MAE Loss': '1.699145'}
+{'Epoch': 64, 'MAE Loss (Eval)': '1.600470'}
+EarlyStopping counter: 1 out of 40
+{'epoch': 65, 'Geneartion Loss ce_image (Train)': '0.000000', 'Correlation Image(Train)': '0.026884', 'MAE Loss': '1.701941'}
+{'Epoch': 65, 'MAE Loss (Eval)': '1.608035'}
+EarlyStopping counter: 2 out of 40
+{'epoch': 66, 'Geneartion Loss ce_image (Train)': '0.000000', 'Correlation Image(Train)': '0.026884', 'MAE Loss': '1.702191'}
+{'Epoch': 66, 'MAE Loss (Eval)': '1.609557'}
+EarlyStopping counter: 3 out of 40
+{'epoch': 67, 'Geneartion Loss ce_image (Train)': '0.000000', 'Correlation Image(Train)': '0.026884', 'MAE Loss': '1.703560'}
+{'Epoch': 67, 'MAE Loss (Eval)': '1.607371'}
+EarlyStopping counter: 4 out of 40
+{'epoch': 68, 'Geneartion Loss ce_image (Train)': '0.000000', 'Correlation Image(Train)': '0.026884', 'MAE Loss': '1.691208'}
+{'Epoch': 68, 'MAE Loss (Eval)': '1.603468'}
+EarlyStopping counter: 5 out of 40
+{'epoch': 69, 'Geneartion Loss ce_image (Train)': '0.000000', 'Correlation Image(Train)': '0.026884', 'MAE Loss': '1.703449'}
+{'Epoch': 69, 'MAE Loss (Eval)': '1.605770'}
+EarlyStopping counter: 6 out of 40
+{'epoch': 70, 'Geneartion Loss ce_image (Train)': '0.000000', 'Correlation Image(Train)': '0.026884', 'MAE Loss': '1.701877'}
+{'Epoch': 70, 'MAE Loss (Eval)': '1.611366'}
+EarlyStopping counter: 7 out of 40
+{'epoch': 71, 'Geneartion Loss ce_image (Train)': '0.000000', 'Correlation Image(Train)': '0.026884', 'MAE Loss': '1.704360'}
+{'Epoch': 71, 'MAE Loss (Eval)': '1.597452'}
+EarlyStopping counter: 8 out of 40
+{'epoch': 72, 'Geneartion Loss ce_image (Train)': '0.000000', 'Correlation Image(Train)': '0.026884', 'MAE Loss': '1.697830'}
+{'Epoch': 72, 'MAE Loss (Eval)': '1.595549'}
+{'epoch': 73, 'Geneartion Loss ce_image (Train)': '0.000000', 'Correlation Image(Train)': '0.026884', 'MAE Loss': '1.697172'}
+{'Epoch': 73, 'MAE Loss (Eval)': '1.595083'}
+{'epoch': 74, 'Geneartion Loss ce_image (Train)': '0.000000', 'Correlation Image(Train)': '0.026884', 'MAE Loss': '1.708609'}
+{'Epoch': 74, 'MAE Loss (Eval)': '1.601509'}
+EarlyStopping counter: 1 out of 40
+{'epoch': 75, 'Geneartion Loss ce_image (Train)': '0.000000', 'Correlation Image(Train)': '0.026884', 'MAE Loss': '1.699875'}
+{'Epoch': 75, 'MAE Loss (Eval)': '1.605322'}
+EarlyStopping counter: 2 out of 40
+{'epoch': 76, 'Geneartion Loss ce_image (Train)': '0.000000', 'Correlation Image(Train)': '0.026884', 'MAE Loss': '1.697260'}
+{'Epoch': 76, 'MAE Loss (Eval)': '1.610031'}
+EarlyStopping counter: 3 out of 40
+{'epoch': 77, 'Geneartion Loss ce_image (Train)': '0.000000', 'Correlation Image(Train)': '0.026884', 'MAE Loss': '1.692738'}
+{'Epoch': 77, 'MAE Loss (Eval)': '1.585298'}
+{'epoch': 78, 'Geneartion Loss ce_image (Train)': '0.000000', 'Correlation Image(Train)': '0.026884', 'MAE Loss': '1.704235'}
+{'Epoch': 78, 'MAE Loss (Eval)': '1.595603'}
+EarlyStopping counter: 1 out of 40
+{'epoch': 79, 'Geneartion Loss ce_image (Train)': '0.000000', 'Correlation Image(Train)': '0.026884', 'MAE Loss': '1.704814'}
+{'Epoch': 79, 'MAE Loss (Eval)': '1.607928'}
+EarlyStopping counter: 2 out of 40
+{'epoch': 80, 'Geneartion Loss ce_image (Train)': '0.000000', 'Correlation Image(Train)': '0.026884', 'MAE Loss': '1.696894'}
+{'Epoch': 80, 'MAE Loss (Eval)': '1.598323'}
+EarlyStopping counter: 3 out of 40
+{'epoch': 81, 'Geneartion Loss ce_image (Train)': '0.000000', 'Correlation Image(Train)': '0.026884', 'MAE Loss': '1.697735'}
+{'Epoch': 81, 'MAE Loss (Eval)': '1.599432'}
+EarlyStopping counter: 4 out of 40
+{'epoch': 82, 'Geneartion Loss ce_image (Train)': '0.000000', 'Correlation Image(Train)': '0.026884', 'MAE Loss': '1.702556'}
+{'Epoch': 82, 'MAE Loss (Eval)': '1.603954'}
+EarlyStopping counter: 5 out of 40
+{'epoch': 83, 'Geneartion Loss ce_image (Train)': '0.000000', 'Correlation Image(Train)': '0.026884', 'MAE Loss': '1.697123'}
+{'Epoch': 83, 'MAE Loss (Eval)': '1.596325'}
+EarlyStopping counter: 6 out of 40
+{'epoch': 84, 'Geneartion Loss ce_image (Train)': '0.000000', 'Correlation Image(Train)': '0.026884', 'MAE Loss': '1.700099'}
+{'Epoch': 84, 'MAE Loss (Eval)': '1.607558'}
+EarlyStopping counter: 7 out of 40
+{'epoch': 85, 'Geneartion Loss ce_image (Train)': '0.000000', 'Correlation Image(Train)': '0.026884', 'MAE Loss': '1.696730'}
+{'Epoch': 85, 'MAE Loss (Eval)': '1.605226'}
+EarlyStopping counter: 8 out of 40
+{'epoch': 86, 'Geneartion Loss ce_image (Train)': '0.000000', 'Correlation Image(Train)': '0.026884', 'MAE Loss': '1.702500'}
+{'Epoch': 86, 'MAE Loss (Eval)': '1.593286'}
+EarlyStopping counter: 9 out of 40
+{'epoch': 87, 'Geneartion Loss ce_image (Train)': '0.000000', 'Correlation Image(Train)': '0.026884', 'MAE Loss': '1.693368'}
+{'Epoch': 87, 'MAE Loss (Eval)': '1.600732'}
+EarlyStopping counter: 10 out of 40
+{'epoch': 88, 'Geneartion Loss ce_image (Train)': '0.000000', 'Correlation Image(Train)': '0.026884', 'MAE Loss': '1.701952'}
+{'Epoch': 88, 'MAE Loss (Eval)': '1.596262'}
+EarlyStopping counter: 11 out of 40
+{'epoch': 89, 'Geneartion Loss ce_image (Train)': '0.000000', 'Correlation Image(Train)': '0.026884', 'MAE Loss': '1.697283'}
+{'Epoch': 89, 'MAE Loss (Eval)': '1.612980'}
+EarlyStopping counter: 12 out of 40
+{'epoch': 90, 'Geneartion Loss ce_image (Train)': '0.000000', 'Correlation Image(Train)': '0.026884', 'MAE Loss': '1.705733'}
+{'Epoch': 90, 'MAE Loss (Eval)': '1.604348'}
+EarlyStopping counter: 13 out of 40
+{'epoch': 91, 'Geneartion Loss ce_image (Train)': '0.000000', 'Correlation Image(Train)': '0.026884', 'MAE Loss': '1.694633'}
+{'Epoch': 91, 'MAE Loss (Eval)': '1.601770'}
+EarlyStopping counter: 14 out of 40
+{'epoch': 92, 'Geneartion Loss ce_image (Train)': '0.000000', 'Correlation Image(Train)': '0.026884', 'MAE Loss': '1.691556'}
+{'Epoch': 92, 'MAE Loss (Eval)': '1.606619'}
+EarlyStopping counter: 15 out of 40
+{'epoch': 93, 'Geneartion Loss ce_image (Train)': '0.000000', 'Correlation Image(Train)': '0.026884', 'MAE Loss': '1.698611'}
+{'Epoch': 93, 'MAE Loss (Eval)': '1.609080'}
+EarlyStopping counter: 16 out of 40
+{'epoch': 94, 'Geneartion Loss ce_image (Train)': '0.000000', 'Correlation Image(Train)': '0.026884', 'MAE Loss': '1.697112'}
+{'Epoch': 94, 'MAE Loss (Eval)': '1.586488'}
+EarlyStopping counter: 17 out of 40
+{'epoch': 95, 'Geneartion Loss ce_image (Train)': '0.000000', 'Correlation Image(Train)': '0.026884', 'MAE Loss': '1.702282'}
+{'Epoch': 95, 'MAE Loss (Eval)': '1.597993'}
+EarlyStopping counter: 18 out of 40
+{'epoch': 96, 'Geneartion Loss ce_image (Train)': '0.000000', 'Correlation Image(Train)': '0.026884', 'MAE Loss': '1.690399'}
+{'Epoch': 96, 'MAE Loss (Eval)': '1.594513'}
+EarlyStopping counter: 19 out of 40
+{'epoch': 97, 'Geneartion Loss ce_image (Train)': '0.000000', 'Correlation Image(Train)': '0.026884', 'MAE Loss': '1.696864'}
+{'Epoch': 97, 'MAE Loss (Eval)': '1.601364'}
+EarlyStopping counter: 20 out of 40
+{'epoch': 98, 'Geneartion Loss ce_image (Train)': '0.000000', 'Correlation Image(Train)': '0.026884', 'MAE Loss': '1.696670'}
+{'Epoch': 98, 'MAE Loss (Eval)': '1.586375'}
+EarlyStopping counter: 21 out of 40
+{'epoch': 99, 'Geneartion Loss ce_image (Train)': '0.000000', 'Correlation Image(Train)': '0.026884', 'MAE Loss': '1.695247'}
+{'Epoch': 99, 'MAE Loss (Eval)': '1.580609'}
+{'epoch': 100, 'Geneartion Loss ce_image (Train)': '0.000000', 'Correlation Image(Train)': '0.026884', 'MAE Loss': '1.691208'}
+{'Epoch': 100, 'MAE Loss (Eval)': '1.602244'}
+EarlyStopping counter: 1 out of 40
+{'epoch': 101, 'Geneartion Loss ce_image (Train)': '0.000000', 'Correlation Image(Train)': '0.026884', 'MAE Loss': '1.693775'}
+{'Epoch': 101, 'MAE Loss (Eval)': '1.605481'}
+EarlyStopping counter: 2 out of 40
+{'epoch': 102, 'Geneartion Loss ce_image (Train)': '0.000000', 'Correlation Image(Train)': '0.026884', 'MAE Loss': '1.693951'}
+{'Epoch': 102, 'MAE Loss (Eval)': '1.596194'}
+EarlyStopping counter: 3 out of 40
+{'epoch': 103, 'Geneartion Loss ce_image (Train)': '0.000000', 'Correlation Image(Train)': '0.026884', 'MAE Loss': '1.692212'}
+{'Epoch': 103, 'MAE Loss (Eval)': '1.594890'}
+EarlyStopping counter: 4 out of 40
+{'epoch': 104, 'Geneartion Loss ce_image (Train)': '0.000000', 'Correlation Image(Train)': '0.026884', 'MAE Loss': '1.694236'}
+{'Epoch': 104, 'MAE Loss (Eval)': '1.588897'}
+EarlyStopping counter: 5 out of 40
+{'epoch': 105, 'Geneartion Loss ce_image (Train)': '0.000000', 'Correlation Image(Train)': '0.026884', 'MAE Loss': '1.699501'}
+{'Epoch': 105, 'MAE Loss (Eval)': '1.590430'}
+EarlyStopping counter: 6 out of 40
+{'epoch': 106, 'Geneartion Loss ce_image (Train)': '0.000000', 'Correlation Image(Train)': '0.026884', 'MAE Loss': '1.690477'}
+{'Epoch': 106, 'MAE Loss (Eval)': '1.596789'}
+EarlyStopping counter: 7 out of 40
+{'epoch': 107, 'Geneartion Loss ce_image (Train)': '0.000000', 'Correlation Image(Train)': '0.026884', 'MAE Loss': '1.695435'}
+{'Epoch': 107, 'MAE Loss (Eval)': '1.603709'}
+EarlyStopping counter: 8 out of 40
+{'epoch': 108, 'Geneartion Loss ce_image (Train)': '0.000000', 'Correlation Image(Train)': '0.026884', 'MAE Loss': '1.692496'}
+{'Epoch': 108, 'MAE Loss (Eval)': '1.588258'}
+EarlyStopping counter: 9 out of 40
+{'epoch': 109, 'Geneartion Loss ce_image (Train)': '0.000000', 'Correlation Image(Train)': '0.026884', 'MAE Loss': '1.703651'}
+{'Epoch': 109, 'MAE Loss (Eval)': '1.594605'}
+EarlyStopping counter: 10 out of 40
+{'epoch': 110, 'Geneartion Loss ce_image (Train)': '0.000000', 'Correlation Image(Train)': '0.026884', 'MAE Loss': '1.697188'}
+{'Epoch': 110, 'MAE Loss (Eval)': '1.590237'}
+EarlyStopping counter: 11 out of 40
+{'epoch': 111, 'Geneartion Loss ce_image (Train)': '0.000000', 'Correlation Image(Train)': '0.026884', 'MAE Loss': '1.698670'}
+{'Epoch': 111, 'MAE Loss (Eval)': '1.591222'}
+EarlyStopping counter: 12 out of 40
+{'epoch': 112, 'Geneartion Loss ce_image (Train)': '0.000000', 'Correlation Image(Train)': '0.026884', 'MAE Loss': '1.688108'}
+{'Epoch': 112, 'MAE Loss (Eval)': '1.589044'}
+EarlyStopping counter: 13 out of 40
+{'epoch': 113, 'Geneartion Loss ce_image (Train)': '0.000000', 'Correlation Image(Train)': '0.026884', 'MAE Loss': '1.689891'}
+{'Epoch': 113, 'MAE Loss (Eval)': '1.596187'}
+EarlyStopping counter: 14 out of 40
+{'epoch': 114, 'Geneartion Loss ce_image (Train)': '0.000000', 'Correlation Image(Train)': '0.026884', 'MAE Loss': '1.699741'}
+{'Epoch': 114, 'MAE Loss (Eval)': '1.590734'}
+EarlyStopping counter: 15 out of 40
+{'epoch': 115, 'Geneartion Loss ce_image (Train)': '0.000000', 'Correlation Image(Train)': '0.026884', 'MAE Loss': '1.697863'}
+{'Epoch': 115, 'MAE Loss (Eval)': '1.593300'}
+EarlyStopping counter: 16 out of 40
+{'epoch': 116, 'Geneartion Loss ce_image (Train)': '0.000000', 'Correlation Image(Train)': '0.026884', 'MAE Loss': '1.693789'}
+{'Epoch': 116, 'MAE Loss (Eval)': '1.592659'}
+EarlyStopping counter: 17 out of 40
+{'epoch': 117, 'Geneartion Loss ce_image (Train)': '0.000000', 'Correlation Image(Train)': '0.026884', 'MAE Loss': '1.686718'}
+{'Epoch': 117, 'MAE Loss (Eval)': '1.600165'}
+EarlyStopping counter: 18 out of 40
+{'epoch': 118, 'Geneartion Loss ce_image (Train)': '0.000000', 'Correlation Image(Train)': '0.026884', 'MAE Loss': '1.689618'}
+{'Epoch': 118, 'MAE Loss (Eval)': '1.595469'}
+EarlyStopping counter: 19 out of 40
+{'epoch': 119, 'Geneartion Loss ce_image (Train)': '0.000000', 'Correlation Image(Train)': '0.026884', 'MAE Loss': '1.694973'}
+{'Epoch': 119, 'MAE Loss (Eval)': '1.599834'}
+EarlyStopping counter: 20 out of 40
+{'epoch': 120, 'Geneartion Loss ce_image (Train)': '0.000000', 'Correlation Image(Train)': '0.026884', 'MAE Loss': '1.693605'}
+{'Epoch': 120, 'MAE Loss (Eval)': '1.593922'}
+EarlyStopping counter: 21 out of 40
+{'epoch': 121, 'Geneartion Loss ce_image (Train)': '0.000000', 'Correlation Image(Train)': '0.026884', 'MAE Loss': '1.689885'}
+{'Epoch': 121, 'MAE Loss (Eval)': '1.589474'}
+EarlyStopping counter: 22 out of 40
+{'epoch': 122, 'Geneartion Loss ce_image (Train)': '0.000000', 'Correlation Image(Train)': '0.026884', 'MAE Loss': '1.696376'}
+{'Epoch': 122, 'MAE Loss (Eval)': '1.593927'}
+EarlyStopping counter: 23 out of 40
+{'epoch': 123, 'Geneartion Loss ce_image (Train)': '0.000000', 'Correlation Image(Train)': '0.026884', 'MAE Loss': '1.694895'}
+{'Epoch': 123, 'MAE Loss (Eval)': '1.587173'}
+EarlyStopping counter: 24 out of 40
+{'epoch': 124, 'Geneartion Loss ce_image (Train)': '0.000000', 'Correlation Image(Train)': '0.026884', 'MAE Loss': '1.696766'}
+{'Epoch': 124, 'MAE Loss (Eval)': '1.604091'}
+EarlyStopping counter: 25 out of 40
+{'epoch': 125, 'Geneartion Loss ce_image (Train)': '0.000000', 'Correlation Image(Train)': '0.026884', 'MAE Loss': '1.692194'}
+{'Epoch': 125, 'MAE Loss (Eval)': '1.590378'}
+EarlyStopping counter: 26 out of 40
+{'epoch': 126, 'Geneartion Loss ce_image (Train)': '0.000000', 'Correlation Image(Train)': '0.026884', 'MAE Loss': '1.683749'}
+{'Epoch': 126, 'MAE Loss (Eval)': '1.589854'}
+EarlyStopping counter: 27 out of 40
+{'epoch': 127, 'Geneartion Loss ce_image (Train)': '0.000000', 'Correlation Image(Train)': '0.026884', 'MAE Loss': '1.690860'}
+{'Epoch': 127, 'MAE Loss (Eval)': '1.585108'}
+EarlyStopping counter: 28 out of 40
+{'epoch': 128, 'Geneartion Loss ce_image (Train)': '0.000000', 'Correlation Image(Train)': '0.026884', 'MAE Loss': '1.694646'}
+{'Epoch': 128, 'MAE Loss (Eval)': '1.595363'}
+EarlyStopping counter: 29 out of 40
+{'epoch': 129, 'Geneartion Loss ce_image (Train)': '0.000000', 'Correlation Image(Train)': '0.026884', 'MAE Loss': '1.688658'}
+{'Epoch': 129, 'MAE Loss (Eval)': '1.592278'}
+EarlyStopping counter: 30 out of 40
+{'epoch': 130, 'Geneartion Loss ce_image (Train)': '0.000000', 'Correlation Image(Train)': '0.026884', 'MAE Loss': '1.690195'}
+{'Epoch': 130, 'MAE Loss (Eval)': '1.586958'}
+EarlyStopping counter: 31 out of 40
+{'epoch': 131, 'Geneartion Loss ce_image (Train)': '0.000000', 'Correlation Image(Train)': '0.026884', 'MAE Loss': '1.691344'}
+{'Epoch': 131, 'MAE Loss (Eval)': '1.592070'}
+EarlyStopping counter: 32 out of 40
+{'epoch': 132, 'Geneartion Loss ce_image (Train)': '0.000000', 'Correlation Image(Train)': '0.026884', 'MAE Loss': '1.688904'}
+{'Epoch': 132, 'MAE Loss (Eval)': '1.594570'}
+EarlyStopping counter: 33 out of 40
+{'epoch': 133, 'Geneartion Loss ce_image (Train)': '0.000000', 'Correlation Image(Train)': '0.026884', 'MAE Loss': '1.692407'}
+{'Epoch': 133, 'MAE Loss (Eval)': '1.601093'}
+EarlyStopping counter: 34 out of 40
+{'epoch': 134, 'Geneartion Loss ce_image (Train)': '0.000000', 'Correlation Image(Train)': '0.026884', 'MAE Loss': '1.688645'}
+{'Epoch': 134, 'MAE Loss (Eval)': '1.588846'}
+EarlyStopping counter: 35 out of 40
+{'epoch': 135, 'Geneartion Loss ce_image (Train)': '0.000000', 'Correlation Image(Train)': '0.026884', 'MAE Loss': '1.686186'}
+{'Epoch': 135, 'MAE Loss (Eval)': '1.594512'}
+EarlyStopping counter: 36 out of 40
+{'epoch': 136, 'Geneartion Loss ce_image (Train)': '0.000000', 'Correlation Image(Train)': '0.026884', 'MAE Loss': '1.691704'}
+{'Epoch': 136, 'MAE Loss (Eval)': '1.596501'}
+EarlyStopping counter: 37 out of 40
+{'epoch': 137, 'Geneartion Loss ce_image (Train)': '0.000000', 'Correlation Image(Train)': '0.026884', 'MAE Loss': '1.689599'}
+{'Epoch': 137, 'MAE Loss (Eval)': '1.594140'}
+EarlyStopping counter: 38 out of 40
+{'epoch': 138, 'Geneartion Loss ce_image (Train)': '0.000000', 'Correlation Image(Train)': '0.026884', 'MAE Loss': '1.687404'}
+{'Epoch': 138, 'MAE Loss (Eval)': '1.587075'}
+EarlyStopping counter: 39 out of 40
+{'epoch': 139, 'Geneartion Loss ce_image (Train)': '0.000000', 'Correlation Image(Train)': '0.026884', 'MAE Loss': '1.689117'}
+{'Epoch': 139, 'MAE Loss (Eval)': '1.592000'}
+EarlyStopping counter: 40 out of 40
+{'Epoch': 3000, 'MAE Loss (Eval)': '5.624970'}
+To run Epoch:3000 , It took 0 hours, 44 minutes, 42 seconds
+------------------------------ Continue Training ------------------------------ 
+Load pt for Finetune-training---------------------- Configure Info: ----------------------
+data_dir                       : data/data_Seoul
+image_csv_dir                  : data/Seoul.csv
+output_dir                     : output/seoul-L1.01/
+gpu_id                         : 0
+device                         : cuda:0
+seed                           : 0
+no_cuda                        : False
+use_multi_gpu                  : False
+multi_devices                  : 0,1
+wandb                          : False
+pre_train                      : False
+do_eval                        : False
+test_list                      : ['[]']
+grey_scale                     : False
+location                       : seoul
+model_idx                      : seoul-L1.01
+batch                          : 8
+n_classes                      : 100
+sianet                         : False
+classification                 : True
+balancing                      : False
+epochs                         : 3000
+log_freq                       : 1
+patience                       : 40
+loss_type                      : ce_image
+regression                     : gap
+lr                             : 0.02
+adam_beta1                     : 0.9
+adam_beta2                     : 0.999
+weight_decay                   : 0.0
+initializer_range              : 0.01
+str                            : seoul-L1.01-8
+dataframe_path                 : output/seoul-L1.01/seoul-L1.01-8-Fine-tune+moe.csv
+checkpoint_path                : output/seoul-L1.01/seoul-L1.01-8_finetune+moe.pt
+log_file                       : output/seoul-L1.01/seoul-L1.01-8-Fine-tune+moe.txt
+---------------------- Configure Info: ----------------------
